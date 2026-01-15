@@ -1,0 +1,20 @@
+{
+  "Group": "plugin.siren",
+  "Name": "Mermaids",
+  "Version": "0.1.0",
+  "Description": "Adds Mermaids to your game",
+  "Authors": [
+    {
+      "Name": "Siren"
+    }
+  ],
+  "Website": "",
+  "ServerVersion": "*",
+  "Dependencies": {},
+  "OptionalDependencies": {},
+  "LoadBefore": {},
+  "DisabledByDefault": false,
+  "IncludesAssetPack": true,
+  "SubPlugins": [],
+  "Main": "plugin.siren.Mermaids"
+}
