@@ -42,8 +42,10 @@ public class WaterSystem extends EntityTickingSystem<EntityStore> {
         World world = player.getWorld();
         int fluidId = world.getFluidId((int)Math.floor(pos.getX()), (int)Math.floor(pos.getY()), (int)Math.floor(pos.getZ()));
 
-        if(fluidId == 7){if(!water.isUnderwater()) {
+        if(fluidId == 7) {
+            if(!water.isUnderwater()) {
                 water.setUnderwater(true);
+                water.setElapsedTime(0f);
 
                 if(Mermaids.ifDebug()) {
                     player.sendMessage(Message.raw("You have entered the water"));

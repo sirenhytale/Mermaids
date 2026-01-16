@@ -1,5 +1,95 @@
 {
   "Parent": "Player",
   "Model": "Characters/MermaidPlayer.blockymodel",
-  "Texture": "Characters/PlayerTextures/MermaidPlayerGrayscale.png"
+  "Texture": "Characters/PlayerTextures/MermaidPlayerGrayscale.png",
+  "AnimationSets": {
+    "SwimIdle": {
+      "Animations": [
+        {
+          "Animation": "Characters/Animations/Swim/Mermaid_Swim_Idle.blockyanim"
+        }
+      ]
+    },
+    "Swim": {
+      "Animations": [
+        {
+          "Animation": "Characters/Animations/Swim/Mermaid_Swim.blockyanim",
+          "SoundEventId": "SFX_Player_Swim",
+          "Speed": 0.8
+        }
+      ]
+    },
+    "SwimBackward": {
+      "Animations": [
+        {
+          "Animation": "Characters/Animations/Swim/Mermaid_Swim_Backward.blockyanim",
+          "SoundEventId": "SFX_Player_Swim",
+          "Speed": 1.2
+        }
+      ]
+    },
+    "SwimFast": {
+      "Animations": [
+        {
+          "Animation": "Characters/Animations/Swim/Mermaid_Swim_Fast.blockyanim",
+          "SoundEventId": "SFX_Player_Swim_Fast",
+          "Speed": 0.8
+        }
+      ]
+    },
+    "SwimJump": {
+      "Animations": [
+        {
+          "Animation": "Characters/Animations/Swim/Mermaid_Swim_Jump.blockyanim",
+          "BlendingDuration": 0.1,
+          "Looping": false,
+          "SoundEventId": "SFX_Player_Swim_Jump",
+          "Speed": 0.8
+        }
+      ]
+    },
+    "SwimFloat": {
+      "Animations": [
+        {
+          "Animation": "Characters/Animations/Swim/Mermaid_Swim_Float.blockyanim",
+          "SoundEventId": "SFX_Player_Swim"
+        }
+      ]
+    },
+    "SwimSink": {
+      "Animations": [
+        {
+          "Animation": "Characters/Animations/Swim/Mermaid_Swim_Sink.blockyanim",
+          "SoundEventId": "SFX_Player_Swim"
+        }
+      ]
+    },
+    "SwimDive": {
+      "Animations": [
+        {
+          "Animation": "Characters/Animations/Swim/Mermaid_Swim_Dive.blockyanim",
+          "SoundEventId": "SFX_Player_Swim",
+          "Speed": 0.8
+        }
+      ]
+    },
+    "SwimDiveBackward": {
+      "Animations": [
+        {
+          "Animation": "Characters/Animations/Swim/Mermaid_Swim_Backward.blockyanim",
+          "SoundEventId": "SFX_Player_Swim",
+          "Speed": 1.2
+        }
+      ]
+    },
+    "SwimDiveFast": {
+      "Animations": [
+        {
+          "Animation": "Characters/Animations/Swim/Mermaid_Swim_Dive_Fast.blockyanim",
+          "SoundEventId": "SFX_Player_Swim_Fast",
+          "Speed": 0.8
+        }
+      ]
+    }
+  }
 }
