@@ -2,14 +2,9 @@ package plugin.siren.Systems;
 
 import com.hypixel.hytale.component.Component;
 import com.hypixel.hytale.protocol.PlayerSkin;
-import com.hypixel.hytale.server.core.Message;
-import com.hypixel.hytale.server.core.modules.entity.player.PlayerSkinComponent;
-import com.hypixel.hytale.server.core.universe.Universe;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.List;
 
 public class MermaidComponent implements Component<EntityStore> {
 

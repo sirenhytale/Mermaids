@@ -1233,7 +1233,7 @@
                           "children": [
                             {
                               "id": "38",
-                              "name": "cube--C1",
+                              "name": "R-Foot-L--C1",
                               "position": {"x": 15.5, "y": 3, "z": -1},
                               "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
                               "shape": {

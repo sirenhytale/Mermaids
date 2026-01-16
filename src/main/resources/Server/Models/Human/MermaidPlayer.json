@@ -1,8 +1,5 @@
 {
   "Parent": "Player",
-  "Model": "Characters/model-tail-test.blockymodel",
-  "Texture": "Characters/PlayerTextures/texture.png",
-  "AnimationSets": {
-
-  }
+  "Model": "Characters/MermaidPlayer.blockymodel",
+  "Texture": "Characters/PlayerTextures/MermaidPlayerGrayscale.png"
 }
