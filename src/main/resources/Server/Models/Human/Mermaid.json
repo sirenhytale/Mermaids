@@ -1,0 +1,5 @@
+{
+  "Parent": "Player",
+  "Model": "Characters/model-tail-test.blockymodel",
+  "Texture": "Characters/Player_Textures/Player_Greyscale.png"
+}

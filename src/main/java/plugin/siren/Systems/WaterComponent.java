@@ -5,10 +5,12 @@ import com.hypixel.hytale.server.core.universe.Universe;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 public class WaterComponent implements Component<EntityStore> {
     private boolean underwater;
     private boolean swimming;
+    private boolean drying;
 
     private float elapsedTime;
 
@@ -19,13 +21,15 @@ public class WaterComponent implements Component<EntityStore> {
     public WaterComponent(boolean underwater, boolean swimming){
         this.underwater = underwater;
         this.swimming = swimming;
+        this.drying = false;
         this.elapsedTime = 0f;
     }
 
     public WaterComponent(WaterComponent other){
         this.underwater = other.underwater;
         this.swimming = other.swimming;
-
+        this.drying = other.drying;
+        this.elapsedTime = other.elapsedTime;
     }
 
     @Nullable
@@ -42,6 +46,10 @@ public class WaterComponent implements Component<EntityStore> {
         return swimming;
     }
 
+    public boolean isDrying(){
+        return drying;
+    }
+
     public float getElapsedTime(){
         return this.elapsedTime;
     }
@@ -54,6 +62,10 @@ public class WaterComponent implements Component<EntityStore> {
         this.swimming = swimming;
     }
 
+    public void setDrying(boolean drying){
+        this.drying = drying;
+    }
+
     public void incrementTick(){
         this.elapsedTime += 1f;
     }
@@ -61,4 +73,5 @@ public class WaterComponent implements Component<EntityStore> {
     public void setElapsedTime(float dt){
         this.elapsedTime = dt;
     }
+
 }
