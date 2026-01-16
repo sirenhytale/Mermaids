@@ -1,5 +1,6 @@
 package plugin.siren.Events;
 
+import com.hypixel.hytale.component.Component;
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.component.Store;
 import com.hypixel.hytale.protocol.PlayerSkin;
@@ -18,7 +19,6 @@ import java.util.List;
 public class PlayerReadyEventM {
     public static void onPlayerReadyEvent(PlayerReadyEvent event){
         Player player = event.getPlayer();
-        player.sendMessage(Message.raw("PlayerReadyEvent"));
 
         Ref<EntityStore> ref = event.getPlayerRef();
         Store<EntityStore> store = ref.getStore();
@@ -26,18 +26,18 @@ public class PlayerReadyEventM {
         MermaidComponent mermaid = new MermaidComponent();
         PlayerSkinComponent skinComp = store.getComponent(ref, PlayerSkinComponent.getComponentType());
         if(skinComp != null) {
-            PlayerSkin skin = skinComp.getPlayerSkin();
-            mermaid.saveCosmetics(skin);
-
-            mermaid.setOriginalSkin(skinComp);
+            PlayerSkin skin = skinComp.getPlayerSkin().clone();
+            mermaid.setPlayerSkin(skin);
         }else{
-            player.sendMessage(Message.raw("skincomp == null"));
+            player.sendMessage(Message.raw("Mermaids: Error: PlayerReadyEventM: skincomp == null"));
         }
         store.addComponent(ref, Mermaids.get().getMermaidComponentType(), mermaid);
 
         WaterComponent water = new WaterComponent();
         store.addComponent(ref, Mermaids.get().getWaterComponentType(), water);
 
-        player.sendMessage(Message.raw("You now have Water Compontent!"));
+        if(Mermaids.ifDebug()) {
+            player.sendMessage(Message.raw("You now have Water Compontent!"));
+        }
     }
 }

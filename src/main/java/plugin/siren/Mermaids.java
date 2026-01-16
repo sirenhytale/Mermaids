@@ -14,6 +14,8 @@ import plugin.siren.Systems.WaterSystem;
 import javax.annotation.Nonnull;
 
 public class Mermaids extends JavaPlugin {
+    private static final String VERSION = "1.0.0";
+    private static final boolean DEBUG = true;
     private static Mermaids plugin;
     private ComponentType<EntityStore, WaterComponent> waterComponent;
     private ComponentType<EntityStore, MermaidComponent> mermaidComponent;
@@ -32,7 +34,7 @@ public class Mermaids extends JavaPlugin {
         this.mermaidComponent = this.getEntityStoreRegistry().registerComponent(MermaidComponent.class, MermaidComponent::new);
         this.getEntityStoreRegistry().registerSystem(new WaterSystem(this.waterComponent, this.mermaidComponent));
 
-        System.out.println("Mermaids Plugin Version 0.1.0 has started!");
+        System.out.println("Mermaids Plugin Version " + VERSION + " has started!");
     }
 
     public ComponentType<EntityStore, WaterComponent> getWaterComponentType(){
@@ -45,5 +47,13 @@ public class Mermaids extends JavaPlugin {
 
     public static Mermaids get(){
         return plugin;
+    }
+
+    public static String getVersion(){
+        return VERSION;
+    }
+
+    public static boolean ifDebug(){
+        return DEBUG;
     }
 }

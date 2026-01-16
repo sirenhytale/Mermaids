@@ -1,4 +1,4 @@
-package plugin.siren.other;
+package plugin.siren.Contributions.starman.modelutils;
 
 import com.hypixel.hytale.component.CommandBuffer;
 import com.hypixel.hytale.component.Ref;
@@ -6,6 +6,18 @@ import com.hypixel.hytale.protocol.PlayerSkin;
 import com.hypixel.hytale.server.core.asset.type.model.config.Model;
 import com.hypixel.hytale.server.core.modules.entity.component.ModelComponent;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+
+/*
+ *
+ * Author: StarMan
+ * Version: 1.0-pre
+ * Date: 1/15/2026
+ * Link: https://github.com/SyperAI/hytale-model-utils
+ *
+ * Modified: meFroggy
+ * Date: 1/16/2026
+ *
+ */
 
 public class ModelHelper {
 
@@ -41,7 +53,6 @@ public class ModelHelper {
     public static void applySkin(Model model, PlayerSkin skin, Ref<EntityStore> ref, CommandBuffer commandBuffer) {
         var skinnedModel = applySkin(model, skin);
 
-        var store = ref.getStore();
         commandBuffer.replaceComponent(ref, ModelComponent.getComponentType(), new ModelComponent(skinnedModel));
     }
 }

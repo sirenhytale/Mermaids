@@ -1,4 +1,4 @@
-package plugin.siren.other;
+package plugin.siren.Contributions.starman.modelutils;
 
 import com.hypixel.hytale.protocol.PlayerSkin;
 import com.hypixel.hytale.server.core.asset.type.model.config.ModelAttachment;
@@ -10,6 +10,15 @@ import com.hypixel.hytale.server.core.cosmetics.PlayerSkinPart;
 import javax.annotation.Nullable;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+
+/*
+ *
+ * Author: StarMan
+ * Version: 1.0-pre
+ * Date: 1/15/2026
+ * Link: https://github.com/SyperAI/hytale-model-utils
+ *
+ */
 
 public class AttachmentsHelper {
     static CosmeticRegistry reg = CosmeticsModule.get().getRegistry();

@@ -1,11 +1,9 @@
 package plugin.siren.Systems;
 
 import com.hypixel.hytale.component.Component;
-import com.hypixel.hytale.server.core.universe.Universe;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 
 import javax.annotation.Nullable;
-import java.util.List;
 
 public class WaterComponent implements Component<EntityStore> {
     private boolean underwater;
