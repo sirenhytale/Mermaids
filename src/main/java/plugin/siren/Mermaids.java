@@ -1,43 +1,56 @@
 package plugin.siren;
 
 import com.hypixel.hytale.component.ComponentType;
-import com.hypixel.hytale.server.core.event.events.player.PlayerDisconnectEvent;
 import com.hypixel.hytale.server.core.event.events.player.PlayerReadyEvent;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
-import plugin.siren.Commands.CheckWaterComponent;
-import plugin.siren.Events.PlayerDisconnectEventM;
+import com.hypixel.hytale.server.core.util.Config;
+import plugin.siren.Commands.*;
 import plugin.siren.Events.PlayerReadyEventM;
 import plugin.siren.Systems.MermaidComponent;
 import plugin.siren.Systems.WaterComponent;
 import plugin.siren.Systems.WaterSystem;
+import plugin.siren.Utils.Config.MermaidsConfig;
 
 import javax.annotation.Nonnull;
 
 public class Mermaids extends JavaPlugin {
-    private static final String VERSION = "1.0.0";
-    private static final boolean DEBUG = true;
+    private static final String VERSION = "1.2.0";
+    private static final boolean DEBUG = false;
+
     private static Mermaids plugin;
+    private final Config<MermaidsConfig> config;
+
     private ComponentType<EntityStore, WaterComponent> waterComponent;
     private ComponentType<EntityStore, MermaidComponent> mermaidComponent;
 
     public Mermaids(@Nonnull JavaPluginInit init){
         super(init);
+
         plugin = this;
+        this.config = this.withConfig("Mermaids", MermaidsConfig.CODEC);
     }
 
     @Override
     protected void setup(){
         this.getEventRegistry().registerGlobal(PlayerReadyEvent.class, PlayerReadyEventM::onPlayerReadyEvent);
-        this.getEventRegistry().registerGlobal(PlayerDisconnectEvent.class, PlayerDisconnectEventM::onPlayerDisconnectEvent);
-        //this.getCommandRegistry().registerCommand(new CheckWaterComponent());
+        this.getCommandRegistry().registerCommand(new MermaidsUI());
+        this.getCommandRegistry().registerCommand(new ToggleMermaid());
 
         this.waterComponent = this.getEntityStoreRegistry().registerComponent(WaterComponent.class, WaterComponent::new);
         this.mermaidComponent = this.getEntityStoreRegistry().registerComponent(MermaidComponent.class, MermaidComponent::new);
         this.getEntityStoreRegistry().registerSystem(new WaterSystem(this.waterComponent, this.mermaidComponent));
 
-        System.out.println("Mermaids Plugin Version " + VERSION + " has started!");
+        //config.save();
+        config.load();
+        config.save();
+
+        if(ifDebug()){
+            this.getCommandRegistry().registerCommand(new CheckWaterComponent());
+        }
+
+        //System.out.println("Mermaids Plugin Version " + VERSION + " has started!");
     }
 
     public ComponentType<EntityStore, WaterComponent> getWaterComponentType(){
@@ -56,7 +69,12 @@ public class Mermaids extends JavaPlugin {
         return VERSION;
     }
 
+    public static Config<MermaidsConfig> getConfig(){
+        return plugin.config;
+    }
+
     public static boolean ifDebug(){
-        return DEBUG;
+        boolean showDebug = plugin.DEBUG || plugin.config.get().ifDebugMode();
+        return showDebug;
     }
 }

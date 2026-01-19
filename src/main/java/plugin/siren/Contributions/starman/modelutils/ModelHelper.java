@@ -4,8 +4,11 @@ import com.hypixel.hytale.component.CommandBuffer;
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.protocol.PlayerSkin;
 import com.hypixel.hytale.server.core.asset.type.model.config.Model;
+import com.hypixel.hytale.server.core.command.system.CommandManager;
+import com.hypixel.hytale.server.core.console.ConsoleSender;
 import com.hypixel.hytale.server.core.modules.entity.component.ModelComponent;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import plugin.siren.Systems.MermaidComponent;
 
 /*
  *
@@ -15,15 +18,18 @@ import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
  * Link: https://github.com/SyperAI/hytale-model-utils
  *
  * Modified: meFroggy
- * Date: 1/16/2026
+ * Date: 1/18/2026
  *
  */
 
 public class ModelHelper {
 
     // Applies given skin on given model
-    public static Model applySkin(Model model, PlayerSkin playerSkin) {
-        var attachments = AttachmentsHelper.parseSkin(playerSkin, null, model.getGradientId());
+    public static Model applySkin(Model model, PlayerSkin playerSkin, MermaidComponent mermaid) {
+        ModelComponent modelComponent = (ModelComponent) mermaid.getModelComponent().clone();
+        Model playerModel = modelComponent.getModel();
+
+        var attachments = AttachmentsHelper.parseSkin(playerSkin, null, playerModel.getGradientId());
 
         return new Model(
                 model.getModelAssetId() + "_Skinned",
@@ -33,8 +39,8 @@ public class ModelHelper {
                 model.getBoundingBox(),
                 model.getModel(),
                 model.getTexture(),
-                model.getGradientSet(),
-                model.getGradientId(),
+                playerModel.getGradientSet(),
+                playerModel.getGradientId(),
                 model.getEyeHeight(),
                 model.getCrouchOffset(),
                 model.getAnimationSetMap(),
@@ -50,8 +56,8 @@ public class ModelHelper {
     }
 
     // Applies given skin on given player reference
-    public static void applySkin(Model model, PlayerSkin skin, Ref<EntityStore> ref, CommandBuffer commandBuffer) {
-        var skinnedModel = applySkin(model, skin);
+    public static void applySkin(Model model, PlayerSkin skin, Ref<EntityStore> ref, CommandBuffer commandBuffer, MermaidComponent mermaid) {
+        var skinnedModel = applySkin(model, skin, mermaid);
 
         commandBuffer.replaceComponent(ref, ModelComponent.getComponentType(), new ModelComponent(skinnedModel));
     }

@@ -1,14 +1,15 @@
 {
   "Group": "plugin.siren",
   "Name": "Mermaids",
-  "Version": "1.0.0",
+  "Version": "1.2.0",
   "Description": "Adds Mermaids to your game",
   "Authors": [
     {
-      "Name": "Siren"
+      "Name": "Siren",
+      "Url": "https://discord.gg/Dbrv2yRJr4"
     }
   ],
-  "Website": "",
+  "Website": "https://curseforge.com/hytale/mods/mermaids",
   "ServerVersion": "*",
   "Dependencies": {},
   "OptionalDependencies": {},
