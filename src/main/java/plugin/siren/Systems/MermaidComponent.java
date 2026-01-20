@@ -3,6 +3,8 @@ package plugin.siren.Systems;
 import com.hypixel.hytale.component.Component;
 import com.hypixel.hytale.protocol.PlayerSkin;
 import com.hypixel.hytale.server.core.entity.entities.player.movement.MovementManager;
+import com.hypixel.hytale.server.core.modules.entity.component.ModelComponent;
+import com.hypixel.hytale.server.core.modules.entity.player.PlayerSkinComponent;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 
 import javax.annotation.Nullable;
@@ -11,14 +13,14 @@ public class MermaidComponent implements Component<EntityStore> {
 
     private boolean mermaid;
     private boolean toggleMermaid;
-    private boolean updateStats; //not used
 
     private String mermaidTail;
+    private String tailColor;
 
     private PlayerSkin skin;
-    private Component<EntityStore> movementManager;
-    private Component<EntityStore> playerSkinComponent;
-    private Component<EntityStore> modelComponent;
+    private MovementManager movementManager;
+    private PlayerSkinComponent playerSkinComponent;
+    private ModelComponent modelComponent;
 
     public MermaidComponent(){
         this(new PlayerSkin());
@@ -27,17 +29,17 @@ public class MermaidComponent implements Component<EntityStore> {
     public MermaidComponent(PlayerSkin skin){
         this.mermaid = false;
         this.toggleMermaid = true;
-        this.updateStats = false;
         this.skin = skin;
         this.mermaidTail = "MermaidBigFinPlayer";
+        this.tailColor = "MermaidPlayerGrayscale";
     }
 
     public MermaidComponent(MermaidComponent other){
         this.mermaid = other.mermaid;
         this.toggleMermaid = other.toggleMermaid;
-        this.updateStats = other.updateStats;
         this.skin = other.skin;
         this.mermaidTail = other.mermaidTail;
+        this.tailColor = other.tailColor;
         this.movementManager = other.movementManager;
         this.playerSkinComponent = other.playerSkinComponent;
         this.modelComponent = other.modelComponent;
@@ -57,27 +59,27 @@ public class MermaidComponent implements Component<EntityStore> {
         this.toggleMermaid = toggle;
     }
 
-    public void setUpdateStats(boolean updateStats){
-        this.updateStats = updateStats;
-    }
-
     public void setMermaidTail(String mermaidTail){
         this.mermaidTail = mermaidTail;
+    }
+
+    public void setTailColor(String tailColor) {
+        this.tailColor = tailColor;
     }
 
     public void setPlayerSkin(PlayerSkin skin){
         this.skin = skin;
     }
 
-    public void setMovementManager(Component<EntityStore> movementManager){
+    public void setMovementManager(MovementManager movementManager){
         this.movementManager = movementManager;
     }
 
-    public void setPlayerSkinComponent(Component<EntityStore> playerSkinComponent){
+    public void setPlayerSkinComponent(PlayerSkinComponent playerSkinComponent){
         this.playerSkinComponent = playerSkinComponent;
     }
 
-    public void setModelComponent(Component<EntityStore> modelComponent){
+    public void setModelComponent(ModelComponent modelComponent){
         this.modelComponent = modelComponent;
     }
 
@@ -89,12 +91,12 @@ public class MermaidComponent implements Component<EntityStore> {
         return toggleMermaid;
     }
 
-    public boolean getUpdateStats(){
-        return updateStats;
-    }
-
     public String getMermaidTail(){
         return mermaidTail;
+    }
+
+    public String getTailColor() {
+        return tailColor;
     }
 
     public PlayerSkin getPlayerSkin(){
@@ -113,16 +115,16 @@ public class MermaidComponent implements Component<EntityStore> {
         return mermaidSkin;
     }
 
-    public Component<EntityStore> getMovementManager(){
-        return movementManager;
+    public MovementManager getMovementManager(){
+        return (MovementManager) movementManager.clone();
     }
 
-    public Component<EntityStore> getPlayerSkinComponent(){
-        return playerSkinComponent;
+    public PlayerSkinComponent getPlayerSkinComponent(){
+        return (PlayerSkinComponent) playerSkinComponent.clone();
     }
 
-    public Component<EntityStore> getModelComponent(){
-        return modelComponent;
+    public ModelComponent getModelComponent(){
+        return (ModelComponent) modelComponent.clone();
     }
 
 }

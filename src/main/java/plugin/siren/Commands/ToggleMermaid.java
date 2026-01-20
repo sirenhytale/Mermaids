@@ -19,7 +19,6 @@ import javax.annotation.Nonnull;
 public class ToggleMermaid extends AbstractPlayerCommand {
     public ToggleMermaid() {
         super("mermaid", "Toggles if you can be mermaid or not");
-        //this.requirePermission(HytalePermissions.fromCommand("mermaids.toggle"));
         this.requirePermission("mermaids.toggle");
     }
 
@@ -29,22 +28,19 @@ public class ToggleMermaid extends AbstractPlayerCommand {
     protected void execute(@Nonnull CommandContext commandContext, @Nonnull Store<EntityStore> store, @Nonnull Ref<EntityStore> ref, @Nonnull PlayerRef playerRef, @Nonnull World world) {
         Player player = store.getComponent(ref, Player.getComponentType());
 
-        //boolean merTogglePerm = PermissionsModule.get().hasPermission(playerRef.getUuid(), "mermaids.toggle");
-        //if(merTogglePerm) {
-            boolean merToggle = msgMerToggleArg.get(commandContext);
+        boolean merToggle = msgMerToggleArg.get(commandContext);
 
-            MermaidComponent mermaid = store.getComponent(ref, Mermaids.get().getMermaidComponentType());
-            mermaid.setToggleMermaid(merToggle);
+        MermaidComponent mermaid = store.getComponent(ref, Mermaids.get().getMermaidComponentType());
+        mermaid.setToggleMermaid(merToggle);
 
-            String toggledStr = "";
-            if (merToggle) {
-                toggledStr = "Enabled";
-            } else {
-                toggledStr = "Disabled";
-            }
-            player.sendMessage(Message.raw("You have " + toggledStr + " transforming into a mermaid."));
-        //}else{
-        //    player.sendMessage(Message.raw("You are missing the permission 'mermaids.toggle'."));
-        //}
+        String toggledStr = "";
+        if (merToggle) {
+            toggledStr = "Enabled";
+        } else {
+            toggledStr = "Disabled";
+        }
+        player.sendMessage(Message.raw("You have " + toggledStr + " transforming into a mermaid."));
+
+        Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " has toggled transforming into a Mermaid: " + String.valueOf(merToggle));
     }
 }

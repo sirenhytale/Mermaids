@@ -8,6 +8,7 @@ import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import plugin.siren.Mermaids;
 import plugin.siren.Utils.UI.MermaidUIPage;
 
 import javax.annotation.Nonnull;
@@ -24,5 +25,9 @@ public class MermaidsUI extends AbstractPlayerCommand {
 
         MermaidUIPage merPage = new MermaidUIPage(playerRef);
         player.getPageManager().openCustomPage(ref, store, merPage);
+
+        if(Mermaids.ifDebug()){
+            Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " opened the Mermaids UI");
+        }
     }
 }

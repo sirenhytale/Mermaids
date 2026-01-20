@@ -1,6 +1,7 @@
 package plugin.siren;
 
 import com.hypixel.hytale.component.ComponentType;
+import com.hypixel.hytale.logger.HytaleLogger;
 import com.hypixel.hytale.server.core.event.events.player.PlayerReadyEvent;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
@@ -16,10 +17,11 @@ import plugin.siren.Utils.Config.MermaidsConfig;
 import javax.annotation.Nonnull;
 
 public class Mermaids extends JavaPlugin {
-    private static final String VERSION = "1.2.0";
+    private static final String VERSION = "1.2.2";
     private static final boolean DEBUG = false;
 
     private static Mermaids plugin;
+    public static final HytaleLogger LOGGER = HytaleLogger.forEnclosingClass();
     private final Config<MermaidsConfig> config;
 
     private ComponentType<EntityStore, WaterComponent> waterComponent;
@@ -42,15 +44,14 @@ public class Mermaids extends JavaPlugin {
         this.mermaidComponent = this.getEntityStoreRegistry().registerComponent(MermaidComponent.class, MermaidComponent::new);
         this.getEntityStoreRegistry().registerSystem(new WaterSystem(this.waterComponent, this.mermaidComponent));
 
-        //config.save();
         config.load();
         config.save();
 
-        if(ifDebug()){
-            this.getCommandRegistry().registerCommand(new CheckWaterComponent());
-        }
+        LOGGER.atInfo().log("Version " + VERSION + " of Mermaids has loaded.");
 
-        //System.out.println("Mermaids Plugin Version " + VERSION + " has started!");
+        if(ifDebug()){
+            LOGGER.atInfo().log("Loaded in Debug mode.");
+        }
     }
 
     public ComponentType<EntityStore, WaterComponent> getWaterComponentType(){

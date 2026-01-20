@@ -4,8 +4,6 @@ import com.hypixel.hytale.component.CommandBuffer;
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.protocol.PlayerSkin;
 import com.hypixel.hytale.server.core.asset.type.model.config.Model;
-import com.hypixel.hytale.server.core.command.system.CommandManager;
-import com.hypixel.hytale.server.core.console.ConsoleSender;
 import com.hypixel.hytale.server.core.modules.entity.component.ModelComponent;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import plugin.siren.Systems.MermaidComponent;
@@ -18,7 +16,7 @@ import plugin.siren.Systems.MermaidComponent;
  * Link: https://github.com/SyperAI/hytale-model-utils
  *
  * Modified: meFroggy
- * Date: 1/18/2026
+ * Date: 1/19/2026
  *
  */
 
@@ -33,25 +31,25 @@ public class ModelHelper {
 
         return new Model(
                 model.getModelAssetId() + "_Skinned",
-                model.getScale(),
-                model.getRandomAttachmentIds(),
+                playerModel.getScale(),
+                playerModel.getRandomAttachmentIds(),
                 attachments,
-                model.getBoundingBox(),
+                playerModel.getBoundingBox(),
                 model.getModel(),
-                model.getTexture(),
+                "Characters/PlayerTextures/" + mermaid.getTailColor() + ".png",//model.getTexture(),
                 playerModel.getGradientSet(),
                 playerModel.getGradientId(),
-                model.getEyeHeight(),
-                model.getCrouchOffset(),
+                playerModel.getEyeHeight(),
+                playerModel.getCrouchOffset(),
                 model.getAnimationSetMap(),
-                model.getCamera(),
-                model.getLight(),
-                model.getParticles(),
-                model.getTrails(),
-                model.getPhysicsValues(),
-                model.getDetailBoxes(),
-                model.getPhobia(),
-                model.getPhobiaModelAssetId()
+                playerModel.getCamera(),
+                playerModel.getLight(),
+                playerModel.getParticles(),
+                playerModel.getTrails(),
+                playerModel.getPhysicsValues(),
+                playerModel.getDetailBoxes(),
+                playerModel.getPhobia(),
+                playerModel.getPhobiaModelAssetId()
         );
     }
 
@@ -60,5 +58,12 @@ public class ModelHelper {
         var skinnedModel = applySkin(model, skin, mermaid);
 
         commandBuffer.replaceComponent(ref, ModelComponent.getComponentType(), new ModelComponent(skinnedModel));
+    }
+
+    public static void applySkin(Model model, PlayerSkin skin, Ref<EntityStore> ref, MermaidComponent mermaid) {
+        var skinnedModel = applySkin(model, skin, mermaid);
+
+        var store = ref.getStore();
+        store.replaceComponent(ref, ModelComponent.getComponentType(), new ModelComponent(skinnedModel));
     }
 }
