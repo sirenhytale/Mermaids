@@ -4,6 +4,7 @@ import com.hypixel.hytale.codec.Codec;
 import com.hypixel.hytale.codec.KeyedCodec;
 import com.hypixel.hytale.codec.builder.BuilderCodec;
 import plugin.siren.Mermaids;
+import plugin.siren.Utils.UI.MermaidUIPage;
 
 public class MermaidsConfig {
 
@@ -32,16 +33,25 @@ public class MermaidsConfig {
                     (merConfig, rtpBool, extraInfo) -> merConfig.RequireTransPerm = rtpBool, // Setter
                     (merConfig, extraInfo) -> merConfig.RequireTransPerm)                    // Getter
             .add()
+            .append(new KeyedCodec<Boolean>("Require-Mermaids-UI-Permission", Codec.BOOLEAN),
+                    (merConfig, rmupBool, extraInfo) -> merConfig.RequireUIPerm = rmupBool, // Setter
+                    (merConfig, extraInfo) -> merConfig.RequireUIPerm)                    // Getter
+            .add()
             .build();
 
-    private int ConfigVersion = 1;
+    private int ConfigVersion = 2;
     private String PluginName = "Mermaids";
     private String Version = Mermaids.getVersion();
     private String Website = "https://www.curseforge.com/hytale/mods/mermaids";
     private boolean DebugMode = false;
     private boolean RequireTransPerm = false;
+    private boolean RequireUIPerm = false;
 
     public MermaidsConfig() {}
+
+    public int getConfigVersion(){
+        return ConfigVersion;
+    }
 
     public boolean ifDebugMode(){
         return DebugMode;
@@ -49,5 +59,9 @@ public class MermaidsConfig {
 
     public boolean getRequireTransformationPermission(){
         return RequireTransPerm;
+    }
+
+    public boolean getRequireUIPermission(){
+        return RequireUIPerm;
     }
 }
