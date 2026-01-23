@@ -1,28 +1,36 @@
-package plugin.siren.Events;
+package plugin.siren.Commands;
 
 import com.hypixel.hytale.component.Component;
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.component.Store;
+import com.hypixel.hytale.protocol.GameMode;
 import com.hypixel.hytale.protocol.PlayerSkin;
 import com.hypixel.hytale.server.core.Message;
+import com.hypixel.hytale.server.core.command.system.CommandContext;
+import com.hypixel.hytale.server.core.command.system.basecommands.AbstractPlayerCommand;
 import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.entity.entities.player.movement.MovementManager;
-import com.hypixel.hytale.server.core.event.events.player.PlayerReadyEvent;
 import com.hypixel.hytale.server.core.modules.entity.component.ModelComponent;
 import com.hypixel.hytale.server.core.modules.entity.player.PlayerSkinComponent;
+import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import plugin.siren.Mermaids;
 import plugin.siren.Systems.MermaidComponent;
 
-public class PlayerReadyEventM {
-    public static void onPlayerReadyEvent(PlayerReadyEvent event){
-        World world = event.getPlayer().getWorld();
-        world.execute(() -> {
-            Player player = event.getPlayer();
+import javax.annotation.Nonnull;
 
-            Ref<EntityStore> ref = event.getPlayerRef();
-            Store<EntityStore> store = ref.getStore();
+public class MermaidCompBugCmd extends AbstractPlayerCommand {
+    public MermaidCompBugCmd() {
+        super("mermaidsbugfix", "Gives the user the Mermaids Component.");
+
+        this.setPermissionGroup(GameMode.Adventure);
+    }
+
+    @Override
+    protected void execute(@Nonnull CommandContext commandContext, @Nonnull Store<EntityStore> store, @Nonnull Ref<EntityStore> ref, @Nonnull PlayerRef playerRef, @Nonnull World world) {
+        world.execute(() -> {
+            Player player = store.getComponent(ref, Player.getComponentType());
 
             MermaidComponent merComp = store.getComponent(ref, Mermaids.get().getMermaidComponentType());
             if (merComp == null) {
@@ -38,8 +46,8 @@ public class PlayerReadyEventM {
                         player.sendMessage(Message.raw("Set the PlayerSkinComponent"));
                     }
                 } else {
-                    player.sendMessage(Message.raw("Mermaids: Error: PlayerReadyEventM: skincomp == null"));
-                    Mermaids.LOGGER.atSevere().log(player.getDisplayName() + " failed to get Mermaid Component. Error: PlayerReadyEventM: skincomp == null");
+                    player.sendMessage(Message.raw("Mermaids: Error: MermaidCompBugCmd: skincomp == null"));
+                    Mermaids.LOGGER.atSevere().log(player.getDisplayName() + " failed to get Mermaid Component. Error: MermaidCompBugCmd: skincomp == null");
                 }
 
                 Component<EntityStore> movementManager = store.getComponent(ref, MovementManager.getComponentType()).clone();
@@ -56,17 +64,13 @@ public class PlayerReadyEventM {
 
                 store.addComponent(ref, Mermaids.get().getMermaidComponentType(), mermaid);
 
-                if (Mermaids.ifDebug()) {
-                    player.sendMessage(Message.raw("You now have the Mermaid Component!"));
-                }
+                player.sendMessage(Message.raw("You now have the Mermaid Component!"));
 
                 Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " now has the Mermaid Component.");
             }else{
-                if (Mermaids.ifDebug()) {
-                    player.sendMessage(Message.raw("You already have the Mermaid Component!"));
-                }
+                player.sendMessage(Message.raw("You already have the Mermaid Component!"));
 
-                Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " tried to receive Mermaid Component but already has it.");
+                Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " tried to receive Mermaid Component in Bug Fix Cmd but already has it.");
             }
         });
     }

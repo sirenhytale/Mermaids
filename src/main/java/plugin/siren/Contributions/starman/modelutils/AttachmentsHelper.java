@@ -69,8 +69,6 @@ public class AttachmentsHelper {
             String[] cosmeticParts = skinPartValue.split("\\.");
             PlayerSkinPart skinPart = (PlayerSkinPart) reg.getByType(cosmeticType).get(cosmeticParts[0]);
 
-            //System.out.println(skinPart.toString());
-
             // Collecting gradient id from parsed cosmetic data
             String gradientId;
             if (cosmeticParts.length > 1) {

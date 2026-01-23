@@ -14,7 +14,6 @@ import com.hypixel.hytale.server.core.asset.type.blocktype.config.BlockType;
 import com.hypixel.hytale.server.core.asset.type.model.config.Model;
 import com.hypixel.hytale.server.core.asset.type.model.config.ModelAsset;
 import com.hypixel.hytale.server.core.asset.type.weather.config.Weather;
-import com.hypixel.hytale.server.core.cosmetics.CosmeticsModule;
 import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.entity.entities.player.hud.HudManager;
 import com.hypixel.hytale.server.core.entity.entities.player.movement.MovementManager;
@@ -34,14 +33,11 @@ import plugin.siren.Contributions.starman.modelutils.ModelHelper;
 import plugin.siren.Mermaids;
 
 import javax.annotation.Nonnull;
-import java.util.concurrent.atomic.AtomicBoolean;
 
-public class WaterSystem extends EntityTickingSystem<EntityStore> {
-    private final ComponentType<EntityStore, WaterComponent> waterComponentType;
+public class MermaidSystem extends EntityTickingSystem<EntityStore> {
     private final ComponentType<EntityStore, MermaidComponent> mermaidComponentType;
 
-    public WaterSystem(ComponentType<EntityStore, WaterComponent> waterComponentType, ComponentType<EntityStore, MermaidComponent> mermaidComponentType){
-        this.waterComponentType = waterComponentType;
+    public MermaidSystem(ComponentType<EntityStore, MermaidComponent> mermaidComponentType){
         this.mermaidComponentType = mermaidComponentType;
     }
 
@@ -49,7 +45,6 @@ public class WaterSystem extends EntityTickingSystem<EntityStore> {
     public void tick(float dt, int index, @Nonnull ArchetypeChunk<EntityStore> archetypeChunk,
                      @Nonnull Store<EntityStore> store, @Nonnull CommandBuffer<EntityStore> commandBuffer){
 
-        WaterComponent water = archetypeChunk.getComponent(index, waterComponentType);
         MermaidComponent mermaid = archetypeChunk.getComponent(index, mermaidComponentType);
 
         Ref<EntityStore> ref = archetypeChunk.getReferenceTo(index);
@@ -116,22 +111,20 @@ public class WaterSystem extends EntityTickingSystem<EntityStore> {
         MovementStatesComponent movementState = commandBuffer.getComponent(ref, MovementStatesComponent.getComponentType());
         if((movementState.getMovementStates().swimming || movementState.getMovementStates().swimJumping || movementState.getMovementStates().inFluid ||
                 mermaid.getH2OBlock().get() || mermaid.getRainTransform().get()) && mermaid.getToggleMermaid() && transformPermission){
-            if(!water.isUnderwater()) {
-                water.setUnderwater(true);
-                water.setElapsedTime(0f);
+            if(!mermaid.isUnderwater()) {
+                mermaid.setUnderwater(true);
+                mermaid.setElapsedTime(0f);
 
                 if(Mermaids.ifDebug()) {
                     player.sendMessage(Message.raw("You have entered a liquid."));
                 }
             }
 
-            if(water.getElapsedTime() < 500f) {
-                water.incrementTick();
+            if(mermaid.getElapsedTime() < 500f) {
+                mermaid.incrementTick();
             }
 
-            if(!water.isSwimming() && water.getElapsedTime() >= 35f){
-                water.setSwimming(true);
-
+            if(!mermaid.isMermaid() && mermaid.getElapsedTime() >= 35f){
                 if(Mermaids.ifDebug()) {
                     player.sendMessage(Message.raw("Now Swimming (35 ticks)"));
                 }
@@ -167,17 +160,17 @@ public class WaterSystem extends EntityTickingSystem<EntityStore> {
                 mermaid.setMermaid(true);
                 Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " has transformed into a Mermaid.");
             }
-        }else if(water.isSwimming() || water.isUnderwater()){
-            water.setUnderwater(false);
-            water.setSwimming(false);
-            water.setElapsedTime(0f);
-            water.setDrying(true);
-        }else if(water.isDrying()){
-            water.incrementTick();
+        }else if(mermaid.isMermaid() || mermaid.isUnderwater()){
+            mermaid.setUnderwater(false);
+            mermaid.setMermaid(false);
+            mermaid.setElapsedTime(0f);
+            mermaid.setDrying(true);
+        }else if(mermaid.isDrying()){
+            mermaid.incrementTick();
 
-            if(water.getElapsedTime() >= 15f){
-                water.setDrying(false);
-                water.setElapsedTime(0f);
+            if(mermaid.getElapsedTime() >= 15f){
+                mermaid.setDrying(false);
+                mermaid.setElapsedTime(0f);
 
                 if(Mermaids.ifDebug()){
                     player.sendMessage(Message.raw("Updating stats for player transformation"));
@@ -213,7 +206,7 @@ public class WaterSystem extends EntityTickingSystem<EntityStore> {
             }
         }
 
-        if(water.isSwimming() && mermaid.getToggleMermaid() && transformPermission){
+        if(mermaid.isMermaid() && mermaid.getToggleMermaid() && transformPermission){
             MovementManager movement = commandBuffer.getComponent(ref, MovementManager.getComponentType());
             movement.getSettings().baseSpeed = 11.5f;
             movement.getSettings().forwardCrouchSpeedMultiplier = 1f;
@@ -234,6 +227,6 @@ public class WaterSystem extends EntityTickingSystem<EntityStore> {
     @Nonnull
     @Override
     public Query<EntityStore> getQuery(){
-        return Query.and(this.waterComponentType,this.mermaidComponentType);
+        return Query.and(this.mermaidComponentType);
     }
 }

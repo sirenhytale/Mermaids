@@ -39,11 +39,15 @@ public class MermaidComponent implements Component<EntityStore> {
         this.underwater = false;
         this.dryingOff = false;
         this.toggleMermaid = true;
-        this.skin = skin;
-        this.mermaidTail = "MermaidBigFinPlayer";
-        this.tailColor = "MermaidPlayerGrayscale";
+
         this.h2oBlock = new AtomicBoolean(false);
         this.rainTransform = new AtomicBoolean(false);
+
+        this.mermaidTail = "MermaidBigFinPlayer";
+        this.tailColor = "MermaidPlayerGrayscale";
+
+        this.skin = skin;
+
         this.elapsedTime = 0f;
     }
 
@@ -52,14 +56,18 @@ public class MermaidComponent implements Component<EntityStore> {
         this.underwater = other.underwater;
         this.dryingOff = other.dryingOff;
         this.toggleMermaid = other.toggleMermaid;
+
         this.h2oBlock = other.h2oBlock;
         this.rainTransform = other.rainTransform;
-        this.skin = other.skin;
+
         this.mermaidTail = other.mermaidTail;
         this.tailColor = other.tailColor;
+
+        this.skin = other.skin;
         this.movementManager = other.movementManager;
         this.playerSkinComponent = other.playerSkinComponent;
         this.modelComponent = other.modelComponent;
+
         this.elapsedTime = other.elapsedTime;
     }
 
@@ -69,95 +77,68 @@ public class MermaidComponent implements Component<EntityStore> {
         return new MermaidComponent(this);
     }
 
-    public void setMermaid(boolean mermaid){
-        this.mermaid = mermaid;
-    }
-
-    public void setUnderwater(boolean underwater){
-        this.underwater = underwater;
-    }
-
-    public void setDrying(boolean drying){
-        this.dryingOff = drying;
-    }
-
-    public void setToggleMermaid(boolean toggle){
-        this.toggleMermaid = toggle;
-    }
-
-    public void setH2OBlock(boolean h2o){
-        h2oBlock.set(h2o);
-    }
-    public void setRainTransform(boolean raining){
-        rainTransform.set(raining);
-    }
-
-    public void setMermaidTail(String mermaidTail){
-        this.mermaidTail = mermaidTail;
-    }
-
-    public void setTailColor(String tailColor) {
-        this.tailColor = tailColor;
-    }
-
-    public void setPlayerSkin(PlayerSkin skin){
-        this.skin = skin;
-    }
-
-    public void setMovementManager(MovementManager movementManager){
-        this.movementManager = movementManager;
-    }
-
-    public void setPlayerSkinComponent(PlayerSkinComponent playerSkinComponent){
-        this.playerSkinComponent = playerSkinComponent;
-    }
-
-    public void setModelComponent(ModelComponent modelComponent){
-        this.modelComponent = modelComponent;
-    }
-
-    public void setElapsedTime(float time){
-        this.elapsedTime = time;
-    }
-
-    public void incrementTick(){
-        this.elapsedTime += 1f;
-    }
-
     public boolean isMermaid(){
         return mermaid;
+    }
+
+    public void setMermaid(boolean mermaid){
+        this.mermaid = mermaid;
     }
 
     public boolean isUnderwater(){
         return underwater;
     }
 
-    public boolean getDrying(){
+    public void setUnderwater(boolean underwater){
+        this.underwater = underwater;
+    }
+
+    public boolean isDrying(){
         return dryingOff;
+    }
+
+    public void setDrying(boolean drying){
+        this.dryingOff = drying;
     }
 
     public boolean getToggleMermaid(){
         return toggleMermaid;
     }
 
+    public void setToggleMermaid(boolean toggle){
+        this.toggleMermaid = toggle;
+    }
+
     public AtomicBoolean getH2OBlock(){
         return h2oBlock;
+    }
+
+    public void setH2OBlock(boolean h2o){
+        h2oBlock.set(h2o);
     }
 
     public AtomicBoolean getRainTransform(){
         return rainTransform;
     }
 
+    public void setRainTransform(boolean raining){
+        rainTransform.set(raining);
+    }
+
     public String getMermaidTail(){
         return mermaidTail;
+    }
+
+    public void setMermaidTail(String mermaidTail){
+        this.mermaidTail = mermaidTail;
     }
 
     public String getTailColor() {
         return tailColor;
     }
 
-    public PlayerSkin getPlayerSkin(){
-        return skin;
+    public void setTailColor(String tailColor) {
+        this.tailColor = tailColor;
     }
 
     public PlayerSkin getMermaidSkin(){
@@ -172,20 +153,48 @@ public class MermaidComponent implements Component<EntityStore> {
         return mermaidSkin;
     }
 
+    public PlayerSkin getPlayerSkin(){
+        return skin;
+    }
+
+    public void setPlayerSkin(PlayerSkin skin){
+        this.skin = skin;
+    }
+
     public MovementManager getMovementManager(){
         return (MovementManager) movementManager.clone();
+    }
+
+    public void setMovementManager(MovementManager movementManager){
+        this.movementManager = movementManager;
     }
 
     public PlayerSkinComponent getPlayerSkinComponent(){
         return (PlayerSkinComponent) playerSkinComponent.clone();
     }
 
+    public void setPlayerSkinComponent(PlayerSkinComponent playerSkinComponent){
+        this.playerSkinComponent = playerSkinComponent;
+    }
+
     public ModelComponent getModelComponent(){
         return (ModelComponent) modelComponent.clone();
     }
 
+    public void setModelComponent(ModelComponent modelComponent){
+        this.modelComponent = modelComponent;
+    }
+
     public float getElapsedTime(){
         return this.elapsedTime;
+    }
+
+    public void setElapsedTime(float time){
+        this.elapsedTime = time;
+    }
+
+    public void incrementTick(){
+        this.elapsedTime += 1f;
     }
 
 }

@@ -4,7 +4,6 @@ import com.hypixel.hytale.codec.Codec;
 import com.hypixel.hytale.codec.KeyedCodec;
 import com.hypixel.hytale.codec.builder.BuilderCodec;
 import plugin.siren.Mermaids;
-import plugin.siren.Utils.UI.MermaidUIPage;
 
 public class MermaidsConfig {
 

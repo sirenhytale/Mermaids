@@ -10,8 +10,7 @@ import com.hypixel.hytale.server.core.util.Config;
 import plugin.siren.Commands.*;
 import plugin.siren.Events.PlayerReadyEventM;
 import plugin.siren.Systems.MermaidComponent;
-import plugin.siren.Systems.WaterComponent;
-import plugin.siren.Systems.WaterSystem;
+import plugin.siren.Systems.MermaidSystem;
 import plugin.siren.Utils.Config.MermaidsConfig;
 
 import javax.annotation.Nonnull;
@@ -24,7 +23,6 @@ public class Mermaids extends JavaPlugin {
     public static final HytaleLogger LOGGER = HytaleLogger.forEnclosingClass();
     private final Config<MermaidsConfig> config;
 
-    private ComponentType<EntityStore, WaterComponent> waterComponent;
     private ComponentType<EntityStore, MermaidComponent> mermaidComponent;
 
     public Mermaids(@Nonnull JavaPluginInit init){
@@ -36,13 +34,13 @@ public class Mermaids extends JavaPlugin {
 
     @Override
     protected void setup(){
-        this.getEventRegistry().registerGlobal(PlayerReadyEvent.class, PlayerReadyEventM::onPlayerReadyEvent);//PlayerConnectEvent.class, PlayerJoinEventM::onPlayerConnectEvent);//PlayerReadyEvent.class, PlayerReadyEventM::onPlayerReadyEvent);
+        this.getEventRegistry().registerGlobal(PlayerReadyEvent.class, PlayerReadyEventM::onPlayerReadyEvent);
         this.getCommandRegistry().registerCommand(new MermaidsUI());
         this.getCommandRegistry().registerCommand(new ToggleMermaid());
+        this.getCommandRegistry().registerCommand(new MermaidCompBugCmd());
 
-        this.waterComponent = this.getEntityStoreRegistry().registerComponent(WaterComponent.class, WaterComponent::new);
         this.mermaidComponent = this.getEntityStoreRegistry().registerComponent(MermaidComponent.class, MermaidComponent::new);
-        this.getEntityStoreRegistry().registerSystem(new WaterSystem(this.waterComponent, this.mermaidComponent));
+        this.getEntityStoreRegistry().registerSystem(new MermaidSystem(this.mermaidComponent));
 
         //config.load();
         config.save();
@@ -52,10 +50,6 @@ public class Mermaids extends JavaPlugin {
         if(ifDebug()){
             LOGGER.atInfo().log("Loaded in Debug mode.");
         }
-    }
-
-    public ComponentType<EntityStore, WaterComponent> getWaterComponentType(){
-        return waterComponent;
     }
 
     public ComponentType<EntityStore, MermaidComponent> getMermaidComponentType(){
