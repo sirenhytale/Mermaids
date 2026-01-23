@@ -1,0 +1,5 @@
+{
+  "Parent": "MermaidPlayer",
+  "Model": "Characters/Mermaidv2.blockymodel",
+  "Texture": "Characters/PlayerTextures/MermaidTextureV2.png"
+}

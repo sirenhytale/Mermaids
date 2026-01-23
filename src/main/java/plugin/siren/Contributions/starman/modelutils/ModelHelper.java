@@ -16,7 +16,7 @@ import plugin.siren.Systems.MermaidComponent;
  * Link: https://github.com/SyperAI/hytale-model-utils
  *
  * Modified: meFroggy
- * Date: 1/19/2026
+ * Date: 1/22/2026
  *
  */
 
@@ -29,6 +29,11 @@ public class ModelHelper {
 
         var attachments = AttachmentsHelper.parseSkin(playerSkin, null, playerModel.getGradientId());
 
+        String texturePath = model.getTexture();
+        if(model.getModel().equals("Characters/MermaidPlayer.blockymodel") || model.getModel().equals("Characters/MermaidBigFinPlayer.blockymodel")){
+            texturePath = "Characters/PlayerTextures/" + mermaid.getTailColor() + ".png";
+        }
+
         return new Model(
                 model.getModelAssetId() + "_Skinned",
                 playerModel.getScale(),
@@ -36,7 +41,7 @@ public class ModelHelper {
                 attachments,
                 playerModel.getBoundingBox(),
                 model.getModel(),
-                "Characters/PlayerTextures/" + mermaid.getTailColor() + ".png",//model.getTexture(),
+                texturePath,//"Characters/PlayerTextures/" + mermaid.getTailColor() + ".png",//model.getTexture(),
                 playerModel.getGradientSet(),
                 playerModel.getGradientId(),
                 playerModel.getEyeHeight(),

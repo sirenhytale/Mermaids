@@ -15,10 +15,9 @@ import plugin.siren.Systems.WaterSystem;
 import plugin.siren.Utils.Config.MermaidsConfig;
 
 import javax.annotation.Nonnull;
-import java.util.concurrent.CompletableFuture;
 
 public class Mermaids extends JavaPlugin {
-    private static final String VERSION = "1.2.3";
+    private static final String VERSION = "1.2.4";
     private static final boolean DEBUG = false;
 
     private static Mermaids plugin;
@@ -37,7 +36,7 @@ public class Mermaids extends JavaPlugin {
 
     @Override
     protected void setup(){
-        this.getEventRegistry().registerGlobal(PlayerReadyEvent.class, PlayerReadyEventM::onPlayerReadyEvent);
+        this.getEventRegistry().registerGlobal(PlayerReadyEvent.class, PlayerReadyEventM::onPlayerReadyEvent);//PlayerConnectEvent.class, PlayerJoinEventM::onPlayerConnectEvent);//PlayerReadyEvent.class, PlayerReadyEventM::onPlayerReadyEvent);
         this.getCommandRegistry().registerCommand(new MermaidsUI());
         this.getCommandRegistry().registerCommand(new ToggleMermaid());
 
