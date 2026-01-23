@@ -13,8 +13,12 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class MermaidComponent implements Component<EntityStore> {
 
     private boolean mermaid;
+    private boolean underwater;
+    private boolean dryingOff;
     private boolean toggleMermaid;
+
     private AtomicBoolean h2oBlock;
+    private AtomicBoolean rainTransform;
 
     private String mermaidTail;
     private String tailColor;
@@ -24,28 +28,39 @@ public class MermaidComponent implements Component<EntityStore> {
     private PlayerSkinComponent playerSkinComponent;
     private ModelComponent modelComponent;
 
+    private float elapsedTime;
+
     public MermaidComponent(){
         this(new PlayerSkin());
     }
 
     public MermaidComponent(PlayerSkin skin){
         this.mermaid = false;
+        this.underwater = false;
+        this.dryingOff = false;
         this.toggleMermaid = true;
         this.skin = skin;
         this.mermaidTail = "MermaidBigFinPlayer";
         this.tailColor = "MermaidPlayerGrayscale";
-        h2oBlock = new AtomicBoolean(false);
+        this.h2oBlock = new AtomicBoolean(false);
+        this.rainTransform = new AtomicBoolean(false);
+        this.elapsedTime = 0f;
     }
 
     public MermaidComponent(MermaidComponent other){
         this.mermaid = other.mermaid;
+        this.underwater = other.underwater;
+        this.dryingOff = other.dryingOff;
         this.toggleMermaid = other.toggleMermaid;
+        this.h2oBlock = other.h2oBlock;
+        this.rainTransform = other.rainTransform;
         this.skin = other.skin;
         this.mermaidTail = other.mermaidTail;
         this.tailColor = other.tailColor;
         this.movementManager = other.movementManager;
         this.playerSkinComponent = other.playerSkinComponent;
         this.modelComponent = other.modelComponent;
+        this.elapsedTime = other.elapsedTime;
     }
 
     @Nullable
@@ -58,12 +73,23 @@ public class MermaidComponent implements Component<EntityStore> {
         this.mermaid = mermaid;
     }
 
+    public void setUnderwater(boolean underwater){
+        this.underwater = underwater;
+    }
+
+    public void setDrying(boolean drying){
+        this.dryingOff = drying;
+    }
+
     public void setToggleMermaid(boolean toggle){
         this.toggleMermaid = toggle;
     }
 
     public void setH2OBlock(boolean h2o){
         h2oBlock.set(h2o);
+    }
+    public void setRainTransform(boolean raining){
+        rainTransform.set(raining);
     }
 
     public void setMermaidTail(String mermaidTail){
@@ -90,8 +116,24 @@ public class MermaidComponent implements Component<EntityStore> {
         this.modelComponent = modelComponent;
     }
 
+    public void setElapsedTime(float time){
+        this.elapsedTime = time;
+    }
+
+    public void incrementTick(){
+        this.elapsedTime += 1f;
+    }
+
     public boolean isMermaid(){
         return mermaid;
+    }
+
+    public boolean isUnderwater(){
+        return underwater;
+    }
+
+    public boolean getDrying(){
+        return dryingOff;
     }
 
     public boolean getToggleMermaid(){
@@ -100,6 +142,10 @@ public class MermaidComponent implements Component<EntityStore> {
 
     public AtomicBoolean getH2OBlock(){
         return h2oBlock;
+    }
+
+    public AtomicBoolean getRainTransform(){
+        return rainTransform;
     }
 
     public String getMermaidTail(){
@@ -136,6 +182,10 @@ public class MermaidComponent implements Component<EntityStore> {
 
     public ModelComponent getModelComponent(){
         return (ModelComponent) modelComponent.clone();
+    }
+
+    public float getElapsedTime(){
+        return this.elapsedTime;
     }
 
 }

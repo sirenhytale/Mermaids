@@ -41,6 +41,10 @@ public class MermaidsConfig {
                     (merConfig, bcctBool, extraInfo) -> merConfig.BlockTrans = bcctBool, // Setter
                     (merConfig, extraInfo) -> merConfig.BlockTrans)                    // Getter
             .add()
+            .append(new KeyedCodec<Boolean>("Rain-Can-Cause-Transformations", Codec.BOOLEAN),
+                    (merConfig, rcctBool, extraInfo) -> merConfig.RainTrans = rcctBool, // Setter
+                    (merConfig, extraInfo) -> merConfig.RainTrans)                    // Getter
+            .add()
             .build();
 
     private int ConfigVersion = 3;
@@ -51,6 +55,7 @@ public class MermaidsConfig {
     private boolean RequireTransPerm = false;
     private boolean RequireUIPerm = false;
     private boolean BlockTrans = true;
+    private boolean RainTrans = false;
 
     public MermaidsConfig() {}
 
@@ -72,5 +77,9 @@ public class MermaidsConfig {
 
     public boolean getBlockTransformation(){
         return BlockTrans;
+    }
+
+    public boolean getRainTransformation(){
+        return RainTrans;
     }
 }

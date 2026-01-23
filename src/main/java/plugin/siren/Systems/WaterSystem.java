@@ -1,8 +1,11 @@
 package plugin.siren.Systems;
 
+import com.hypixel.hytale.builtin.weather.resources.WeatherResource;
 import com.hypixel.hytale.component.*;
 import com.hypixel.hytale.component.query.Query;
 import com.hypixel.hytale.component.system.tick.EntityTickingSystem;
+import com.hypixel.hytale.math.util.ChunkUtil;
+import com.hypixel.hytale.math.util.MathUtil;
 import com.hypixel.hytale.math.vector.Vector3d;
 import com.hypixel.hytale.protocol.PlayerSkin;
 import com.hypixel.hytale.protocol.packets.interface_.HudComponent;
@@ -10,6 +13,7 @@ import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.asset.type.blocktype.config.BlockType;
 import com.hypixel.hytale.server.core.asset.type.model.config.Model;
 import com.hypixel.hytale.server.core.asset.type.model.config.ModelAsset;
+import com.hypixel.hytale.server.core.asset.type.weather.config.Weather;
 import com.hypixel.hytale.server.core.cosmetics.CosmeticsModule;
 import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.entity.entities.player.hud.HudManager;
@@ -24,6 +28,7 @@ import com.hypixel.hytale.server.core.modules.entitystats.asset.DefaultEntitySta
 import com.hypixel.hytale.server.core.permissions.PermissionsModule;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.World;
+import com.hypixel.hytale.server.core.universe.world.chunk.WorldChunk;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import plugin.siren.Contributions.starman.modelutils.ModelHelper;
 import plugin.siren.Mermaids;
@@ -52,7 +57,7 @@ public class WaterSystem extends EntityTickingSystem<EntityStore> {
         Player player = commandBuffer.getComponent(ref, Player.getComponentType());
         PlayerRef playerRef = commandBuffer.getComponent(ref, PlayerRef.getComponentType());
 
-        if(Mermaids.getConfig().get().getBlockTransformation()) {
+        if(Mermaids.getConfig().get().getBlockTransformation() || Mermaids.getConfig().get().getRainTransformation()) {
             World world = player.getWorld();
             if(world.getName().equals("default")) {
                 world.execute(() -> {
@@ -60,20 +65,46 @@ public class WaterSystem extends EntityTickingSystem<EntityStore> {
                     if (transform != null) {
                         Vector3d pos = transform.getPosition();
 
-                        BlockType footBlockType = world.getBlockType((int) Math.floor(pos.getX()), (int) Math.floor(pos.getY()), (int) Math.floor(pos.getZ()));
-                        String footBlockId = footBlockType.getId();
+                        if(Mermaids.getConfig().get().getBlockTransformation()) {
+                            BlockType footBlockType = world.getBlockType((int) Math.floor(pos.getX()), (int) Math.floor(pos.getY()), (int) Math.floor(pos.getZ()));
+                            String footBlockId = footBlockType.getId();
 
-                        Boolean h2o = false;
-                        if (footBlockId.equals("Alchemy_Cauldron_Big")) {//footBlockId == 24){//Large Cauldron
-                            mermaid.setH2OBlock(true);
-                            h2o = true;
+                            Boolean h2o = false;
+                            if (footBlockId.equals("Alchemy_Cauldron_Big")) {//footBlockId == 24){//Large Cauldron
+                                mermaid.setH2OBlock(true);
+                                h2o = true;
+                            }
+                            if (footBlockId.equals("Soil_Mud")) {//footBlockId == 563 || footBlockId == 564){//Soil Mud
+                                mermaid.setH2OBlock(true);
+                                h2o = true;
+                            }
+                            if (!h2o && mermaid.getH2OBlock().get()) {
+                                mermaid.setH2OBlock(false);
+                            }
                         }
-                        if (footBlockId.equals("Soil_Mud")) {//footBlockId == 563 || footBlockId == 564){//Soil Mud
-                            mermaid.setH2OBlock(true);
-                            h2o = true;
-                        }
-                        if (!h2o && mermaid.getH2OBlock().get()) {
-                            mermaid.setH2OBlock(false);
+
+                        if(Mermaids.getConfig().get().getRainTransformation()) {
+                            WorldChunk worldChunk = world.getChunkIfInMemory(ChunkUtil.indexChunkFromBlock(pos.getX(), pos.getZ()));
+                            int yHeight = worldChunk.getHeight(MathUtil.floor(pos.getX()), MathUtil.floor(pos.getZ()));
+
+                            boolean raining = false;
+
+                            if (pos.getY() >= yHeight) {
+                                WeatherResource weatherResource = commandBuffer.getResource(WeatherResource.getResourceType());
+                                Weather weatherAsset = Weather.getAssetMap().getAsset(weatherResource.getForcedWeatherIndex());
+
+                                String weatherId = weatherAsset.getId();
+                                if (weatherId.equalsIgnoreCase("zone1_rain") || weatherId.equalsIgnoreCase("zone1_swamp_rain") ||
+                                        weatherId.equalsIgnoreCase("zone1_rain_light") || weatherId.equalsIgnoreCase("zone3_rain") ||
+                                        weatherId.equalsIgnoreCase("zone4_wastes_rain")) {
+                                    mermaid.setRainTransform(true);
+                                    raining = true;
+                                }
+                            }
+
+                            if(!raining && mermaid.getRainTransform().get()){
+                                mermaid.setRainTransform(false);
+                            }
                         }
                     }
                 });
@@ -83,7 +114,8 @@ public class WaterSystem extends EntityTickingSystem<EntityStore> {
         boolean transformPermission = PermissionsModule.get().hasPermission(playerRef.getUuid(), "mermaids.transform") || !Mermaids.getConfig().get().getRequireTransformationPermission();
 
         MovementStatesComponent movementState = commandBuffer.getComponent(ref, MovementStatesComponent.getComponentType());
-        if((movementState.getMovementStates().swimming || movementState.getMovementStates().swimJumping || movementState.getMovementStates().inFluid || mermaid.getH2OBlock().get()) && mermaid.getToggleMermaid() && transformPermission){
+        if((movementState.getMovementStates().swimming || movementState.getMovementStates().swimJumping || movementState.getMovementStates().inFluid ||
+                mermaid.getH2OBlock().get() || mermaid.getRainTransform().get()) && mermaid.getToggleMermaid() && transformPermission){
             if(!water.isUnderwater()) {
                 water.setUnderwater(true);
                 water.setElapsedTime(0f);
