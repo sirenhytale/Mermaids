@@ -3,9 +3,11 @@ package plugin.siren.Systems;
 import com.hypixel.hytale.component.*;
 import com.hypixel.hytale.component.query.Query;
 import com.hypixel.hytale.component.system.tick.EntityTickingSystem;
+import com.hypixel.hytale.math.vector.Vector3d;
 import com.hypixel.hytale.protocol.PlayerSkin;
 import com.hypixel.hytale.protocol.packets.interface_.HudComponent;
 import com.hypixel.hytale.server.core.Message;
+import com.hypixel.hytale.server.core.asset.type.blocktype.config.BlockType;
 import com.hypixel.hytale.server.core.asset.type.model.config.Model;
 import com.hypixel.hytale.server.core.asset.type.model.config.ModelAsset;
 import com.hypixel.hytale.server.core.cosmetics.CosmeticsModule;
@@ -15,16 +17,19 @@ import com.hypixel.hytale.server.core.entity.entities.player.movement.MovementMa
 import com.hypixel.hytale.server.core.entity.movement.MovementStatesComponent;
 import com.hypixel.hytale.server.core.modules.entity.component.ActiveAnimationComponent;
 import com.hypixel.hytale.server.core.modules.entity.component.ModelComponent;
+import com.hypixel.hytale.server.core.modules.entity.component.TransformComponent;
 import com.hypixel.hytale.server.core.modules.entity.player.PlayerSkinComponent;
 import com.hypixel.hytale.server.core.modules.entitystats.EntityStatMap;
 import com.hypixel.hytale.server.core.modules.entitystats.asset.DefaultEntityStatTypes;
 import com.hypixel.hytale.server.core.permissions.PermissionsModule;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
+import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import plugin.siren.Contributions.starman.modelutils.ModelHelper;
 import plugin.siren.Mermaids;
 
 import javax.annotation.Nonnull;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class WaterSystem extends EntityTickingSystem<EntityStore> {
     private final ComponentType<EntityStore, WaterComponent> waterComponentType;
@@ -47,16 +52,44 @@ public class WaterSystem extends EntityTickingSystem<EntityStore> {
         Player player = commandBuffer.getComponent(ref, Player.getComponentType());
         PlayerRef playerRef = commandBuffer.getComponent(ref, PlayerRef.getComponentType());
 
+        if(Mermaids.getConfig().get().getBlockTransformation()) {
+            World world = player.getWorld();
+            if(world.getName().equals("default")) {
+                world.execute(() -> {
+                    TransformComponent transform = commandBuffer.getComponent(ref, TransformComponent.getComponentType());
+                    if (transform != null) {
+                        Vector3d pos = transform.getPosition();
+
+                        BlockType footBlockType = world.getBlockType((int) Math.floor(pos.getX()), (int) Math.floor(pos.getY()), (int) Math.floor(pos.getZ()));
+                        String footBlockId = footBlockType.getId();
+
+                        Boolean h2o = false;
+                        if (footBlockId.equals("Alchemy_Cauldron_Big")) {//footBlockId == 24){//Large Cauldron
+                            mermaid.setH2OBlock(true);
+                            h2o = true;
+                        }
+                        if (footBlockId.equals("Soil_Mud")) {//footBlockId == 563 || footBlockId == 564){//Soil Mud
+                            mermaid.setH2OBlock(true);
+                            h2o = true;
+                        }
+                        if (!h2o && mermaid.getH2OBlock().get()) {
+                            mermaid.setH2OBlock(false);
+                        }
+                    }
+                });
+            }
+        }
+
         boolean transformPermission = PermissionsModule.get().hasPermission(playerRef.getUuid(), "mermaids.transform") || !Mermaids.getConfig().get().getRequireTransformationPermission();
 
         MovementStatesComponent movementState = commandBuffer.getComponent(ref, MovementStatesComponent.getComponentType());
-        if((movementState.getMovementStates().swimming || movementState.getMovementStates().swimJumping || movementState.getMovementStates().inFluid) && mermaid.getToggleMermaid() && transformPermission){
+        if((movementState.getMovementStates().swimming || movementState.getMovementStates().swimJumping || movementState.getMovementStates().inFluid || mermaid.getH2OBlock().get()) && mermaid.getToggleMermaid() && transformPermission){
             if(!water.isUnderwater()) {
                 water.setUnderwater(true);
                 water.setElapsedTime(0f);
 
                 if(Mermaids.ifDebug()) {
-                    player.sendMessage(Message.raw("You have entered the water"));
+                    player.sendMessage(Message.raw("You have entered a liquid."));
                 }
             }
 

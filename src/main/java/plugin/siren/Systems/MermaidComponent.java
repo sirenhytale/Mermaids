@@ -8,11 +8,13 @@ import com.hypixel.hytale.server.core.modules.entity.player.PlayerSkinComponent;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 
 import javax.annotation.Nullable;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class MermaidComponent implements Component<EntityStore> {
 
     private boolean mermaid;
     private boolean toggleMermaid;
+    private AtomicBoolean h2oBlock;
 
     private String mermaidTail;
     private String tailColor;
@@ -32,6 +34,7 @@ public class MermaidComponent implements Component<EntityStore> {
         this.skin = skin;
         this.mermaidTail = "MermaidBigFinPlayer";
         this.tailColor = "MermaidPlayerGrayscale";
+        h2oBlock = new AtomicBoolean(false);
     }
 
     public MermaidComponent(MermaidComponent other){
@@ -57,6 +60,10 @@ public class MermaidComponent implements Component<EntityStore> {
 
     public void setToggleMermaid(boolean toggle){
         this.toggleMermaid = toggle;
+    }
+
+    public void setH2OBlock(boolean h2o){
+        h2oBlock.set(h2o);
     }
 
     public void setMermaidTail(String mermaidTail){
@@ -89,6 +96,10 @@ public class MermaidComponent implements Component<EntityStore> {
 
     public boolean getToggleMermaid(){
         return toggleMermaid;
+    }
+
+    public AtomicBoolean getH2OBlock(){
+        return h2oBlock;
     }
 
     public String getMermaidTail(){

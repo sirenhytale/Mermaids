@@ -37,15 +37,20 @@ public class MermaidsConfig {
                     (merConfig, rmupBool, extraInfo) -> merConfig.RequireUIPerm = rmupBool, // Setter
                     (merConfig, extraInfo) -> merConfig.RequireUIPerm)                    // Getter
             .add()
+            .append(new KeyedCodec<Boolean>("Blocks-Can-Cause-Transformations", Codec.BOOLEAN),
+                    (merConfig, bcctBool, extraInfo) -> merConfig.BlockTrans = bcctBool, // Setter
+                    (merConfig, extraInfo) -> merConfig.BlockTrans)                    // Getter
+            .add()
             .build();
 
-    private int ConfigVersion = 2;
+    private int ConfigVersion = 3;
     private String PluginName = "Mermaids";
     private String Version = Mermaids.getVersion();
     private String Website = "https://www.curseforge.com/hytale/mods/mermaids";
     private boolean DebugMode = false;
     private boolean RequireTransPerm = false;
     private boolean RequireUIPerm = false;
+    private boolean BlockTrans = true;
 
     public MermaidsConfig() {}
 
@@ -63,5 +68,9 @@ public class MermaidsConfig {
 
     public boolean getRequireUIPermission(){
         return RequireUIPerm;
+    }
+
+    public boolean getBlockTransformation(){
+        return BlockTrans;
     }
 }
