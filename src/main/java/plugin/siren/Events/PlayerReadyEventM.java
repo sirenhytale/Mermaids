@@ -39,7 +39,7 @@ public class PlayerReadyEventM {
                     }
                 } else {
                     player.sendMessage(Message.raw("Mermaids: Error: PlayerReadyEventM: skincomp == null"));
-                    Mermaids.LOGGER.atSevere().log(player.getDisplayName() + " failed to get Mermaid Component. Error: PlayerReadyEventM: skincomp == null");
+                    Mermaids.LOGGER.atSevere().log(player.getDisplayName() + " failed to get Player Skin Component. Error: PlayerReadyEventM: skincomp == null");
                 }
 
                 Component<EntityStore> movementManager = store.getComponent(ref, MovementManager.getComponentType()).clone();

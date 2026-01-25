@@ -1,9 +1,93 @@
 {
   "TranslationProperties": {
-    "Name": "items.Mermaids_Chest_Seashell_Bra.name",
-    "Description": ""
+    "Name": "items.Mermaids_Chest_Seashell_Bra.name"
   },
   "Parent": "Armor_Cloth_Wool_Chest",
-  "Model": "Items/Armor/Mermaids_Seashell_Bra.blockymodel",
-  "Texture": "Items/Armor/Mermaids_Seashell_Bra_Texture.png"
+  "Icon": "Icons/ItemsGenerated/Mermaids_Seashell_Bra.png",
+  "IconProperties": {
+    "Scale": 0.55,
+    "Rotation": [
+      22.5,
+      47.815,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -64
+    ]
+  },
+  "Model": "Items/Armor/Mermaids/Mermaids_Seashell_Bra.blockymodel",
+  "Texture": "Items/Armor/Mermaids/Mermaids_Seashell_Bra.png",
+  "Recipe": {
+    "TimeSeconds": 1,
+    "Input": [
+      {
+        "ItemId": "Deco_Coral_Shell",
+        "Quantity": 2
+      },
+      {
+        "ItemId": "Ingredient_Fibre",
+        "Quantity": 3
+      },
+      {
+        "ItemId": "Plant_Seaweed_Grass_Stack",
+        "Quantity": 6
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Id": "Armor_Bench",
+        "Type": "Crafting",
+        "Categories": [
+          "Armor_Chest"
+        ]
+      }
+    ],
+    "KnowledgeRequired": false
+  },
+  "Armor": {
+    "ArmorSlot": "Chest",
+    "BaseDamageResistance": 0,
+    "CosmeticsToHide": [
+      "Overtop",
+      "Undertop"
+    ],
+    "StatModifiers": {
+      "Oxygen": [
+        {
+          "Amount": 250,
+          "CalculationType": "Additive"
+        }
+      ],
+      "Health": [
+        {
+          "Amount": 10,
+          "CalculationType": "Additive"
+        }
+      ]
+    },
+    "DamageResistance": {
+      "Physical": [
+        {
+          "Amount": 0.03,
+          "CalculationType": "Multiplicative"
+        }
+      ],
+      "Projectile": [
+        {
+          "Amount": 0.03,
+          "CalculationType": "Multiplicative"
+        }
+      ]
+    }
+  },
+  "Tags": {
+    "Type": [
+      "Armor"
+    ],
+    "Family": [
+      "Mermaids"
+    ]
+  },
+  "MaxDurability": 150
 }

@@ -2,11 +2,25 @@ package plugin.siren.Contributions.starman.modelutils;
 
 import com.hypixel.hytale.component.CommandBuffer;
 import com.hypixel.hytale.component.Ref;
+import com.hypixel.hytale.protocol.ComponentUpdate;
+import com.hypixel.hytale.protocol.ComponentUpdateType;
+import com.hypixel.hytale.protocol.EntityUpdate;
 import com.hypixel.hytale.protocol.PlayerSkin;
+import com.hypixel.hytale.protocol.packets.entities.EntityUpdates;
+import com.hypixel.hytale.server.core.HytaleServer;
+import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.asset.type.model.config.Model;
+import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.modules.entity.component.ModelComponent;
+import com.hypixel.hytale.server.core.modules.entity.tracker.EntityTrackerSystems;
+import com.hypixel.hytale.server.core.modules.entity.tracker.NetworkId;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import plugin.siren.Mermaids;
 import plugin.siren.Systems.MermaidComponent;
+
+import java.util.Arrays;
+import java.util.concurrent.TimeUnit;
 
 /*
  *
@@ -44,14 +58,14 @@ public class ModelHelper {
                 texturePath,//"Characters/PlayerTextures/" + mermaid.getTailColor() + ".png",//model.getTexture(),
                 playerModel.getGradientSet(),
                 playerModel.getGradientId(),
-                playerModel.getEyeHeight(),
-                playerModel.getCrouchOffset(),
+                model.getEyeHeight(),
+                model.getCrouchOffset(),
                 model.getAnimationSetMap(),
                 playerModel.getCamera(),
-                playerModel.getLight(),
-                playerModel.getParticles(),
-                playerModel.getTrails(),
-                playerModel.getPhysicsValues(),
+                model.getLight(),
+                model.getParticles(),
+                model.getTrails(),
+                model.getPhysicsValues(),
                 playerModel.getDetailBoxes(),
                 playerModel.getPhobia(),
                 playerModel.getPhobiaModelAssetId()
@@ -59,7 +73,7 @@ public class ModelHelper {
     }
 
     // Applies given skin on given player reference
-    public static void applySkin(Model model, PlayerSkin skin, Ref<EntityStore> ref, CommandBuffer commandBuffer, MermaidComponent mermaid) {
+    public static void applySkin(Model model, PlayerSkin skin, Ref<EntityStore> ref, CommandBuffer commandBuffer, Player player, MermaidComponent mermaid) {
         var skinnedModel = applySkin(model, skin, mermaid);
 
         commandBuffer.replaceComponent(ref, ModelComponent.getComponentType(), new ModelComponent(skinnedModel));

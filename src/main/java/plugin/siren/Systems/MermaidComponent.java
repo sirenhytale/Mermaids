@@ -150,6 +150,8 @@ public class MermaidComponent implements Component<EntityStore> {
         mermaidSkin.overpants = null;
         mermaidSkin.bodyCharacteristic = null;
 
+
+
         return mermaidSkin;
     }
 
