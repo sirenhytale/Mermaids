@@ -31,9 +31,6 @@
                                 <copy file="${project.build.directory}/${project.build.finalName}.jar"
                                       todir="C:\Users\dipia\OneDrive\Documents\HytalePlugins\TESTING_SERVER\Server\mods"
                                       overwrite="true"/>
-                                <copy file="${project.build.directory}/${project.build.finalName}.jar"
-                                      todir="C:\Users\dipia\OneDrive\Documents\HytalePlugins\TESTING_SERVER\Server\mods"
-                                      overwrite="true"/>
                             </target>
                         </configuration>
                     </execution>

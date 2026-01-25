@@ -1,16 +1,22 @@
 package plugin.siren.Systems;
 
+import com.hypixel.hytale.builtin.weather.components.WeatherTracker;
 import com.hypixel.hytale.builtin.weather.resources.WeatherResource;
+import com.hypixel.hytale.builtin.weather.systems.WeatherSystem;
 import com.hypixel.hytale.component.*;
 import com.hypixel.hytale.component.query.Query;
 import com.hypixel.hytale.component.system.tick.EntityTickingSystem;
 import com.hypixel.hytale.math.util.ChunkUtil;
 import com.hypixel.hytale.math.util.MathUtil;
 import com.hypixel.hytale.math.vector.Vector3d;
-import com.hypixel.hytale.protocol.PlayerSkin;
+import com.hypixel.hytale.protocol.*;
+import com.hypixel.hytale.protocol.packets.entities.EntityUpdates;
 import com.hypixel.hytale.protocol.packets.interface_.HudComponent;
 import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.asset.type.blocktype.config.BlockType;
+import com.hypixel.hytale.server.core.asset.type.environment.config.Environment;
+import com.hypixel.hytale.server.core.asset.type.environment.config.WeatherForecast;
+import com.hypixel.hytale.server.core.asset.type.gameplay.PlayerConfig;
 import com.hypixel.hytale.server.core.asset.type.model.config.Model;
 import com.hypixel.hytale.server.core.asset.type.model.config.ModelAsset;
 import com.hypixel.hytale.server.core.asset.type.weather.config.Weather;
@@ -18,10 +24,16 @@ import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.entity.entities.player.hud.HudManager;
 import com.hypixel.hytale.server.core.entity.entities.player.movement.MovementManager;
 import com.hypixel.hytale.server.core.entity.movement.MovementStatesComponent;
+import com.hypixel.hytale.server.core.inventory.Inventory;
+import com.hypixel.hytale.server.core.inventory.ItemStack;
+import com.hypixel.hytale.server.core.inventory.container.ItemContainer;
 import com.hypixel.hytale.server.core.modules.entity.component.ActiveAnimationComponent;
 import com.hypixel.hytale.server.core.modules.entity.component.ModelComponent;
 import com.hypixel.hytale.server.core.modules.entity.component.TransformComponent;
+import com.hypixel.hytale.server.core.modules.entity.player.PlayerSettings;
 import com.hypixel.hytale.server.core.modules.entity.player.PlayerSkinComponent;
+import com.hypixel.hytale.server.core.modules.entity.tracker.EntityTrackerSystems;
+import com.hypixel.hytale.server.core.modules.entity.tracker.NetworkId;
 import com.hypixel.hytale.server.core.modules.entitystats.EntityStatMap;
 import com.hypixel.hytale.server.core.modules.entitystats.asset.DefaultEntityStatTypes;
 import com.hypixel.hytale.server.core.permissions.PermissionsModule;
@@ -29,10 +41,12 @@ import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.chunk.WorldChunk;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import plugin.siren.Contributions.starman.modelutils.ModelHelper;
 import plugin.siren.Mermaids;
 
 import javax.annotation.Nonnull;
+import java.util.Arrays;
 
 public class MermaidSystem extends EntityTickingSystem<EntityStore> {
     private final ComponentType<EntityStore, MermaidComponent> mermaidComponentType;
@@ -86,15 +100,44 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
 
                             if (pos.getY() >= yHeight) {
                                 WeatherResource weatherResource = commandBuffer.getResource(WeatherResource.getResourceType());
-                                Weather weatherAsset = Weather.getAssetMap().getAsset(weatherResource.getForcedWeatherIndex());
+                                Weather weatherForcedAsset = Weather.getAssetMap().getAsset(weatherResource.getForcedWeatherIndex());
 
-                                String weatherId = weatherAsset.getId();
-                                if (weatherId.equalsIgnoreCase("zone1_rain") || weatherId.equalsIgnoreCase("zone1_swamp_rain") ||
-                                        weatherId.equalsIgnoreCase("zone1_rain_light") || weatherId.equalsIgnoreCase("zone3_rain") ||
-                                        weatherId.equalsIgnoreCase("zone4_wastes_rain")) {
+                                WeatherTracker weatherTracker = commandBuffer.getComponent(ref, WeatherTracker.getComponentType());
+                                Weather weatherNaturalAsset = Weather.getAssetMap().getAsset(weatherResource.getWeatherIndexForEnvironment(weatherTracker.getEnvironmentId()));
+
+                                String weatherForcedId = weatherForcedAsset.getId();
+                                String weatherNaturalId = weatherNaturalAsset.getId();
+                                if (weatherNaturalId.equalsIgnoreCase("zone1_rain") || weatherNaturalId.equalsIgnoreCase("zone1_swamp_rain") || //Zone 1
+                                        weatherNaturalId.equalsIgnoreCase("zone1_rain_light") || weatherNaturalId.equalsIgnoreCase("zone1_storm") ||
+                                        weatherNaturalId.equalsIgnoreCase("zone2_thunder_storm") || //Zone2
+                                        weatherNaturalId.equalsIgnoreCase("zone3_rain") || //Zone3
+                                        weatherNaturalId.equalsIgnoreCase("zone4_wastes_rain") || weatherNaturalId.equalsIgnoreCase("zone4_wastes_rain_heavy") || //Zone4
+                                        weatherNaturalId.equalsIgnoreCase("skylands_rapid_marsh_stormy")) /* Misc */{
                                     mermaid.setRainTransform(true);
                                     raining = true;
                                 }
+                                if (weatherForcedId.equalsIgnoreCase("zone1_rain") || weatherForcedId.equalsIgnoreCase("zone1_swamp_rain") || //Zone 1
+                                        weatherForcedId.equalsIgnoreCase("zone1_rain_light") || weatherForcedId.equalsIgnoreCase("zone1_storm") ||
+                                        weatherForcedId.equalsIgnoreCase("zone2_thunder_storm") || //Zone2
+                                        weatherForcedId.equalsIgnoreCase("zone3_rain") || //Zone3
+                                        weatherForcedId.equalsIgnoreCase("zone4_wastes_rain") || weatherForcedId.equalsIgnoreCase("zone4_wastes_rain_heavy") || //Zone4
+                                        weatherForcedId.equalsIgnoreCase("skylands_rapid_marsh_stormy")) /* Misc */{
+                                    mermaid.setRainTransform(true);
+                                    raining = true;
+                                }
+
+                                if (weatherNaturalId.equalsIgnoreCase("zone3_snow") || weatherNaturalId.equalsIgnoreCase("zone3_snow_storm") ||//Zone3
+                                        weatherNaturalId.equalsIgnoreCase("zone3_snow_heavy")) {
+                                    mermaid.setRainTransform(true);
+                                    raining = true;
+                                }
+                                if (weatherForcedId.equalsIgnoreCase("zone3_snow") || weatherForcedId.equalsIgnoreCase("zone3_snow_storm") ||//Zone3
+                                        weatherForcedId.equalsIgnoreCase("zone3_snow_heavy")) {
+                                    mermaid.setRainTransform(true);
+                                    raining = true;
+                                }
+
+                                //player.sendMessage(Message.raw(weatherId));
                             }
 
                             if(!raining && mermaid.getRainTransform().get()){
@@ -202,26 +245,130 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                     Mermaids.LOGGER.atSevere().log(player.getDisplayName() + " had an error of getting the Mermaid Component. Error: WaterSystem: Mermaid Component == null [water.isDrying]");
                 }
 
+                EntityTrackerSystems.EntityViewer entityViewer = commandBuffer.getComponent(ref, EntityTrackerSystems.EntityViewer.getComponentType());
+                if(entityViewer == null){
+                    player.sendMessage(Message.raw("Mermaids: Error: WaterSystem: EntityViewer Component == null [transformation stats]"));
+                }else{
+                    NetworkId networkId = store.getComponent(ref, NetworkId.getComponentType());
+                    if(networkId == null){
+                        player.sendMessage(Message.raw("Mermaids: Error: WaterSystem: NetworkID Component == null [transformation stats]"));
+                    }else {
+                        EntityUpdate entityUpdate = new EntityUpdate();
+                        entityUpdate.networkId = networkId.getId();
+
+                        ObjectArrayList<ComponentUpdate> updateList = new ObjectArrayList<>();
+
+                        Inventory inventory = player.getInventory();
+                        ComponentUpdate update = new ComponentUpdate();
+
+                        update.type = ComponentUpdateType.Equipment;
+                        update.equipment = new Equipment();
+
+                        ItemContainer armor = inventory.getArmor();
+                        update.equipment.armorIds = new String[armor.getCapacity()];
+                        Arrays.fill(update.equipment.armorIds, "");
+                        armor.forEachWithMeta((slot, itemStack, armorIds) -> armorIds[slot] = itemStack.getItemId(), update.equipment.armorIds);
+
+                        /*PlayerSettings playerSettings = commandBuffer.getComponent(ref, PlayerSettings.getComponentType());
+                        if (playerSettings != null) {
+                            PlayerConfig.ArmorVisibilityOption armorVisibilityOption = commandBuffer.getExternalData()//store.getExternalData()
+                                    .getWorld()
+                                    .getGameplayConfig()
+                                    .getPlayerConfig()
+                                    .getArmorVisibilityOption();
+                            if (playerSettings.hideHelmet()) {
+                                update.equipment.armorIds[ItemArmorSlot.Head.ordinal()] = "";
+                            }
+
+                            if (armorVisibilityOption.canHideCuirass() && playerSettings.hideCuirass()) {
+                                update.equipment.armorIds[ItemArmorSlot.Chest.ordinal()] = "";
+                            }
+
+                            if (armorVisibilityOption.canHideGauntlets() && playerSettings.hideGauntlets()) {
+                                update.equipment.armorIds[ItemArmorSlot.Hands.ordinal()] = "";
+                            }
+
+                            if (armorVisibilityOption.canHidePants() && playerSettings.hidePants()) {
+                                update.equipment.armorIds[ItemArmorSlot.Legs.ordinal()] = "";
+                            }
+                        }*/
+
+                        ItemStack itemInHand = inventory.getItemInHand();
+                        update.equipment.rightHandItemId = itemInHand != null ? itemInHand.getItemId() : "Empty";
+                        ItemStack utilityItem = inventory.getUtilityItem();
+                        update.equipment.leftHandItemId = utilityItem != null ? utilityItem.getItemId() : "Empty";
+
+                        updateList.add(update);
+
+                        entityUpdate.updates = updateList.toArray(ComponentUpdate[]::new);
+                        entityViewer.packetReceiver.writeNoCache(new EntityUpdates(null, new EntityUpdate[]{entityUpdate}));
+                    }
+                }
+
                 mermaid.setMermaid(false);
             }
         }
 
         if(mermaid.isMermaid() && mermaid.getToggleMermaid() && transformPermission){
             MovementManager movement = commandBuffer.getComponent(ref, MovementManager.getComponentType());
-            movement.getSettings().baseSpeed = 11.5f;
-            movement.getSettings().forwardCrouchSpeedMultiplier = 1f;
-            movement.getSettings().backwardCrouchSpeedMultiplier = 0.8f;
-            movement.getSettings().forwardSprintSpeedMultiplier = 1.85f;
-            movement.update(playerRef.getPacketHandler());
-
+            if(movementState.getMovementStates().swimming || movementState.getMovementStates().swimJumping || movementState.getMovementStates().inFluid) {
+                movement.getSettings().swimJumpForce = 14.5f;
+                movement.getSettings().baseSpeed = 11.5f;
+                movement.getSettings().forwardCrouchSpeedMultiplier = 1f;
+                movement.getSettings().backwardCrouchSpeedMultiplier = 0.8f;
+                movement.getSettings().forwardSprintSpeedMultiplier = 1.85f;
+                movement.update(playerRef.getPacketHandler());
+            }else{
+                movement.getSettings().jumpForce = 8f;
+                movement.getSettings().baseSpeed = 3f;
+                movement.getSettings().forwardCrouchSpeedMultiplier = 0.35f;
+                movement.getSettings().backwardCrouchSpeedMultiplier = 0.25f;
+                movement.getSettings().forwardSprintSpeedMultiplier = 1.35f;
+                movement.update(playerRef.getPacketHandler());
+            }
 
             EntityStatMap statMapComponent = commandBuffer.getComponent(ref, EntityStatMap.getComponentType());
-            statMapComponent.setStatValue(DefaultEntityStatTypes.getOxygen(), 100f);
-        }
+            //statMapComponent.setStatValue(DefaultEntityStatTypes.getOxygen(), 100f);
+            statMapComponent.maximizeStatValue(DefaultEntityStatTypes.getOxygen());
 
-        ActiveAnimationComponent actAnimation = commandBuffer.getComponent(ref, ActiveAnimationComponent.getComponentType());
-        if(actAnimation != null)
-            player.sendMessage(Message.raw(actAnimation.getActiveAnimations()[0]));
+            EntityTrackerSystems.EntityViewer entityViewer = commandBuffer.getComponent(ref, EntityTrackerSystems.EntityViewer.getComponentType());
+            if(entityViewer == null){
+                player.sendMessage(Message.raw("Mermaids: Error: WaterSystem: EntityViewer Component == null [transformation stats]"));
+            }else{
+                NetworkId networkId = store.getComponent(ref, NetworkId.getComponentType());
+                if(networkId == null){
+                    player.sendMessage(Message.raw("Mermaids: Error: WaterSystem: NetworkID Component == null [transformation stats]"));
+                }else {
+                    EntityUpdate entityUpdate = new EntityUpdate();
+                    entityUpdate.networkId = networkId.getId();
+
+                    ObjectArrayList<ComponentUpdate> updateList = new ObjectArrayList<>();
+
+                    Inventory inventory = player.getInventory();
+                    ComponentUpdate update = new ComponentUpdate();
+
+                    update.type = ComponentUpdateType.Equipment;
+                    update.equipment = new Equipment();
+
+                    ItemContainer armor = inventory.getArmor();
+                    update.equipment.armorIds = new String[armor.getCapacity()];
+                    Arrays.fill(update.equipment.armorIds, "");
+                    armor.forEachWithMeta((slot, itemStack, armorIds) -> armorIds[slot] = itemStack.getItemId(), update.equipment.armorIds);
+
+                    update.equipment.armorIds[ItemArmorSlot.Legs.ordinal()] = "";
+
+                    ItemStack itemInHand = inventory.getItemInHand();
+                    update.equipment.rightHandItemId = itemInHand != null ? itemInHand.getItemId() : "Empty";
+                    ItemStack utilityItem = inventory.getUtilityItem();
+                    update.equipment.leftHandItemId = utilityItem != null ? utilityItem.getItemId() : "Empty";
+
+                    updateList.add(update);
+
+                    entityUpdate.updates = updateList.toArray(ComponentUpdate[]::new);
+                    entityViewer.packetReceiver.writeNoCache(new EntityUpdates(null, new EntityUpdate[]{entityUpdate}));
+                }
+            }
+        }
     }
 
     @Nonnull
