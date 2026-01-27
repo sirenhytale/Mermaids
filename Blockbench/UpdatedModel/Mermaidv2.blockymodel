@@ -530,7 +530,7 @@
                           "id": "19",
                           "name": "R-Arm",
                           "position": {"x": 0, "y": 0, "z": 0},
-                          "orientation": {"x": 0.00266, "y": -0.06099, "z": -0.04354, "w": 0.99718},
+                          "orientation": {"x": 0.00266, "y": -0.06099, "z": -0.04354, "w": 0.99719},
                           "shape": {
                             "type": "box",
                             "offset": {"x": -1, "y": -8, "z": 0},
@@ -562,8 +562,8 @@
                               },
                               "top": {
                                 "offset": {"x": 117, "y": 12},
-                                "mirror": {"x": false, "y": false},
-                                "angle": 270
+                                "mirror": {"x": true, "y": true},
+                                "angle": 90
                               },
                               "bottom": {
                                 "offset": {"x": 137, "y": 0},
@@ -669,8 +669,8 @@
                                       },
                                       "bottom": {
                                         "offset": {"x": 141, "y": 70},
-                                        "mirror": {"x": false, "y": false},
-                                        "angle": 270
+                                        "mirror": {"x": true, "y": true},
+                                        "angle": 90
                                       }
                                     },
                                     "unwrapMode": "custom",
@@ -748,7 +748,7 @@
                           "id": "25",
                           "name": "L-Arm",
                           "position": {"x": 0, "y": 0, "z": 0},
-                          "orientation": {"x": 0.00266, "y": 0.06099, "z": 0.04354, "w": 0.99718},
+                          "orientation": {"x": 0.00266, "y": 0.06099, "z": 0.04354, "w": 0.99719},
                           "shape": {
                             "type": "box",
                             "offset": {"x": 1, "y": -8, "z": 0},
@@ -780,8 +780,8 @@
                               },
                               "top": {
                                 "offset": {"x": 166, "y": 12},
-                                "mirror": {"x": false, "y": false},
-                                "angle": 270
+                                "mirror": {"x": true, "y": true},
+                                "angle": 90
                               },
                               "bottom": {
                                 "offset": {"x": 186, "y": 0},
@@ -887,8 +887,8 @@
                                       },
                                       "bottom": {
                                         "offset": {"x": 190, "y": 70},
-                                        "mirror": {"x": false, "y": false},
-                                        "angle": 270
+                                        "mirror": {"x": true, "y": true},
+                                        "angle": 90
                                       }
                                     },
                                     "unwrapMode": "custom",
@@ -4541,11 +4541,11 @@
                                                                             {
                                                                               "id": "100",
                                                                               "name": "Fin-A2",
-                                                                              "position": {"x": 11, "y": -9.5, "z": -0.5},
+                                                                              "position": {"x": 11, "y": -7.5, "z": -0.5},
                                                                               "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
                                                                               "shape": {
                                                                                 "type": "box",
-                                                                                "offset": {"x": -17, "y": -0.5, "z": 0.5},
+                                                                                "offset": {"x": -17, "y": -2.5, "z": 0.5},
                                                                                 "stretch": {"x": 1, "y": 1, "z": 1},
                                                                                 "settings": {
                                                                                   "isPiece": false,
@@ -5944,11 +5944,11 @@
                                                                                 {
                                                                                   "id": "127",
                                                                                   "name": "Fin-End",
-                                                                                  "position": {"x": 17, "y": -8.5, "z": -0.5},
+                                                                                  "position": {"x": 17, "y": 0.5, "z": -0.5},
                                                                                   "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
                                                                                   "shape": {
                                                                                     "type": "box",
-                                                                                    "offset": {"x": -21, "y": -1.5, "z": 0.5},
+                                                                                    "offset": {"x": -21, "y": -10.5, "z": 0.5},
                                                                                     "stretch": {"x": 1, "y": 1, "z": 1},
                                                                                     "settings": {
                                                                                       "isPiece": false,

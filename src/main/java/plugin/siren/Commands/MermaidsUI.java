@@ -33,7 +33,7 @@ public class MermaidsUI extends AbstractPlayerCommand {
         player.getPageManager().openCustomPage(ref, store, merPage);
 
         if(Mermaids.ifDebug()){
-            Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " opened the Mermaids UI");
+            Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " opened the Mermaids UI.");
         }
     }
 }

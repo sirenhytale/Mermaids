@@ -1,5 +1,25 @@
 {
   "Parent": "MermaidPlayer",
   "Model": "Characters/Mermaidv2.blockymodel",
-  "Texture": "Characters/PlayerTextures/MermaidTextureV2.png"
+  "Texture": "Characters/PlayerTextures/MermaidTextureV2.png",
+  "AnimationSets": {
+    "Swim": {
+      "Animations": [
+        {
+          "Animation": "Characters/Animations/Mermaids/Mermaidv2_Swim.blockyanim",
+          "Looping": true,
+          "Speed": 1.2
+        }
+      ]
+    },
+    "SwimFast": {
+      "Animations": [
+        {
+          "Animation": "Characters/Animations/Mermaids/Mermaidv2_Swim_Fast.blockyanim",
+          "Looping": true,
+          "Speed": 1.0
+        }
+      ]
+    }
+  }
 }

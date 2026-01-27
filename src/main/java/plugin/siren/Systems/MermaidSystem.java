@@ -40,6 +40,8 @@ import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.chunk.WorldChunk;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import com.hypixel.hytale.server.npc.asset.builder.BuilderFactory;
+import com.hypixel.hytale.server.npc.movement.controllers.MotionController;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import plugin.siren.Contributions.starman.modelutils.ModelHelper;
 import plugin.siren.Mermaids;
@@ -57,14 +59,13 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
     @Override
     public void tick(float dt, int index, @Nonnull ArchetypeChunk<EntityStore> archetypeChunk,
                      @Nonnull Store<EntityStore> store, @Nonnull CommandBuffer<EntityStore> commandBuffer){
-
-        MermaidComponent mermaid = archetypeChunk.getComponent(index, mermaidComponentType);
-
         Ref<EntityStore> ref = archetypeChunk.getReferenceTo(index);
 
         if(ref == null){
-            Mermaids.LOGGER.atSevere().log("Failed to get reference : MermaidSystem");
+            Mermaids.LOGGER.atFine().log("Failed to get reference : MermaidSystem");
         }else {
+            MermaidComponent mermaid = archetypeChunk.getComponent(index, mermaidComponentType);
+
             Player player = commandBuffer.getComponent(ref, Player.getComponentType());
             PlayerRef playerRef = commandBuffer.getComponent(ref, PlayerRef.getComponentType());
 
@@ -73,78 +74,82 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                 World world = player.getWorld();
                 if (world.getName().equals("default")) {
                     world.execute(() -> {
-                        TransformComponent transform = commandBuffer.getComponent(ref, TransformComponent.getComponentType());
-                        if (transform != null) {
-                            Vector3d pos = transform.getPosition();
+                        if(ref == null){
+                            Mermaids.LOGGER.atFine().log("Failed to get reference : MermaidSystem - World execution");
+                        }else {
+                            TransformComponent transform = commandBuffer.getComponent(ref, TransformComponent.getComponentType());
+                            if (transform != null) {
+                                Vector3d pos = transform.getPosition();
 
-                            if (Mermaids.getConfig().get().getBlockTransformation()) {
-                                BlockType footBlockType = world.getBlockType((int) Math.floor(pos.getX()), (int) Math.floor(pos.getY()), (int) Math.floor(pos.getZ()));
-                                String footBlockId = footBlockType.getId();
+                                if (Mermaids.getConfig().get().getBlockTransformation()) {
+                                    BlockType footBlockType = world.getBlockType((int) Math.floor(pos.getX()), (int) Math.floor(pos.getY()), (int) Math.floor(pos.getZ()));
+                                    String footBlockId = footBlockType.getId();
 
-                                Boolean h2o = false;
-                                if (footBlockId.equals("Alchemy_Cauldron_Big")) {//footBlockId == 24){//Large Cauldron
-                                    mermaid.setH2OBlock(true);
-                                    h2o = true;
-                                }
-                                if (footBlockId.equals("Soil_Mud")) {//footBlockId == 563 || footBlockId == 564){//Soil Mud
-                                    mermaid.setH2OBlock(true);
-                                    h2o = true;
-                                }
-                                if (!h2o && mermaid.getH2OBlock().get()) {
-                                    mermaid.setH2OBlock(false);
-                                }
-                            }
-
-                            if (Mermaids.getConfig().get().getRainTransformation()) {
-                                WorldChunk worldChunk = world.getChunkIfInMemory(ChunkUtil.indexChunkFromBlock(pos.getX(), pos.getZ()));
-                                int yHeight = worldChunk.getHeight(MathUtil.floor(pos.getX()), MathUtil.floor(pos.getZ()));
-
-                                boolean raining = false;
-
-                                if (pos.getY() >= yHeight) {
-                                    WeatherResource weatherResource = commandBuffer.getResource(WeatherResource.getResourceType());
-                                    Weather weatherForcedAsset = Weather.getAssetMap().getAsset(weatherResource.getForcedWeatherIndex());
-
-                                    WeatherTracker weatherTracker = commandBuffer.getComponent(ref, WeatherTracker.getComponentType());
-                                    Weather weatherNaturalAsset = Weather.getAssetMap().getAsset(weatherResource.getWeatherIndexForEnvironment(weatherTracker.getEnvironmentId()));
-
-                                    String weatherForcedId = weatherForcedAsset.getId();
-                                    String weatherNaturalId = weatherNaturalAsset.getId();
-                                    if (weatherNaturalId.equalsIgnoreCase("zone1_rain") || weatherNaturalId.equalsIgnoreCase("zone1_swamp_rain") || //Zone 1
-                                            weatherNaturalId.equalsIgnoreCase("zone1_rain_light") || weatherNaturalId.equalsIgnoreCase("zone1_storm") ||
-                                            weatherNaturalId.equalsIgnoreCase("zone2_thunder_storm") || //Zone2
-                                            weatherNaturalId.equalsIgnoreCase("zone3_rain") || //Zone3
-                                            weatherNaturalId.equalsIgnoreCase("zone4_wastes_rain") || weatherNaturalId.equalsIgnoreCase("zone4_wastes_rain_heavy") || //Zone4
-                                            weatherNaturalId.equalsIgnoreCase("skylands_rapid_marsh_stormy")) /* Misc */ {
-                                        mermaid.setRainTransform(true);
-                                        raining = true;
+                                    Boolean h2o = false;
+                                    if (footBlockId.equals("Alchemy_Cauldron_Big")) {//footBlockId == 24){//Large Cauldron
+                                        mermaid.setH2OBlock(true);
+                                        h2o = true;
                                     }
-                                    if (weatherForcedId.equalsIgnoreCase("zone1_rain") || weatherForcedId.equalsIgnoreCase("zone1_swamp_rain") || //Zone 1
-                                            weatherForcedId.equalsIgnoreCase("zone1_rain_light") || weatherForcedId.equalsIgnoreCase("zone1_storm") ||
-                                            weatherForcedId.equalsIgnoreCase("zone2_thunder_storm") || //Zone2
-                                            weatherForcedId.equalsIgnoreCase("zone3_rain") || //Zone3
-                                            weatherForcedId.equalsIgnoreCase("zone4_wastes_rain") || weatherForcedId.equalsIgnoreCase("zone4_wastes_rain_heavy") || //Zone4
-                                            weatherForcedId.equalsIgnoreCase("skylands_rapid_marsh_stormy")) /* Misc */ {
-                                        mermaid.setRainTransform(true);
-                                        raining = true;
+                                    if (footBlockId.equals("Soil_Mud")) {//footBlockId == 563 || footBlockId == 564){//Soil Mud
+                                        mermaid.setH2OBlock(true);
+                                        h2o = true;
                                     }
-
-                                    if (weatherNaturalId.equalsIgnoreCase("zone3_snow") || weatherNaturalId.equalsIgnoreCase("zone3_snow_storm") ||//Zone3
-                                            weatherNaturalId.equalsIgnoreCase("zone3_snow_heavy")) {
-                                        mermaid.setRainTransform(true);
-                                        raining = true;
+                                    if (!h2o && mermaid.getH2OBlock().get()) {
+                                        mermaid.setH2OBlock(false);
                                     }
-                                    if (weatherForcedId.equalsIgnoreCase("zone3_snow") || weatherForcedId.equalsIgnoreCase("zone3_snow_storm") ||//Zone3
-                                            weatherForcedId.equalsIgnoreCase("zone3_snow_heavy")) {
-                                        mermaid.setRainTransform(true);
-                                        raining = true;
-                                    }
-
-                                    //player.sendMessage(Message.raw(weatherId));
                                 }
 
-                                if (!raining && mermaid.getRainTransform().get()) {
-                                    mermaid.setRainTransform(false);
+                                if (Mermaids.getConfig().get().getRainTransformation()) {
+                                    WorldChunk worldChunk = world.getChunkIfInMemory(ChunkUtil.indexChunkFromBlock(pos.getX(), pos.getZ()));
+                                    int yHeight = worldChunk.getHeight(MathUtil.floor(pos.getX()), MathUtil.floor(pos.getZ()));
+
+                                    boolean raining = false;
+
+                                    if (pos.getY() >= yHeight) {
+                                        WeatherResource weatherResource = commandBuffer.getResource(WeatherResource.getResourceType());
+                                        Weather weatherForcedAsset = Weather.getAssetMap().getAsset(weatherResource.getForcedWeatherIndex());
+
+                                        WeatherTracker weatherTracker = commandBuffer.getComponent(ref, WeatherTracker.getComponentType());
+                                        Weather weatherNaturalAsset = Weather.getAssetMap().getAsset(weatherResource.getWeatherIndexForEnvironment(weatherTracker.getEnvironmentId()));
+
+                                        String weatherForcedId = weatherForcedAsset.getId();
+                                        String weatherNaturalId = weatherNaturalAsset.getId();
+                                        if (weatherNaturalId.equalsIgnoreCase("zone1_rain") || weatherNaturalId.equalsIgnoreCase("zone1_swamp_rain") || //Zone 1
+                                                weatherNaturalId.equalsIgnoreCase("zone1_rain_light") || weatherNaturalId.equalsIgnoreCase("zone1_storm") ||
+                                                weatherNaturalId.equalsIgnoreCase("zone2_thunder_storm") || //Zone2
+                                                weatherNaturalId.equalsIgnoreCase("zone3_rain") || //Zone3
+                                                weatherNaturalId.equalsIgnoreCase("zone4_wastes_rain") || weatherNaturalId.equalsIgnoreCase("zone4_wastes_rain_heavy") || //Zone4
+                                                weatherNaturalId.equalsIgnoreCase("skylands_rapid_marsh_stormy")) /* Misc */ {
+                                            mermaid.setRainTransform(true);
+                                            raining = true;
+                                        }
+                                        if (weatherForcedId.equalsIgnoreCase("zone1_rain") || weatherForcedId.equalsIgnoreCase("zone1_swamp_rain") || //Zone 1
+                                                weatherForcedId.equalsIgnoreCase("zone1_rain_light") || weatherForcedId.equalsIgnoreCase("zone1_storm") ||
+                                                weatherForcedId.equalsIgnoreCase("zone2_thunder_storm") || //Zone2
+                                                weatherForcedId.equalsIgnoreCase("zone3_rain") || //Zone3
+                                                weatherForcedId.equalsIgnoreCase("zone4_wastes_rain") || weatherForcedId.equalsIgnoreCase("zone4_wastes_rain_heavy") || //Zone4
+                                                weatherForcedId.equalsIgnoreCase("skylands_rapid_marsh_stormy")) /* Misc */ {
+                                            mermaid.setRainTransform(true);
+                                            raining = true;
+                                        }
+
+                                        if (weatherNaturalId.equalsIgnoreCase("zone3_snow") || weatherNaturalId.equalsIgnoreCase("zone3_snow_storm") ||//Zone3
+                                                weatherNaturalId.equalsIgnoreCase("zone3_snow_heavy")) {
+                                            mermaid.setRainTransform(true);
+                                            raining = true;
+                                        }
+                                        if (weatherForcedId.equalsIgnoreCase("zone3_snow") || weatherForcedId.equalsIgnoreCase("zone3_snow_storm") ||//Zone3
+                                                weatherForcedId.equalsIgnoreCase("zone3_snow_heavy")) {
+                                            mermaid.setRainTransform(true);
+                                            raining = true;
+                                        }
+
+                                        //player.sendMessage(Message.raw(weatherId));
+                                    }
+
+                                    if (!raining && mermaid.getRainTransform().get()) {
+                                        mermaid.setRainTransform(false);
+                                    }
                                 }
                             }
                         }
@@ -200,7 +205,7 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
 
                         String mermaidTailModel = mermaid.getMermaidTail();
 
-                        ModelAsset modelAsset = ModelAsset.getAssetMap().getAsset(mermaidTailModel);
+                        ModelAsset modelAsset = ModelAsset.getAssetMap().getAsset("MermaidV2");//mermaidTailModel);
                         if (modelAsset == null) {
                             player.sendMessage(Message.raw("Mermaids: Error: WaterSystem: " + mermaidTailModel + " Model not found"));
                             Mermaids.LOGGER.atSevere().log(player.getDisplayName() + " had an error of getting the Mermaid Model. Error: WaterSystem: " + mermaidTailModel + " Model not found.");
@@ -331,20 +336,22 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
 
             if (mermaid.isMermaid() && mermaid.getToggleMermaid() && transformPermission) {
                 MovementManager movement = commandBuffer.getComponent(ref, MovementManager.getComponentType());
-                if (movementState.getMovementStates().swimming || movementState.getMovementStates().swimJumping || movementState.getMovementStates().inFluid) {
-                    movement.getSettings().swimJumpForce = 14.5f;
-                    movement.getSettings().baseSpeed = 11.5f;
-                    movement.getSettings().forwardCrouchSpeedMultiplier = 1f;
-                    movement.getSettings().backwardCrouchSpeedMultiplier = 0.8f;
-                    movement.getSettings().forwardSprintSpeedMultiplier = 1.85f;
-                    movement.update(playerRef.getPacketHandler());
-                } else {
-                    movement.getSettings().jumpForce = 8f;
-                    movement.getSettings().baseSpeed = 3f;
-                    movement.getSettings().forwardCrouchSpeedMultiplier = 0.35f;
-                    movement.getSettings().backwardCrouchSpeedMultiplier = 0.25f;
-                    movement.getSettings().forwardSprintSpeedMultiplier = 1.35f;
-                    movement.update(playerRef.getPacketHandler());
+                if(movement == null) {
+                    if (movementState.getMovementStates().swimming || movementState.getMovementStates().swimJumping || movementState.getMovementStates().inFluid) {
+                        movement.getSettings().swimJumpForce = 14.5f;
+                        movement.getSettings().baseSpeed = 11.5f;
+                        movement.getSettings().forwardCrouchSpeedMultiplier = 1f;
+                        movement.getSettings().backwardCrouchSpeedMultiplier = 0.8f;
+                        movement.getSettings().forwardSprintSpeedMultiplier = 1.85f;
+                        movement.update(playerRef.getPacketHandler());
+                    } else {
+                        movement.getSettings().jumpForce = 8f;
+                        movement.getSettings().baseSpeed = 3f;
+                        movement.getSettings().forwardCrouchSpeedMultiplier = 0.35f;
+                        movement.getSettings().backwardCrouchSpeedMultiplier = 0.25f;
+                        movement.getSettings().forwardSprintSpeedMultiplier = 1.35f;
+                        movement.update(playerRef.getPacketHandler());
+                    }
                 }
 
                 EntityStatMap statMapComponent = commandBuffer.getComponent(ref, EntityStatMap.getComponentType());
