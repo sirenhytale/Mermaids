@@ -6,9 +6,9 @@
     "Swim": {
       "Animations": [
         {
-          "Animation": "Characters/Animations/Mermaids/Mermaidv2_Swim.blockyanim",
-          "Looping": true,
-          "Speed": 1.2
+          "Animation": "Characters/Animations/Mermaids/Mermaidv2_Swimv3.blockyanim",
+          "SoundEventId": "SFX_Player_Swim",
+          "Speed": 1.1
         }
       ]
     },
@@ -16,8 +16,26 @@
       "Animations": [
         {
           "Animation": "Characters/Animations/Mermaids/Mermaidv2_Swim_Fast.blockyanim",
-          "Looping": true,
-          "Speed": 1.0
+          "SoundEventId": "SFX_Player_Swim_Fast",
+          "Speed": 1.6
+        }
+      ]
+    },
+    "SwimDive": {
+      "Animations": [
+        {
+          "Animation": "Characters/Animations/Mermaids/Mermaidv2_Divev2.blockyanim",
+          "SoundEventId": "SFX_Player_Swim",
+          "Speed": 1.1
+        }
+      ]
+    },
+    "SwimDiveFast": {
+      "Animations": [
+        {
+          "Animation": "Characters/Animations/Mermaids/Mermaidv2_Dive_Fast.blockyanim",
+          "SoundEventId": "SFX_Player_Swim_Fast",
+          "Speed": 1.6
         }
       ]
     }

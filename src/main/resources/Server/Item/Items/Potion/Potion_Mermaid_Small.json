@@ -1,0 +1,107 @@
+{
+  "Parent": "Potion_Template",
+  "TranslationProperties": {
+    "Name": "items.Potion_Mermaid_Transformation_Small.name",
+    "Description": "items.Potion_Mermaid_Transformation_Small.description"
+  },
+  "Icon": "Icons/ItemsGenerated/Potion_Regen_Health_Small.png",
+  "IconProperties": {
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Scale": 0.9,
+    "Translation": [
+      0,
+      -9
+    ]
+  },
+  "Interactions": {
+    "Secondary": "Root_Secondary_Consume_Potion"
+  },
+  "InteractionVars": {
+    "Effect": {
+      "Interactions": [
+        {
+          "Type": "MermaidPotionSmallEffect",
+          "EffectId": {
+            "StatModifiers": {
+              "Oxygen": 900
+            },
+            "Duration": 180,
+            "DamageCalculatorCooldown": 0,
+            "Debuff": false,
+            "StatusEffectIcon": "UI/StatusEffects/Mermaids_StatusEffect_Icon.png",
+            "OverlapBehavior": "Extend"
+          }
+        }
+      ]
+    },
+    "ConsumeSFX": {
+      "Interactions": [
+        {
+          "Parent": "Consume_SFX",
+          "Effects": {
+            "LocalSoundEventId": "SFX_Health_Potion_Low_Drink",
+            "ClearSoundEventOnFinish": true
+          }
+        }
+      ]
+    }
+  },
+  "BlockType": {
+    "CustomModel": "Items/Consumables/Potions/Potion_Small.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Items/Consumables/Potions/Potion_Textures/Pink.png",
+        "Weight": 1
+      }
+    ],
+    "ParticleColor": "#f977be",
+    "Light": {
+      "Color": "#414"
+    }
+  },
+  "Recipe": {
+    "Input": [
+      {
+        "ItemId": "Potion_Empty",
+        "Quantity": 1
+      },
+      {
+        "ItemId": "Ingredient_Life_Essence",
+        "Quantity": 50
+      },
+      {
+        "ItemId": "Ingredient_Water_Essence",
+        "Quantity": 1
+      },
+      {
+        "ItemId": "Plant_Seaweed_Grass_Stack",
+        "Quantity": 15
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Id": "Alchemybench",
+        "Type": "Crafting",
+        "Categories": [
+          "Alchemy_Potions_Misc"
+        ]
+      }
+    ],
+    "TimeSeconds": 1
+  },
+  "ItemLevel": 1,
+  "Tags": {
+    "Type": [
+      "Potion"
+    ],
+    "Family": [
+      "Mermaids"
+    ]
+  },
+  "MaxStack": 10,
+  "DropOnDeath": true
+}

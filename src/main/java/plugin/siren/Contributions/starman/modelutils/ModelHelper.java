@@ -2,25 +2,13 @@ package plugin.siren.Contributions.starman.modelutils;
 
 import com.hypixel.hytale.component.CommandBuffer;
 import com.hypixel.hytale.component.Ref;
-import com.hypixel.hytale.protocol.ComponentUpdate;
-import com.hypixel.hytale.protocol.ComponentUpdateType;
-import com.hypixel.hytale.protocol.EntityUpdate;
 import com.hypixel.hytale.protocol.PlayerSkin;
-import com.hypixel.hytale.protocol.packets.entities.EntityUpdates;
-import com.hypixel.hytale.server.core.HytaleServer;
-import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.asset.type.model.config.Model;
 import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.modules.entity.component.ModelComponent;
-import com.hypixel.hytale.server.core.modules.entity.tracker.EntityTrackerSystems;
-import com.hypixel.hytale.server.core.modules.entity.tracker.NetworkId;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import plugin.siren.Mermaids;
 import plugin.siren.Systems.MermaidComponent;
-
-import java.util.Arrays;
-import java.util.concurrent.TimeUnit;
+import plugin.siren.Systems.MermaidSettings;
 
 /*
  *
@@ -30,14 +18,14 @@ import java.util.concurrent.TimeUnit;
  * Link: https://github.com/SyperAI/hytale-model-utils
  *
  * Modified: meFroggy
- * Date: 1/22/2026
+ * Date: 1/29/2026
  *
  */
 
 public class ModelHelper {
 
     // Applies given skin on given model
-    public static Model applySkin(Model model, PlayerSkin playerSkin, MermaidComponent mermaid) {
+    public static Model applySkin(Model model, PlayerSkin playerSkin, MermaidComponent mermaid, MermaidSettings mermaidSettings) {
         ModelComponent modelComponent = (ModelComponent) mermaid.getModelComponent().clone();
         Model playerModel = modelComponent.getModel();
 
@@ -45,7 +33,7 @@ public class ModelHelper {
 
         String texturePath = model.getTexture();
         if(model.getModel().equals("Characters/MermaidPlayer.blockymodel") || model.getModel().equals("Characters/MermaidBigFinPlayer.blockymodel")){
-            texturePath = "Characters/PlayerTextures/" + mermaid.getTailColor() + ".png";
+            texturePath = "Characters/PlayerTextures/" + mermaidSettings.getTailColor() + ".png";
         }
 
         return new Model(
@@ -55,7 +43,7 @@ public class ModelHelper {
                 attachments,
                 playerModel.getBoundingBox(),
                 model.getModel(),
-                texturePath,//"Characters/PlayerTextures/" + mermaid.getTailColor() + ".png",//model.getTexture(),
+                texturePath,//"Characters/PlayerTextures/" + mermaidSettings.getTailColor() + ".png",//model.getTexture(),
                 playerModel.getGradientSet(),
                 playerModel.getGradientId(),
                 model.getEyeHeight(),
@@ -73,14 +61,14 @@ public class ModelHelper {
     }
 
     // Applies given skin on given player reference
-    public static void applySkin(Model model, PlayerSkin skin, Ref<EntityStore> ref, CommandBuffer commandBuffer, Player player, MermaidComponent mermaid) {
-        var skinnedModel = applySkin(model, skin, mermaid);
+    public static void applySkin(Model model, PlayerSkin skin, Ref<EntityStore> ref, CommandBuffer commandBuffer, Player player, MermaidComponent mermaid, MermaidSettings mermaidSettings) {
+        var skinnedModel = applySkin(model, skin, mermaid, mermaidSettings);
 
         commandBuffer.replaceComponent(ref, ModelComponent.getComponentType(), new ModelComponent(skinnedModel));
     }
 
-    public static void applySkin(Model model, PlayerSkin skin, Ref<EntityStore> ref, MermaidComponent mermaid) {
-        var skinnedModel = applySkin(model, skin, mermaid);
+    public static void applySkin(Model model, PlayerSkin skin, Ref<EntityStore> ref, MermaidComponent mermaid, MermaidSettings mermaidSettings) {
+        var skinnedModel = applySkin(model, skin, mermaid, mermaidSettings);
 
         var store = ref.getStore();
         store.replaceComponent(ref, ModelComponent.getComponentType(), new ModelComponent(skinnedModel));

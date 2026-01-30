@@ -1,0 +1,71 @@
+{
+  "Parent": "Potion_Mermaid_Small",
+  "TranslationProperties": {
+    "Name": "items.Potion_Mermaid_Transformation_Large.name",
+    "Description": "items.Potion_Mermaid_Transformation_Large.description"
+  },
+  "Icon": "Icons/ItemsGenerated/Potion_Regen_Health_Large.png",
+  "InteractionVars": {
+    "Effect": {
+      "Interactions": [
+        {
+          "Type": "MermaidPotionLarge"
+        }
+      ]
+    },
+    "ConsumeSFX": {
+      "Interactions": [
+        {
+          "Parent": "Consume_SFX",
+          "Effects": {
+            "LocalSoundEventId": "SFX_Health_Potion_Low_Drink",
+            "ClearSoundEventOnFinish": true
+          }
+        }
+      ]
+    }
+  },
+  "BlockType": {
+    "CustomModel": "Items/Consumables/Potions/Potion_Large.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Items/Consumables/Potions/Potion_Textures/Pink.png",
+        "Weight": 1
+      }
+    ],
+    "ParticleColor": "#f977be",
+    "Light": {
+      "Color": "#414"
+    }
+  },
+  "Recipe": {
+    "Input": [
+      {
+        "ItemId": "Potion_Mermaid_Medium",
+        "Quantity": 3
+      },
+      {
+        "ItemId": "Ingredient_Life_Essence_Concentrated",
+        "Quantity": 2
+      },
+      {
+        "ItemId": "Ingredient_Water_Essence",
+        "Quantity": 7
+      },
+      {
+        "ItemId": "Food_Fish_Raw",
+        "Quantity": 22
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Id": "Alchemybench",
+        "Type": "Crafting",
+        "Categories": [
+          "Alchemy_Potions_Misc"
+        ]
+      }
+    ],
+    "TimeSeconds": 2
+  }
+}

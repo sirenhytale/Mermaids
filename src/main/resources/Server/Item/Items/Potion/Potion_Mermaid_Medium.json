@@ -1,0 +1,81 @@
+{
+  "Parent": "Potion_Mermaid_Small",
+  "TranslationProperties": {
+    "Name": "items.Potion_Mermaid_Transformation_Medium.name",
+    "Description": "items.Potion_Mermaid_Transformation_Medium.description"
+  },
+  "Icon": "Icons/ItemsGenerated/Potion_Regen_Health.png",
+  "InteractionVars": {
+    "Effect": {
+      "Interactions": [
+        {
+          "Type": "MermaidPotionMediumEffect",
+          "EffectId": {
+            "StatModifiers": {
+              "Oxygen": 900
+            },
+            "Duration": 600,
+            "DamageCalculatorCooldown": 0,
+            "Debuff": false,
+            "StatusEffectIcon": "UI/StatusEffects/Mermaids_StatusEffect_Icon.png",
+            "OverlapBehavior": "Extend"
+          }
+        }
+      ]
+    },
+    "ConsumeSFX": {
+      "Interactions": [
+        {
+          "Parent": "Consume_SFX",
+          "Effects": {
+            "LocalSoundEventId": "SFX_Health_Potion_Low_Drink",
+            "ClearSoundEventOnFinish": true
+          }
+        }
+      ]
+    }
+  },
+  "BlockType": {
+    "CustomModel": "Items/Consumables/Potions/Potion.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Items/Consumables/Potions/Potion_Textures/Pink.png",
+        "Weight": 1
+      }
+    ],
+    "ParticleColor": "#f977be",
+    "Light": {
+      "Color": "#414"
+    }
+  },
+  "Recipe": {
+    "Input": [
+      {
+        "ItemId": "Potion_Mermaid_Small",
+        "Quantity": 1
+      },
+      {
+        "ItemId": "Ingredient_Life_Essence",
+        "Quantity": 60
+      },
+      {
+        "ItemId": "Ingredient_Water_Essence",
+        "Quantity": 3
+      },
+      {
+        "ItemId": "Deco_Coral_Shell",
+        "Quantity": 7
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Id": "Alchemybench",
+        "Type": "Crafting",
+        "Categories": [
+          "Alchemy_Potions_Misc"
+        ]
+      }
+    ],
+    "TimeSeconds": 1
+  }
+}

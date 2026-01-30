@@ -1,4 +1,4 @@
-package plugin.siren.Commands;
+package plugin.siren.Commands.Mermaids;
 
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.component.Store;
@@ -16,7 +16,7 @@ import javax.annotation.Nonnull;
 
 public class MermaidsUI extends AbstractPlayerCommand {
     public MermaidsUI() {
-        super("mermaids", "Opens the Mermaids plugin UI");
+        super("ui", "Opens the Mermaids plugin UI");
 
         if(Mermaids.getConfig().get().getRequireUIPermission()) {
             this.requirePermission("mermaids.ui");

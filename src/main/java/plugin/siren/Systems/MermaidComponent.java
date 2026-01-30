@@ -15,13 +15,10 @@ public class MermaidComponent implements Component<EntityStore> {
     private boolean mermaid;
     private boolean underwater;
     private boolean dryingOff;
-    private boolean toggleMermaid;
 
     private AtomicBoolean h2oBlock;
     private AtomicBoolean rainTransform;
-
-    private String mermaidTail;
-    private String tailColor;
+    private AtomicBoolean potionEffect;
 
     private PlayerSkin skin;
     private MovementManager movementManager;
@@ -29,6 +26,8 @@ public class MermaidComponent implements Component<EntityStore> {
     private ModelComponent modelComponent;
 
     private float elapsedTime;
+    private float armorElapsedTime;
+    private float potionElapsedTime;
 
     public MermaidComponent(){
         this(new PlayerSkin());
@@ -38,30 +37,26 @@ public class MermaidComponent implements Component<EntityStore> {
         this.mermaid = false;
         this.underwater = false;
         this.dryingOff = false;
-        this.toggleMermaid = true;
 
         this.h2oBlock = new AtomicBoolean(false);
         this.rainTransform = new AtomicBoolean(false);
-
-        this.mermaidTail = "MermaidBigFinPlayer";
-        this.tailColor = "MermaidPlayerGrayscale";
+        this.potionEffect = new AtomicBoolean(false);
 
         this.skin = skin;
 
         this.elapsedTime = 0f;
+        this.armorElapsedTime = 0f;
+        this.potionElapsedTime = 0f;
     }
 
     public MermaidComponent(MermaidComponent other){
         this.mermaid = other.mermaid;
         this.underwater = other.underwater;
         this.dryingOff = other.dryingOff;
-        this.toggleMermaid = other.toggleMermaid;
 
         this.h2oBlock = other.h2oBlock;
         this.rainTransform = other.rainTransform;
-
-        this.mermaidTail = other.mermaidTail;
-        this.tailColor = other.tailColor;
+        this.potionEffect = other.potionEffect;
 
         this.skin = other.skin;
         this.movementManager = other.movementManager;
@@ -69,6 +64,8 @@ public class MermaidComponent implements Component<EntityStore> {
         this.modelComponent = other.modelComponent;
 
         this.elapsedTime = other.elapsedTime;
+        this.armorElapsedTime = other.armorElapsedTime;
+        this.potionElapsedTime = other.potionElapsedTime;
     }
 
     @Nullable
@@ -101,14 +98,6 @@ public class MermaidComponent implements Component<EntityStore> {
         this.dryingOff = drying;
     }
 
-    public boolean getToggleMermaid(){
-        return toggleMermaid;
-    }
-
-    public void setToggleMermaid(boolean toggle){
-        this.toggleMermaid = toggle;
-    }
-
     public AtomicBoolean getH2OBlock(){
         return h2oBlock;
     }
@@ -125,20 +114,12 @@ public class MermaidComponent implements Component<EntityStore> {
         rainTransform.set(raining);
     }
 
-    public String getMermaidTail(){
-        return mermaidTail;
+    public boolean isPotionEffectTransformation(){
+        return potionEffect.get();
     }
 
-    public void setMermaidTail(String mermaidTail){
-        this.mermaidTail = mermaidTail;
-    }
-
-    public String getTailColor() {
-        return tailColor;
-    }
-
-    public void setTailColor(String tailColor) {
-        this.tailColor = tailColor;
+    public void setPotionEffect(boolean potion){
+        this.potionEffect.set(potion);
     }
 
     public PlayerSkin getMermaidSkin(){
@@ -149,8 +130,6 @@ public class MermaidComponent implements Component<EntityStore> {
         mermaidSkin.underwear = null;
         mermaidSkin.overpants = null;
         mermaidSkin.bodyCharacteristic = null;
-
-
 
         return mermaidSkin;
     }
@@ -197,6 +176,34 @@ public class MermaidComponent implements Component<EntityStore> {
 
     public void incrementTick(){
         this.elapsedTime += 1f;
+    }
+
+    public float getArmorElapsedTime(){
+        return this.armorElapsedTime;
+    }
+
+    public void setArmorElapsedTime(float time){
+        this.armorElapsedTime = time;
+    }
+
+    public void decrementArmorTick(){
+        this.armorElapsedTime -= 1f;
+    }
+
+    public float getPotionElapsedTime(){
+        return this.potionElapsedTime;
+    }
+
+    public void setPotionElapsedTime(float time){
+        this.potionElapsedTime = time;
+    }
+
+    public void addPotionElapsedTime(float time){
+        this.potionElapsedTime += time;
+    }
+
+    public void decrementPotionTick(){
+        this.potionElapsedTime -= 1f;
     }
 
 }

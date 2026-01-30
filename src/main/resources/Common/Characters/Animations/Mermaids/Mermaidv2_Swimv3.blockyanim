@@ -8,7 +8,7 @@
       "orientation": [
         {
           "time": 0,
-          "delta": {"x": 0.80644, "y": 0, "z": 0, "w": 0.59131},
+          "delta": {"x": 0.57379, "y": 0, "z": 0, "w": 0.819},
           "interpolationType": "smooth"
         }
       ],

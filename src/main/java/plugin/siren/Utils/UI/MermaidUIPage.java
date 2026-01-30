@@ -21,6 +21,7 @@ import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import plugin.siren.Contributions.starman.modelutils.ModelHelper;
 import plugin.siren.Mermaids;
 import plugin.siren.Systems.MermaidComponent;
+import plugin.siren.Systems.MermaidSettings;
 
 import javax.annotation.Nonnull;
 
@@ -81,11 +82,12 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
         String tailColor = data.getTailColor();
 
         MermaidComponent mermaid = store.getComponent(ref, Mermaids.get().getMermaidComponentType());
+        MermaidSettings mermaidSettings = store.getComponent(ref, Mermaids.get().getMermaidSetingsComponentType());
 
         if(!mermaidTail.equals("ModelTail")) {
-            String oldMermaidTail = mermaid.getMermaidTail();
+            String oldMermaidTail = mermaidSettings.getMermaidTail();
 
-            mermaid.setMermaidTail(mermaidTail);
+            mermaidSettings.setMermaidTail(mermaidTail);
 
             String msgMerTail = "ERROR GETTING TAIL";
             if (mermaidTail.equals("MermaidPlayer")) {
@@ -103,13 +105,13 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
                     player.sendMessage(Message.raw("Mermaids: Error: MermaidUIPage: " + mermaidTail + " Model not found"));
                     Mermaids.LOGGER.atSevere().log(player.getDisplayName() + " had an error of getting the Mermaid Model. Error: MermaidUIPage: " + mermaidTail + " Model not found.");
                 } else {
-                    ModelHelper.applySkin(Model.createUnitScaleModel(modelAsset), mermaid.getMermaidSkin().clone(), ref, mermaid);
+                    ModelHelper.applySkin(Model.createUnitScaleModel(modelAsset), mermaid.getMermaidSkin().clone(), ref, mermaid, mermaidSettings);
                 }
             }
         }else if(!tailColor.equals("TailColor")){
-            String oldTailColor = mermaid.getTailColor();
+            String oldTailColor = mermaidSettings.getTailColor();
 
-            mermaid.setTailColor(tailColor);
+            mermaidSettings.setTailColor(tailColor);
 
             String msgTailColor = "ERROR GETTING COLOR";
             if (tailColor.equals("MermaidPlayerGrayscale")) {
@@ -135,7 +137,7 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
             player.sendMessage(Message.raw("You have selected the " + msgTailColor + " tail color."));
             Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " has switched the Mermaid tail color to " + msgTailColor + ".");
 
-            String activeMermaidTail = mermaid.getMermaidTail();
+            String activeMermaidTail = mermaidSettings.getMermaidTail();
 
             if (!oldTailColor.equals(tailColor) && mermaid.isMermaid()) {
                 ModelAsset modelAsset = ModelAsset.getAssetMap().getAsset(activeMermaidTail);
@@ -143,7 +145,7 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
                     player.sendMessage(Message.raw("Mermaids: Error: MermaidUIPage: " + activeMermaidTail + " Model not found"));
                     Mermaids.LOGGER.atSevere().log(player.getDisplayName() + " had an error of getting the Mermaid Model. Error: MermaidUIPage: " + activeMermaidTail + " Model not found.");
                 } else {
-                    ModelHelper.applySkin(Model.createUnitScaleModel(modelAsset), mermaid.getMermaidSkin().clone(), ref, mermaid);
+                    ModelHelper.applySkin(Model.createUnitScaleModel(modelAsset), mermaid.getMermaidSkin().clone(), ref, mermaid, mermaidSettings);
                 }
             }
         }else{

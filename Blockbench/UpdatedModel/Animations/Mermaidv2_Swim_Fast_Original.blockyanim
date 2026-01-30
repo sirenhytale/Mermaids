@@ -715,19 +715,6 @@
       "shapeStretch": [],
       "shapeVisible": [],
       "shapeUvOffset": []
-    },
-    "Origin": {
-      "position": [
-        {
-          "time": 0,
-          "delta": {"x": 0, "y": -10, "z": 0},
-          "interpolationType": "linear"
-        }
-      ],
-      "orientation": [],
-      "shapeStretch": [],
-      "shapeVisible": [],
-      "shapeUvOffset": []
     }
   }
 }

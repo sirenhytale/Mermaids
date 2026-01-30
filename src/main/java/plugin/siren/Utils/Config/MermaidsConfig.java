@@ -8,6 +8,10 @@ import plugin.siren.Mermaids;
 public class MermaidsConfig {
 
     public static final BuilderCodec<MermaidsConfig> CODEC = BuilderCodec.builder(MermaidsConfig.class, MermaidsConfig::new)
+            .append(new KeyedCodec<String>("Config-Information", Codec.STRING),
+                    (merConfig, ciStr, extraInfo) -> merConfig.Information = ciStr, // Setter
+                    (merConfig, extraInfo) -> merConfig.Information)                    // Getter
+            .add()
             .append(new KeyedCodec<Integer>("ConfigVersion", Codec.INTEGER),
                     (merConfig, cvInt, extraInfo) -> merConfig.ConfigVersion = cvInt, // Setter
                     (merConfig, extraInfo) -> merConfig.ConfigVersion)                    // Getter
@@ -28,6 +32,14 @@ public class MermaidsConfig {
                     (merConfig, dmBool, extraInfo) -> merConfig.DebugMode = dmBool, // Setter
                     (merConfig, extraInfo) -> merConfig.DebugMode)                    // Getter
             .add()
+            .append(new KeyedCodec<Integer>("Transformation-Mode", Codec.INTEGER),
+                    (merConfig, tmInt, extraInfo) -> merConfig.TransformationMode = tmInt, // Setter
+                    (merConfig, extraInfo) -> merConfig.TransformationMode)                    // Getter
+            .add()
+            .append(new KeyedCodec<String>("Description-Transformation-Mode", Codec.STRING),
+                    (merConfig, dtmStr, extraInfo) -> merConfig.TransModeDesc = dtmStr, // Setter
+                    (merConfig, extraInfo) -> merConfig.TransModeDesc)                    // Getter
+            .add()
             .append(new KeyedCodec<Boolean>("Require-Transformation-Permission", Codec.BOOLEAN),
                     (merConfig, rtpBool, extraInfo) -> merConfig.RequireTransPerm = rtpBool, // Setter
                     (merConfig, extraInfo) -> merConfig.RequireTransPerm)                    // Getter
@@ -46,11 +58,14 @@ public class MermaidsConfig {
             .add()
             .build();
 
-    private int ConfigVersion = 3;
+    private String Information = "Confused about what one of these statement do? Check out the Mermaids page on the Curseforge website and scroll down to Config Extra Info.";
+    private int ConfigVersion = 4;
     private String PluginName = "Mermaids";
     private String Version = Mermaids.getVersion();
     private String Website = "https://www.curseforge.com/hytale/mods/mermaids";
     private boolean DebugMode = false;
+    private int TransformationMode = 0;
+    private String TransModeDesc = "TransformationMode = 0 : Transform when entering water, TransformationMode = 1 : Requires user to drink Mermaid Potion to Transform";
     private boolean RequireTransPerm = false;
     private boolean RequireUIPerm = false;
     private boolean BlockTrans = true;
@@ -64,6 +79,10 @@ public class MermaidsConfig {
 
     public boolean ifDebugMode(){
         return DebugMode;
+    }
+
+    public int getTransformationMode(){
+        return TransformationMode;
     }
 
     public boolean getRequireTransformationPermission(){

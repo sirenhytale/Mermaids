@@ -1,4 +1,4 @@
-package plugin.siren.Commands;
+package plugin.siren.Commands.Mermaids;
 
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.component.Store;
@@ -12,13 +12,13 @@ import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import plugin.siren.Mermaids;
-import plugin.siren.Systems.MermaidComponent;
+import plugin.siren.Systems.MermaidSettings;
 
 import javax.annotation.Nonnull;
 
 public class ToggleMermaid extends AbstractPlayerCommand {
     public ToggleMermaid() {
-        super("mermaid", "Toggles if you can be mermaid or not");
+        super("toggle", "Toggles if you can be mermaid or not");
         this.requirePermission("mermaids.toggle");
     }
 
@@ -30,8 +30,8 @@ public class ToggleMermaid extends AbstractPlayerCommand {
 
         boolean merToggle = msgMerToggleArg.get(commandContext);
 
-        MermaidComponent mermaid = store.getComponent(ref, Mermaids.get().getMermaidComponentType());
-        mermaid.setToggleMermaid(merToggle);
+        MermaidSettings mermaidSettings = store.getComponent(ref, Mermaids.get().getMermaidSetingsComponentType());
+        mermaidSettings.setToggleMermaid(merToggle);
 
         String toggledStr = "";
         if (merToggle) {

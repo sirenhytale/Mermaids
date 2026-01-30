@@ -14,6 +14,7 @@ import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import plugin.siren.Mermaids;
 import plugin.siren.Systems.MermaidComponent;
+import plugin.siren.Systems.MermaidSettings;
 
 public class PlayerReadyEventM {
     public static void onPlayerReadyEvent(PlayerReadyEvent event){
@@ -54,7 +55,7 @@ public class PlayerReadyEventM {
                     player.sendMessage(Message.raw("Set the ModelComponent"));
                 }
 
-                store.addComponent(ref, Mermaids.get().getMermaidComponentType(), mermaid);
+                store.putComponent(ref, Mermaids.get().getMermaidComponentType(), mermaid);
 
                 if (Mermaids.ifDebug()) {
                     player.sendMessage(Message.raw("You now have the Mermaid Component!"));
@@ -67,6 +68,25 @@ public class PlayerReadyEventM {
                 }
 
                 Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " tried to receive Mermaid Component but already has it.");
+            }
+
+            MermaidSettings merSett = store.getComponent(ref, Mermaids.get().getMermaidSetingsComponentType());
+            if (merSett == null) {
+                MermaidSettings mermaidSettings = new MermaidSettings();
+
+                store.putComponent(ref, Mermaids.get().getMermaidSetingsComponentType(), mermaidSettings);
+
+                if (Mermaids.ifDebug()) {
+                    player.sendMessage(Message.raw("You now have the Mermaid Settings Component!"));
+                }
+
+                Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " now has the Mermaid Settings Component.");
+            }else{
+                if (Mermaids.ifDebug()) {
+                    player.sendMessage(Message.raw("You already have the Mermaid Settings Component!"));
+                }
+
+                Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " tried to receive Mermaid Settings Component but already has it.");
             }
         });
     }
