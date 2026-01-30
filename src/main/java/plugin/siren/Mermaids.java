@@ -39,9 +39,6 @@ public class Mermaids extends JavaPlugin {
     @Override
     protected void setup(){
         this.getEventRegistry().registerGlobal(PlayerReadyEvent.class, PlayerReadyEventM::onPlayerReadyEvent);
-        /*this.getCommandRegistry().registerCommand(new MermaidsUI());
-        this.getCommandRegistry().registerCommand(new ToggleMermaid());
-        this.getCommandRegistry().registerCommand(new MermaidCompBugCmd());*/
         this.getCommandRegistry().registerCommand(new MermaidsCmd());
 
         this.mermaidComponent = this.getEntityStoreRegistry().registerComponent(MermaidComponent.class, MermaidComponent::new);
@@ -52,7 +49,6 @@ public class Mermaids extends JavaPlugin {
         this.getCodecRegistry(Interaction.CODEC).register("MermaidPotionMediumEffect", MermaidMediumPotionEffectInteraction.class, MermaidMediumPotionEffectInteraction.CODEC);
         this.getCodecRegistry(Interaction.CODEC).register("MermaidPotionLarge", MermaidLargePotionInteraction.class, MermaidLargePotionInteraction.CODEC);
 
-        //config.load();
         config.save();
 
         LOGGER.atInfo().log("Version " + VERSION + " of Mermaids has loaded.");

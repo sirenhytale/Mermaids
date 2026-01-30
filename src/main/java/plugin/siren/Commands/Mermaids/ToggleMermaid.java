@@ -2,6 +2,7 @@ package plugin.siren.Commands.Mermaids;
 
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.component.Store;
+import com.hypixel.hytale.protocol.GameMode;
 import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.command.system.CommandContext;
 import com.hypixel.hytale.server.core.command.system.arguments.system.RequiredArg;
@@ -20,6 +21,7 @@ public class ToggleMermaid extends AbstractPlayerCommand {
     public ToggleMermaid() {
         super("toggle", "Toggles if you can be mermaid or not");
         this.requirePermission("mermaids.toggle");
+        this.setPermissionGroup(GameMode.Creative);
     }
 
     RequiredArg<Boolean> msgMerToggleArg = this.withRequiredArg("toggle boolean", "Boolean to allow for the mermaid transformations to happen.", ArgTypes.BOOLEAN);

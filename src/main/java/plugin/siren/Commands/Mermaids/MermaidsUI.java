@@ -20,6 +20,7 @@ public class MermaidsUI extends AbstractPlayerCommand {
 
         if(Mermaids.getConfig().get().getRequireUIPermission()) {
             this.requirePermission("mermaids.ui");
+            this.setPermissionGroup(GameMode.Creative);
         }else{
             this.setPermissionGroup(GameMode.Adventure);
         }

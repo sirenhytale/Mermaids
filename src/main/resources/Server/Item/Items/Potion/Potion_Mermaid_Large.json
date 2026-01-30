@@ -42,7 +42,7 @@
     "Input": [
       {
         "ItemId": "Potion_Mermaid_Medium",
-        "Quantity": 3
+        "Quantity": 2
       },
       {
         "ItemId": "Ingredient_Life_Essence_Concentrated",
@@ -54,7 +54,7 @@
       },
       {
         "ItemId": "Food_Fish_Raw",
-        "Quantity": 22
+        "Quantity": 17
       }
     ],
     "BenchRequirement": [

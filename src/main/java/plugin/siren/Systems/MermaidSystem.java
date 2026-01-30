@@ -376,10 +376,10 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                         ItemStack itemInHand = player.getInventory().getItemInHand();
                         if(itemInHand != null && itemInHand.getItemId().equalsIgnoreCase("weapon_spear_fishbone")){
                             movement.getSettings().swimJumpForce = 16f;
-                            movement.getSettings().baseSpeed = 14f;
-                            movement.getSettings().forwardCrouchSpeedMultiplier = 1.1f;
+                            movement.getSettings().baseSpeed = 15f;
+                            movement.getSettings().forwardCrouchSpeedMultiplier = 1f;
                             movement.getSettings().backwardCrouchSpeedMultiplier = 0.9f;
-                            movement.getSettings().forwardSprintSpeedMultiplier = 2f;
+                            movement.getSettings().forwardSprintSpeedMultiplier = 2.05f;
                         }else{
                             movement.getSettings().swimJumpForce = 14.5f;
                             movement.getSettings().baseSpeed = 11.5f;
@@ -400,7 +400,6 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                 }
 
                 EntityStatMap statMapComponent = commandBuffer.getComponent(ref, EntityStatMap.getComponentType());
-                //statMapComponent.setStatValue(DefaultEntityStatTypes.getOxygen(), 100f);
                 statMapComponent.maximizeStatValue(DefaultEntityStatTypes.getOxygen());
 
                 mermaid.decrementArmorTick();
@@ -480,45 +479,6 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                         }
                     }
                 }
-
-
-                /*EntityTrackerSystems.EntityViewer entityViewer = commandBuffer.getComponent(ref, EntityTrackerSystems.EntityViewer.getComponentType());
-                if (entityViewer == null) {
-                    player.sendMessage(Message.raw("Mermaids: Error: WaterSystem: EntityViewer Component == null [transformation stats]"));
-                } else {
-                    NetworkId networkId = commandBuffer.getComponent(ref, NetworkId.getComponentType());
-                    if (networkId == null) {
-                        player.sendMessage(Message.raw("Mermaids: Error: WaterSystem: NetworkID Component == null [transformation stats]"));
-                    } else {
-                        EntityUpdate entityUpdate = new EntityUpdate();
-                        entityUpdate.networkId = networkId.getId();
-
-                        ObjectArrayList<ComponentUpdate> updateList = new ObjectArrayList<>();
-
-                        Inventory inventory = player.getInventory();
-                        ComponentUpdate update = new ComponentUpdate();
-
-                        update.type = ComponentUpdateType.Equipment;
-                        update.equipment = new Equipment();
-
-                        ItemContainer armor = inventory.getArmor();
-                        update.equipment.armorIds = new String[armor.getCapacity()];
-                        Arrays.fill(update.equipment.armorIds, "");
-                        armor.forEachWithMeta((slot, itemStack, armorIds) -> armorIds[slot] = itemStack.getItemId(), update.equipment.armorIds);
-
-                        update.equipment.armorIds[ItemArmorSlot.Legs.ordinal()] = "";
-
-                        ItemStack itemInHand = inventory.getItemInHand();
-                        update.equipment.rightHandItemId = itemInHand != null ? itemInHand.getItemId() : "Empty";
-                        ItemStack utilityItem = inventory.getUtilityItem();
-                        update.equipment.leftHandItemId = utilityItem != null ? utilityItem.getItemId() : "Empty";
-
-                        updateList.add(update);
-
-                        entityUpdate.updates = updateList.toArray(ComponentUpdate[]::new);
-                        entityViewer.packetReceiver.writeNoCache(new EntityUpdates(null, new EntityUpdate[]{entityUpdate}));
-                    }
-                }*/
             }
         }
     }

@@ -43,7 +43,7 @@ public class ModelHelper {
                 attachments,
                 playerModel.getBoundingBox(),
                 model.getModel(),
-                texturePath,//"Characters/PlayerTextures/" + mermaidSettings.getTailColor() + ".png",//model.getTexture(),
+                texturePath,
                 playerModel.getGradientSet(),
                 playerModel.getGradientId(),
                 model.getEyeHeight(),

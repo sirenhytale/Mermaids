@@ -1,5 +1,6 @@
 package plugin.siren.Commands;
 
+import com.hypixel.hytale.protocol.GameMode;
 import com.hypixel.hytale.server.core.command.system.basecommands.AbstractCommandCollection;
 import plugin.siren.Commands.Mermaids.MermaidCompBugCmd;
 import plugin.siren.Commands.Mermaids.MermaidsPermPotionRemove;
@@ -10,9 +11,11 @@ public class MermaidsCmd extends AbstractCommandCollection {
     public MermaidsCmd(){
         super("mermaids","Mermaids command line");
 
-        addSubCommand(new ToggleMermaid());
-        addSubCommand(new MermaidsUI());
-        addSubCommand(new MermaidsPermPotionRemove());
-        addSubCommand(new MermaidCompBugCmd());
+        this.addSubCommand(new ToggleMermaid());
+        this.addSubCommand(new MermaidsUI());
+        this.addSubCommand(new MermaidsPermPotionRemove());
+        this.addSubCommand(new MermaidCompBugCmd());
+
+        this.setPermissionGroup(GameMode.Adventure);
     }
 }
