@@ -1,0 +1,79 @@
+{
+  "TranslationProperties": {
+    "Name": "items.Mermaids_Weapon_Spell_Ring.name"
+  },
+  "Icon": "Icons/ItemsGenerated/Deco_Starfish.png",
+  "IconProperties": {
+    "Scale": 0.545,
+    "Translation": [
+      -7.8,
+      -7.8
+    ],
+    "Rotation": [
+      45,
+      90,
+      0
+    ]
+  },
+  "Model": "Blocks/Foliage/Water/Starfish.blockymodel",
+  "Texture": "Blocks/Foliage/Water/Starfish_Texture.png",
+  "Interactions": {
+    "Primary": {
+      "Interactions": [
+        {
+          "Type": "Charging",
+          "DisplayProgress": true,
+          "CancelOnOtherClick": true,
+          "RunTime": 0,
+          "Next": {
+            "0": {
+              "Type": "RunOnBlockTypes",
+              "Range": 4,
+              "MaxCount": 400,
+              "BlockSets": [
+                "IceAndSnow"
+              ],
+              "Interactions": {
+                "Interactions": [
+                  {
+                    "Type": "PlaceFluid",
+                    "FluidToPlace": "Water"
+                  },
+                  {
+                    "Type": "DestroyBlock"
+                  }
+                ]
+              },
+              "Effects": {
+                "WorldSoundEventId": "SFX_Z3_Emit_Cave_Ice_Crackle"
+              }
+            }
+          },
+          "AllowIndefiniteHold": true
+        }
+      ]
+    },
+    "Secondary": {
+      "Interactions": [
+        {
+          "Type": "MermaidFreeze"
+        }
+      ]
+    }
+  },
+  "Tags": {
+    "Type": [
+      "Weapon"
+    ],
+    "Family": [
+      "Mermaids"
+    ]
+  },
+  "Categories": [
+    "Items.Weapons"
+  ],
+  "DroppedItemAnimation": "Items/Animations/Dropped/Dropped_Diagonal_Left.blockyanim",
+  "MaxStack": 1,
+  "Quality": "Common",
+  "ItemLevel": 40
+}

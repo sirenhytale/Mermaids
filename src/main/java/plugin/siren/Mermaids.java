@@ -11,6 +11,7 @@ import com.hypixel.hytale.server.core.util.Config;
 import plugin.siren.Commands.MermaidsCmd;
 import plugin.siren.Events.Interactions.*;
 import plugin.siren.Events.PlayerReadyEventM;
+import plugin.siren.Events.UseBlockEventM;
 import plugin.siren.Systems.MermaidComponent;
 import plugin.siren.Systems.MermaidSettings;
 import plugin.siren.Systems.MermaidSystem;
@@ -44,10 +45,12 @@ public class Mermaids extends JavaPlugin {
         this.mermaidComponent = this.getEntityStoreRegistry().registerComponent(MermaidComponent.class, MermaidComponent::new);
         this.mermaidSettingsComponent = this.getEntityStoreRegistry().registerComponent(MermaidSettings.class, "MermaidSettings", MermaidSettings.CODEC);
         this.getEntityStoreRegistry().registerSystem(new MermaidSystem(this.mermaidComponent, this.mermaidSettingsComponent));
+        this.getEntityStoreRegistry().registerSystem(new UseBlockEventM());
 
         this.getCodecRegistry(Interaction.CODEC).register("MermaidPotionSmallEffect", MermaidSmallPotionEffectInteraction.class, MermaidSmallPotionEffectInteraction.CODEC);
         this.getCodecRegistry(Interaction.CODEC).register("MermaidPotionMediumEffect", MermaidMediumPotionEffectInteraction.class, MermaidMediumPotionEffectInteraction.CODEC);
         this.getCodecRegistry(Interaction.CODEC).register("MermaidPotionLarge", MermaidLargePotionInteraction.class, MermaidLargePotionInteraction.CODEC);
+        this.getCodecRegistry(Interaction.CODEC).register("MermaidFreeze", FreezeInteraction.class, FreezeInteraction.CODEC);
 
         config.save();
 
