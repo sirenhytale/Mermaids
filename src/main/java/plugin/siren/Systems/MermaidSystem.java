@@ -176,7 +176,8 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
             if ((((movementState.getMovementStates().swimming || movementState.getMovementStates().swimJumping || movementState.getMovementStates().inFluid ||
                     mermaid.getH2OBlock().get() || mermaid.getRainTransform().get()) &&
                     (transformationMode == 0 || ((transformationMode == 0 || transformationMode == 1) && mermaidSettings.ifPermanentPotion()))) ||
-                    mermaid.isPotionEffectTransformation()) && mermaidSettings.getToggleMermaid() && transformPermission) {
+                    mermaid.isPotionEffectTransformation() || Mermaids.getConfig().get().getMermaidOnLand()) &&
+                    mermaidSettings.getToggleMermaid() && transformPermission) {
 
                 if (!mermaid.isUnderwater()) {
                     mermaid.setUnderwater(true);
@@ -224,7 +225,7 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
 
                         String mermaidTailModel = mermaidSettings.getMermaidTail();
 
-                        ModelAsset modelAsset = ModelAsset.getAssetMap().getAsset(mermaidTailModel);//"MermaidV2");//mermaidTailModel);
+                        ModelAsset modelAsset = ModelAsset.getAssetMap().getAsset("MermaidV2");//mermaidTailModel);
                         if (modelAsset == null) {
                             player.sendMessage(Message.raw("Mermaids: Error: WaterSystem: " + mermaidTailModel + " Model not found"));
                             Mermaids.LOGGER.atSevere().log(player.getDisplayName() + " had an error of getting the Mermaid Model. Error: WaterSystem: " + mermaidTailModel + " Model not found.");

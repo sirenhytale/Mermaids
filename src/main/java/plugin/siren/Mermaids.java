@@ -1,7 +1,9 @@
 package plugin.siren;
 
 import com.hypixel.hytale.component.ComponentType;
+import com.hypixel.hytale.event.EventRegistration;
 import com.hypixel.hytale.logger.HytaleLogger;
+import com.hypixel.hytale.server.core.command.system.CommandRegistration;
 import com.hypixel.hytale.server.core.event.events.player.PlayerReadyEvent;
 import com.hypixel.hytale.server.core.modules.interaction.interaction.config.Interaction;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
@@ -11,7 +13,6 @@ import com.hypixel.hytale.server.core.util.Config;
 import plugin.siren.Commands.MermaidsCmd;
 import plugin.siren.Events.Interactions.*;
 import plugin.siren.Events.PlayerReadyEventM;
-import plugin.siren.Events.UseBlockEventM;
 import plugin.siren.Systems.MermaidComponent;
 import plugin.siren.Systems.MermaidSettings;
 import plugin.siren.Systems.MermaidSystem;
@@ -20,7 +21,7 @@ import plugin.siren.Utils.Config.MermaidsConfig;
 import javax.annotation.Nonnull;
 
 public class Mermaids extends JavaPlugin {
-    private static final String VERSION = "1.3.0";
+    private static final String VERSION = "1.3.1";
     private static final boolean DEBUG = false;
 
     private static Mermaids plugin;
@@ -39,26 +40,55 @@ public class Mermaids extends JavaPlugin {
 
     @Override
     protected void setup(){
-        this.getEventRegistry().registerGlobal(PlayerReadyEvent.class, PlayerReadyEventM::onPlayerReadyEvent);
-        this.getCommandRegistry().registerCommand(new MermaidsCmd());
+        LOGGER.atInfo().log("===---==---==---== MERMAIDS ==---==---==---===");
+        LOGGER.atInfo().log("Mermaids has began to load.");
+
+        EventRegistration<String, PlayerReadyEvent> playerReadyEventRegistration = this.getEventRegistry().registerGlobal(PlayerReadyEvent.class, PlayerReadyEventM::onPlayerReadyEvent);
+        if(playerReadyEventRegistration != null && playerReadyEventRegistration.isRegistered()) {
+            LOGGER.atInfo().log("Registered Player Ready Event.");
+        }else{
+            LOGGER.atSevere().log("Failed to register Player Ready Event.");
+        }
+
+        CommandRegistration mermaidsCmdRegistration = this.getCommandRegistry().registerCommand(new MermaidsCmd());
+        if(mermaidsCmdRegistration != null && mermaidsCmdRegistration.isRegistered()) {
+            LOGGER.atInfo().log("Registered Mermaids Command.");
+        }else{
+            LOGGER.atSevere().log("Failed to register Mermaids Command.");
+        }
 
         this.mermaidComponent = this.getEntityStoreRegistry().registerComponent(MermaidComponent.class, MermaidComponent::new);
+        if(this.mermaidComponent != null) {
+            LOGGER.atInfo().log("Registered Mermaid Component.");
+        }else{
+            LOGGER.atInfo().log("Failed to register Mermaid Component.");
+        }
+
         this.mermaidSettingsComponent = this.getEntityStoreRegistry().registerComponent(MermaidSettings.class, "MermaidSettings", MermaidSettings.CODEC);
+        if(this.mermaidSettingsComponent != null) {
+            LOGGER.atInfo().log("Registered Mermaid Settings Component.");
+        }else{
+            LOGGER.atInfo().log("Failed to register Mermaid Settings Component.");
+        }
+
         this.getEntityStoreRegistry().registerSystem(new MermaidSystem(this.mermaidComponent, this.mermaidSettingsComponent));
-        this.getEntityStoreRegistry().registerSystem(new UseBlockEventM());
+        LOGGER.atInfo().log("Registered Mermaid System.");
 
         this.getCodecRegistry(Interaction.CODEC).register("MermaidPotionSmallEffect", MermaidSmallPotionEffectInteraction.class, MermaidSmallPotionEffectInteraction.CODEC);
         this.getCodecRegistry(Interaction.CODEC).register("MermaidPotionMediumEffect", MermaidMediumPotionEffectInteraction.class, MermaidMediumPotionEffectInteraction.CODEC);
         this.getCodecRegistry(Interaction.CODEC).register("MermaidPotionLarge", MermaidLargePotionInteraction.class, MermaidLargePotionInteraction.CODEC);
         this.getCodecRegistry(Interaction.CODEC).register("MermaidFreeze", FreezeInteraction.class, FreezeInteraction.CODEC);
+        LOGGER.atInfo().log("Registered Codec Interactions.");
 
         config.save();
+        LOGGER.atInfo().log("Saved config settings.");
 
-        LOGGER.atInfo().log("Version " + VERSION + " of Mermaids has loaded.");
-
+        LOGGER.atInfo().log("Version " + VERSION + " of Mermaids has successfully loaded.");
         if(ifDebug()){
-            LOGGER.atInfo().log("Loaded in Debug mode.");
+            LOGGER.atInfo().log("= =- -=- -=- -=- -=- -=- -=- -=- -= =");
+            LOGGER.atInfo().log("Loaded Mermaids in Debug mode.");
         }
+        LOGGER.atInfo().log("===---==---==---==---==---==---==---==---===");
     }
 
     public ComponentType<EntityStore, MermaidComponent> getMermaidComponentType(){

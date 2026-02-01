@@ -63,9 +63,12 @@
         "Type": "Crafting",
         "Categories": [
           "Alchemy_Potions_Misc"
-        ]
+        ],
+        "RequiredTierLevel": 2
       }
     ],
     "TimeSeconds": 2
-  }
+  },
+  "ItemLevel": 30,
+  "Quality": "Rare"
 }

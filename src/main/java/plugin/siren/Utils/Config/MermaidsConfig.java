@@ -40,6 +40,10 @@ public class MermaidsConfig {
                     (merConfig, dtmStr, extraInfo) -> merConfig.TransModeDesc = dtmStr, // Setter
                     (merConfig, extraInfo) -> merConfig.TransModeDesc)                    // Getter
             .add()
+            .append(new KeyedCodec<Boolean>("Always-A-Mermaid-Even-On-Land", Codec.BOOLEAN),
+                    (merConfig, aameolBool, extraInfo) -> merConfig.MermaidOnLand = aameolBool, // Setter
+                    (merConfig, extraInfo) -> merConfig.MermaidOnLand)                    // Getter
+            .add()
             .append(new KeyedCodec<Boolean>("Require-Transformation-Permission", Codec.BOOLEAN),
                     (merConfig, rtpBool, extraInfo) -> merConfig.RequireTransPerm = rtpBool, // Setter
                     (merConfig, extraInfo) -> merConfig.RequireTransPerm)                    // Getter
@@ -59,13 +63,14 @@ public class MermaidsConfig {
             .build();
 
     private String Information = "Confused about what one of these statement do? Check out the Mermaids page on the Curseforge website and scroll down to Config Extra Info.";
-    private int ConfigVersion = 4;
+    private int ConfigVersion = 5;
     private String PluginName = "Mermaids";
     private String Version = Mermaids.getVersion();
     private String Website = "https://www.curseforge.com/hytale/mods/mermaids";
     private boolean DebugMode = false;
     private int TransformationMode = 0;
     private String TransModeDesc = "TransformationMode = 0 : Transform when entering water, TransformationMode = 1 : Requires user to drink Mermaid Potion to Transform";
+    private boolean MermaidOnLand = false;
     private boolean RequireTransPerm = false;
     private boolean RequireUIPerm = false;
     private boolean BlockTrans = true;
@@ -83,6 +88,10 @@ public class MermaidsConfig {
 
     public int getTransformationMode(){
         return TransformationMode;
+    }
+
+    public boolean getMermaidOnLand(){
+        return MermaidOnLand;
     }
 
     public boolean getRequireTransformationPermission(){
