@@ -77,7 +77,7 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
             //Check to see if Raining or on a transformation block
             if (Mermaids.getConfig().get().getBlockTransformation() || Mermaids.getConfig().get().getRainTransformation()) {
                 World world = player.getWorld();
-                if (world.getName().equals("default")) {
+                if (world != null){//world.getName().equals("default")) {
                     world.execute(() -> {
                         if(ref == null || !ref.isValid()){
                             Mermaids.LOGGER.atFine().log("Failed to get reference : MermaidSystem - World execution");
@@ -165,19 +165,27 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                             }
                         }
                     });
+                }else{
+                    Mermaids.LOGGER.atFine().log("Failed to get world : MermaidSystem - Pre-World execution");
                 }
             }
 
             boolean transformPermission = PermissionsModule.get().hasPermission(playerRef.getUuid(), "mermaids.transform") || !Mermaids.getConfig().get().getRequireTransformationPermission();
+            boolean toggleMermaid = mermaidSettings.getToggleMermaid();
             int transformationMode = Mermaids.getConfig().get().getTransformationMode();
+            boolean transModeZero = transformationMode == 0;
+            boolean transModeOne = transformationMode == 1;
 
             MovementStatesComponent movementState = commandBuffer.getComponent(ref, MovementStatesComponent.getComponentType());
+
+            boolean movementStatesTransform = movementState.getMovementStates().swimming || movementState.getMovementStates().swimJumping || movementState.getMovementStates().inFluid;
+            boolean h2OorRain = mermaid.getH2OBlock().get() || mermaid.getRainTransform().get();
+            boolean permMerPotion = (transformationMode == 0 || transformationMode == 1) && mermaidSettings.ifPermanentPotion();
+            boolean mermaidPotionEffect = mermaid.isPotionEffectTransformation();
+            boolean mermaidOnLand = Mermaids.getConfig().get().getMermaidOnLand();
+
             //Checks to see if in water / other transformation methods
-            if ((((movementState.getMovementStates().swimming || movementState.getMovementStates().swimJumping || movementState.getMovementStates().inFluid ||
-                    mermaid.getH2OBlock().get() || mermaid.getRainTransform().get()) &&
-                    (transformationMode == 0 || ((transformationMode == 0 || transformationMode == 1) && mermaidSettings.ifPermanentPotion()))) ||
-                    mermaid.isPotionEffectTransformation() || Mermaids.getConfig().get().getMermaidOnLand()) &&
-                    mermaidSettings.getToggleMermaid() && transformPermission) {
+            if ((((movementStatesTransform || h2OorRain) && (transModeZero || (permMerPotion))) || mermaidPotionEffect || (mermaidOnLand && (transModeZero || permMerPotion))) && toggleMermaid && transformPermission) {
 
                 if (!mermaid.isUnderwater()) {
                     mermaid.setUnderwater(true);
@@ -225,7 +233,7 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
 
                         String mermaidTailModel = mermaidSettings.getMermaidTail();
 
-                        ModelAsset modelAsset = ModelAsset.getAssetMap().getAsset("MermaidV2");//mermaidTailModel);
+                        ModelAsset modelAsset = ModelAsset.getAssetMap().getAsset(mermaidTailModel);//"MermaidV2");//mermaidTailModel);
                         if (modelAsset == null) {
                             player.sendMessage(Message.raw("Mermaids: Error: WaterSystem: " + mermaidTailModel + " Model not found"));
                             Mermaids.LOGGER.atSevere().log(player.getDisplayName() + " had an error of getting the Mermaid Model. Error: WaterSystem: " + mermaidTailModel + " Model not found.");
