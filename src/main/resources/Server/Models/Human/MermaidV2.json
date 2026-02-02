@@ -15,7 +15,7 @@
     "SwimFast": {
       "Animations": [
         {
-          "Animation": "Characters/Animations/Mermaids/Mermaidv2_Swim_Fast.blockyanim",
+          "Animation": "Characters/Animations/Mermaids/Mermaidv2_Swim_Fastv2.blockyanim",
           "SoundEventId": "SFX_Player_Swim_Fast",
           "Speed": 1.2
         }
@@ -33,7 +33,7 @@
     "SwimDiveFast": {
       "Animations": [
         {
-          "Animation": "Characters/Animations/Mermaids/Mermaidv2_Dive_Fast.blockyanim",
+          "Animation": "Characters/Animations/Mermaids/Mermaidv2_Dive_Fastv2.blockyanim",
           "SoundEventId": "SFX_Player_Swim_Fast",
           "Speed": 1.2
         }
