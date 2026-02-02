@@ -17,7 +17,7 @@ import javax.annotation.Nonnull;
 
 public class MermaidsPermPotionRemove extends AbstractPlayerCommand {
     public MermaidsPermPotionRemove() {
-        super("permpotionremove", "Removes the permanent potion transformation");
+        super("permpotionremove", "Removes the permanent potion transformation.");
 
         this.setPermissionGroup(GameMode.Adventure);
     }

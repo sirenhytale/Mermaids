@@ -27,6 +27,10 @@ public class MermaidSettings implements Component<EntityStore> {
                     (merSettings, mtcStr) -> merSettings.tailColor = mtcStr, // Setter
                     (merSettings) -> merSettings.tailColor)                    // Getter
             .add()
+            .append(new KeyedCodec<Boolean>("MermaidV2Model", Codec.BOOLEAN),
+                    (merSettings, mv2mBool) -> merSettings.mermaidV2Model = mv2mBool, // Setter
+                    (merSettings) -> merSettings.mermaidV2Model)                    // Getter
+            .add()
             .build();
 
     private boolean toggleMermaid;
@@ -35,12 +39,16 @@ public class MermaidSettings implements Component<EntityStore> {
     private String mermaidTail;
     private String tailColor;
 
+    private boolean mermaidV2Model;
+
     public MermaidSettings(){
         this.toggleMermaid = true;
         this.permanentPotion = false;
 
         this.mermaidTail = "MermaidBigFinPlayer";
         this.tailColor = "MermaidPlayerGrayscale";
+
+        this.mermaidV2Model = false;
     }
 
     public MermaidSettings(MermaidSettings other){
@@ -49,6 +57,8 @@ public class MermaidSettings implements Component<EntityStore> {
 
         this.mermaidTail = other.mermaidTail;
         this.tailColor = other.tailColor;
+
+        this.mermaidV2Model = other.mermaidV2Model;
     }
 
     @Nullable
@@ -87,5 +97,13 @@ public class MermaidSettings implements Component<EntityStore> {
 
     public void setTailColor(String tailColor) {
         this.tailColor = tailColor;
+    }
+
+    public boolean ifUseMermaidV2(){
+        return mermaidV2Model;
+    }
+
+    public void setMermaidV2Model(boolean useMermaidV2){
+        this.mermaidV2Model = useMermaidV2;
     }
 }

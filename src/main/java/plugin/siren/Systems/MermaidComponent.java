@@ -28,6 +28,7 @@ public class MermaidComponent implements Component<EntityStore> {
     private float elapsedTime;
     private float armorElapsedTime;
     private float potionElapsedTime;
+    private float dryingElapsedTime;
 
     public MermaidComponent(){
         this(new PlayerSkin());
@@ -47,6 +48,7 @@ public class MermaidComponent implements Component<EntityStore> {
         this.elapsedTime = 0f;
         this.armorElapsedTime = 0f;
         this.potionElapsedTime = 0f;
+        this.dryingElapsedTime = 0f;
     }
 
     public MermaidComponent(MermaidComponent other){
@@ -66,6 +68,7 @@ public class MermaidComponent implements Component<EntityStore> {
         this.elapsedTime = other.elapsedTime;
         this.armorElapsedTime = other.armorElapsedTime;
         this.potionElapsedTime = other.potionElapsedTime;
+        this.dryingElapsedTime = other.dryingElapsedTime;
     }
 
     @Nullable
@@ -204,6 +207,18 @@ public class MermaidComponent implements Component<EntityStore> {
 
     public void decrementPotionTick(){
         this.potionElapsedTime -= 1f;
+    }
+
+    public float getDryingElapsedTime(){
+        return this.dryingElapsedTime;
+    }
+
+    public void setDryingElapsedTime(float time){
+        this.dryingElapsedTime = time;
+    }
+
+    public void incrementDryingTick(){
+        this.dryingElapsedTime += 1f;
     }
 
 }

@@ -94,6 +94,10 @@ public class MermaidsConfig {
         return MermaidOnLand;
     }
 
+    public void setMermaidOnLand(boolean onLand){
+        this.MermaidOnLand = onLand;
+    }
+
     public boolean getRequireTransformationPermission(){
         return RequireTransPerm;
     }
@@ -106,7 +110,15 @@ public class MermaidsConfig {
         return BlockTrans;
     }
 
+    public void setBlockTransformation(boolean transform){
+        this.BlockTrans = transform;
+    }
+
     public boolean getRainTransformation(){
         return RainTrans;
+    }
+
+    public void setRainTransformation(boolean transform){
+        this.RainTrans = transform;
     }
 }

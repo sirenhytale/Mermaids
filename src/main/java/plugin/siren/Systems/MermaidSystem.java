@@ -8,12 +8,7 @@ import com.hypixel.hytale.component.system.tick.EntityTickingSystem;
 import com.hypixel.hytale.math.util.ChunkUtil;
 import com.hypixel.hytale.math.util.MathUtil;
 import com.hypixel.hytale.math.vector.Vector3d;
-import com.hypixel.hytale.protocol.ComponentUpdate;
-import com.hypixel.hytale.protocol.ComponentUpdateType;
-import com.hypixel.hytale.protocol.EntityUpdate;
-import com.hypixel.hytale.protocol.Equipment;
-import com.hypixel.hytale.protocol.ItemArmorSlot;
-import com.hypixel.hytale.protocol.PlayerSkin;
+import com.hypixel.hytale.protocol.*;
 import com.hypixel.hytale.protocol.packets.entities.EntityUpdates;
 import com.hypixel.hytale.protocol.packets.interface_.HudComponent;
 import com.hypixel.hytale.server.core.Message;
@@ -232,6 +227,9 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                         }
 
                         String mermaidTailModel = mermaidSettings.getMermaidTail();
+                        if(Mermaids.ifDebug() && mermaidSettings.ifUseMermaidV2()){
+                            mermaidTailModel = "MermaidV2";
+                        }
 
                         ModelAsset modelAsset = ModelAsset.getAssetMap().getAsset(mermaidTailModel);//"MermaidV2");//mermaidTailModel);
                         if (modelAsset == null) {
@@ -379,6 +377,7 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
             }
 
             if (mermaid.isMermaid() && mermaidSettings.getToggleMermaid() && transformPermission) {
+                boolean onLand = false;
                 MovementManager movement = commandBuffer.getComponent(ref, MovementManager.getComponentType());
                 if(movement != null) {
                     if (movementState.getMovementStates().swimming || movementState.getMovementStates().swimJumping || movementState.getMovementStates().inFluid) {
@@ -402,14 +401,39 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                         movement.getSettings().forwardCrouchSpeedMultiplier = 0.35f;
                         movement.getSettings().backwardCrouchSpeedMultiplier = 0.25f;
                         movement.getSettings().forwardSprintSpeedMultiplier = 1.35f;
+                        onLand = true;
                     }
                     movement.update(playerRef.getPacketHandler());
                 }else{
                     player.sendMessage(Message.raw("Mermaids: Error: WaterSystem: Movement Component == null [transformation stats]"));
                 }
 
-                EntityStatMap statMapComponent = commandBuffer.getComponent(ref, EntityStatMap.getComponentType());
-                statMapComponent.maximizeStatValue(DefaultEntityStatTypes.getOxygen());
+                if(onLand){
+                    /*HudManager playerHud = player.getHudManager();
+                    playerHud.showHudComponents(playerRef, HudComponent.Oxygen);
+
+                    EntityStatMap statMapComponent = commandBuffer.getComponent(ref, EntityStatMap.getComponentType());
+                    float currOxygen = statMapComponent.get(DefaultEntityStatTypes.getOxygen()).get();
+                    float newOxygen = currOxygen;
+                    if(mermaid.getDryingElapsedTime() >= 18f){
+                        newOxygen -= 1f;
+                        mermaid.setDryingElapsedTime(0f);
+                    }else{
+                        mermaid.incrementDryingTick();
+                    }
+
+                    if(newOxygen <= 0f) {
+                        statMapComponent.minimizeStatValue(DefaultEntityStatTypes.getOxygen());
+                    }else {
+                        statMapComponent.setStatValue(DefaultEntityStatTypes.getOxygen(), newOxygen);
+                    }*/
+                }else {
+                    EntityStatMap statMapComponent = commandBuffer.getComponent(ref, EntityStatMap.getComponentType());
+                    statMapComponent.maximizeStatValue(DefaultEntityStatTypes.getOxygen());
+
+                    //HudManager playerHud = player.getHudManager();
+                    //playerHud.hideHudComponents(playerRef, HudComponent.Oxygen);
+                }
 
                 mermaid.decrementArmorTick();
                 if(mermaid.getArmorElapsedTime() < 0){

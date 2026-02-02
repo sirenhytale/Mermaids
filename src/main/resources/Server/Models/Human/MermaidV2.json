@@ -8,7 +8,7 @@
         {
           "Animation": "Characters/Animations/Mermaids/Mermaidv2_Swimv3.blockyanim",
           "SoundEventId": "SFX_Player_Swim",
-          "Speed": 1.1
+          "Speed": 0.8
         }
       ]
     },
@@ -17,7 +17,7 @@
         {
           "Animation": "Characters/Animations/Mermaids/Mermaidv2_Swim_Fast.blockyanim",
           "SoundEventId": "SFX_Player_Swim_Fast",
-          "Speed": 1.6
+          "Speed": 1.2
         }
       ]
     },
@@ -26,7 +26,7 @@
         {
           "Animation": "Characters/Animations/Mermaids/Mermaidv2_Divev2.blockyanim",
           "SoundEventId": "SFX_Player_Swim",
-          "Speed": 1.1
+          "Speed": 0.8
         }
       ]
     },
@@ -35,7 +35,7 @@
         {
           "Animation": "Characters/Animations/Mermaids/Mermaidv2_Dive_Fast.blockyanim",
           "SoundEventId": "SFX_Player_Swim_Fast",
-          "Speed": 1.6
+          "Speed": 1.2
         }
       ]
     }
