@@ -15,14 +15,14 @@ import plugin.siren.Mermaids;
 
 import javax.annotation.Nonnull;
 
-public class RainTransformationCmd extends AbstractPlayerCommand {
-    public RainTransformationCmd() {
+public class RainTransformCmd extends AbstractPlayerCommand {
+    public RainTransformCmd() {
         super("raintransform", "Toggles to allow users to transform from rain/snow.");
 
         this.requirePermission("mermaids.admin.raintransform");
     }
 
-    RequiredArg<Boolean> msgMerRainTransArg = this.withRequiredArg("toggle boolean", "Boolean to toggle rain transformations.", ArgTypes.BOOLEAN);
+    RequiredArg<Boolean> msgMerRainTransArg = this.withRequiredArg("Allow Rain Transformation", "Boolean to toggle rain transformations.", ArgTypes.BOOLEAN);
 
     @Override
     protected void execute(@Nonnull CommandContext commandContext, @Nonnull Store<EntityStore> store, @Nonnull Ref<EntityStore> ref, @Nonnull PlayerRef playerRef, @Nonnull World world) {

@@ -7,9 +7,10 @@ public class AdminCmd extends AbstractCommandCollection {
     public AdminCmd(){
         super("admin","Mermaids admin command line");
 
+        this.addSubCommand(new TransformModeCmd());
         this.addSubCommand(new MermaidOnLandCmd());
-        this.addSubCommand(new BlocksTransformationCmd());
-        this.addSubCommand(new RainTransformationCmd());
+        this.addSubCommand(new BlockTransformCmd());
+        this.addSubCommand(new RainTransformCmd());
         this.addSubCommand(new MermaidGlowCmd());
         this.addSubCommand(new MermaidGlowRadiusCmd());
 

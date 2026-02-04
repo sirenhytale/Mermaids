@@ -24,7 +24,7 @@ public class ToggleMermaid extends AbstractPlayerCommand {
         this.setPermissionGroup(GameMode.Creative);
     }
 
-    RequiredArg<Boolean> msgMerToggleArg = this.withRequiredArg("toggle boolean", "Boolean to allow for the mermaid transformations to happen.", ArgTypes.BOOLEAN);
+    RequiredArg<Boolean> msgMerToggleArg = this.withRequiredArg("Allow Mermaid Transformations", "Boolean to allow for the mermaid transformations to happen.", ArgTypes.BOOLEAN);
 
     @Override
     protected void execute(@Nonnull CommandContext commandContext, @Nonnull Store<EntityStore> store, @Nonnull Ref<EntityStore> ref, @Nonnull PlayerRef playerRef, @Nonnull World world) {

@@ -10,8 +10,8 @@
     1,
     1
   ],
-  "DistortionAmplitude": 5,
-  "DistortionFrequency": 6,
+  "DistortionAmplitude": 4,
+  "DistortionFrequency": 5,
   "MovementSettings": {
     "SwimUpSpeed": 6,
     "SwimDownSpeed": -6,
@@ -23,6 +23,6 @@
   "Particle": {
     "SystemId": "Underwater_Effects"
   },
-  "FogDepthFalloff": 1.3,
-  "FogDepthStart": 95
+  "FogDepthFalloff": 0.75,
+  "FogDepthStart": 140
 }

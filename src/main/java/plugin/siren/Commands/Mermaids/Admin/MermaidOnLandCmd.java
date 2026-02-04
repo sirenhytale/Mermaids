@@ -22,7 +22,7 @@ public class MermaidOnLandCmd extends AbstractPlayerCommand {
         this.requirePermission("mermaids.admin.mermaidonland");
     }
 
-    RequiredArg<Boolean> msgMerOnLandArg = this.withRequiredArg("toggle boolean", "Boolean to toggle Mermaid on Land.", ArgTypes.BOOLEAN);
+    RequiredArg<Boolean> msgMerOnLandArg = this.withRequiredArg("Toggle Always being a Mermaid", "Boolean to toggle Mermaid on Land.", ArgTypes.BOOLEAN);
 
     @Override
     protected void execute(@Nonnull CommandContext commandContext, @Nonnull Store<EntityStore> store, @Nonnull Ref<EntityStore> ref, @Nonnull PlayerRef playerRef, @Nonnull World world) {

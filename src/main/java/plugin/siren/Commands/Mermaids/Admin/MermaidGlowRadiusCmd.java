@@ -22,7 +22,7 @@ public class MermaidGlowRadiusCmd extends AbstractPlayerCommand {
         this.requirePermission("mermaids.admin.mermaidglow");
     }
 
-    RequiredArg<Integer> msgMerGlowRadiusArg = this.withRequiredArg("interger value", "value to set as Mermaid glow (default 33).", ArgTypes.INTEGER);
+    RequiredArg<Integer> msgMerGlowRadiusArg = this.withRequiredArg("Glow Radius", "value to set as Mermaid glow (default 33).", ArgTypes.INTEGER);
 
     @Override
     protected void execute(@Nonnull CommandContext commandContext, @Nonnull Store<EntityStore> store, @Nonnull Ref<EntityStore> ref, @Nonnull PlayerRef playerRef, @Nonnull World world) {

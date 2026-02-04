@@ -25,7 +25,7 @@ public class Mermaidv2Cmd extends AbstractPlayerCommand {
         this.setPermissionGroup(GameMode.Creative);
     }
 
-    RequiredArg<Boolean> msgMerV2Arg = this.withRequiredArg("toggle boolean", "Boolean to toggle Mermaid v2 Model.", ArgTypes.BOOLEAN);
+    RequiredArg<Boolean> msgMerV2Arg = this.withRequiredArg("Use Model v2", "Boolean to toggle Mermaid v2 Model.", ArgTypes.BOOLEAN);
 
     @Override
     protected void execute(@Nonnull CommandContext commandContext, @Nonnull Store<EntityStore> store, @Nonnull Ref<EntityStore> ref, @Nonnull PlayerRef playerRef, @Nonnull World world) {

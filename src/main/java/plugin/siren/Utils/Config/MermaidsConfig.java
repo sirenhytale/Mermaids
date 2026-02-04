@@ -71,7 +71,8 @@ public class MermaidsConfig {
             .build();
 
     private String Information = "Confused about what one of these statement do? Check out the Mermaids page on the Curseforge website and scroll down to Config Extra Info.";
-    private int ConfigVersion = 6;
+    private final int ConfigVersionDefault = 6;
+    private int ConfigVersion = ConfigVersionDefault;
     private String PluginName = "Mermaids";
     private String Version = Mermaids.getVersion();
     private String Website = "https://www.curseforge.com/hytale/mods/mermaids";
@@ -88,12 +89,32 @@ public class MermaidsConfig {
 
     public MermaidsConfig() {}
 
+    public int getConfigVersionDefault(){
+        return ConfigVersionDefault;
+    }
+
     public int getConfigVersion(){
         return ConfigVersion;
     }
 
+    public void setConfigVersion(int version){
+        this.ConfigVersion = version;
+    }
+
+    public String getPluginVersion(){
+        return Version;
+    }
+
+    public void setPluginVersion(String version){
+        this.Version = version;
+    }
+
     public int getTransformationMode(){
         return TransformationMode;
+    }
+
+    public void setTransformationMode(int mode){
+        this.TransformationMode = mode;
     }
 
     public boolean getMermaidOnLand(){

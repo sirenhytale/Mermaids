@@ -15,14 +15,14 @@ import plugin.siren.Mermaids;
 
 import javax.annotation.Nonnull;
 
-public class BlocksTransformationCmd extends AbstractPlayerCommand {
-    public BlocksTransformationCmd() {
+public class BlockTransformCmd extends AbstractPlayerCommand {
+    public BlockTransformCmd() {
         super("blocktransform", "Toggles to allow users to transform from liquid blocks.");
 
         this.requirePermission("mermaids.admin.blocktransform");
     }
 
-    RequiredArg<Boolean> msgMerBlockTransArg = this.withRequiredArg("toggle boolean", "Boolean to toggle block transformations.", ArgTypes.BOOLEAN);
+    RequiredArg<Boolean> msgMerBlockTransArg = this.withRequiredArg("Allow Block Transformation", "Boolean to toggle block transformations.", ArgTypes.BOOLEAN);
 
     @Override
     protected void execute(@Nonnull CommandContext commandContext, @Nonnull Store<EntityStore> store, @Nonnull Ref<EntityStore> ref, @Nonnull PlayerRef playerRef, @Nonnull World world) {

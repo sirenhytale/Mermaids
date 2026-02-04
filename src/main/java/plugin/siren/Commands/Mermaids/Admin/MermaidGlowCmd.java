@@ -22,7 +22,7 @@ public class MermaidGlowCmd extends AbstractPlayerCommand {
         this.requirePermission("mermaids.admin.mermaidglow");
     }
 
-    RequiredArg<Boolean> msgMerGlowArg = this.withRequiredArg("toggle boolean", "Boolean to toggle mermaid glow.", ArgTypes.BOOLEAN);
+    RequiredArg<Boolean> msgMerGlowArg = this.withRequiredArg("Allow Mermaid Glow", "Boolean to toggle mermaid glow.", ArgTypes.BOOLEAN);
 
     @Override
     protected void execute(@Nonnull CommandContext commandContext, @Nonnull Store<EntityStore> store, @Nonnull Ref<EntityStore> ref, @Nonnull PlayerRef playerRef, @Nonnull World world) {
