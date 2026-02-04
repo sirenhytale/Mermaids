@@ -28,10 +28,6 @@ public class MermaidsConfig {
                     (merConfig, wStr, extraInfo) -> merConfig.Website = wStr, // Setter
                     (merConfig, extraInfo) -> merConfig.Website)                    // Getter
             .add()
-            .append(new KeyedCodec<Boolean>("DebugMode", Codec.BOOLEAN),
-                    (merConfig, dmBool, extraInfo) -> merConfig.DebugMode = dmBool, // Setter
-                    (merConfig, extraInfo) -> merConfig.DebugMode)                    // Getter
-            .add()
             .append(new KeyedCodec<Integer>("Transformation-Mode", Codec.INTEGER),
                     (merConfig, tmInt, extraInfo) -> merConfig.TransformationMode = tmInt, // Setter
                     (merConfig, extraInfo) -> merConfig.TransformationMode)                    // Getter
@@ -60,14 +56,25 @@ public class MermaidsConfig {
                     (merConfig, rcctBool, extraInfo) -> merConfig.RainTrans = rcctBool, // Setter
                     (merConfig, extraInfo) -> merConfig.RainTrans)                    // Getter
             .add()
+            .append(new KeyedCodec<Boolean>("Mermaid-Have-A-Glow/Light", Codec.BOOLEAN),
+                    (merConfig, mhaglBool, extraInfo) -> merConfig.MermaidLight = mhaglBool, // Setter
+                    (merConfig, extraInfo) -> merConfig.MermaidLight)                    // Getter
+            .add()
+            .append(new KeyedCodec<Integer>("Mermaid-Glow/Light-Radius", Codec.INTEGER),
+                    (merConfig, mglrInt, extraInfo) -> merConfig.LightRadius = mglrInt, // Setter
+                    (merConfig, extraInfo) -> merConfig.LightRadius)                    // Getter
+            .add()
+            .append(new KeyedCodec<Boolean>("DebugMode", Codec.BOOLEAN),
+                    (merConfig, dmBool, extraInfo) -> merConfig.DebugMode = dmBool, // Setter
+                    (merConfig, extraInfo) -> merConfig.DebugMode)                    // Getter
+            .add()
             .build();
 
     private String Information = "Confused about what one of these statement do? Check out the Mermaids page on the Curseforge website and scroll down to Config Extra Info.";
-    private int ConfigVersion = 5;
+    private int ConfigVersion = 6;
     private String PluginName = "Mermaids";
     private String Version = Mermaids.getVersion();
     private String Website = "https://www.curseforge.com/hytale/mods/mermaids";
-    private boolean DebugMode = false;
     private int TransformationMode = 0;
     private String TransModeDesc = "TransformationMode = 0 : Transform when entering water, TransformationMode = 1 : Requires user to drink Mermaid Potion to Transform";
     private boolean MermaidOnLand = false;
@@ -75,15 +82,14 @@ public class MermaidsConfig {
     private boolean RequireUIPerm = false;
     private boolean BlockTrans = true;
     private boolean RainTrans = false;
+    private boolean MermaidLight = true;
+    private int LightRadius = 33;
+    private boolean DebugMode = false;
 
     public MermaidsConfig() {}
 
     public int getConfigVersion(){
         return ConfigVersion;
-    }
-
-    public boolean ifDebugMode(){
-        return DebugMode;
     }
 
     public int getTransformationMode(){
@@ -120,5 +126,25 @@ public class MermaidsConfig {
 
     public void setRainTransformation(boolean transform){
         this.RainTrans = transform;
+    }
+
+    public boolean getMermaidLight(){
+        return MermaidLight;
+    }
+
+    public void setMermaidLight(boolean light){
+        this.MermaidLight = light;
+    }
+
+    public int getLightRadius(){
+        return LightRadius;
+    }
+
+    public void setLightRadius(int radius){
+        this.LightRadius = radius;
+    }
+
+    public boolean ifDebugMode(){
+        return DebugMode;
     }
 }

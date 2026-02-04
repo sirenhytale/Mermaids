@@ -17,7 +17,7 @@
         {
           "Animation": "Characters/Animations/Mermaids/Mermaidv2_Swim_Fastv2.blockyanim",
           "SoundEventId": "SFX_Player_Swim_Fast",
-          "Speed": 1.2
+          "Speed": 1.05
         }
       ]
     },
@@ -35,7 +35,7 @@
         {
           "Animation": "Characters/Animations/Mermaids/Mermaidv2_Dive_Fastv2.blockyanim",
           "SoundEventId": "SFX_Player_Swim_Fast",
-          "Speed": 1.2
+          "Speed": 1.05
         }
       ]
     }

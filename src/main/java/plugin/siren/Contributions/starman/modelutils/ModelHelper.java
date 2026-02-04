@@ -2,11 +2,13 @@ package plugin.siren.Contributions.starman.modelutils;
 
 import com.hypixel.hytale.component.CommandBuffer;
 import com.hypixel.hytale.component.Ref;
+import com.hypixel.hytale.protocol.ColorLight;
 import com.hypixel.hytale.protocol.PlayerSkin;
 import com.hypixel.hytale.server.core.asset.type.model.config.Model;
 import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.modules.entity.component.ModelComponent;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import plugin.siren.Mermaids;
 import plugin.siren.Systems.MermaidComponent;
 import plugin.siren.Systems.MermaidSettings;
 
@@ -14,11 +16,11 @@ import plugin.siren.Systems.MermaidSettings;
  *
  * Author: StarMan
  * Version: 1.0-pre
- * Date: 1/15/2026
+ * Date: 2026/01/15
  * Link: https://github.com/SyperAI/hytale-model-utils
  *
  * Modified: meFroggy
- * Date: 1/29/2026
+ * Date: 2026/02/03
  *
  */
 
@@ -36,6 +38,12 @@ public class ModelHelper {
             texturePath = "Characters/PlayerTextures/" + mermaidSettings.getTailColor() + ".png";
         }
 
+        ColorLight modelLight = playerModel.getLight();
+        if(Mermaids.getConfig().get().getMermaidLight()){
+            model.getLight().radius = (byte) Mermaids.getConfig().get().getLightRadius();
+            modelLight = model.getLight();
+        }
+
         return new Model(
                 model.getModelAssetId() + "_Skinned",
                 playerModel.getScale(),
@@ -50,7 +58,7 @@ public class ModelHelper {
                 model.getCrouchOffset(),
                 model.getAnimationSetMap(),
                 playerModel.getCamera(),
-                model.getLight(),
+                modelLight,
                 model.getParticles(),
                 model.getTrails(),
                 model.getPhysicsValues(),

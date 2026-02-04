@@ -15,32 +15,32 @@ import plugin.siren.Mermaids;
 
 import javax.annotation.Nonnull;
 
-public class BlocksTransformationCmd extends AbstractPlayerCommand {
-    public BlocksTransformationCmd() {
-        super("blocktransform", "Toggles to allow users to transform from liquid blocks.");
+public class MermaidGlowCmd extends AbstractPlayerCommand {
+    public MermaidGlowCmd() {
+        super("mermaidglow", "Toggles to allow the mermaid model to glow.");
 
-        this.requirePermission("mermaids.admin.blocktransform");
+        this.requirePermission("mermaids.admin.mermaidglow");
     }
 
-    RequiredArg<Boolean> msgMerBlockTransArg = this.withRequiredArg("toggle boolean", "Boolean to toggle block transformations.", ArgTypes.BOOLEAN);
+    RequiredArg<Boolean> msgMerGlowArg = this.withRequiredArg("toggle boolean", "Boolean to toggle mermaid glow.", ArgTypes.BOOLEAN);
 
     @Override
     protected void execute(@Nonnull CommandContext commandContext, @Nonnull Store<EntityStore> store, @Nonnull Ref<EntityStore> ref, @Nonnull PlayerRef playerRef, @Nonnull World world) {
         Player player = store.getComponent(ref, Player.getComponentType());
 
-        boolean merBlockTrans = msgMerBlockTransArg.get(commandContext);
+        boolean merGlow = msgMerGlowArg.get(commandContext);
 
-        Mermaids.getConfig().get().setBlockTransformation(merBlockTrans);
+        Mermaids.getConfig().get().setMermaidLight(merGlow);
         Mermaids.getConfig().save();
 
         String toggledStr = "";
-        if (merBlockTrans) {
+        if (merGlow) {
             toggledStr = "Enabled";
         } else {
             toggledStr = "Disabled";
         }
-        player.sendMessage(Message.raw("You have " + toggledStr + " block transformations."));
+        player.sendMessage(Message.raw("You have " + toggledStr + " mermaid glow."));
 
-        Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " has toggled block transformations: " + String.valueOf(merBlockTrans) + ".");
+        Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " has toggled mermaid glow: " + String.valueOf(merGlow) + ".");
     }
 }

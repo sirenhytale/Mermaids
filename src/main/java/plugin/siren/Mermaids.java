@@ -21,7 +21,7 @@ import plugin.siren.Utils.Config.MermaidsConfig;
 import javax.annotation.Nonnull;
 
 public class Mermaids extends JavaPlugin {
-    private static final String VERSION = "1.3.2";
+    private static final String VERSION = "1.3.4";
     private static final boolean DEBUG = false;
 
     private static Mermaids plugin;

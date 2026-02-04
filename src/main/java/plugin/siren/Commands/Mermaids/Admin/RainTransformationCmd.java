@@ -17,7 +17,7 @@ import javax.annotation.Nonnull;
 
 public class RainTransformationCmd extends AbstractPlayerCommand {
     public RainTransformationCmd() {
-        super("raintransformation", "Toggles to allow users to transform from rain/snow.");
+        super("raintransform", "Toggles to allow users to transform from rain/snow.");
 
         this.requirePermission("mermaids.admin.raintransform");
     }

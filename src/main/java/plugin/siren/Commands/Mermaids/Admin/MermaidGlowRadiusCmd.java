@@ -15,32 +15,26 @@ import plugin.siren.Mermaids;
 
 import javax.annotation.Nonnull;
 
-public class BlocksTransformationCmd extends AbstractPlayerCommand {
-    public BlocksTransformationCmd() {
-        super("blocktransform", "Toggles to allow users to transform from liquid blocks.");
+public class MermaidGlowRadiusCmd extends AbstractPlayerCommand {
+    public MermaidGlowRadiusCmd() {
+        super("mermaidglowradius", "Set the radius of the Mermaid glow.");
 
-        this.requirePermission("mermaids.admin.blocktransform");
+        this.requirePermission("mermaids.admin.mermaidglow");
     }
 
-    RequiredArg<Boolean> msgMerBlockTransArg = this.withRequiredArg("toggle boolean", "Boolean to toggle block transformations.", ArgTypes.BOOLEAN);
+    RequiredArg<Integer> msgMerGlowRadiusArg = this.withRequiredArg("interger value", "value to set as Mermaid glow (default 33).", ArgTypes.INTEGER);
 
     @Override
     protected void execute(@Nonnull CommandContext commandContext, @Nonnull Store<EntityStore> store, @Nonnull Ref<EntityStore> ref, @Nonnull PlayerRef playerRef, @Nonnull World world) {
         Player player = store.getComponent(ref, Player.getComponentType());
 
-        boolean merBlockTrans = msgMerBlockTransArg.get(commandContext);
+        int merGlowRadius = msgMerGlowRadiusArg.get(commandContext);
 
-        Mermaids.getConfig().get().setBlockTransformation(merBlockTrans);
+        Mermaids.getConfig().get().setLightRadius(merGlowRadius);
         Mermaids.getConfig().save();
 
-        String toggledStr = "";
-        if (merBlockTrans) {
-            toggledStr = "Enabled";
-        } else {
-            toggledStr = "Disabled";
-        }
-        player.sendMessage(Message.raw("You have " + toggledStr + " block transformations."));
+        player.sendMessage(Message.raw("You have changed the mermaid glow radius to " + String.valueOf(merGlowRadius) + "."));
 
-        Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " has toggled block transformations: " + String.valueOf(merBlockTrans) + ".");
+        Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " has changed the mermaid glow radius to " + String.valueOf(merGlowRadius) + ".");
     }
 }
