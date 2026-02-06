@@ -1,0 +1,24 @@
+{
+  "Type": "Abstract",
+  "Appearance": "MermaidPlayer",
+  "StartState": "Idle",
+  "DefaultPlayerAttitude": "FRIENDLY",
+  "DefaultNPCAttitude": "NEUTRAL",
+  "Invulnerable": true,
+  "MaxHealth": 100,
+  "MotionControllerList": [
+    {
+      "Type": "Walk",
+      "MaxWalkSpeed": 15,
+      "Gravity": 10,
+      "MaxFallSpeed": 8,
+      "Acceleration": 10,
+      "MinHover": 0.5,
+      "MinHoverDrop": 0.1,
+      "MinHoverClimb": 0.1,
+      "MaxHover": 1.5,
+      "HoverFreq": 0.2,
+      "MaxClimbHeight": 10
+    }
+  ]
+}

@@ -3,6 +3,14 @@
   "Model": "Characters/Mermaidv2.blockymodel",
   "Texture": "Characters/PlayerTextures/MermaidTextureV2.png",
   "AnimationSets": {
+    "SwimIdle": {
+      "Animations": [
+        {
+          "Animation": "Characters/Animations/Mermaids/Mermaidv2_Swim_Idle.blockyanim",
+          "Speed": 0.35
+        }
+      ]
+    },
     "Swim": {
       "Animations": [
         {
@@ -21,6 +29,15 @@
         }
       ]
     },
+    "SwimSink": {
+      "Animations": [
+        {
+          "Animation": "Characters/Animations/Mermaids/Mermaidv2_Swim_Sink.blockyanim",
+          "SoundEventId": "SFX_Player_Swim",
+          "Speed": 0.45
+        }
+      ]
+    },
     "SwimDive": {
       "Animations": [
         {
@@ -36,6 +53,15 @@
           "Animation": "Characters/Animations/Mermaids/Mermaidv2_Dive_Fastv2.blockyanim",
           "SoundEventId": "SFX_Player_Swim_Fast",
           "Speed": 1.05
+        }
+      ]
+    },
+    "SwimFloat": {
+      "Animations": [
+        {
+          "Animation": "Characters/Animations/Mermaids/Mermaidv2_Swim_Floatv2.blockyanim",
+          "SoundEventId": "SFX_Player_Swim",
+          "Speed": 0.55
         }
       ]
     }
