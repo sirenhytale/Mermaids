@@ -226,7 +226,7 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                             player.sendMessage(Message.raw("Replacing Skin"));
                         }
 
-                        String mermaidTailModel = mermaidSettings.getMermaidTail();
+                        String mermaidTailModel = "MermaidV2";//mermaidSettings.getMermaidTail();
                         if(Mermaids.ifDebug() && mermaidSettings.ifUseMermaidV2()){
                             mermaidTailModel = "MermaidV2";
                         }

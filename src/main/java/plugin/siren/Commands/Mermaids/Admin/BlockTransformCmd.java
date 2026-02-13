@@ -14,6 +14,7 @@ import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import plugin.siren.Mermaids;
 
 import javax.annotation.Nonnull;
+import java.util.UUID;
 
 public class BlockTransformCmd extends AbstractPlayerCommand {
     public BlockTransformCmd() {
@@ -27,6 +28,8 @@ public class BlockTransformCmd extends AbstractPlayerCommand {
     @Override
     protected void execute(@Nonnull CommandContext commandContext, @Nonnull Store<EntityStore> store, @Nonnull Ref<EntityStore> ref, @Nonnull PlayerRef playerRef, @Nonnull World world) {
         Player player = store.getComponent(ref, Player.getComponentType());
+        UUID a = playerRef.getUuid();
+        String b = a.toString();
 
         boolean merBlockTrans = msgMerBlockTransArg.get(commandContext);
 
