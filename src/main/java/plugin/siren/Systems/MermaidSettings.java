@@ -19,7 +19,7 @@ public class MermaidSettings implements Component<EntityStore> {
                     (merSettings, mtppBool) -> merSettings.permanentPotion = mtppBool, // Setter
                     (merSettings) -> merSettings.permanentPotion)                    // Getter
             .add()
-            .append(new KeyedCodec<String>("MermaidTailModel", Codec.STRING),
+            .append(new KeyedCodec<String>("MermaidTailModelAlpha200", Codec.STRING),
                     (merSettings, mtmStr) -> merSettings.mermaidTail = mtmStr, // Setter
                     (merSettings) -> merSettings.mermaidTail)                    // Getter
             .add()
@@ -31,6 +31,10 @@ public class MermaidSettings implements Component<EntityStore> {
                     (merSettings, mv2mBool) -> merSettings.mermaidV2Model = mv2mBool, // Setter
                     (merSettings) -> merSettings.mermaidV2Model)                    // Getter
             .add()
+            .append(new KeyedCodec<Boolean>("Alpha2.0.0", Codec.BOOLEAN),
+                    (merSettings, a200Bool) -> merSettings.alpha200 = a200Bool, // Setter
+                    (merSettings) -> merSettings.alpha200)                    // Getter
+            .add()
             .build();
 
     private boolean toggleMermaid;
@@ -41,14 +45,18 @@ public class MermaidSettings implements Component<EntityStore> {
 
     private boolean mermaidV2Model;
 
+    private boolean alpha200;
+
     public MermaidSettings(){
         this.toggleMermaid = true;
         this.permanentPotion = false;
 
-        this.mermaidTail = "MermaidBigFinPlayer";
+        this.mermaidTail = "MermaidV2";
         this.tailColor = "MermaidPlayerGrayscale";
 
         this.mermaidV2Model = false;
+
+        this.alpha200 = false;
     }
 
     public MermaidSettings(MermaidSettings other){
@@ -59,6 +67,8 @@ public class MermaidSettings implements Component<EntityStore> {
         this.tailColor = other.tailColor;
 
         this.mermaidV2Model = other.mermaidV2Model;
+
+        this.alpha200 = other.alpha200;
     }
 
     @Nullable
@@ -105,5 +115,13 @@ public class MermaidSettings implements Component<EntityStore> {
 
     public void setMermaidV2Model(boolean useMermaidV2){
         this.mermaidV2Model = useMermaidV2;
+    }
+
+    public boolean getAlpha200(){
+        return this.alpha200;
+    }
+
+    public void setAlpha200(boolean alpha){
+        this.alpha200 = alpha;
     }
 }

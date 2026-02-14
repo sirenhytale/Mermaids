@@ -62,6 +62,7 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
 
         event.addEventBinding(CustomUIEventBindingType.Activating, "#OriginalMermaidSmallFinButton", new EventData().append("@MermaidTail", "#MermaidPlayer.Value"));
         event.addEventBinding(CustomUIEventBindingType.Activating, "#OriginalMermaidBigFinButton", new EventData().append("@MermaidTail", "#MermaidBigFinPlayer.Value"));
+        event.addEventBinding(CustomUIEventBindingType.Activating, "#MermaidV2Button", new EventData().append("@MermaidTail", "#MermaidV2.Value"));
 
         event.addEventBinding(CustomUIEventBindingType.Activating, "#OrangeTailColorButton", new EventData().append("@TailColor", "#OrangeTailColor.Value"));
         event.addEventBinding(CustomUIEventBindingType.Activating, "#YellowTailColorButton", new EventData().append("@TailColor", "#YellowTailColor.Value"));
@@ -94,6 +95,8 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
                 msgMerTail = "Small Fin";
             } else if (mermaidTail.equals("MermaidBigFinPlayer")) {
                 msgMerTail = "Big Fin";
+            } else if (mermaidTail.equals("MermaidV2")) {
+                msgMerTail = "ModelV2";
             }
 
             player.sendMessage(Message.raw("You have selected the " + msgMerTail + " mermaid tail."));

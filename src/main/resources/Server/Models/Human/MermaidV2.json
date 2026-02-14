@@ -82,6 +82,22 @@
           "Speed": 0.55
         }
       ]
+    },
+    "FluidWalk": {
+      "Animations": [
+        {
+          "Animation": "Characters/Animations/Mermaids/Mermaidv2_Fluid_Walk.blockyanim",
+          "Speed": 1
+        }
+      ]
+    },
+    "FluidRun": {
+      "Animations": [
+        {
+          "Animation": "Characters/Animations/Mermaids/Mermaidv2_Fluid_Walk.blockyanim",
+          "Speed": 1.25
+        }
+      ]
     }
   }
 }

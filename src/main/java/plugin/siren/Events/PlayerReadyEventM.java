@@ -81,6 +81,19 @@ public class PlayerReadyEventM {
                 }
 
                 Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " now has the Mermaid Settings Component.");
+
+                MermaidSettings mermaidSett = store.getComponent(ref, Mermaids.get().getMermaidSetingsComponentType());
+                if(mermaidSett != null){
+                    if(!mermaidSett.getAlpha200()){
+                        mermaidSett.setAlpha200(true);
+
+                        mermaidSett.setMermaidTail("MermaidV2");
+
+                        Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " has updated saved Mermaid Tail to V2.");
+                    }
+                }else{
+                    Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " failed to get mermaidSett Mermaid Settings Component.");
+                }
             }else{
                 if (Mermaids.ifDebug()) {
                     player.sendMessage(Message.raw("You already have the Mermaid Settings Component!"));

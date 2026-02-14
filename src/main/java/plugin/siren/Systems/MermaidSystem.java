@@ -226,12 +226,12 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                             player.sendMessage(Message.raw("Replacing Skin"));
                         }
 
-                        String mermaidTailModel = "MermaidV2";//mermaidSettings.getMermaidTail();
+                        String mermaidTailModel = mermaidSettings.getMermaidTail();
                         if(Mermaids.ifDebug() && mermaidSettings.ifUseMermaidV2()){
                             mermaidTailModel = "MermaidV2";
                         }
 
-                        ModelAsset modelAsset = ModelAsset.getAssetMap().getAsset(mermaidTailModel);//"MermaidV2");//mermaidTailModel);
+                        ModelAsset modelAsset = ModelAsset.getAssetMap().getAsset(mermaidTailModel);
                         if (modelAsset == null) {
                             player.sendMessage(Message.raw("Mermaids: Error: WaterSystem: " + mermaidTailModel + " Model not found"));
                             Mermaids.LOGGER.atSevere().log(player.getDisplayName() + " had an error of getting the Mermaid Model. Error: WaterSystem: " + mermaidTailModel + " Model not found.");

@@ -8,7 +8,7 @@
       "orientation": [
         {
           "time": 0,
-          "delta": {"x": 0.66262, "y": 0, "z": 0, "w": 0.74896},
+          "delta": {"x": 0.64945, "y": 0, "z": 0, "w": 0.76041},
           "interpolationType": "smooth"
         }
       ],
@@ -675,12 +675,12 @@
       "position": [
         {
           "time": 0,
-          "delta": {"x": 0, "y": -23, "z": 0},
+          "delta": {"x": 0, "y": -17, "z": 0},
           "interpolationType": "linear"
         },
         {
           "time": 25,
-          "delta": {"x": 0, "y": -21, "z": 0},
+          "delta": {"x": 0, "y": -15, "z": 0},
           "interpolationType": "linear"
         }
       ],
