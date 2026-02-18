@@ -20,7 +20,7 @@ import plugin.siren.Systems.MermaidSettings;
  * Link: https://github.com/SyperAI/hytale-model-utils
  *
  * Modified: meFroggy
- * Date: 2026/02/03
+ * Date: 2026/02/17
  *
  */
 
@@ -44,7 +44,7 @@ public class ModelHelper {
             modelLight = model.getLight();
         }
 
-        return new Model(
+        Model newMermaidModel = new Model(
                 model.getModelAssetId() + "_Skinned",
                 playerModel.getScale(),
                 playerModel.getRandomAttachmentIds(),
@@ -56,6 +56,8 @@ public class ModelHelper {
                 playerModel.getGradientId(),
                 model.getEyeHeight(),
                 model.getCrouchOffset(),
+                model.getSittingOffset(),
+                model.getSleepingOffset(),
                 model.getAnimationSetMap(),
                 playerModel.getCamera(),
                 modelLight,
@@ -66,6 +68,8 @@ public class ModelHelper {
                 playerModel.getPhobia(),
                 playerModel.getPhobiaModelAssetId()
         );
+
+        return newMermaidModel;
     }
 
     // Applies given skin on given player reference
