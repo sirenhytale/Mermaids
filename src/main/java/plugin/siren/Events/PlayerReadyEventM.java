@@ -88,6 +88,8 @@ public class PlayerReadyEventM {
                         mermaidSett.setAlpha200(true);
 
                         mermaidSett.setMermaidTail("MermaidV2");
+                        mermaidSett.setTailColor("MermaidPlayerGrayscale");
+                        mermaidSett.setTailColorV2("MermaidTextureV2");
 
                         Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " has updated saved Mermaid Tail to V2.");
                     }

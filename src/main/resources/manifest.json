@@ -1,7 +1,7 @@
 {
   "Group": "plugin.siren",
   "Name": "Mermaids",
-  "Version": "2.0.0-2026.02.17",
+  "Version": "2.0.0-2026.02.22",
   "Description": "Ever wanted to be a Mermaid? Now you can with Mermaids, this plugin allows the user to become a Mermaid in water!",
   "Authors": [
     {
@@ -10,7 +10,7 @@
     }
   ],
   "Website": "https://curseforge.com/hytale/mods/mermaids",
-  "ServerVersion": "2026.02.18-f3b8fff95",
+  "ServerVersion": "2026.02.19-1a311a592",
   "Dependencies": {},
   "OptionalDependencies": {},
   "LoadBefore": {},

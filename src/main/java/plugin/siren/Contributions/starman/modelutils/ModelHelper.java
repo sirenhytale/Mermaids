@@ -20,7 +20,7 @@ import plugin.siren.Systems.MermaidSettings;
  * Link: https://github.com/SyperAI/hytale-model-utils
  *
  * Modified: meFroggy
- * Date: 2026/02/17
+ * Date: 2026/02/22
  *
  */
 
@@ -36,6 +36,9 @@ public class ModelHelper {
         String texturePath = model.getTexture();
         if(model.getModel().equals("Characters/MermaidPlayer.blockymodel") || model.getModel().equals("Characters/MermaidBigFinPlayer.blockymodel")){
             texturePath = "Characters/PlayerTextures/" + mermaidSettings.getTailColor() + ".png";
+        }
+        if(model.getModel().equals("Characters/SirensMermaid/Mermaidv2.blockymodel")){
+            texturePath = "Characters/SirensMermaid/MermaidTextures/" + mermaidSettings.getTailColorV2() + ".png";
         }
 
         ColorLight modelLight = playerModel.getLight();

@@ -1,7 +1,7 @@
 {
   "Parent": "MermaidPlayer",
-  "Model": "Characters/Mermaidv2.blockymodel",
-  "Texture": "Characters/PlayerTextures/MermaidTextureV2.png",
+  "Model": "Characters/SirensMermaid/Mermaidv2.blockymodel",
+  "Texture": "Characters/SirensMermaid/MermaidTextures/MermaidTextureV2.png",
   "AnimationSets": {
     "SwimIdle": {
       "Animations": [

@@ -23,7 +23,11 @@ public class MermaidSettings implements Component<EntityStore> {
                     (merSettings, mtmStr) -> merSettings.mermaidTail = mtmStr, // Setter
                     (merSettings) -> merSettings.mermaidTail)                    // Getter
             .add()
-            .append(new KeyedCodec<String>("MermaidTailColor", Codec.STRING),
+            .append(new KeyedCodec<String>("MermaidTailColorAlpha200", Codec.STRING),
+                    (merSettings, mtcStr) -> merSettings.tailColor = mtcStr, // Setter
+                    (merSettings) -> merSettings.tailColor)                    // Getter
+            .add()
+            .append(new KeyedCodec<String>("MermaidTailColorV2Alpha200", Codec.STRING),
                     (merSettings, mtcStr) -> merSettings.tailColor = mtcStr, // Setter
                     (merSettings) -> merSettings.tailColor)                    // Getter
             .add()
@@ -42,6 +46,7 @@ public class MermaidSettings implements Component<EntityStore> {
 
     private String mermaidTail;
     private String tailColor;
+    private String tailColorV2;
 
     private boolean mermaidV2Model;
 
@@ -53,6 +58,7 @@ public class MermaidSettings implements Component<EntityStore> {
 
         this.mermaidTail = "MermaidV2";
         this.tailColor = "MermaidPlayerGrayscale";
+        this.tailColorV2 = "MermaidTextureV2";
 
         this.mermaidV2Model = false;
 
@@ -65,6 +71,7 @@ public class MermaidSettings implements Component<EntityStore> {
 
         this.mermaidTail = other.mermaidTail;
         this.tailColor = other.tailColor;
+        this.tailColorV2 = other.tailColorV2;
 
         this.mermaidV2Model = other.mermaidV2Model;
 
@@ -107,6 +114,14 @@ public class MermaidSettings implements Component<EntityStore> {
 
     public void setTailColor(String tailColor) {
         this.tailColor = tailColor;
+    }
+
+    public String getTailColorV2() {
+        return tailColorV2;
+    }
+
+    public void setTailColorV2(String tailColor) {
+        this.tailColorV2 = tailColor;
     }
 
     public boolean ifUseMermaidV2(){

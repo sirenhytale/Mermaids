@@ -34,12 +34,21 @@ public class MermaidV2UIPage extends InteractiveCustomUIPage<MermaidV2UIPage.Mer
                         (MermaidSelectData merData, String mTail) -> merData.mermaidTail = mTail,
                         (MermaidSelectData merData) -> merData.mermaidTail)
                 .add()
+                .append(new KeyedCodec<>("@TailColor", Codec.STRING),
+                        (MermaidSelectData merData, String tColor) -> merData.tailColor = tColor,
+                        (MermaidSelectData merData) -> merData.tailColor)
+                .add()
                 .build();
 
         private String mermaidTail = "ModelTail";
+        private String tailColor = "TailColor";
 
         public String getMermaidTail(){
             return mermaidTail;
+        }
+
+        public String getTailColor() {
+            return tailColor;
         }
     }
 
@@ -53,6 +62,9 @@ public class MermaidV2UIPage extends InteractiveCustomUIPage<MermaidV2UIPage.Mer
 
         event.addEventBinding(CustomUIEventBindingType.Activating, "#MermaidV2Button", new EventData().append("@MermaidTail", "#MermaidV2.Value"));
         event.addEventBinding(CustomUIEventBindingType.Activating, "#OriginalMermaidBigFinButton", new EventData().append("@MermaidTail", "#MermaidBigFinPlayer.Value"));
+
+        event.addEventBinding(CustomUIEventBindingType.Activating, "#OrangeTailColorButton", new EventData().append("@TailColor", "#OrangeTailColor.Value"));
+        event.addEventBinding(CustomUIEventBindingType.Activating, "#PinkTailColorButton", new EventData().append("@TailColor", "#PinkTailColor.Value"));
     }
 
     @Override
@@ -60,6 +72,7 @@ public class MermaidV2UIPage extends InteractiveCustomUIPage<MermaidV2UIPage.Mer
         Player player = store.getComponent(ref, Player.getComponentType());
 
         String mermaidTail = data.getMermaidTail();
+        String tailColor = data.getTailColor();
 
         MermaidComponent mermaid = store.getComponent(ref, Mermaids.get().getMermaidComponentType());
         MermaidSettings mermaidSettings = store.getComponent(ref, Mermaids.get().getMermaidSetingsComponentType());
@@ -88,9 +101,35 @@ public class MermaidV2UIPage extends InteractiveCustomUIPage<MermaidV2UIPage.Mer
                     ModelHelper.applySkin(Model.createUnitScaleModel(modelAsset), mermaid.getMermaidSkin().clone(), ref, mermaid, mermaidSettings);
                 }
             }
+        }else if(!tailColor.equals("TailColor")){
+            String oldTailColor = mermaidSettings.getTailColor();
+
+            mermaidSettings.setTailColorV2(tailColor);
+
+            String msgTailColor = "ERROR GETTING COLOR";
+            if (tailColor.equals("MermaidTextureV2")) {
+                msgTailColor = "Orange";
+            } else if (tailColor.equals("MermaidV2Texture_PINK")) {
+                msgTailColor = "Pink";
+            }
+
+            player.sendMessage(Message.raw("You have selected the " + msgTailColor + " tail color."));
+            Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " has switched the Mermaid tail color to " + msgTailColor + ".");
+
+            String activeMermaidTail = mermaidSettings.getMermaidTail();
+
+            if (!oldTailColor.equals(tailColor) && mermaid.isMermaid()) {
+                ModelAsset modelAsset = ModelAsset.getAssetMap().getAsset(activeMermaidTail);
+                if (modelAsset == null) {
+                    player.sendMessage(Message.raw("Mermaids: Error: MermaidUIPage: " + activeMermaidTail + " Model not found"));
+                    Mermaids.LOGGER.atSevere().log(player.getDisplayName() + " had an error of getting the Mermaid Model. Error: MermaidUIPage: " + activeMermaidTail + " Model not found.");
+                } else {
+                    ModelHelper.applySkin(Model.createUnitScaleModel(modelAsset), mermaid.getMermaidSkin().clone(), ref, mermaid, mermaidSettings);
+                }
+            }
         }else{
-            player.sendMessage(Message.raw("Mermaids: Error: MermaidV2UIPage: Failed to get Mermaid Model"));
-            Mermaids.LOGGER.atSevere().log(player.getDisplayName() + " had an error of getting the Mermaid Model. Error: MermaidV2UIPage: Failed to get Mermaid Model.");
+            player.sendMessage(Message.raw("Mermaids: Error: MermaidV2UIPage: Failed to get Mermaid Model and/or Tail color"));
+            Mermaids.LOGGER.atSevere().log(player.getDisplayName() + " had an error of getting the Mermaid Model. Error: MermaidV2UIPage: Failed to get Mermaid Model and/or Tail color.");
         }
 
         player.getPageManager().setPage(ref, store, Page.None);
