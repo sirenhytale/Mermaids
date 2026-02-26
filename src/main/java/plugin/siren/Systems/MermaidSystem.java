@@ -87,11 +87,24 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
 
                                     Boolean h2o = false;
                                     if (footBlockId.equals("Alchemy_Cauldron_Big")) {//footBlockId == 24){//Large Cauldron
-                                        mermaid.setH2OBlock(true);
+                                        if(!mermaid.getH2OBlock().get()) {
+                                            mermaid.setH2OBlock(true);
+                                        }
+
+                                        h2o = true;
+                                    }
+                                    if (footBlockId.equals("Alchemy_Cauldron")) {//footBlockId == 24){//Large Cauldron
+                                        if(!mermaid.getH2OBlock().get()) {
+                                            mermaid.setH2OBlock(true);
+                                        }
+
                                         h2o = true;
                                     }
                                     if (footBlockId.equals("Soil_Mud")) {//footBlockId == 563 || footBlockId == 564){//Soil Mud
-                                        mermaid.setH2OBlock(true);
+                                        if(!mermaid.getH2OBlock().get()) {
+                                            mermaid.setH2OBlock(true);
+                                        }
+
                                         h2o = true;
                                     }
                                     if (!h2o && mermaid.getH2OBlock().get()) {
@@ -126,7 +139,9 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                                                         weatherNaturalId.equalsIgnoreCase("zone3_rain") || //Zone3
                                                         weatherNaturalId.equalsIgnoreCase("zone4_wastes_rain") || weatherNaturalId.equalsIgnoreCase("zone4_wastes_rain_heavy") || //Zone4
                                                         weatherNaturalId.equalsIgnoreCase("skylands_rapid_marsh_stormy")) /* Misc */ {
-                                                    mermaid.setRainTransform(true);
+                                                    if(!mermaid.getRainTransform().get()){
+                                                        mermaid.setRainTransform(true);
+                                                    }
                                                     raining = true;
                                                 }
                                                 if (weatherForcedId.equalsIgnoreCase("zone1_rain") || weatherForcedId.equalsIgnoreCase("zone1_swamp_rain") || //Zone 1
@@ -135,18 +150,24 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                                                         weatherForcedId.equalsIgnoreCase("zone3_rain") || //Zone3
                                                         weatherForcedId.equalsIgnoreCase("zone4_wastes_rain") || weatherForcedId.equalsIgnoreCase("zone4_wastes_rain_heavy") || //Zone4
                                                         weatherForcedId.equalsIgnoreCase("skylands_rapid_marsh_stormy")) /* Misc */ {
-                                                    mermaid.setRainTransform(true);
+                                                    if(!mermaid.getRainTransform().get()){
+                                                        mermaid.setRainTransform(true);
+                                                    }
                                                     raining = true;
                                                 }
 
                                                 if (weatherNaturalId.equalsIgnoreCase("zone3_snow") || weatherNaturalId.equalsIgnoreCase("zone3_snow_storm") ||//Zone3
                                                         weatherNaturalId.equalsIgnoreCase("zone3_snow_heavy")) {
-                                                    mermaid.setRainTransform(true);
+                                                    if(!mermaid.getRainTransform().get()){
+                                                        mermaid.setRainTransform(true);
+                                                    }
                                                     raining = true;
                                                 }
                                                 if (weatherForcedId.equalsIgnoreCase("zone3_snow") || weatherForcedId.equalsIgnoreCase("zone3_snow_storm") ||//Zone3
                                                         weatherForcedId.equalsIgnoreCase("zone3_snow_heavy")) {
-                                                    mermaid.setRainTransform(true);
+                                                    if(!mermaid.getRainTransform().get()){
+                                                        mermaid.setRainTransform(true);
+                                                    }
                                                     raining = true;
                                                 }
                                             }
@@ -156,6 +177,17 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                                     if (!raining && mermaid.getRainTransform().get()) {
                                         mermaid.setRainTransform(false);
                                     }
+                                }
+
+                                int footFluidId = world.getFluidId((int)Math.floor(pos.getX()), (int)Math.floor(pos.getY()), (int)Math.floor(pos.getZ()));
+                                int bodyFluidID = 0;//world.getFluidId((int)Math.floor(pos.getX()), (int)Math.floor(pos.getY())+1, (int)Math.floor(pos.getZ()));
+                                int belowFluidID = 0;//world.getFluidId((int)Math.floor(pos.getX()), (int)Math.floor(pos.getY())-1, (int)Math.floor(pos.getZ()));
+                                if(footFluidId > 0 || bodyFluidID > 0 || belowFluidID > 0){
+                                    mermaid.setInFluidBlock(true);
+                                }
+
+                                if(footFluidId == 0 && bodyFluidID == 0 && belowFluidID == 0 && mermaid.isInFluidBlock()){
+                                    mermaid.setInFluidBlock(false);
                                 }
                             }
                         }
@@ -175,12 +207,14 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
 
             boolean movementStatesTransform = movementState.getMovementStates().swimming || movementState.getMovementStates().swimJumping || movementState.getMovementStates().inFluid;
             boolean h2OorRain = mermaid.getH2OBlock().get() || mermaid.getRainTransform().get();
+            boolean inFluidBlock = mermaid.isInFluidBlock();
+
             boolean permMerPotion = (transformationMode == 0 || transformationMode == 1) && mermaidSettings.ifPermanentPotion();
             boolean mermaidPotionEffect = mermaid.isPotionEffectTransformation();
             boolean mermaidOnLand = Mermaids.getConfig().get().getMermaidOnLand();
 
             //Checks to see if in water / other transformation methods
-            if ((((movementStatesTransform || h2OorRain) && (transModeZero || (permMerPotion))) || mermaidPotionEffect || (mermaidOnLand && (transModeZero || permMerPotion))) && toggleMermaid && transformPermission) {
+            if ((((movementStatesTransform || h2OorRain || inFluidBlock) && (transModeZero || (permMerPotion))) || mermaidPotionEffect || (mermaidOnLand && (transModeZero || permMerPotion))) && toggleMermaid && transformPermission) {
 
                 if (!mermaid.isUnderwater()) {
                     mermaid.setUnderwater(true);
@@ -197,6 +231,14 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
 
                 if(mermaid.getPotionElapsedTime() > 0){
                     mermaid.decrementPotionTick();
+                }
+
+                if(!mermaid.isMermaid() && mermaid.getElapsedTime() < 35f){
+                    EntityStatMap statMapComponent = commandBuffer.getComponent(ref, EntityStatMap.getComponentType());
+                    float stamina = statMapComponent.get(DefaultEntityStatTypes.getStamina()).get();
+                    if(!(stamina <= statMapComponent.get(DefaultEntityStatTypes.getStamina()).getMax() + 0.5 || stamina >= statMapComponent.get(DefaultEntityStatTypes.getStamina()).getMax() - 0.5)){
+                        mermaid.setPreviousStamina(stamina);
+                    }
                 }
 
                 //Began transformation into Mermaid
@@ -266,6 +308,7 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                 if (mermaid.getElapsedTime() >= 15f) {
                     mermaid.setDrying(false);
                     mermaid.setElapsedTime(0f);
+                    mermaid.setPreviousStamina(100f);
 
                     if (Mermaids.ifDebug()) {
                         player.sendMessage(Message.raw("Updating stats for player transformation"));
@@ -372,6 +415,12 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
 
                     mermaid.setMermaid(false);
                 }
+            }else{
+                EntityStatMap statMapComponent = commandBuffer.getComponent(ref, EntityStatMap.getComponentType());
+                float stamina = statMapComponent.get(DefaultEntityStatTypes.getStamina()).get();
+                if(!(stamina <= statMapComponent.get(DefaultEntityStatTypes.getStamina()).getMax() + 0.5 || stamina >= statMapComponent.get(DefaultEntityStatTypes.getStamina()).getMax() - 0.5)){
+                    mermaid.setPreviousStamina(stamina);
+                }
             }
 
             if (mermaid.isMermaid() && mermaidSettings.getToggleMermaid() && transformPermission) {
@@ -431,11 +480,23 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
 
                     //HudManager playerHud = player.getHudManager();
                     //playerHud.hideHudComponents(playerRef, HudComponent.Oxygen);
+
+                    float stamina = statMapComponent.get(DefaultEntityStatTypes.getStamina()).get();
+                    if(movementState.getMovementStates().sprinting) {
+                        float newStamina = ((stamina + mermaid.getPreviousStamina()) / 2f);
+
+                        statMapComponent.setStatValue(DefaultEntityStatTypes.getStamina(), newStamina);
+                        mermaid.setPreviousStamina(stamina);
+                    }else{
+                        if(stamina != mermaid.getPreviousStamina()){
+                            mermaid.setPreviousStamina(stamina);
+                        }
+                    }
                 }
 
                 mermaid.decrementArmorTick();
                 if(mermaid.getArmorElapsedTime() < 0){
-                    mermaid.setArmorElapsedTime(60f);
+                    mermaid.setArmorElapsedTime(35f);
 
                     List<PlayerRef> playersList = Universe.get().getPlayers();
                     for(int i = 0; i < playersList.size(); i++) {

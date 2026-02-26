@@ -10,7 +10,9 @@ import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import com.hypixel.hytale.server.core.util.Config;
+import plugin.siren.Commands.MermaidCmd;
 import plugin.siren.Commands.MermaidsCmd;
+import plugin.siren.Contributions.al3x.HStats;
 import plugin.siren.Events.Interactions.*;
 import plugin.siren.Events.PlayerReadyEventM;
 import plugin.siren.Systems.MermaidComponent;
@@ -21,7 +23,7 @@ import plugin.siren.Utils.Config.MermaidsConfig;
 import javax.annotation.Nonnull;
 
 public class Mermaids extends JavaPlugin {
-    private static final String VERSION = "Alpha 2.0.0-2026.02.22";
+    private static final String VERSION = "Alpha 2.0.0-2026.02.25";
     private static final boolean DEBUG = false;
 
     private static Mermaids plugin;
@@ -36,6 +38,8 @@ public class Mermaids extends JavaPlugin {
 
         plugin = this;
         this.config = this.withConfig("Mermaids", MermaidsConfig.CODEC);
+
+        new HStats("8aab16df-13b6-429e-9568-9b80effacdc8", VERSION);
     }
 
     @Override
@@ -55,6 +59,13 @@ public class Mermaids extends JavaPlugin {
             LOGGER.atInfo().log("Registered Mermaids Command.");
         }else{
             LOGGER.atSevere().log("Failed to register Mermaids Command.");
+        }
+
+        CommandRegistration mermaidCmdRegistration = this.getCommandRegistry().registerCommand(new MermaidCmd());
+        if(mermaidCmdRegistration != null && mermaidCmdRegistration.isRegistered()) {
+            LOGGER.atInfo().log("Registered Mermaid Command.");
+        }else{
+            LOGGER.atSevere().log("Failed to register Mermaid Command.");
         }
 
         this.mermaidComponent = this.getEntityStoreRegistry().registerComponent(MermaidComponent.class, MermaidComponent::new);

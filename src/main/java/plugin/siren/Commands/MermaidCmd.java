@@ -1,0 +1,59 @@
+package plugin.siren.Commands;
+
+import com.hypixel.hytale.component.Ref;
+import com.hypixel.hytale.component.Store;
+import com.hypixel.hytale.protocol.GameMode;
+import com.hypixel.hytale.server.core.command.system.CommandContext;
+import com.hypixel.hytale.server.core.command.system.basecommands.AbstractPlayerCommand;
+import com.hypixel.hytale.server.core.entity.entities.Player;
+import com.hypixel.hytale.server.core.universe.PlayerRef;
+import com.hypixel.hytale.server.core.universe.world.World;
+import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import plugin.siren.Mermaids;
+import plugin.siren.Systems.MermaidSettings;
+import plugin.siren.Utils.UI.MermaidUIPage;
+import plugin.siren.Utils.UI.MermaidV2UIPage;
+
+import javax.annotation.Nonnull;
+
+public class MermaidCmd extends AbstractPlayerCommand {
+    public MermaidCmd() {
+        super("mermaid", "Opens the Mermaids plugin UI.");
+
+        if(Mermaids.getConfig().get().getRequireUIPermission()) {
+            this.requirePermission("mermaids.ui");
+            this.setPermissionGroup(GameMode.Creative);
+        }else{
+            this.setPermissionGroup(GameMode.Adventure);
+        }
+    }
+
+    @Override
+    protected void execute(@Nonnull CommandContext commandContext, @Nonnull Store<EntityStore> store, @Nonnull Ref<EntityStore> ref, @Nonnull PlayerRef playerRef, @Nonnull World world) {
+        world.execute(() -> {
+            Player player = store.getComponent(ref, Player.getComponentType());
+
+            if(player == null){
+                Mermaids.LOGGER.atFine().log(player.getDisplayName() + " had an error of getting the Player Component. MermaidsUI");
+            }else{
+                MermaidSettings mermaidSettings = store.getComponent(ref, Mermaids.get().getMermaidSetingsComponentType());
+
+                if(mermaidSettings == null){
+                    Mermaids.LOGGER.atFine().log(player.getDisplayName() + " had an error of getting the Mermaid Settings Component. MermaidsUI");
+                }else{
+                    if(mermaidSettings.getMermaidTail().equals("MermaidV2")){
+                        MermaidV2UIPage merPage = new MermaidV2UIPage(playerRef);
+                        player.getPageManager().openCustomPage(ref, store, merPage);
+                    }else{
+                        MermaidUIPage merPage = new MermaidUIPage(playerRef);
+                        player.getPageManager().openCustomPage(ref, store, merPage);
+                    }
+
+                    if(Mermaids.ifDebug()){
+                        Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " opened the Mermaids UI.");
+                    }
+                }
+            }
+        });
+    }
+}

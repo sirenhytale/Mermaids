@@ -19,12 +19,14 @@ public class MermaidComponent implements Component<EntityStore> {
     private AtomicBoolean h2oBlock;
     private AtomicBoolean rainTransform;
     private AtomicBoolean potionEffect;
+    private AtomicBoolean inFluidBlock;
 
     private PlayerSkin skin;
     private MovementManager movementManager;
     private PlayerSkinComponent playerSkinComponent;
     private ModelComponent modelComponent;
 
+    private float previousStamina;
     private float elapsedTime;
     private float armorElapsedTime;
     private float potionElapsedTime;
@@ -42,9 +44,11 @@ public class MermaidComponent implements Component<EntityStore> {
         this.h2oBlock = new AtomicBoolean(false);
         this.rainTransform = new AtomicBoolean(false);
         this.potionEffect = new AtomicBoolean(false);
+        this.inFluidBlock = new AtomicBoolean(false);
 
         this.skin = skin;
 
+        this.previousStamina = 100f;
         this.elapsedTime = 0f;
         this.armorElapsedTime = 0f;
         this.potionElapsedTime = 0f;
@@ -59,12 +63,14 @@ public class MermaidComponent implements Component<EntityStore> {
         this.h2oBlock = other.h2oBlock;
         this.rainTransform = other.rainTransform;
         this.potionEffect = other.potionEffect;
+        this.inFluidBlock = other.inFluidBlock;
 
         this.skin = other.skin;
         this.movementManager = other.movementManager;
         this.playerSkinComponent = other.playerSkinComponent;
         this.modelComponent = other.modelComponent;
 
+        this.previousStamina = other.previousStamina;
         this.elapsedTime = other.elapsedTime;
         this.armorElapsedTime = other.armorElapsedTime;
         this.potionElapsedTime = other.potionElapsedTime;
@@ -125,6 +131,14 @@ public class MermaidComponent implements Component<EntityStore> {
         this.potionEffect.set(potion);
     }
 
+    public boolean isInFluidBlock(){
+        return inFluidBlock.get();
+    }
+
+    public void setInFluidBlock(boolean fluidBlock){
+        this.inFluidBlock.set(fluidBlock);
+    }
+
     public PlayerSkin getMermaidSkin(){
         PlayerSkin mermaidSkin = skin.clone();
 
@@ -167,6 +181,14 @@ public class MermaidComponent implements Component<EntityStore> {
 
     public void setModelComponent(ModelComponent modelComponent){
         this.modelComponent = modelComponent;
+    }
+
+    public float getPreviousStamina(){
+        return this.previousStamina;
+    }
+
+    public void setPreviousStamina(float stamina){
+        this.previousStamina = stamina;
     }
 
     public float getElapsedTime(){
