@@ -347,66 +347,68 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                         if(tempPlayerRef == null || !tempPlayerRef.isValid()){
                             Mermaids.LOGGER.atFine().log("Failed to get temp player reference : MermaidSystem [hide armor]");
                         }else {
-                            Ref<EntityStore> tempRef = tempPlayerRef.getReference();
+                            if(playerRef.getWorldUuid() == tempPlayerRef.getWorldUuid()) {
+                                Ref<EntityStore> tempRef = tempPlayerRef.getReference();
 
-                            if(tempRef == null || !tempRef.isValid()){
-                                Mermaids.LOGGER.atFine().log("Failed to get temp reference : MermaidSystem [hide armor]");
-                            }else {
-                                EntityTrackerSystems.EntityViewer entityViewer = commandBuffer.getComponent(tempRef, EntityTrackerSystems.EntityViewer.getComponentType());
-                                if (entityViewer == null) {
-                                    player.sendMessage(Message.raw("Mermaids: Error: WaterSystem: EntityViewer Component[tempRef] == null [hide armor]"));
+                                if (tempRef == null || !tempRef.isValid()) {
+                                    Mermaids.LOGGER.atFine().log("Failed to get temp reference : MermaidSystem [hide armor]");
                                 } else {
-                                    NetworkId networkId = commandBuffer.getComponent(ref, NetworkId.getComponentType());
-                                    if (networkId == null) {
-                                        player.sendMessage(Message.raw("Mermaids: Error: WaterSystem: NetworkID Component == null [hide armor]"));
+                                    EntityTrackerSystems.EntityViewer entityViewer = commandBuffer.getComponent(tempRef, EntityTrackerSystems.EntityViewer.getComponentType());
+                                    if (entityViewer == null) {
+                                        player.sendMessage(Message.raw("Mermaids: Error: WaterSystem: EntityViewer Component[tempRef] == null [hide armor]"));
                                     } else {
-                                        EntityUpdate entityUpdate = new EntityUpdate();
-                                        entityUpdate.networkId = networkId.getId();
+                                        NetworkId networkId = commandBuffer.getComponent(ref, NetworkId.getComponentType());
+                                        if (networkId == null) {
+                                            player.sendMessage(Message.raw("Mermaids: Error: WaterSystem: NetworkID Component == null [hide armor]"));
+                                        } else {
+                                            EntityUpdate entityUpdate = new EntityUpdate();
+                                            entityUpdate.networkId = networkId.getId();
 
-                                        ObjectArrayList<ComponentUpdate> updateList = new ObjectArrayList<>();
+                                            ObjectArrayList<ComponentUpdate> updateList = new ObjectArrayList<>();
 
-                                        EquipmentUpdate update = new EquipmentUpdate();
+                                            EquipmentUpdate update = new EquipmentUpdate();
 
-                                        Inventory inventory = player.getInventory();
+                                            Inventory inventory = player.getInventory();
 
-                                        ItemContainer armor = inventory.getArmor();
-                                        update.armorIds = new String[armor.getCapacity()];
-                                        Arrays.fill(update.armorIds, "");
-                                        armor.forEachWithMeta((slot, itemStack, armorIds) -> armorIds[slot] = itemStack.getItemId(), update.armorIds);
+                                            ItemContainer armor = inventory.getArmor();
+                                            update.armorIds = new String[armor.getCapacity()];
+                                            Arrays.fill(update.armorIds, "");
+                                            armor.forEachWithMeta((slot, itemStack, armorIds) -> armorIds[slot] = itemStack.getItemId(), update.armorIds);
 
-                                        PlayerSettings playerSettings = commandBuffer.getComponent(ref, PlayerSettings.getComponentType());
-                                        if (playerSettings != null) {
-                                            PlayerConfig.ArmorVisibilityOption armorVisibilityOption = commandBuffer.getExternalData()//store.getExternalData()
-                                                    .getWorld()
-                                                    .getGameplayConfig()
-                                                    .getPlayerConfig()
-                                                    .getArmorVisibilityOption();
-                                            if (playerSettings.hideHelmet()) {
-                                                update.armorIds[ItemArmorSlot.Head.ordinal()] = "";
+                                            PlayerSettings playerSettings = commandBuffer.getComponent(ref, PlayerSettings.getComponentType());
+                                            if (playerSettings != null) {
+                                                PlayerConfig.ArmorVisibilityOption armorVisibilityOption = commandBuffer.getExternalData()//store.getExternalData()
+                                                        .getWorld()
+                                                        .getGameplayConfig()
+                                                        .getPlayerConfig()
+                                                        .getArmorVisibilityOption();
+                                                if (playerSettings.hideHelmet()) {
+                                                    update.armorIds[ItemArmorSlot.Head.ordinal()] = "";
+                                                }
+
+                                                if (armorVisibilityOption.canHideCuirass() && playerSettings.hideCuirass()) {
+                                                    update.armorIds[ItemArmorSlot.Chest.ordinal()] = "";
+                                                }
+
+                                                if (armorVisibilityOption.canHideGauntlets() && playerSettings.hideGauntlets()) {
+                                                    update.armorIds[ItemArmorSlot.Hands.ordinal()] = "";
+                                                }
+
+                                                if (armorVisibilityOption.canHidePants() && playerSettings.hidePants()) {
+                                                    update.armorIds[ItemArmorSlot.Legs.ordinal()] = "";
+                                                }
                                             }
 
-                                            if (armorVisibilityOption.canHideCuirass() && playerSettings.hideCuirass()) {
-                                                update.armorIds[ItemArmorSlot.Chest.ordinal()] = "";
-                                            }
+                                            ItemStack itemInHand = inventory.getItemInHand();
+                                            update.rightHandItemId = itemInHand != null ? itemInHand.getItemId() : "Empty";
+                                            ItemStack utilityItem = inventory.getUtilityItem();
+                                            update.leftHandItemId = utilityItem != null ? utilityItem.getItemId() : "Empty";
 
-                                            if (armorVisibilityOption.canHideGauntlets() && playerSettings.hideGauntlets()) {
-                                                update.armorIds[ItemArmorSlot.Hands.ordinal()] = "";
-                                            }
+                                            updateList.add(update);
 
-                                            if (armorVisibilityOption.canHidePants() && playerSettings.hidePants()) {
-                                                update.armorIds[ItemArmorSlot.Legs.ordinal()] = "";
-                                            }
+                                            entityUpdate.updates = updateList.toArray(ComponentUpdate[]::new);
+                                            entityViewer.packetReceiver.writeNoCache(new EntityUpdates(null, new EntityUpdate[]{entityUpdate}));
                                         }
-
-                                        ItemStack itemInHand = inventory.getItemInHand();
-                                        update.rightHandItemId = itemInHand != null ? itemInHand.getItemId() : "Empty";
-                                        ItemStack utilityItem = inventory.getUtilityItem();
-                                        update.leftHandItemId = utilityItem != null ? utilityItem.getItemId() : "Empty";
-
-                                        updateList.add(update);
-
-                                        entityUpdate.updates = updateList.toArray(ComponentUpdate[]::new);
-                                        entityViewer.packetReceiver.writeNoCache(new EntityUpdates(null, new EntityUpdate[]{entityUpdate}));
                                     }
                                 }
                             }
@@ -505,64 +507,66 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                         if(tempPlayerRef == null || !tempPlayerRef.isValid()){
                             Mermaids.LOGGER.atFine().log("Failed to get temp player reference : MermaidSystem [hide armor]");
                         }else {
-                            Ref<EntityStore> tempRef = tempPlayerRef.getReference();
+                            if(playerRef.getWorldUuid() == tempPlayerRef.getWorldUuid()) {
+                                Ref<EntityStore> tempRef = tempPlayerRef.getReference();
 
-                            if(tempRef == null || !tempRef.isValid()){
-                                Mermaids.LOGGER.atFine().log("Failed to get temp reference : MermaidSystem [hide armor]");
-                            }else {
-                                EntityTrackerSystems.EntityViewer entityViewer = commandBuffer.getComponent(tempRef, EntityTrackerSystems.EntityViewer.getComponentType());
-                                if (entityViewer == null) {
-                                    player.sendMessage(Message.raw("Mermaids: Error: WaterSystem: EntityViewer Component[tempRef] == null [hide armor]"));
+                                if (tempRef == null || !tempRef.isValid()) {
+                                    Mermaids.LOGGER.atFine().log("Failed to get temp reference : MermaidSystem [hide armor]");
                                 } else {
-                                    NetworkId networkId = commandBuffer.getComponent(ref, NetworkId.getComponentType());
-                                    if (networkId == null) {
-                                        player.sendMessage(Message.raw("Mermaids: Error: WaterSystem: NetworkID Component == null [hide armor]"));
+                                    EntityTrackerSystems.EntityViewer entityViewer = commandBuffer.getComponent(tempRef, EntityTrackerSystems.EntityViewer.getComponentType());
+                                    if (entityViewer == null) {
+                                        player.sendMessage(Message.raw("Mermaids: Error: WaterSystem: EntityViewer Component[tempRef] == null [hide armor]"));
                                     } else {
-                                        EntityUpdate entityUpdate = new EntityUpdate();
-                                        entityUpdate.networkId = networkId.getId();
+                                        NetworkId networkId = commandBuffer.getComponent(ref, NetworkId.getComponentType());
+                                        if (networkId == null) {
+                                            player.sendMessage(Message.raw("Mermaids: Error: WaterSystem: NetworkID Component == null [hide armor]"));
+                                        } else {
+                                            EntityUpdate entityUpdate = new EntityUpdate();
+                                            entityUpdate.networkId = networkId.getId();
 
-                                        ObjectArrayList<ComponentUpdate> updateList = new ObjectArrayList<>();
+                                            ObjectArrayList<ComponentUpdate> updateList = new ObjectArrayList<>();
 
-                                        EquipmentUpdate update = new EquipmentUpdate();
+                                            EquipmentUpdate update = new EquipmentUpdate();
 
-                                        Inventory inventory = player.getInventory();
+                                            Inventory inventory = player.getInventory();
 
-                                        ItemContainer armor = inventory.getArmor();
-                                        update.armorIds = new String[armor.getCapacity()];
-                                        Arrays.fill(update.armorIds, "");
-                                        armor.forEachWithMeta((slot, itemStack, armorIds) -> armorIds[slot] = itemStack.getItemId(), update.armorIds);
+                                            ItemContainer armor = inventory.getArmor();
+                                            update.armorIds = new String[armor.getCapacity()];
+                                            Arrays.fill(update.armorIds, "");
+                                            armor.forEachWithMeta((slot, itemStack, armorIds) -> armorIds[slot] = itemStack.getItemId(), update.armorIds);
 
-                                        PlayerSettings playerSettings = commandBuffer.getComponent(ref, PlayerSettings.getComponentType());
-                                        if (playerSettings != null) {
-                                            PlayerConfig.ArmorVisibilityOption armorVisibilityOption = store.getExternalData()
-                                                    .getWorld()
-                                                    .getGameplayConfig()
-                                                    .getPlayerConfig()
-                                                    .getArmorVisibilityOption();
-                                            if (armorVisibilityOption.canHideHelmet() && playerSettings.hideHelmet()) {
-                                                update.armorIds[ItemArmorSlot.Head.ordinal()] = "";
+                                            PlayerSettings playerSettings = commandBuffer.getComponent(ref, PlayerSettings.getComponentType());
+                                            if (playerSettings != null) {
+                                                PlayerConfig.ArmorVisibilityOption armorVisibilityOption = store.getExternalData()
+                                                        .getWorld()
+                                                        .getGameplayConfig()
+                                                        .getPlayerConfig()
+                                                        .getArmorVisibilityOption();
+                                                if (armorVisibilityOption.canHideHelmet() && playerSettings.hideHelmet()) {
+                                                    update.armorIds[ItemArmorSlot.Head.ordinal()] = "";
+                                                }
+
+                                                if (armorVisibilityOption.canHideCuirass() && playerSettings.hideCuirass()) {
+                                                    update.armorIds[ItemArmorSlot.Chest.ordinal()] = "";
+                                                }
+
+                                                if (armorVisibilityOption.canHideGauntlets() && playerSettings.hideGauntlets()) {
+                                                    update.armorIds[ItemArmorSlot.Hands.ordinal()] = "";
+                                                }
+
+                                                update.armorIds[ItemArmorSlot.Legs.ordinal()] = "";
                                             }
 
-                                            if (armorVisibilityOption.canHideCuirass() && playerSettings.hideCuirass()) {
-                                                update.armorIds[ItemArmorSlot.Chest.ordinal()] = "";
-                                            }
+                                            ItemStack itemInHand = inventory.getItemInHand();
+                                            update.rightHandItemId = itemInHand != null ? itemInHand.getItemId() : "Empty";
+                                            ItemStack utilityItem = inventory.getUtilityItem();
+                                            update.leftHandItemId = utilityItem != null ? utilityItem.getItemId() : "Empty";
 
-                                            if (armorVisibilityOption.canHideGauntlets() && playerSettings.hideGauntlets()) {
-                                                update.armorIds[ItemArmorSlot.Hands.ordinal()] = "";
-                                            }
+                                            updateList.add(update);
 
-                                            update.armorIds[ItemArmorSlot.Legs.ordinal()] = "";
+                                            entityUpdate.updates = updateList.toArray(ComponentUpdate[]::new);
+                                            entityViewer.packetReceiver.writeNoCache(new EntityUpdates(null, new EntityUpdate[]{entityUpdate}));
                                         }
-
-                                        ItemStack itemInHand = inventory.getItemInHand();
-                                        update.rightHandItemId = itemInHand != null ? itemInHand.getItemId() : "Empty";
-                                        ItemStack utilityItem = inventory.getUtilityItem();
-                                        update.leftHandItemId = utilityItem != null ? utilityItem.getItemId() : "Empty";
-
-                                        updateList.add(update);
-
-                                        entityUpdate.updates = updateList.toArray(ComponentUpdate[]::new);
-                                        entityViewer.packetReceiver.writeNoCache(new EntityUpdates(null, new EntityUpdate[]{entityUpdate}));
                                     }
                                 }
                             }
