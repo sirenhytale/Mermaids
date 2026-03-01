@@ -28,6 +28,10 @@ public class MermaidsConfig {
                     (merConfig, wStr, extraInfo) -> merConfig.Website = wStr, // Setter
                     (merConfig, extraInfo) -> merConfig.Website)                    // Getter
             .add()
+            .append(new KeyedCodec<String>("Download-Site", Codec.STRING),
+                    (merConfig, dsStr, extraInfo) -> merConfig.DownloadSite = dsStr, // Setter
+                    (merConfig, extraInfo) -> merConfig.DownloadSite)                    // Getter
+            .add()
             .append(new KeyedCodec<Integer>("Transformation-Mode", Codec.INTEGER),
                     (merConfig, tmInt, extraInfo) -> merConfig.TransformationMode = tmInt, // Setter
                     (merConfig, extraInfo) -> merConfig.TransformationMode)                    // Getter
@@ -70,12 +74,13 @@ public class MermaidsConfig {
             .add()
             .build();
 
-    private String Information = "Confused about what one of these statement do? Check out the Mermaids page on the Curseforge website and scroll down to Config Extra Info.";
-    private final int ConfigVersionDefault = 6;
+    private String Information = "Confused about what one of these statement do? Go to https://mermaids.dev/mermaids/config/ or check out the Mermaids page on the Curseforge website and scroll down to Config Extra Info.";
+    private final int ConfigVersionDefault = 7;
     private int ConfigVersion = ConfigVersionDefault;
     private String PluginName = "Mermaids";
     private String Version = Mermaids.getVersion();
-    private String Website = "https://www.curseforge.com/hytale/mods/mermaids";
+    private String Website = "https://mermaids.dev/mermaids/";
+    private String DownloadSite = "https://www.curseforge.com/hytale/mods/mermaids";
     private int TransformationMode = 0;
     private String TransModeDesc = "TransformationMode = 0 : Transform when entering water, TransformationMode = 1 : Requires user to drink Mermaid Potion to Transform";
     private boolean MermaidOnLand = false;
