@@ -23,7 +23,8 @@ import plugin.siren.Utils.Config.MermaidsConfig;
 import javax.annotation.Nonnull;
 
 public class Mermaids extends JavaPlugin {
-    private static final String VERSION = "Alpha 2.0.0-2026.02.25";
+    private static final boolean v1 = true;
+    private static final String VERSION = "1.3.10";//"Alpha 2.0.0-2026.03.01";
     private static final boolean DEBUG = false;
 
     private static Mermaids plugin;
@@ -75,11 +76,20 @@ public class Mermaids extends JavaPlugin {
             LOGGER.atInfo().log("Failed to register Mermaid Component.");
         }
 
-        this.mermaidSettingsComponent = this.getEntityStoreRegistry().registerComponent(MermaidSettings.class, "MermaidSettings", MermaidSettings.CODEC);
-        if(this.mermaidSettingsComponent != null) {
-            LOGGER.atInfo().log("Registered Mermaid Settings Component.");
-        }else{
-            LOGGER.atInfo().log("Failed to register Mermaid Settings Component.");
+        if(ifVersion1()){
+            this.mermaidSettingsComponent = this.getEntityStoreRegistry().registerComponent(MermaidSettings.class, "MermaidSettings", MermaidSettings.CODECV1);
+            if(this.mermaidSettingsComponent != null) {
+                LOGGER.atInfo().log("Registered Mermaid Settings Component.");
+            }else{
+                LOGGER.atInfo().log("Failed to register Mermaid Settings Component.");
+            }
+        }else {
+            this.mermaidSettingsComponent = this.getEntityStoreRegistry().registerComponent(MermaidSettings.class, "MermaidSettings", MermaidSettings.CODEC);
+            if (this.mermaidSettingsComponent != null) {
+                LOGGER.atInfo().log("Registered Mermaid Settings Component.");
+            } else {
+                LOGGER.atInfo().log("Failed to register Mermaid Settings Component.");
+            }
         }
 
         this.getEntityStoreRegistry().registerSystem(new MermaidSystem(this.mermaidComponent, this.mermaidSettingsComponent));
@@ -93,21 +103,17 @@ public class Mermaids extends JavaPlugin {
 
         config.save();
         LOGGER.atInfo().log("Loaded config settings.");
-        boolean configUpdated = false;
-        if(config.get().getConfigVersionDefault() > config.get().getConfigVersion()){
-            configUpdated = true;
-            config.get().setConfigVersion(config.get().getConfigVersionDefault());
-        }
-        if(!config.get().getPluginVersion().equalsIgnoreCase(VERSION)){
-            configUpdated = true;
-            config.get().setPluginVersion(VERSION);
-        }
+        boolean configUpdated = config.get().ifConfigUpdate();
         if(configUpdated){
             config.save();
             LOGGER.atInfo().log("Updated config to latest version.");
         }
 
         LOGGER.atInfo().log("Version " + VERSION + " of Mermaids has successfully loaded.");
+        if(!ifVersion1()){
+            LOGGER.atInfo().log("= =- -=- -=- -=- -=- -=- -=- -=- -= =");
+            LOGGER.atInfo().log("Loaded Mermaids in Alpha state.");
+        }
         if(ifDebug()){
             LOGGER.atInfo().log("= =- -=- -=- -=- -=- -=- -=- -=- -= =");
             LOGGER.atInfo().log("Loaded Mermaids in Debug mode.");
@@ -147,5 +153,9 @@ public class Mermaids extends JavaPlugin {
     public static boolean ifDebug(){
         boolean showDebug = plugin.DEBUG || plugin.config.get().ifDebugMode();
         return showDebug;
+    }
+
+    public static boolean ifVersion1(){
+        return v1;
     }
 }

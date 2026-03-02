@@ -1,8 +1,8 @@
 {
   "Parent": "Potion_Template",
   "TranslationProperties": {
-    "Name": "items.Potion_Mermaid_Transformation_Small.name",
-    "Description": "items.Potion_Mermaid_Transformation_Small.description"
+    "Name": "server.items.Potion_Mermaid_Transformation_Small.name",
+    "Description": "server.items.Potion_Mermaid_Transformation_Small.description"
   },
   "Icon": "Icons/ItemsGenerated/Potion_Regen_Health_Small.png",
   "IconProperties": {

@@ -1,8 +1,8 @@
 {
   "Parent": "Potion_Mermaid_Small",
   "TranslationProperties": {
-    "Name": "items.Potion_Mermaid_Transformation_Large.name",
-    "Description": "items.Potion_Mermaid_Transformation_Large.description"
+    "Name": "server.items.Potion_Mermaid_Transformation_Large.name",
+    "Description": "server.items.Potion_Mermaid_Transformation_Large.description"
   },
   "Icon": "Icons/ItemsGenerated/Potion_Regen_Health_Large.png",
   "InteractionVars": {
@@ -51,6 +51,10 @@
       {
         "ItemId": "Ingredient_Water_Essence",
         "Quantity": 7
+      },
+      {
+        "ItemId": "Ingredient_Ice_Essence",
+        "Quantity": 2
       },
       {
         "ItemId": "Food_Fish_Raw",

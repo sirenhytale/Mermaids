@@ -10,6 +10,29 @@ import javax.annotation.Nullable;
 
 public class MermaidSettings implements Component<EntityStore> {
 
+    public static final BuilderCodec<MermaidSettings> CODECV1 = BuilderCodec.builder(MermaidSettings.class, MermaidSettings::new)
+            .append(new KeyedCodec<Boolean>("MermaidToggle", Codec.BOOLEAN),
+                    (merSettings, mtBool) -> merSettings.toggleMermaid = mtBool, // Setter
+                    (merSettings) -> merSettings.toggleMermaid)                    // Getter
+            .add()
+            .append(new KeyedCodec<Boolean>("MermaidTransPermPotion", Codec.BOOLEAN),
+                    (merSettings, mtppBool) -> merSettings.permanentPotion = mtppBool, // Setter
+                    (merSettings) -> merSettings.permanentPotion)                    // Getter
+            .add()
+            .append(new KeyedCodec<String>("MermaidTailModel", Codec.STRING),
+                    (merSettings, mtmStr) -> merSettings.mermaidTail = mtmStr, // Setter
+                    (merSettings) -> merSettings.mermaidTail)                    // Getter
+            .add()
+            .append(new KeyedCodec<String>("MermaidTailColor", Codec.STRING),
+                    (merSettings, mtcStr) -> merSettings.tailColor = mtcStr, // Setter
+                    (merSettings) -> merSettings.tailColor)                    // Getter
+            .add()
+            .append(new KeyedCodec<Boolean>("MermaidV2Model", Codec.BOOLEAN),
+                    (merSettings, mv2mBool) -> merSettings.mermaidV2Model = mv2mBool, // Setter
+                    (merSettings) -> merSettings.mermaidV2Model)                    // Getter
+            .add()
+            .build();
+
     public static final BuilderCodec<MermaidSettings> CODEC = BuilderCodec.builder(MermaidSettings.class, MermaidSettings::new)
             .append(new KeyedCodec<Boolean>("MermaidToggle", Codec.BOOLEAN),
                     (merSettings, mtBool) -> merSettings.toggleMermaid = mtBool, // Setter

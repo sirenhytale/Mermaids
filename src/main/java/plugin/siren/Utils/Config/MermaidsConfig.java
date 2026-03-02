@@ -74,13 +74,16 @@ public class MermaidsConfig {
             .add()
             .build();
 
-    private String Information = "Confused about what one of these statement do? Go to https://mermaids.dev/mermaids/config/ or check out the Mermaids page on the Curseforge website and scroll down to Config Extra Info.";
+    private String InformationDefault = "Confused about what one of these statement do? Go to https://mermaids.dev/mermaids/config/ or check out the Mermaids page on the Curseforge website and scroll down to Config Extra Info.";
+    private String Information = InformationDefault;
     private final int ConfigVersionDefault = 7;
     private int ConfigVersion = ConfigVersionDefault;
     private String PluginName = "Mermaids";
     private String Version = Mermaids.getVersion();
-    private String Website = "https://mermaids.dev/mermaids/";
-    private String DownloadSite = "https://www.curseforge.com/hytale/mods/mermaids";
+    private String WebsiteDefault = "https://mermaids.dev/mermaids/";
+    private String Website = WebsiteDefault;
+    private String DownloadSiteDefault = "https://www.curseforge.com/hytale/mods/mermaids";
+    private String DownloadSite = DownloadSiteDefault;
     private int TransformationMode = 0;
     private String TransModeDesc = "TransformationMode = 0 : Transform when entering water, TransformationMode = 1 : Requires user to drink Mermaid Potion to Transform";
     private boolean MermaidOnLand = false;
@@ -93,6 +96,33 @@ public class MermaidsConfig {
     private boolean DebugMode = false;
 
     public MermaidsConfig() {}
+
+    public boolean ifConfigUpdate(){
+        boolean configUpdated = false;
+
+        if(ConfigVersionDefault > ConfigVersion){
+            configUpdated = true;
+            ConfigVersion = ConfigVersionDefault;
+        }
+        if(!Version.equalsIgnoreCase(Mermaids.getVersion())){
+            configUpdated = true;
+            Version = Mermaids.getVersion();
+        }
+        if(!Information.equalsIgnoreCase(InformationDefault)){
+            configUpdated = true;
+            Information = InformationDefault;
+        }
+        if(!Website.equalsIgnoreCase(WebsiteDefault)){
+            configUpdated = true;
+            Website = WebsiteDefault;
+        }
+        if(!DownloadSite.equalsIgnoreCase(DownloadSiteDefault)){
+            configUpdated = true;
+            DownloadSite = DownloadSiteDefault;
+        }
+
+        return configUpdated;
+    }
 
     public int getConfigVersionDefault(){
         return ConfigVersionDefault;

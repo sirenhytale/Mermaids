@@ -86,8 +86,8 @@
     "FluidWalk": {
       "Animations": [
         {
-          "Animation": "Characters/Animations/Mermaids/Swim/Mermaidv2_Fluid_Walk.blockyanim",
-          "Speed": 1
+          "Animation": "Characters/Animations/Mermaids/Swim/Mermaidv2_Fluid_Walkv3.blockyanim",
+          "Speed": 1.3
         }
       ]
     },

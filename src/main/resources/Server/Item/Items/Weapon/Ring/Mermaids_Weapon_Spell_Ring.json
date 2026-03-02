@@ -1,6 +1,6 @@
 {
   "TranslationProperties": {
-    "Name": "items.Mermaids_Weapon_Spell_Ring.name"
+    "Name": "server.items.Mermaids_Weapon_Spell_Ring.name"
   },
   "Icon": "Icons/ItemsGenerated/Deco_Starfish.png",
   "IconProperties": {

@@ -94,7 +94,7 @@ Group{
                 }
 
                 TextButton #PinkTailColorButton {
-                    Text: "Pink";
+                    Text: "ColorCoded";
                     Anchor: (Width: 90, Height: 60);
                     Style: @MermaidButtonStyle;
                 }

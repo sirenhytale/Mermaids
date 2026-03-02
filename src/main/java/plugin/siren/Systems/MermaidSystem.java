@@ -180,13 +180,13 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                                 }
 
                                 int footFluidId = world.getFluidId((int)Math.floor(pos.getX()), (int)Math.floor(pos.getY()), (int)Math.floor(pos.getZ()));
-                                int bodyFluidID = 0;//world.getFluidId((int)Math.floor(pos.getX()), (int)Math.floor(pos.getY())+1, (int)Math.floor(pos.getZ()));
-                                int belowFluidID = 0;//world.getFluidId((int)Math.floor(pos.getX()), (int)Math.floor(pos.getY())-1, (int)Math.floor(pos.getZ()));
-                                if(footFluidId > 0 || bodyFluidID > 0 || belowFluidID > 0){
+                                int bodyFluidID = world.getFluidId((int)Math.floor(pos.getX()), (int)Math.floor(pos.getY())+1, (int)Math.floor(pos.getZ()));
+                                ///int belowFluidID = 0;//world.getFluidId((int)Math.floor(pos.getX()), (int)Math.floor(pos.getY())-1, (int)Math.floor(pos.getZ()));
+                                if(footFluidId > 0 || bodyFluidID > 0){
                                     mermaid.setInFluidBlock(true);
                                 }
 
-                                if(footFluidId == 0 && bodyFluidID == 0 && belowFluidID == 0 && mermaid.isInFluidBlock()){
+                                if(footFluidId == 0 && bodyFluidID == 0 && mermaid.isInFluidBlock()){
                                     mermaid.setInFluidBlock(false);
                                 }
                             }
@@ -429,7 +429,8 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                 boolean onLand = false;
                 MovementManager movement = commandBuffer.getComponent(ref, MovementManager.getComponentType());
                 if(movement != null) {
-                    if (movementState.getMovementStates().swimming || movementState.getMovementStates().swimJumping || movementState.getMovementStates().inFluid) {
+                    if (movementState.getMovementStates().swimming || movementState.getMovementStates().swimJumping || movementState.getMovementStates().inFluid ||
+                            (mermaid.isInFluidBlock() && (movementState.getMovementStates().sitting || movementState.getMovementStates().sleeping))) {
                         ItemStack itemInHand = player.getInventory().getItemInHand();
                         if(itemInHand != null && itemInHand.getItemId().equalsIgnoreCase("weapon_spear_fishbone")){
                             movement.getSettings().swimJumpForce = 16f;
@@ -483,15 +484,17 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                     //HudManager playerHud = player.getHudManager();
                     //playerHud.hideHudComponents(playerRef, HudComponent.Oxygen);
 
-                    float stamina = statMapComponent.get(DefaultEntityStatTypes.getStamina()).get();
-                    if(movementState.getMovementStates().sprinting) {
-                        float newStamina = ((stamina + mermaid.getPreviousStamina()) / 2f);
+                    if(!Mermaids.ifVersion1()) {
+                        float stamina = statMapComponent.get(DefaultEntityStatTypes.getStamina()).get();
+                        if (movementState.getMovementStates().sprinting) {
+                            float newStamina = ((stamina + mermaid.getPreviousStamina()) / 2f);
 
-                        statMapComponent.setStatValue(DefaultEntityStatTypes.getStamina(), newStamina);
-                        mermaid.setPreviousStamina(stamina);
-                    }else{
-                        if(stamina != mermaid.getPreviousStamina()){
+                            statMapComponent.setStatValue(DefaultEntityStatTypes.getStamina(), newStamina);
                             mermaid.setPreviousStamina(stamina);
+                        } else {
+                            if (stamina != mermaid.getPreviousStamina()) {
+                                mermaid.setPreviousStamina(stamina);
+                            }
                         }
                     }
                 }

@@ -1,0 +1,11 @@
+# === items ===
+
+items.Mermaids_Chest_Seashell_Bra.name = Seashell Bra
+items.Mermaids_Weapon_Spell_Ring.name = Mermaid Ring
+
+items.Potion_Mermaid_Transformation_Small.name = Small Potion of Mermaid Transformation
+items.Potion_Mermaid_Transformation_Small.description = Transform into a Mermaid for 3 minutes.
+items.Potion_Mermaid_Transformation_Medium.name = Medium Potion of Mermaid Transformation
+items.Potion_Mermaid_Transformation_Medium.description = Transform into a Mermaid for 10 minutes.
+items.Potion_Mermaid_Transformation_Large.name = Permanent Potion of Mermaid Transformation
+items.Potion_Mermaid_Transformation_Large.description = Permanent transform into a Mermaid when enter contact with water.

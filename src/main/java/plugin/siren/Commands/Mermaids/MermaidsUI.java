@@ -12,6 +12,7 @@ import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import plugin.siren.Mermaids;
 import plugin.siren.Systems.MermaidSettings;
 import plugin.siren.Utils.UI.MermaidUIPage;
+import plugin.siren.Utils.UI.MermaidV1UIPage;
 import plugin.siren.Utils.UI.MermaidV2UIPage;
 
 import javax.annotation.Nonnull;
@@ -36,21 +37,30 @@ public class MermaidsUI extends AbstractPlayerCommand {
             if(player == null){
                 Mermaids.LOGGER.atFine().log(player.getDisplayName() + " had an error of getting the Player Component. MermaidsUI");
             }else{
-                MermaidSettings mermaidSettings = store.getComponent(ref, Mermaids.get().getMermaidSetingsComponentType());
-
-                if(mermaidSettings == null){
-                    Mermaids.LOGGER.atFine().log(player.getDisplayName() + " had an error of getting the Mermaid Settings Component. MermaidsUI");
-                }else{
-                    if(mermaidSettings.getMermaidTail().equals("MermaidV2")){
-                        MermaidV2UIPage merPage = new MermaidV2UIPage(playerRef);
-                        player.getPageManager().openCustomPage(ref, store, merPage);
-                    }else{
-                        MermaidUIPage merPage = new MermaidUIPage(playerRef);
-                        player.getPageManager().openCustomPage(ref, store, merPage);
-                    }
+                if(Mermaids.ifVersion1()){
+                    MermaidV1UIPage merPage = new MermaidV1UIPage(playerRef);
+                    player.getPageManager().openCustomPage(ref, store, merPage);
 
                     if(Mermaids.ifDebug()){
                         Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " opened the Mermaids UI.");
+                    }
+                }else {
+                    MermaidSettings mermaidSettings = store.getComponent(ref, Mermaids.get().getMermaidSetingsComponentType());
+
+                    if (mermaidSettings == null) {
+                        Mermaids.LOGGER.atFine().log(player.getDisplayName() + " had an error of getting the Mermaid Settings Component. MermaidsUI");
+                    } else {
+                        if (mermaidSettings.getMermaidTail().equals("MermaidV2")) {
+                            MermaidV2UIPage merPage = new MermaidV2UIPage(playerRef);
+                            player.getPageManager().openCustomPage(ref, store, merPage);
+                        } else {
+                            MermaidUIPage merPage = new MermaidUIPage(playerRef);
+                            player.getPageManager().openCustomPage(ref, store, merPage);
+                        }
+
+                        if (Mermaids.ifDebug()) {
+                            Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " opened the Mermaids UI.");
+                        }
                     }
                 }
             }

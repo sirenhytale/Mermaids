@@ -1,6 +1,6 @@
 {
   "TranslationProperties": {
-    "Name": "items.Mermaids_Chest_Seashell_Bra.name"
+    "Name": "server.items.Mermaids_Chest_Seashell_Bra.name"
   },
   "Parent": "Armor_Cloth_Wool_Chest",
   "Icon": "Icons/ItemsGenerated/Mermaids_Seashell_Bra.png",
