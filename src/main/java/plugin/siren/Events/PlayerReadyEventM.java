@@ -65,9 +65,9 @@ public class PlayerReadyEventM {
             }else{
                 if (Mermaids.ifDebug()) {
                     player.sendMessage(Message.raw("You already have the Mermaid Component!"));
-                }
 
-                Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " tried to receive Mermaid Component but already has it.");
+                    Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " tried to receive Mermaid Component but already has it.");
+                }
             }
 
             MermaidSettings merSett = store.getComponent(ref, Mermaids.get().getMermaidSetingsComponentType());
@@ -78,20 +78,25 @@ public class PlayerReadyEventM {
 
                 if (Mermaids.ifDebug()) {
                     player.sendMessage(Message.raw("You now have the Mermaid Settings Component!"));
-                }
 
-                Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " now has the Mermaid Settings Component.");
+                    Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " now has the Mermaid Settings Component.");
+                }
 
                 MermaidSettings mermaidSett = store.getComponent(ref, Mermaids.get().getMermaidSetingsComponentType());
                 if(mermaidSett != null){
-                    if(!mermaidSett.getAlpha200()){
-                        mermaidSett.setAlpha200(true);
+                    if(!Mermaids.ifVersion1()) {
+                        if (!mermaidSett.getAlpha200()) {
+                            mermaidSett.setAlpha200(true);
 
-                        mermaidSett.setMermaidTail("MermaidV2");
+                            mermaidSett.setMermaidTail("MermaidV2");
+                            mermaidSett.setTailColor("MermaidPlayerGrayscale");
+                            mermaidSett.setTailColorV2("MermaidTextureV2");
+
+                            Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " has updated saved Mermaid Tail to V2.");
+                        }
+                    }else{
+                        mermaidSett.setMermaidTail("MermaidBigFinPlayer");
                         mermaidSett.setTailColor("MermaidPlayerGrayscale");
-                        mermaidSett.setTailColorV2("MermaidTextureV2");
-
-                        Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " has updated saved Mermaid Tail to V2.");
                     }
                 }else{
                     Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " failed to get mermaidSett Mermaid Settings Component.");
@@ -99,9 +104,9 @@ public class PlayerReadyEventM {
             }else{
                 if (Mermaids.ifDebug()) {
                     player.sendMessage(Message.raw("You already have the Mermaid Settings Component!"));
-                }
 
-                Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " tried to receive Mermaid Settings Component but already has it.");
+                    Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " tried to receive Mermaid Settings Component but already has it.");
+                }
             }
         });
     }
