@@ -62,8 +62,13 @@ public class MermaidSettings implements Component<EntityStore> {
                     (merSettings, a200Bool) -> merSettings.alpha200 = a200Bool, // Setter
                     (merSettings) -> merSettings.alpha200)                    // Getter
             .add()
+            .append(new KeyedCodec<Boolean>("ForceMermaid", Codec.BOOLEAN),
+                    (merSettings, fmBool) -> merSettings.forceMermaid = fmBool, // Setter
+                    (merSettings) -> merSettings.forceMermaid)                    // Getter
+            .add()
             .build();
 
+    private boolean forceMermaid;
     private boolean toggleMermaid;
     private boolean permanentPotion;
 
@@ -76,6 +81,7 @@ public class MermaidSettings implements Component<EntityStore> {
     private boolean alpha200;
 
     public MermaidSettings(){
+        this.forceMermaid = false;
         this.toggleMermaid = true;
         this.permanentPotion = false;
 
@@ -89,6 +95,7 @@ public class MermaidSettings implements Component<EntityStore> {
     }
 
     public MermaidSettings(MermaidSettings other){
+        this.forceMermaid = other.forceMermaid;
         this.toggleMermaid = other.toggleMermaid;
         this.permanentPotion = other.permanentPotion;
 
@@ -105,6 +112,14 @@ public class MermaidSettings implements Component<EntityStore> {
     @Override
     public Component<EntityStore> clone() {
         return new MermaidSettings(this);
+    }
+
+    public boolean isForcedMermaid(){
+        return this.forceMermaid;
+    }
+
+    public void setForcedMermaid(boolean forcedMermaid){
+        this.forceMermaid = forcedMermaid;
     }
 
     public boolean getToggleMermaid(){

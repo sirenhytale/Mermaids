@@ -8,7 +8,7 @@
       "shape": {
         "type": "none",
         "offset": {"x": 0, "y": 0, "z": 0},
-        "stretch": {"x": 1, "y": 1, "z": 1},
+        "stretch": {"x": 0, "y": 0, "z": 0},
         "settings": {
           "isPiece": false
         },
@@ -380,7 +380,7 @@
                           "shape": {
                             "type": "none",
                             "offset": {"x": 0, "y": 0, "z": 0},
-                            "stretch": {"x": 1, "y": 1, "z": 1},
+                            "stretch": {"x": 0, "y": 0, "z": 0},
                             "settings": {
                               "isPiece": false
                             },
@@ -399,7 +399,7 @@
                           "shape": {
                             "type": "none",
                             "offset": {"x": 0, "y": 0, "z": 0},
-                            "stretch": {"x": 1, "y": 1, "z": 1},
+                            "stretch": {"x": 0, "y": 0, "z": 0},
                             "settings": {
                               "isPiece": false
                             },
@@ -418,7 +418,7 @@
                           "shape": {
                             "type": "none",
                             "offset": {"x": 0, "y": 0, "z": 0},
-                            "stretch": {"x": 1, "y": 1, "z": 1},
+                            "stretch": {"x": 0, "y": 0, "z": 0},
                             "settings": {
                               "isPiece": false
                             },
@@ -437,7 +437,7 @@
                           "shape": {
                             "type": "none",
                             "offset": {"x": 0, "y": 0, "z": 0},
-                            "stretch": {"x": 1, "y": 1, "z": 1},
+                            "stretch": {"x": 0, "y": 0, "z": 0},
                             "settings": {
                               "isPiece": false
                             },
@@ -456,7 +456,7 @@
                           "shape": {
                             "type": "none",
                             "offset": {"x": 0, "y": 0, "z": 0},
-                            "stretch": {"x": 1, "y": 1, "z": 1},
+                            "stretch": {"x": 0, "y": 0, "z": 0},
                             "settings": {
                               "isPiece": false
                             },
@@ -475,7 +475,7 @@
                           "shape": {
                             "type": "none",
                             "offset": {"x": 0, "y": 0, "z": 0},
-                            "stretch": {"x": 1, "y": 1, "z": 1},
+                            "stretch": {"x": 0, "y": 0, "z": 0},
                             "settings": {
                               "isPiece": false
                             },
@@ -494,7 +494,7 @@
                           "shape": {
                             "type": "none",
                             "offset": {"x": 0, "y": 0, "z": 0},
-                            "stretch": {"x": 1, "y": 1, "z": 1},
+                            "stretch": {"x": 0, "y": 0, "z": 0},
                             "settings": {
                               "isPiece": false
                             },
@@ -515,7 +515,7 @@
                       "shape": {
                         "type": "none",
                         "offset": {"x": 0, "y": 0, "z": 0},
-                        "stretch": {"x": 1, "y": 1, "z": 1},
+                        "stretch": {"x": 0, "y": 0, "z": 0},
                         "settings": {
                           "isPiece": false
                         },
@@ -687,7 +687,7 @@
                                       "shape": {
                                         "type": "none",
                                         "offset": {"x": 0, "y": 0, "z": 0},
-                                        "stretch": {"x": 1, "y": 1, "z": 1},
+                                        "stretch": {"x": 0, "y": 0, "z": 0},
                                         "settings": {
                                           "isPiece": false
                                         },
@@ -710,7 +710,7 @@
                               "shape": {
                                 "type": "none",
                                 "offset": {"x": 0, "y": 0, "z": 0},
-                                "stretch": {"x": 1, "y": 1, "z": 1},
+                                "stretch": {"x": 0, "y": 0, "z": 0},
                                 "settings": {
                                   "isPiece": true
                                 },
@@ -733,7 +733,7 @@
                       "shape": {
                         "type": "none",
                         "offset": {"x": 0, "y": 0, "z": 0},
-                        "stretch": {"x": 1, "y": 1, "z": 1},
+                        "stretch": {"x": 0, "y": 0, "z": 0},
                         "settings": {
                           "isPiece": false
                         },
@@ -905,7 +905,7 @@
                                       "shape": {
                                         "type": "none",
                                         "offset": {"x": 0, "y": 0, "z": 0},
-                                        "stretch": {"x": 1, "y": 1, "z": 1},
+                                        "stretch": {"x": 0, "y": 0, "z": 0},
                                         "settings": {
                                           "isPiece": false
                                         },
@@ -928,7 +928,7 @@
                               "shape": {
                                 "type": "none",
                                 "offset": {"x": 0, "y": 0, "z": 0},
-                                "stretch": {"x": 1, "y": 1, "z": 1},
+                                "stretch": {"x": 0, "y": 0, "z": 0},
                                 "settings": {
                                   "isPiece": true
                                 },
@@ -951,7 +951,7 @@
                       "shape": {
                         "type": "none",
                         "offset": {"x": 0, "y": 0, "z": 0},
-                        "stretch": {"x": 1, "y": 1, "z": 1},
+                        "stretch": {"x": 0, "y": 0, "z": 0},
                         "settings": {
                           "isPiece": false
                         },

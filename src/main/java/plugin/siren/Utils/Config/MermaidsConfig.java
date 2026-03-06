@@ -52,6 +52,10 @@ public class MermaidsConfig {
                     (merConfig, rmupBool, extraInfo) -> merConfig.RequireUIPerm = rmupBool, // Setter
                     (merConfig, extraInfo) -> merConfig.RequireUIPerm)                    // Getter
             .add()
+            .append(new KeyedCodec<Boolean>("Items-Can-Increase-Swim-Speed", Codec.BOOLEAN),
+                    (merConfig, icissBool, extraInfo) -> merConfig.ItemSwimSpeed = icissBool, // Setter
+                    (merConfig, extraInfo) -> merConfig.ItemSwimSpeed)                    // Getter
+            .add()
             .append(new KeyedCodec<Boolean>("Blocks-Can-Cause-Transformations", Codec.BOOLEAN),
                     (merConfig, bcctBool, extraInfo) -> merConfig.BlockTrans = bcctBool, // Setter
                     (merConfig, extraInfo) -> merConfig.BlockTrans)                    // Getter
@@ -68,6 +72,18 @@ public class MermaidsConfig {
                     (merConfig, mglrInt, extraInfo) -> merConfig.LightRadius = mglrInt, // Setter
                     (merConfig, extraInfo) -> merConfig.LightRadius)                    // Getter
             .add()
+            .append(new KeyedCodec<Boolean>("EasyHunger-By:Haasapenas-Compatibility", Codec.BOOLEAN),
+                    (merConfig, ehbhcBool, extraInfo) -> merConfig.EasyHungerCompat = ehbhcBool, // Setter
+                    (merConfig, extraInfo) -> merConfig.EasyHungerCompat)                    // Getter
+            .add()
+            .append(new KeyedCodec<Boolean>("AquaThirst&Hunger-By:Jume-Compatibility", Codec.BOOLEAN),
+                    (merConfig, athbjcBool, extraInfo) -> merConfig.AquaThirstHungerCompat = athbjcBool, // Setter
+                    (merConfig, extraInfo) -> merConfig.AquaThirstHungerCompat)                    // Getter
+            .add()
+            .append(new KeyedCodec<Boolean>("DivingTale-By:xnrdev-Compatibility", Codec.BOOLEAN),
+                    (merConfig, dtbxcBool, extraInfo) -> merConfig.DivingTaleCompat = dtbxcBool, // Setter
+                    (merConfig, extraInfo) -> merConfig.DivingTaleCompat)                    // Getter
+            .add()
             .append(new KeyedCodec<Boolean>("DebugMode", Codec.BOOLEAN),
                     (merConfig, dmBool, extraInfo) -> merConfig.DebugMode = dmBool, // Setter
                     (merConfig, extraInfo) -> merConfig.DebugMode)                    // Getter
@@ -76,7 +92,7 @@ public class MermaidsConfig {
 
     private String InformationDefault = "Confused about what one of these statement do? Go to https://mermaids.dev/mermaids/config/ or check out the Mermaids page on the Curseforge website and scroll down to Config Extra Info.";
     private String Information = InformationDefault;
-    private final int ConfigVersionDefault = 7;
+    private final int ConfigVersionDefault = 8;
     private int ConfigVersion = ConfigVersionDefault;
     private String PluginName = "Mermaids";
     private String Version = Mermaids.getVersion();
@@ -89,10 +105,14 @@ public class MermaidsConfig {
     private boolean MermaidOnLand = false;
     private boolean RequireTransPerm = false;
     private boolean RequireUIPerm = false;
+    private boolean ItemSwimSpeed = true;
     private boolean BlockTrans = true;
     private boolean RainTrans = false;
     private boolean MermaidLight = true;
     private int LightRadius = 33;
+    private boolean EasyHungerCompat = true;
+    private boolean AquaThirstHungerCompat = true;
+    private boolean DivingTaleCompat = true;
     private boolean DebugMode = false;
 
     public MermaidsConfig() {}
@@ -168,6 +188,14 @@ public class MermaidsConfig {
         return RequireUIPerm;
     }
 
+    public boolean getItemIncreaseSwimSpeed(){
+        return this.ItemSwimSpeed;
+    }
+
+    public void setItemIncreaseSwimSpeed(boolean increaseSwimSpeed){
+        this.ItemSwimSpeed = increaseSwimSpeed;
+    }
+
     public boolean getBlockTransformation(){
         return BlockTrans;
     }
@@ -198,6 +226,18 @@ public class MermaidsConfig {
 
     public void setLightRadius(int radius){
         this.LightRadius = radius;
+    }
+
+    public boolean getEasyHungerCompat(){
+        return this.EasyHungerCompat;
+    }
+
+    public boolean getAquaThirstHungerCompat(){
+        return this.AquaThirstHungerCompat;
+    }
+
+    public boolean getDivingTaleCompat(){
+        return this.DivingTaleCompat;
     }
 
     public boolean ifDebugMode(){

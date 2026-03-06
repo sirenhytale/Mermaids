@@ -1,8 +1,10 @@
 package plugin.siren;
 
+import com.hypixel.hytale.common.plugin.PluginIdentifier;
 import com.hypixel.hytale.component.ComponentType;
 import com.hypixel.hytale.event.EventRegistration;
 import com.hypixel.hytale.logger.HytaleLogger;
+import com.hypixel.hytale.server.core.HytaleServer;
 import com.hypixel.hytale.server.core.command.system.CommandRegistration;
 import com.hypixel.hytale.server.core.event.events.player.PlayerReadyEvent;
 import com.hypixel.hytale.server.core.modules.interaction.interaction.config.Interaction;
@@ -12,6 +14,7 @@ import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import com.hypixel.hytale.server.core.util.Config;
 import plugin.siren.Commands.MermaidCmd;
 import plugin.siren.Commands.MermaidsCmd;
+import plugin.siren.Compatibility.PlaceholderAPI.PlaceholderAPICompat;
 import plugin.siren.Contributions.al3x.HStats;
 import plugin.siren.Events.Interactions.*;
 import plugin.siren.Events.PlayerReadyEventM;
@@ -24,7 +27,7 @@ import javax.annotation.Nonnull;
 
 public class Mermaids extends JavaPlugin {
     private static final boolean v1 = false;
-    private static final String VERSION = "1.3.11";//"Alpha 2.0.0-2026.03.01";
+    private static final String VERSION = "Alpha 2.0.0-2026.03.05";//"Alpha 2.0.0-2026.03.01";
     private static final boolean DEBUG = false;
 
     private static Mermaids plugin;
@@ -47,6 +50,10 @@ public class Mermaids extends JavaPlugin {
     protected void setup(){
         LOGGER.atInfo().log("===---==---==---== MERMAIDS ==---==---==---===");
         LOGGER.atInfo().log("Mermaids has began to load.");
+
+        if (HytaleServer.get().getPluginManager().getPlugin(PluginIdentifier.fromString("HelpChat:PlaceholderAPI")) != null) {
+            new PlaceholderAPICompat().register();
+        }
 
         EventRegistration<String, PlayerReadyEvent> playerReadyEventRegistration = this.getEventRegistry().registerGlobal(PlayerReadyEvent.class, PlayerReadyEventM::onPlayerReadyEvent);
         if(playerReadyEventRegistration != null && playerReadyEventRegistration.isRegistered()) {

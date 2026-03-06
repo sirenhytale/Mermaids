@@ -16,32 +16,32 @@ import plugin.siren.Mermaids;
 import javax.annotation.Nonnull;
 import java.util.UUID;
 
-public class BlockTransformCmd extends AbstractPlayerCommand {
-    public BlockTransformCmd() {
-        super("blocktransform", "Toggles to allow users to transform from liquid blocks.");
+public class ItemIncreaseSpeedCmd extends AbstractPlayerCommand {
+    public ItemIncreaseSpeedCmd() {
+        super("itemincreasespeed", "Toggles to allow some items to increase the swim movement speed.");
 
-        this.requirePermission("mermaids.admin.blocktransform");
+        this.requirePermission("mermaids.admin.itemincreasespeed");
     }
 
-    RequiredArg<Boolean> msgMerBlockTransArg = this.withRequiredArg("Allow Block Transformation", "Boolean to toggle block transformations.", ArgTypes.BOOLEAN);
+    RequiredArg<Boolean> msgMerItemIncSpeedArg = this.withRequiredArg("Allow Items to Increase Speed", "Boolean to toggle items increasing speed.", ArgTypes.BOOLEAN);
 
     @Override
     protected void execute(@Nonnull CommandContext commandContext, @Nonnull Store<EntityStore> store, @Nonnull Ref<EntityStore> ref, @Nonnull PlayerRef playerRef, @Nonnull World world) {
         Player player = store.getComponent(ref, Player.getComponentType());
 
-        boolean merBlockTrans = msgMerBlockTransArg.get(commandContext);
+        boolean merItemIncSpeed = msgMerItemIncSpeedArg.get(commandContext);
 
-        Mermaids.getConfig().get().setBlockTransformation(merBlockTrans);
+        Mermaids.getConfig().get().setItemIncreaseSwimSpeed(merItemIncSpeed);
         Mermaids.getConfig().save();
 
         String toggledStr = "";
-        if (merBlockTrans) {
+        if (merItemIncSpeed) {
             toggledStr = "Enabled";
         } else {
             toggledStr = "Disabled";
         }
-        player.sendMessage(Message.raw("You have " + toggledStr + " block transformations."));
+        player.sendMessage(Message.raw("You have " + toggledStr + " that some items can increase swim movement speed."));
 
-        Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " has toggled block transformations: " + String.valueOf(merBlockTrans) + ".");
+        Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " has toggled how some items can increase swim movement speed: " + String.valueOf(merItemIncSpeed) + ".");
     }
 }

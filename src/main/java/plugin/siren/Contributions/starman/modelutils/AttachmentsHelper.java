@@ -18,6 +18,9 @@ import java.util.ArrayList;
  * Date: 1/15/2026
  * Link: https://github.com/SyperAI/hytale-model-utils
  *
+ * Modified: Siren
+ * Date: 2026/03/06
+ *
  */
 
 public class AttachmentsHelper {
@@ -85,7 +88,7 @@ public class AttachmentsHelper {
             addAttachment(attachments, skinPart, gradientId, skinPartVariant);
         }
 
-        System.out.println(attachments);
+        //System.out.println(attachments);
         return attachments.toArray(new ModelAttachment[0]);
     }
 }

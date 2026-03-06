@@ -95,8 +95,10 @@ public class PlayerReadyEventM {
                             Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " has updated saved Mermaid Tail to V2.");
                         }
                     }else{
-                        mermaidSett.setMermaidTail("MermaidBigFinPlayer");
-                        mermaidSett.setTailColor("MermaidPlayerGrayscale");
+                        if(mermaidSett.getMermaidTail().equalsIgnoreCase("mermaidv2")){
+                            mermaidSett.setMermaidTail("MermaidBigFinPlayer");
+                            mermaidSett.setTailColor("MermaidPlayerGrayscale");
+                        }
                     }
                 }else{
                     Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " failed to get mermaidSett Mermaid Settings Component.");

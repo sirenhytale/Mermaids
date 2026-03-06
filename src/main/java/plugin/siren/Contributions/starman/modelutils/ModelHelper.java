@@ -19,7 +19,7 @@ import plugin.siren.Systems.MermaidSettings;
  * Date: 2026/01/15
  * Link: https://github.com/SyperAI/hytale-model-utils
  *
- * Modified: meFroggy
+ * Modified: Siren
  * Date: 2026/02/22
  *
  */

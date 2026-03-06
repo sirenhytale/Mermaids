@@ -1,0 +1,23 @@
+$C = "../../../Common.ui";
+$SB = "../SelectorButton.ui";
+
+Group {
+  LayoutMode: Top;
+
+  Group {
+    Anchor: (Bottom: 25);
+    LayoutMode: Top;
+
+    Group #TailColor0 {
+      $SB.@SelectorBlock {
+        @Name = "Orange Tail";
+      }
+    }
+
+    Group #TailColor1 {
+      $SB.@SelectorBlock {
+        @Name = "Color-Coded Tail";
+      }
+    }
+  }
+}

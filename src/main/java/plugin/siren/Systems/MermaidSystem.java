@@ -2,6 +2,7 @@ package plugin.siren.Systems;
 
 import com.hypixel.hytale.builtin.weather.components.WeatherTracker;
 import com.hypixel.hytale.builtin.weather.resources.WeatherResource;
+import com.hypixel.hytale.common.plugin.PluginIdentifier;
 import com.hypixel.hytale.component.*;
 import com.hypixel.hytale.component.query.Query;
 import com.hypixel.hytale.component.system.tick.EntityTickingSystem;
@@ -33,12 +34,15 @@ import com.hypixel.hytale.server.core.modules.entity.tracker.NetworkId;
 import com.hypixel.hytale.server.core.modules.entitystats.EntityStatMap;
 import com.hypixel.hytale.server.core.modules.entitystats.asset.DefaultEntityStatTypes;
 import com.hypixel.hytale.server.core.permissions.PermissionsModule;
+import com.hypixel.hytale.server.core.plugin.PluginManager;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.Universe;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.chunk.WorldChunk;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import plugin.siren.Compatibility.AquaThirstHunger.AquaThirstHungerCompact;
+import plugin.siren.Compatibility.EasyHunger.EasyHungerCompat;
 import plugin.siren.Contributions.starman.modelutils.ModelHelper;
 import plugin.siren.Mermaids;
 
@@ -131,44 +135,52 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                                             }else {
                                                 Weather weatherNaturalAsset = Weather.getAssetMap().getAsset(weatherResource.getWeatherIndexForEnvironment(weatherTracker.getEnvironmentId()));
 
-                                                String weatherForcedId = weatherForcedAsset.getId();
-                                                String weatherNaturalId = weatherNaturalAsset.getId();
-                                                if (weatherNaturalId.equalsIgnoreCase("zone1_rain") || weatherNaturalId.equalsIgnoreCase("zone1_swamp_rain") || //Zone 1
-                                                        weatherNaturalId.equalsIgnoreCase("zone1_rain_light") || weatherNaturalId.equalsIgnoreCase("zone1_storm") ||
-                                                        weatherNaturalId.equalsIgnoreCase("zone2_thunder_storm") || //Zone2
-                                                        weatherNaturalId.equalsIgnoreCase("zone3_rain") || //Zone3
-                                                        weatherNaturalId.equalsIgnoreCase("zone4_wastes_rain") || weatherNaturalId.equalsIgnoreCase("zone4_wastes_rain_heavy") || //Zone4
-                                                        weatherNaturalId.equalsIgnoreCase("skylands_rapid_marsh_stormy")) /* Misc */ {
-                                                    if(!mermaid.getRainTransform().get()){
-                                                        mermaid.setRainTransform(true);
+                                                if( weatherNaturalAsset != null){
+                                                    String weatherNaturalId = weatherNaturalAsset.getId();
+
+                                                    if (weatherNaturalId.equalsIgnoreCase("zone1_rain") || weatherNaturalId.equalsIgnoreCase("zone1_swamp_rain") || //Zone 1
+                                                            weatherNaturalId.equalsIgnoreCase("zone1_rain_light") || weatherNaturalId.equalsIgnoreCase("zone1_storm") ||
+                                                            weatherNaturalId.equalsIgnoreCase("zone2_thunder_storm") || //Zone2
+                                                            weatherNaturalId.equalsIgnoreCase("zone3_rain") || //Zone3
+                                                            weatherNaturalId.equalsIgnoreCase("zone4_wastes_rain") || weatherNaturalId.equalsIgnoreCase("zone4_wastes_rain_heavy") || //Zone4
+                                                            weatherNaturalId.equalsIgnoreCase("skylands_rapid_marsh_stormy")) /* Misc */ {
+                                                        if(!mermaid.getRainTransform().get()){
+                                                            mermaid.setRainTransform(true);
+                                                        }
+                                                        raining = true;
                                                     }
-                                                    raining = true;
-                                                }
-                                                if (weatherForcedId.equalsIgnoreCase("zone1_rain") || weatherForcedId.equalsIgnoreCase("zone1_swamp_rain") || //Zone 1
-                                                        weatherForcedId.equalsIgnoreCase("zone1_rain_light") || weatherForcedId.equalsIgnoreCase("zone1_storm") ||
-                                                        weatherForcedId.equalsIgnoreCase("zone2_thunder_storm") || //Zone2
-                                                        weatherForcedId.equalsIgnoreCase("zone3_rain") || //Zone3
-                                                        weatherForcedId.equalsIgnoreCase("zone4_wastes_rain") || weatherForcedId.equalsIgnoreCase("zone4_wastes_rain_heavy") || //Zone4
-                                                        weatherForcedId.equalsIgnoreCase("skylands_rapid_marsh_stormy")) /* Misc */ {
-                                                    if(!mermaid.getRainTransform().get()){
-                                                        mermaid.setRainTransform(true);
+
+                                                    if (weatherNaturalId.equalsIgnoreCase("zone3_snow") || weatherNaturalId.equalsIgnoreCase("zone3_snow_storm") ||//Zone3
+                                                            weatherNaturalId.equalsIgnoreCase("zone3_snow_heavy")) {
+                                                        if(!mermaid.getRainTransform().get()){
+                                                            mermaid.setRainTransform(true);
+                                                        }
+                                                        raining = true;
                                                     }
-                                                    raining = true;
                                                 }
 
-                                                if (weatherNaturalId.equalsIgnoreCase("zone3_snow") || weatherNaturalId.equalsIgnoreCase("zone3_snow_storm") ||//Zone3
-                                                        weatherNaturalId.equalsIgnoreCase("zone3_snow_heavy")) {
-                                                    if(!mermaid.getRainTransform().get()){
-                                                        mermaid.setRainTransform(true);
+                                                if (weatherForcedAsset != null) {
+                                                    String weatherForcedId = weatherForcedAsset.getId();
+
+                                                    if (weatherForcedId.equalsIgnoreCase("zone1_rain") || weatherForcedId.equalsIgnoreCase("zone1_swamp_rain") || //Zone 1
+                                                            weatherForcedId.equalsIgnoreCase("zone1_rain_light") || weatherForcedId.equalsIgnoreCase("zone1_storm") ||
+                                                            weatherForcedId.equalsIgnoreCase("zone2_thunder_storm") || //Zone2
+                                                            weatherForcedId.equalsIgnoreCase("zone3_rain") || //Zone3
+                                                            weatherForcedId.equalsIgnoreCase("zone4_wastes_rain") || weatherForcedId.equalsIgnoreCase("zone4_wastes_rain_heavy") || //Zone4
+                                                            weatherForcedId.equalsIgnoreCase("skylands_rapid_marsh_stormy")) /* Misc */ {
+                                                        if(!mermaid.getRainTransform().get()){
+                                                            mermaid.setRainTransform(true);
+                                                        }
+                                                        raining = true;
                                                     }
-                                                    raining = true;
-                                                }
-                                                if (weatherForcedId.equalsIgnoreCase("zone3_snow") || weatherForcedId.equalsIgnoreCase("zone3_snow_storm") ||//Zone3
-                                                        weatherForcedId.equalsIgnoreCase("zone3_snow_heavy")) {
-                                                    if(!mermaid.getRainTransform().get()){
-                                                        mermaid.setRainTransform(true);
+
+                                                    if (weatherForcedId.equalsIgnoreCase("zone3_snow") || weatherForcedId.equalsIgnoreCase("zone3_snow_storm") ||//Zone3
+                                                            weatherForcedId.equalsIgnoreCase("zone3_snow_heavy")) {
+                                                        if(!mermaid.getRainTransform().get()){
+                                                            mermaid.setRainTransform(true);
+                                                        }
+                                                        raining = true;
                                                     }
-                                                    raining = true;
                                                 }
                                             }
                                         }
@@ -213,8 +225,10 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
             boolean mermaidPotionEffect = mermaid.isPotionEffectTransformation();
             boolean mermaidOnLand = Mermaids.getConfig().get().getMermaidOnLand();
 
+            boolean forcedMermaid = mermaidSettings.isForcedMermaid();
+
             //Checks to see if in water / other transformation methods
-            if ((((movementStatesTransform || h2OorRain || inFluidBlock) && (transModeZero || (permMerPotion))) || mermaidPotionEffect || (mermaidOnLand && (transModeZero || permMerPotion))) && toggleMermaid && transformPermission) {
+            if (((((movementStatesTransform || h2OorRain || inFluidBlock) && (transModeZero || (permMerPotion))) || mermaidPotionEffect || (mermaidOnLand && (transModeZero || permMerPotion))) && toggleMermaid && transformPermission) || forcedMermaid) {
 
                 if (!mermaid.isUnderwater()) {
                     mermaid.setUnderwater(true);
@@ -242,7 +256,7 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                 }
 
                 //Began transformation into Mermaid
-                if (!mermaid.isMermaid() && mermaid.getElapsedTime() >= 35f) {
+                if ((!mermaid.isMermaid() && mermaid.getElapsedTime() >= 35f) || (!mermaid.isMermaid() && forcedMermaid)) {
                     if (Mermaids.ifDebug()) {
                         player.sendMessage(Message.raw("Now Swimming (35 ticks)"));
                     }
@@ -425,7 +439,7 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                 }
             }
 
-            if (mermaid.isMermaid() && mermaidSettings.getToggleMermaid() && transformPermission) {
+            if ((mermaid.isMermaid() && mermaidSettings.getToggleMermaid() && transformPermission) || (forcedMermaid && mermaid.isMermaid())) {
                 boolean onLand = false;
                 MovementManager movement = commandBuffer.getComponent(ref, MovementManager.getComponentType());
                 if(movement != null) {
@@ -444,6 +458,32 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                             movement.getSettings().forwardCrouchSpeedMultiplier = 1f;
                             movement.getSettings().backwardCrouchSpeedMultiplier = 0.8f;
                             movement.getSettings().forwardSprintSpeedMultiplier = 1.85f;
+                        }
+
+                        if(Mermaids.getConfig().get().getDivingTaleCompat()){
+                            if(itemInHand != null &&
+                                    (itemInHand.getItemId().equalsIgnoreCase("Harpoon_Copper") || itemInHand.getItemId().equalsIgnoreCase("Harpoon_Iron"))){
+                                movement.getSettings().swimJumpForce = 15.25f;
+                                movement.getSettings().baseSpeed = 13f;
+                                movement.getSettings().forwardCrouchSpeedMultiplier = 1f;
+                                movement.getSettings().backwardCrouchSpeedMultiplier = 0.85f;
+                                movement.getSettings().forwardSprintSpeedMultiplier = 1.9f;
+                            }else if(itemInHand != null &&
+                                    (itemInHand.getItemId().equalsIgnoreCase("Harpoon_Thorium") || itemInHand.getItemId().equalsIgnoreCase("Harpoon_Cobalt")
+                                    || itemInHand.getItemId().equalsIgnoreCase("Harpoon_Adamantite"))){
+                                movement.getSettings().swimJumpForce = 16f;
+                                movement.getSettings().baseSpeed = 15f;
+                                movement.getSettings().forwardCrouchSpeedMultiplier = 1f;
+                                movement.getSettings().backwardCrouchSpeedMultiplier = 0.9f;
+                                movement.getSettings().forwardSprintSpeedMultiplier = 2.05f;
+                            }else if(itemInHand != null &&
+                                    (itemInHand.getItemId().equalsIgnoreCase("Harpoon_Mithril"))){
+                                movement.getSettings().swimJumpForce = 17f;
+                                movement.getSettings().baseSpeed = 16.5f;
+                                movement.getSettings().forwardCrouchSpeedMultiplier = 1f;
+                                movement.getSettings().backwardCrouchSpeedMultiplier = 0.95f;
+                                movement.getSettings().forwardSprintSpeedMultiplier = 2.15f;
+                            }
                         }
                     } else {
                         movement.getSettings().jumpForce = 8f;
@@ -480,6 +520,18 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                 }else {
                     EntityStatMap statMapComponent = commandBuffer.getComponent(ref, EntityStatMap.getComponentType());
                     statMapComponent.maximizeStatValue(DefaultEntityStatTypes.getOxygen());
+
+                    if(Mermaids.getConfig().get().getEasyHungerCompat()) {
+                        if (PluginManager.get().getPlugin(new PluginIdentifier("Haas", "EasyHunger")) != null) {
+                            EasyHungerCompat.setMaxThirst(store, ref);
+                        }
+                    }
+
+                    if(Mermaids.getConfig().get().getAquaThirstHungerCompat()) {
+                        if (PluginManager.get().getPlugin(new PluginIdentifier("mx.jume.aquahunger", "Aqua-Thirst-hunger")) != null) {
+                            AquaThirstHungerCompact.setMaxThirst(store, ref);
+                        }
+                    }
 
                     //HudManager playerHud = player.getHudManager();
                     //playerHud.hideHudComponents(playerRef, HudComponent.Oxygen);
