@@ -1,0 +1,29 @@
+$C = "../../../Common.ui";
+$SB = "../SelectorButton.ui";
+
+Group {
+  LayoutMode: Top;
+
+  Group {
+    Anchor: (Bottom: 25);
+    LayoutMode: Top;
+
+    Group #TailModel0 {
+      $SB.@SelectorBlock {
+        @Name = "Mermaidv2 Model";
+      }
+    }
+
+    Group #TailModel1 {
+      $SB.@SelectorBlock {
+        @Name = "Old Big Fin Mermaid";
+      }
+    }
+
+    Group #TailModel2 {
+      $SB.@SelectorBlock {
+        @Name = "Old Small Fin Mermaid";
+      }
+    }
+  }
+}

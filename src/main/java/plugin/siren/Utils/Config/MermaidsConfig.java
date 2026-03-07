@@ -115,6 +115,9 @@ public class MermaidsConfig {
     private boolean DivingTaleCompat = true;
     private boolean DebugMode = false;
 
+    private boolean RequireForceMermaid = false;
+    private boolean ForceOnlyInWater = false;
+
     public MermaidsConfig() {}
 
     public boolean ifConfigUpdate(){
@@ -242,5 +245,21 @@ public class MermaidsConfig {
 
     public boolean ifDebugMode(){
         return DebugMode;
+    }
+
+    public boolean ifRequireForceMermaid(){
+        return this.RequireForceMermaid;
+    }
+
+    public void setRequireForceMermaid(boolean requireForceMermaid){
+        this.RequireForceMermaid = requireForceMermaid;
+    }
+
+    public boolean ifForceMermaidOnlyInWater(){
+        return this.ForceOnlyInWater;
+    }
+
+    public void setForceMermaidOnlyInWater(boolean forceOnlyInWater){
+        this.ForceOnlyInWater = forceOnlyInWater;
     }
 }

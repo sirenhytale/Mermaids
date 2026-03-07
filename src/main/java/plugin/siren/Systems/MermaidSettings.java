@@ -3,7 +3,9 @@ package plugin.siren.Systems;
 import com.hypixel.hytale.codec.Codec;
 import com.hypixel.hytale.codec.KeyedCodec;
 import com.hypixel.hytale.codec.builder.BuilderCodec;
+import com.hypixel.hytale.common.plugin.PluginIdentifier;
 import com.hypixel.hytale.component.Component;
+import com.hypixel.hytale.server.core.HytaleServer;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 
 import javax.annotation.Nullable;
@@ -30,6 +32,14 @@ public class MermaidSettings implements Component<EntityStore> {
             .append(new KeyedCodec<Boolean>("MermaidV2Model", Codec.BOOLEAN),
                     (merSettings, mv2mBool) -> merSettings.mermaidV2Model = mv2mBool, // Setter
                     (merSettings) -> merSettings.mermaidV2Model)                    // Getter
+            .add()
+            .append(new KeyedCodec<Boolean>("ForceMermaidOrbisOrigin", Codec.BOOLEAN),
+                    (merSettings, fmooBool) -> merSettings.forceMermaidOrbisOrigin = fmooBool, // Setter
+                    (merSettings) -> merSettings.forceMermaidOrbisOrigin)                    // Getter
+            .add()
+            .append(new KeyedCodec<Boolean>("ForceMermaid", Codec.BOOLEAN),
+                    (merSettings, fmBool) -> merSettings.forceMermaid = fmBool, // Setter
+                    (merSettings) -> merSettings.forceMermaid)                    // Getter
             .add()
             .build();
 
@@ -66,9 +76,15 @@ public class MermaidSettings implements Component<EntityStore> {
                     (merSettings, fmBool) -> merSettings.forceMermaid = fmBool, // Setter
                     (merSettings) -> merSettings.forceMermaid)                    // Getter
             .add()
+            .append(new KeyedCodec<Boolean>("ForceMermaidOrbisOrigin", Codec.BOOLEAN),
+                    (merSettings, fmooBool) -> merSettings.forceMermaidOrbisOrigin = fmooBool, // Setter
+                    (merSettings) -> merSettings.forceMermaidOrbisOrigin)                    // Getter
+            .add()
             .build();
 
     private boolean forceMermaid;
+    private boolean forceMermaidOrbisOrigin;
+
     private boolean toggleMermaid;
     private boolean permanentPotion;
 
@@ -82,6 +98,8 @@ public class MermaidSettings implements Component<EntityStore> {
 
     public MermaidSettings(){
         this.forceMermaid = false;
+        this.forceMermaidOrbisOrigin = false;
+
         this.toggleMermaid = true;
         this.permanentPotion = false;
 
@@ -96,6 +114,8 @@ public class MermaidSettings implements Component<EntityStore> {
 
     public MermaidSettings(MermaidSettings other){
         this.forceMermaid = other.forceMermaid;
+        this.forceMermaidOrbisOrigin = other.forceMermaidOrbisOrigin;
+
         this.toggleMermaid = other.toggleMermaid;
         this.permanentPotion = other.permanentPotion;
 
@@ -115,11 +135,31 @@ public class MermaidSettings implements Component<EntityStore> {
     }
 
     public boolean isForcedMermaid(){
-        return this.forceMermaid;
+        boolean forcedMermaid = this.forceMermaid;
+
+        if (HytaleServer.get().getPluginManager().getPlugin(PluginIdentifier.fromString("hexvane:OrbisOrigins")) != null) {
+            forcedMermaid = forceMermaidOrbisOrigin || this.forceMermaid;
+        }
+
+        return forcedMermaid;
     }
 
     public void setForcedMermaid(boolean forcedMermaid){
         this.forceMermaid = forcedMermaid;
+    }
+
+    public boolean isForcedMermaidOrbisOrigin(){
+        boolean forcedMermaid = false;
+
+        if (HytaleServer.get().getPluginManager().getPlugin(PluginIdentifier.fromString("hexvane:OrbisOrigins")) != null) {
+            forcedMermaid = forceMermaidOrbisOrigin;
+        }
+
+        return forcedMermaid;
+    }
+
+    public void setForcedMermaidOrbisOrigin(boolean forcedMermaid){
+        this.forceMermaidOrbisOrigin = forcedMermaid;
     }
 
     public boolean getToggleMermaid(){

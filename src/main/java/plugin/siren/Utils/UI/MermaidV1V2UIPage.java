@@ -13,6 +13,7 @@ import com.hypixel.hytale.server.core.asset.type.model.config.Model;
 import com.hypixel.hytale.server.core.asset.type.model.config.ModelAsset;
 import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.entity.entities.player.pages.InteractiveCustomUIPage;
+import com.hypixel.hytale.server.core.ui.Value;
 import com.hypixel.hytale.server.core.ui.builder.EventData;
 import com.hypixel.hytale.server.core.ui.builder.UICommandBuilder;
 import com.hypixel.hytale.server.core.ui.builder.UIEventBuilder;
@@ -25,137 +26,241 @@ import plugin.siren.Systems.MermaidSettings;
 
 import javax.annotation.Nonnull;
 
-public class MermaidV1V2UIPage extends InteractiveCustomUIPage<MermaidV1V2UIPage.MermaidSelectData> {
+public class MermaidV1V2UIPage extends InteractiveCustomUIPage<MermaidV1V2UIPage.MermaidV1V2UIEventData> {
+    private static final Value<String> CATEGORY_BUTTON_STYLE = Value.ref("Pages/UIGallery/CategoryButton.ui", "LabelStyle");
+    private static final Value<String> CATEGORY_BUTTON_SELECTED_STYLE = Value.ref("Pages/UIGallery/CategoryButton.ui", "SelectedLabelStyle");
+    private MermaidV1V2UIPage.Category selectedCategory = Category.MODEL;
 
-    public static class MermaidSelectData {
-
-        public static final BuilderCodec<MermaidSelectData> CODEC = BuilderCodec.builder(MermaidSelectData.class, MermaidSelectData::new)
-                .append(new KeyedCodec<>("@MermaidTail", Codec.STRING),
-                        (MermaidSelectData merData, String mTail) -> merData.mermaidTail = mTail,
-                        (MermaidSelectData merData) -> merData.mermaidTail)
-                .add()
-                .append(new KeyedCodec<>("@TailColor", Codec.STRING),
-                        (MermaidSelectData merData, String tColor) -> merData.tailColor = tColor,
-                        (MermaidSelectData merData) -> merData.tailColor)
-                .add()
-                .build();
-
-        private String mermaidTail = "ModelTail";
-        private String tailColor = "TailColor";
-
-        public String getMermaidTail(){
-            return mermaidTail;
-        }
-
-        public String getTailColor() {
-            return tailColor;
-        }
-    }
-
-    public MermaidV1V2UIPage(@Nonnull PlayerRef playerRef){
-        super(playerRef, CustomPageLifetime.CanDismissOrCloseThroughInteraction, MermaidSelectData.CODEC);
+    public MermaidV1V2UIPage(@Nonnull PlayerRef playerRef) {
+        super(playerRef, CustomPageLifetime.CanDismiss, MermaidV1V2UIPage.MermaidV1V2UIEventData.CODEC);
     }
 
     @Override
-    public void build(@Nonnull Ref<EntityStore> ref, @Nonnull UICommandBuilder command, @Nonnull UIEventBuilder event, @Nonnull Store<EntityStore> store){
-        command.append("Pages/MermaidUIPage.ui");
-
-        event.addEventBinding(CustomUIEventBindingType.Activating, "#OriginalMermaidSmallFinButton", new EventData().append("@MermaidTail", "#MermaidPlayer.Value"));
-        event.addEventBinding(CustomUIEventBindingType.Activating, "#OriginalMermaidBigFinButton", new EventData().append("@MermaidTail", "#MermaidBigFinPlayer.Value"));
-        event.addEventBinding(CustomUIEventBindingType.Activating, "#MermaidV2Button", new EventData().append("@MermaidTail", "#MermaidV2.Value"));
-
-        event.addEventBinding(CustomUIEventBindingType.Activating, "#OrangeTailColorButton", new EventData().append("@TailColor", "#OrangeTailColor.Value"));
-        event.addEventBinding(CustomUIEventBindingType.Activating, "#YellowTailColorButton", new EventData().append("@TailColor", "#YellowTailColor.Value"));
-        event.addEventBinding(CustomUIEventBindingType.Activating, "#RedTailColorButton", new EventData().append("@TailColor", "#RedTailColor.Value"));
-        event.addEventBinding(CustomUIEventBindingType.Activating, "#BlueTailColorButton", new EventData().append("@TailColor", "#BlueTailColor.Value"));
-        event.addEventBinding(CustomUIEventBindingType.Activating, "#DBlueTailColorButton", new EventData().append("@TailColor", "#DBlueTailColor.Value"));
-        event.addEventBinding(CustomUIEventBindingType.Activating, "#PurpleTailColorButton", new EventData().append("@TailColor", "#PurpleTailColor.Value"));
-        event.addEventBinding(CustomUIEventBindingType.Activating, "#DPurpleTailColorButton", new EventData().append("@TailColor", "#DPurpleTailColor.Value"));
-        event.addEventBinding(CustomUIEventBindingType.Activating, "#PinkTailColorButton", new EventData().append("@TailColor", "#PinkTailColor.Value"));
-        event.addEventBinding(CustomUIEventBindingType.Activating, "#LimeTailColorButton", new EventData().append("@TailColor", "#LimeTailColor.Value"));
+    public void build(
+            @Nonnull Ref<EntityStore> ref, @Nonnull UICommandBuilder commandBuilder, @Nonnull UIEventBuilder eventBuilder, @Nonnull Store<EntityStore> store
+    ) {
+        commandBuilder.append("Pages/MermaidV1V2UI/MermaidUIPage.ui");
+        this.buildCategoryList(commandBuilder, eventBuilder);
+        this.displayCategory(this.selectedCategory, commandBuilder, eventBuilder);
     }
 
-    @Override
-    public void handleDataEvent(@Nonnull Ref<EntityStore> ref, @Nonnull Store<EntityStore> store, @Nonnull MermaidSelectData data){
+    public void handleDataEvent(@Nonnull Ref<EntityStore> ref, @Nonnull Store<EntityStore> store, @Nonnull MermaidV1V2UIPage.MermaidV1V2UIEventData data) {
         Player player = store.getComponent(ref, Player.getComponentType());
-
-        String mermaidTail = data.getMermaidTail();
-        String tailColor = data.getTailColor();
 
         MermaidComponent mermaid = store.getComponent(ref, Mermaids.get().getMermaidComponentType());
         MermaidSettings mermaidSettings = store.getComponent(ref, Mermaids.get().getMermaidSetingsComponentType());
 
-        if(!mermaidTail.equals("ModelTail")) {
-            String oldMermaidTail = mermaidSettings.getMermaidTail();
-
-            mermaidSettings.setMermaidTail(mermaidTail);
-
-            String msgMerTail = "ERROR GETTING TAIL";
-            if (mermaidTail.equals("MermaidPlayer")) {
-                msgMerTail = "Small Fin";
-            } else if (mermaidTail.equals("MermaidBigFinPlayer")) {
-                msgMerTail = "Big Fin";
-            } else if (mermaidTail.equals("MermaidV2")) {
-                msgMerTail = "ModelV2";
-            }
-
-            player.sendMessage(Message.raw("You have selected the " + msgMerTail + " mermaid tail."));
-            Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " has switched the Mermaid tail to " + msgMerTail + ".");
-
-            if (!oldMermaidTail.equals(mermaidTail) && mermaid.isMermaid()) {
-                ModelAsset modelAsset = ModelAsset.getAssetMap().getAsset(mermaidTail);
-                if (modelAsset == null) {
-                    player.sendMessage(Message.raw("Mermaids: Error: MermaidUIPage: " + mermaidTail + " Model not found"));
-                    Mermaids.LOGGER.atSevere().log(player.getDisplayName() + " had an error of getting the Mermaid Model. Error: MermaidUIPage: " + mermaidTail + " Model not found.");
-                } else {
-                    ModelHelper.applySkin(Model.createUnitScaleModel(modelAsset), mermaid.getMermaidSkin().clone(), ref, mermaid, mermaidSettings);
+        if(mermaid != null && mermaidSettings != null) {
+            UICommandBuilder commandBuilder = new UICommandBuilder();
+            UIEventBuilder eventBuilder = new UIEventBuilder();
+            if (data.category != null) {
+                MermaidV1V2UIPage.Category newCategory = MermaidV1V2UIPage.Category.fromId(data.category);
+                if (newCategory != this.selectedCategory) {
+                    int oldIndex = this.selectedCategory.ordinal();
+                    commandBuilder.set("#CategoryList[" + oldIndex + "].Style", CATEGORY_BUTTON_STYLE);
+                    int newIndex = newCategory.ordinal();
+                    commandBuilder.set("#CategoryList[" + newIndex + "].Style", CATEGORY_BUTTON_SELECTED_STYLE);
+                    this.selectedCategory = newCategory;
+                    this.displayCategory(this.selectedCategory, commandBuilder, eventBuilder);
                 }
-            }
-        }else if(!tailColor.equals("TailColor")){
-            String oldTailColor = mermaidSettings.getTailColor();
 
-            mermaidSettings.setTailColor(tailColor);
+                this.sendUpdate(commandBuilder, eventBuilder, false);
+            } else if (data.tailModel != null) {
+                boolean closeUI = false;
 
-            String msgTailColor = "ERROR GETTING COLOR";
-            if (tailColor.equals("MermaidPlayerGrayscale")) {
-                msgTailColor = "Orange";
-            } else if (tailColor.equals("MermaidPlayerYellow")) {
-                msgTailColor = "Yellow";
-            } else if (tailColor.equals("MermaidPlayerRed")) {
-                msgTailColor = "Red";
-            } else if (tailColor.equals("MermaidPlayerBlue")) {
-                msgTailColor = "Light Blue";
-            } else if (tailColor.equals("MermaidPlayerDBlue")) {
-                msgTailColor = "Blue";
-            } else if (tailColor.equals("MermaidPlayerPurple")) {
-                msgTailColor = "Light Purple";
-            } else if (tailColor.equals("MermaidPlayerDPurple")) {
-                msgTailColor = "Purple";
-            } else if (tailColor.equals("MermaidPlayerPink")) {
-                msgTailColor = "Pink";
-            } else if (tailColor.equals("MermaidPlayerLime")) {
-                msgTailColor = "Green";
-            }
-
-            player.sendMessage(Message.raw("You have selected the " + msgTailColor + " tail color."));
-            Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " has switched the Mermaid tail color to " + msgTailColor + ".");
-
-            String activeMermaidTail = mermaidSettings.getMermaidTail();
-
-            if (!oldTailColor.equals(tailColor) && mermaid.isMermaid()) {
-                ModelAsset modelAsset = ModelAsset.getAssetMap().getAsset(activeMermaidTail);
-                if (modelAsset == null) {
-                    player.sendMessage(Message.raw("Mermaids: Error: MermaidUIPage: " + activeMermaidTail + " Model not found"));
-                    Mermaids.LOGGER.atSevere().log(player.getDisplayName() + " had an error of getting the Mermaid Model. Error: MermaidUIPage: " + activeMermaidTail + " Model not found.");
-                } else {
-                    ModelHelper.applySkin(Model.createUnitScaleModel(modelAsset), mermaid.getMermaidSkin().clone(), ref, mermaid, mermaidSettings);
+                String msgMerTail = "ERROR GETTING TAIL";
+                String mermaidTailPath = "MermaidV2";
+                if (data.tailModel.equalsIgnoreCase("0")) {
+                    msgMerTail = "MermaidV2 Model";
+                    mermaidTailPath = "MermaidV2";
+                    closeUI = true;
+                } else if (data.tailModel.equalsIgnoreCase("1")) {
+                    msgMerTail = "Old Big Fin";
+                    mermaidTailPath = "MermaidBigFinPlayer";
+                } else if (data.tailModel.equalsIgnoreCase("2")) {
+                    msgMerTail = "Old Small Fin";
+                    mermaidTailPath = "MermaidPlayer";
                 }
+
+                player.sendMessage(Message.raw("You have selected the " + msgMerTail + " mermaid tail."));
+                Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " has switched the Mermaid tail to " + msgMerTail + ".");
+
+                String oldMermaidTail = mermaidSettings.getMermaidTail();
+                mermaidSettings.setMermaidTail(mermaidTailPath);
+
+                if (!oldMermaidTail.equals(mermaidTailPath) && mermaid.isMermaid()) {
+                    ModelAsset modelAsset = ModelAsset.getAssetMap().getAsset(mermaidTailPath);
+                    if (modelAsset == null) {
+                        player.sendMessage(Message.raw("Mermaids: Error: MermaidV2UIPage: " + mermaidTailPath + " Model not found"));
+                        Mermaids.LOGGER.atSevere().log(player.getDisplayName() + " had an error of getting the Mermaid Model. Error: MermaidV2UIPage: " + mermaidTailPath + " Model not found.");
+                    } else {
+                        ModelHelper.applySkin(Model.createUnitScaleModel(modelAsset), mermaid.getMermaidSkin().clone(), ref, mermaid, mermaidSettings);
+                    }
+                }
+
+                this.sendUpdate(commandBuilder, eventBuilder, false);
+
+                if(closeUI){
+                    player.getPageManager().setPage(ref, store, Page.None);
+                }
+            } else if (data.tailColor != null) {
+                String msgTailColor = "ERROR GETTING COLOR";
+                String mermaidTailColorPath = "MermaidPlayerGrayscale";
+                if (data.tailColor.equalsIgnoreCase("0")) {
+                    msgTailColor = "Orange";
+                    mermaidTailColorPath = "MermaidPlayerGrayscale";
+                } else if (data.tailColor.equalsIgnoreCase("1")) {
+                    msgTailColor = "Yellow";
+                    mermaidTailColorPath = "MermaidPlayerYellow";
+                } else if (data.tailColor.equalsIgnoreCase("2")) {
+                    msgTailColor = "Red";
+                    mermaidTailColorPath = "MermaidPlayerRed";
+                } else if (data.tailColor.equalsIgnoreCase("3")) {
+                    msgTailColor = "Light Blue";
+                    mermaidTailColorPath = "MermaidPlayerBlue";
+                } else if (data.tailColor.equalsIgnoreCase("4")) {
+                    msgTailColor = "Blue";
+                    mermaidTailColorPath = "MermaidPlayerDBlue";
+                } else if (data.tailColor.equalsIgnoreCase("5")) {
+                    msgTailColor = "Light Purple";
+                    mermaidTailColorPath = "MermaidPlayerPurple";
+                } else if (data.tailColor.equalsIgnoreCase("6")) {
+                    msgTailColor = "Purple";
+                    mermaidTailColorPath = "MermaidPlayerDPurple";
+                } else if (data.tailColor.equalsIgnoreCase("7")) {
+                    msgTailColor = "Pink";
+                    mermaidTailColorPath = "MermaidPlayerPink";
+                } else if (data.tailColor.equalsIgnoreCase("8")) {
+                    msgTailColor = "Green";
+                    mermaidTailColorPath = "MermaidPlayerLime";
+                }
+
+                player.sendMessage(Message.raw("You have selected the " + msgTailColor + " tail color."));
+                Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " has switched the Mermaid tail color to " + msgTailColor + ".");
+
+                String oldTailColor = mermaidSettings.getTailColor();
+                mermaidSettings.setTailColor(mermaidTailColorPath);
+
+                String activeMermaidTail = mermaidSettings.getMermaidTail();
+                if (!oldTailColor.equals(mermaidTailColorPath) && mermaid.isMermaid()) {
+                    ModelAsset modelAsset = ModelAsset.getAssetMap().getAsset(activeMermaidTail);
+                    if (modelAsset == null) {
+                        player.sendMessage(Message.raw("Mermaids: Error: MermaidV1V2UIPage: " + activeMermaidTail + " Model not found"));
+                        Mermaids.LOGGER.atSevere().log(player.getDisplayName() + " had an error of getting the Mermaid Model. Error: MermaidV1V2UIPage: " + activeMermaidTail + " Model not found.");
+                    } else {
+                        ModelHelper.applySkin(Model.createUnitScaleModel(modelAsset), mermaid.getMermaidSkin().clone(), ref, mermaid, mermaidSettings);
+                    }
+                }
+
+                this.sendUpdate(commandBuilder, eventBuilder, false);
             }
         }else{
-            player.sendMessage(Message.raw("Mermaids: Error: MermaidUIPage: Failed to get Mermaid Model and/or Tail color"));
-            Mermaids.LOGGER.atSevere().log(player.getDisplayName() + " had an error of getting the Mermaid Model. Error: MermaidUIPage: Failed to get Mermaid Model and/or Tail color.");
+            Mermaids.LOGGER.atFine().log("Mermaids: Error: MermaidV1V2UIPage: Failed to load Mermaid Component and/or Mermaid Settings Component : handleDataEvent");
+        }
+    }
+
+    private void buildCategoryList(@Nonnull UICommandBuilder commandBuilder, @Nonnull UIEventBuilder eventBuilder) {
+        commandBuilder.clear("#CategoryList");
+
+        for (int i = 0; i < MermaidV1V2UIPage.Category.values().length; i++) {
+            MermaidV1V2UIPage.Category category = MermaidV1V2UIPage.Category.values()[i];
+            commandBuilder.append("#CategoryList", "Pages/UIGallery/CategoryButton.ui");
+            commandBuilder.set("#CategoryList[" + i + "].TextSpans", Message.translation(category.getNameKey()));
+            if (category == this.selectedCategory) {
+                commandBuilder.set("#CategoryList[" + i + "].Style", CATEGORY_BUTTON_SELECTED_STYLE);
+            }
+
+            eventBuilder.addEventBinding(CustomUIEventBindingType.Activating, "#CategoryList[" + i + "]", EventData.of("Category", category.getId()));
+        }
+    }
+
+    private void displayCategory(@Nonnull MermaidV1V2UIPage.Category category, @Nonnull UICommandBuilder commandBuilder, @Nonnull UIEventBuilder eventBuilder) {
+        commandBuilder.set("#CategoryTitle.TextSpans", Message.translation(category.getNameKey()));
+        commandBuilder.clear("#CategoryContent");
+        commandBuilder.append("#CategoryContent", category.getContentPath());
+
+        if(category.id.equalsIgnoreCase("model")) {
+            for (int i = 0; i < category.getTailSelectionCount(); i++) {
+                String selector = "#CategoryContent #TailModel" + i + " #Selector";
+                eventBuilder.addEventBinding(CustomUIEventBindingType.Activating, selector, EventData.of("TailModel", String.valueOf(i)));
+            }
+        } else if(category.id.equalsIgnoreCase("color")) {
+            for (int i = 0; i < category.getTailSelectionCount(); i++) {
+                String selector = "#CategoryContent #TailColor" + i + " #Selector";
+                eventBuilder.addEventBinding(CustomUIEventBindingType.Activating, selector, EventData.of("TailColor", String.valueOf(i)));
+            }
+        }
+    }
+
+    private static enum Category {
+        MODEL(
+                "model",
+                "server.customUI.mermaid.category.model",
+                "Pages/MermaidV1V2UI/Categories/TailModelContent.ui",
+                3
+        ),
+        COLOR(
+                "color",
+                "server.customUI.mermaid.category.color",
+                "Pages/MermaidV1V2UI/Categories/TailColorContent.ui",
+                9
+        );
+
+        private final String id;
+        private final String nameKey;
+        private final String contentPath;
+        private final int tailSelectionCount;
+
+        private Category(String id, String nameKey, String contentPath, int tailSelectionCount) {
+            this.id = id;
+            this.nameKey = nameKey;
+            this.contentPath = contentPath;
+            this.tailSelectionCount = tailSelectionCount;
         }
 
-        player.getPageManager().setPage(ref, store, Page.None);
+        public String getId() {
+            return this.id;
+        }
+
+        public String getNameKey() {
+            return this.nameKey;
+        }
+
+        public String getContentPath() {
+            return this.contentPath;
+        }
+
+        public int getTailSelectionCount(){
+            return this.tailSelectionCount;
+        }
+
+        public static MermaidV1V2UIPage.Category fromId(String id) {
+            for (MermaidV1V2UIPage.Category category : values()) {
+                if (category.id.equals(id)) {
+                    return category;
+                }
+            }
+
+            return MODEL;
+        }
+    }
+
+    public static class MermaidV1V2UIEventData {
+        static final String KEY_CATEGORY = "Category";
+        static final String KEY_TAIL_MODEL = "TailModel";
+        static final String KEY_TAIL_COLOR = "TailColor";
+        public static final BuilderCodec<MermaidV1V2UIEventData> CODEC = BuilderCodec.builder(
+                        MermaidV1V2UIPage.MermaidV1V2UIEventData.class, MermaidV1V2UIPage.MermaidV1V2UIEventData::new
+                )
+                .addField(new KeyedCodec<>("Category", Codec.STRING), (entry, s) -> entry.category = s, entry -> entry.category)
+                .addField(new KeyedCodec<>("TailModel", Codec.STRING), (entry, s) -> entry.tailModel = s, entry -> entry.tailModel)
+                .addField(new KeyedCodec<>("TailColor", Codec.STRING), (entry, s) -> entry.tailColor = s, entry -> entry.tailColor)
+                .build();
+        private String category;
+        private String tailModel;
+        private String tailColor;
+
+        public MermaidV1V2UIEventData() {
+        }
     }
 }

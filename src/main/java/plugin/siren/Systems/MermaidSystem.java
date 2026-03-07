@@ -225,10 +225,12 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
             boolean mermaidPotionEffect = mermaid.isPotionEffectTransformation();
             boolean mermaidOnLand = Mermaids.getConfig().get().getMermaidOnLand();
 
-            boolean forcedMermaid = mermaidSettings.isForcedMermaid();
+            boolean requireForcedMermaid = Mermaids.getConfig().get().ifRequireForceMermaid();
+            boolean forcedMermaid = requireForcedMermaid && mermaidSettings.isForcedMermaid() && !Mermaids.getConfig().get().ifForceMermaidOnlyInWater();
+            boolean forcedMermaidWater = requireForcedMermaid && mermaidSettings.isForcedMermaid() && Mermaids.getConfig().get().ifForceMermaidOnlyInWater();
 
             //Checks to see if in water / other transformation methods
-            if (((((movementStatesTransform || h2OorRain || inFluidBlock) && (transModeZero || (permMerPotion))) || mermaidPotionEffect || (mermaidOnLand && (transModeZero || permMerPotion))) && toggleMermaid && transformPermission) || forcedMermaid) {
+            if (((((movementStatesTransform || h2OorRain || inFluidBlock) && (transModeZero || (permMerPotion))) || mermaidPotionEffect || (mermaidOnLand && (transModeZero || permMerPotion))) && toggleMermaid && transformPermission && (!requireForcedMermaid || forcedMermaidWater)) || forcedMermaid) {
 
                 if (!mermaid.isUnderwater()) {
                     mermaid.setUnderwater(true);
@@ -256,7 +258,7 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                 }
 
                 //Began transformation into Mermaid
-                if ((!mermaid.isMermaid() && mermaid.getElapsedTime() >= 35f) || (!mermaid.isMermaid() && forcedMermaid)) {
+                if ((!mermaid.isMermaid() && mermaid.getElapsedTime() >= 35f) || (!mermaid.isMermaid() && (forcedMermaid || forcedMermaidWater))) {
                     if (Mermaids.ifDebug()) {
                         player.sendMessage(Message.raw("Now Swimming (35 ticks)"));
                     }
@@ -439,51 +441,59 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                 }
             }
 
-            if ((mermaid.isMermaid() && mermaidSettings.getToggleMermaid() && transformPermission) || (forcedMermaid && mermaid.isMermaid())) {
+            if ((mermaid.isMermaid() && mermaidSettings.getToggleMermaid() && transformPermission) || ((forcedMermaid || forcedMermaidWater) && mermaid.isMermaid())) {
                 boolean onLand = false;
                 MovementManager movement = commandBuffer.getComponent(ref, MovementManager.getComponentType());
                 if(movement != null) {
                     if (movementState.getMovementStates().swimming || movementState.getMovementStates().swimJumping || movementState.getMovementStates().inFluid ||
                             (mermaid.isInFluidBlock() && (movementState.getMovementStates().sitting || movementState.getMovementStates().sleeping))) {
-                        ItemStack itemInHand = player.getInventory().getItemInHand();
-                        if(itemInHand != null && itemInHand.getItemId().equalsIgnoreCase("weapon_spear_fishbone")){
-                            movement.getSettings().swimJumpForce = 16f;
-                            movement.getSettings().baseSpeed = 15f;
-                            movement.getSettings().forwardCrouchSpeedMultiplier = 1f;
-                            movement.getSettings().backwardCrouchSpeedMultiplier = 0.9f;
-                            movement.getSettings().forwardSprintSpeedMultiplier = 2.05f;
+                        if(Mermaids.getConfig().get().getItemIncreaseSwimSpeed()) {
+                            ItemStack itemInHand = player.getInventory().getItemInHand();
+                            if (itemInHand != null && itemInHand.getItemId().equalsIgnoreCase("weapon_spear_fishbone")) {
+                                movement.getSettings().swimJumpForce = 16f;
+                                movement.getSettings().baseSpeed = 15f;
+                                movement.getSettings().forwardCrouchSpeedMultiplier = 1f;
+                                movement.getSettings().backwardCrouchSpeedMultiplier = 0.9f;
+                                movement.getSettings().forwardSprintSpeedMultiplier = 2.05f;
+                            } else {
+                                movement.getSettings().swimJumpForce = 14.5f;
+                                movement.getSettings().baseSpeed = 11.5f;
+                                movement.getSettings().forwardCrouchSpeedMultiplier = 1f;
+                                movement.getSettings().backwardCrouchSpeedMultiplier = 0.8f;
+                                movement.getSettings().forwardSprintSpeedMultiplier = 1.85f;
+                            }
+
+                            if (Mermaids.getConfig().get().getDivingTaleCompat()) {
+                                if (itemInHand != null &&
+                                        (itemInHand.getItemId().equalsIgnoreCase("Harpoon_Copper") || itemInHand.getItemId().equalsIgnoreCase("Harpoon_Iron"))) {
+                                    movement.getSettings().swimJumpForce = 15.25f;
+                                    movement.getSettings().baseSpeed = 13f;
+                                    movement.getSettings().forwardCrouchSpeedMultiplier = 1f;
+                                    movement.getSettings().backwardCrouchSpeedMultiplier = 0.85f;
+                                    movement.getSettings().forwardSprintSpeedMultiplier = 1.9f;
+                                } else if (itemInHand != null &&
+                                        (itemInHand.getItemId().equalsIgnoreCase("Harpoon_Thorium") || itemInHand.getItemId().equalsIgnoreCase("Harpoon_Cobalt")
+                                                || itemInHand.getItemId().equalsIgnoreCase("Harpoon_Adamantite"))) {
+                                    movement.getSettings().swimJumpForce = 16f;
+                                    movement.getSettings().baseSpeed = 15f;
+                                    movement.getSettings().forwardCrouchSpeedMultiplier = 1f;
+                                    movement.getSettings().backwardCrouchSpeedMultiplier = 0.9f;
+                                    movement.getSettings().forwardSprintSpeedMultiplier = 2.05f;
+                                } else if (itemInHand != null &&
+                                        (itemInHand.getItemId().equalsIgnoreCase("Harpoon_Mithril"))) {
+                                    movement.getSettings().swimJumpForce = 17f;
+                                    movement.getSettings().baseSpeed = 16.5f;
+                                    movement.getSettings().forwardCrouchSpeedMultiplier = 1f;
+                                    movement.getSettings().backwardCrouchSpeedMultiplier = 0.95f;
+                                    movement.getSettings().forwardSprintSpeedMultiplier = 2.15f;
+                                }
+                            }
                         }else{
                             movement.getSettings().swimJumpForce = 14.5f;
                             movement.getSettings().baseSpeed = 11.5f;
                             movement.getSettings().forwardCrouchSpeedMultiplier = 1f;
                             movement.getSettings().backwardCrouchSpeedMultiplier = 0.8f;
                             movement.getSettings().forwardSprintSpeedMultiplier = 1.85f;
-                        }
-
-                        if(Mermaids.getConfig().get().getDivingTaleCompat()){
-                            if(itemInHand != null &&
-                                    (itemInHand.getItemId().equalsIgnoreCase("Harpoon_Copper") || itemInHand.getItemId().equalsIgnoreCase("Harpoon_Iron"))){
-                                movement.getSettings().swimJumpForce = 15.25f;
-                                movement.getSettings().baseSpeed = 13f;
-                                movement.getSettings().forwardCrouchSpeedMultiplier = 1f;
-                                movement.getSettings().backwardCrouchSpeedMultiplier = 0.85f;
-                                movement.getSettings().forwardSprintSpeedMultiplier = 1.9f;
-                            }else if(itemInHand != null &&
-                                    (itemInHand.getItemId().equalsIgnoreCase("Harpoon_Thorium") || itemInHand.getItemId().equalsIgnoreCase("Harpoon_Cobalt")
-                                    || itemInHand.getItemId().equalsIgnoreCase("Harpoon_Adamantite"))){
-                                movement.getSettings().swimJumpForce = 16f;
-                                movement.getSettings().baseSpeed = 15f;
-                                movement.getSettings().forwardCrouchSpeedMultiplier = 1f;
-                                movement.getSettings().backwardCrouchSpeedMultiplier = 0.9f;
-                                movement.getSettings().forwardSprintSpeedMultiplier = 2.05f;
-                            }else if(itemInHand != null &&
-                                    (itemInHand.getItemId().equalsIgnoreCase("Harpoon_Mithril"))){
-                                movement.getSettings().swimJumpForce = 17f;
-                                movement.getSettings().baseSpeed = 16.5f;
-                                movement.getSettings().forwardCrouchSpeedMultiplier = 1f;
-                                movement.getSettings().backwardCrouchSpeedMultiplier = 0.95f;
-                                movement.getSettings().forwardSprintSpeedMultiplier = 2.15f;
-                            }
                         }
                     } else {
                         movement.getSettings().jumpForce = 8f;

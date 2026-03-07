@@ -1,0 +1,65 @@
+$C = "../../../Common.ui";
+$SB = "../SelectorButton.ui";
+
+Group {
+  LayoutMode: Top;
+
+  Group {
+    Anchor: (Bottom: 25);
+    LayoutMode: Top;
+
+    Group #TailColor0 {
+      $SB.@SelectorBlock {
+        @Name = "Orange Tail";
+      }
+    }
+
+    Group #TailColor1 {
+      $SB.@SelectorBlock {
+        @Name = "Yellow Tail";
+      }
+    }
+
+    Group #TailColor2 {
+      $SB.@SelectorBlock {
+        @Name = "Red Tail";
+      }
+    }
+
+    Group #TailColor3 {
+      $SB.@SelectorBlock {
+        @Name = "Light Blue Tail";
+      }
+    }
+
+    Group #TailColor4 {
+      $SB.@SelectorBlock {
+        @Name = "Blue Tail";
+      }
+    }
+
+    Group #TailColor5 {
+      $SB.@SelectorBlock {
+        @Name = "Light Purple Tail";
+      }
+    }
+
+    Group #TailColor6 {
+      $SB.@SelectorBlock {
+        @Name = "Purple Tail";
+      }
+    }
+
+    Group #TailColor7 {
+      $SB.@SelectorBlock {
+        @Name = "Pink Tail";
+      }
+    }
+
+    Group #TailColor8 {
+      $SB.@SelectorBlock {
+        @Name = "Green Tail";
+      }
+    }
+  }
+}
