@@ -18,7 +18,9 @@
     "x-nrdev:[x-nrdev] DivingTale": "*",
     "HelpChat:PlaceholderAPI": ">= 1.0.2",
     "hexvane:OrbisOrigins": "*",
-    "Hardaway:Wardrobe": "*"
+    "Hardaway:Wardrobe": "*",
+    "IwakuraEnterprises:Voile": "*",
+    "Buuz135:BetterModlist": "*"
   },
   "LoadBefore": {},
   "DisabledByDefault": false,

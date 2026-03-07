@@ -1,0 +1,33 @@
+{
+  "documentations": [
+    {
+      "group": "Siren",
+      "id": "Mermaids",
+      "name": "Mermaids",
+      "enabled": true,
+      "sortIndex": 300,
+      "topics": [
+        {
+          "file": "index.md"
+        },
+        {
+          "file": "serverowners.md",
+          "subTopics": [
+            {
+              "file": "ServerOwners/commands.md"
+            },
+            {
+              "file": "ServerOwners/config.md"
+            },
+            {
+              "file": "ServerOwners/permissions.md"
+            },
+            {
+              "file": "ServerOwners/compatibilities.md"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

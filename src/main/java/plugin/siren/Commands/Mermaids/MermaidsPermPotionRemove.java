@@ -31,6 +31,8 @@ public class MermaidsPermPotionRemove extends AbstractPlayerCommand {
 
         player.sendMessage(Message.raw("You have removed the permanent mermaid potion effect from yourself."));
 
-        Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " has removed the permanent mermaid potion effect from themselves.");
+        if(Mermaids.getConfig().get().ifConsoleLogs()) {
+            Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " has removed the permanent mermaid potion effect from themselves.");
+        }
     }
 }

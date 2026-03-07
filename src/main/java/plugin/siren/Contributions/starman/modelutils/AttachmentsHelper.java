@@ -6,6 +6,7 @@ import com.hypixel.hytale.server.core.cosmetics.CosmeticRegistry;
 import com.hypixel.hytale.server.core.cosmetics.CosmeticType;
 import com.hypixel.hytale.server.core.cosmetics.CosmeticsModule;
 import com.hypixel.hytale.server.core.cosmetics.PlayerSkinPart;
+import plugin.siren.Mermaids;
 
 import javax.annotation.Nullable;
 import java.lang.reflect.Field;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
  * Link: https://github.com/SyperAI/hytale-model-utils
  *
  * Modified: Siren
- * Date: 2026/03/06
+ * Date: 2026/03/07
  *
  */
 
@@ -88,7 +89,10 @@ public class AttachmentsHelper {
             addAttachment(attachments, skinPart, gradientId, skinPartVariant);
         }
 
-        //System.out.println(attachments);
+        if(Mermaids.ifDebug()){
+            Mermaids.LOGGER.atInfo().log(attachments.toString());
+        }
+
         return attachments.toArray(new ModelAttachment[0]);
     }
 }

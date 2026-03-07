@@ -67,11 +67,15 @@ public class MermaidCompBugCmd extends AbstractPlayerCommand {
 
                 player.sendMessage(Message.raw("You now have the Mermaid Component!"));
 
-                Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " now has the Mermaid Component.");
+                if(Mermaids.getConfig().get().ifConsoleLogs()) {
+                    Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " now has the Mermaid Component.");
+                }
             }else{
                 player.sendMessage(Message.raw("You already have the Mermaid Component!"));
 
-                Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " tried to receive Mermaid Component in Bug Fix Cmd but already has it.");
+                if(Mermaids.getConfig().get().ifConsoleLogs()) {
+                    Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " tried to receive Mermaid Component in Bug Fix Cmd but already has it.");
+                }
             }
 
             MermaidSettings merSett = store.getComponent(ref, Mermaids.get().getMermaidSetingsComponentType());
@@ -80,17 +84,17 @@ public class MermaidCompBugCmd extends AbstractPlayerCommand {
 
                 store.putComponent(ref, Mermaids.get().getMermaidSetingsComponentType(), mermaidSettings);
 
-                if (Mermaids.ifDebug()) {
-                    player.sendMessage(Message.raw("You now have the Mermaid Settings Component!"));
-                }
+                player.sendMessage(Message.raw("You now have the Mermaid Settings Component!"));
 
-                Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " now has the Mermaid Settings Component.");
+                if(Mermaids.getConfig().get().ifConsoleLogs()) {
+                    Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " now has the Mermaid Settings Component.");
+                }
             }else{
-                if (Mermaids.ifDebug()) {
-                    player.sendMessage(Message.raw("You already have the Mermaid Settings Component!"));
-                }
+                player.sendMessage(Message.raw("You already have the Mermaid Settings Component!"));
 
-                Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " tried to receive Mermaid Settings Component but already has it.");
+                if(Mermaids.getConfig().get().ifConsoleLogs()) {
+                    Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " tried to receive Mermaid Settings Component but already has it.");
+                }
             }
         });
     }

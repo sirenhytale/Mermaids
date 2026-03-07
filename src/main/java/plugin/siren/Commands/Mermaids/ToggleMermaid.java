@@ -43,6 +43,8 @@ public class ToggleMermaid extends AbstractPlayerCommand {
         }
         player.sendMessage(Message.raw("You have " + toggledStr + " transforming into a mermaid."));
 
-        Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " has toggled transforming into a Mermaid: " + String.valueOf(merToggle) + ".");
+        if(Mermaids.getConfig().get().ifConsoleLogs()) {
+            Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " has toggled transforming into a Mermaid: " + String.valueOf(merToggle) + ".");
+        }
     }
 }

@@ -313,7 +313,10 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
 
                     mermaid.setArmorElapsedTime(0f);
                     mermaid.setMermaid(true);
-                    Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " has transformed into a Mermaid.");
+
+                    if(Mermaids.getConfig().get().ifConsoleLogs()) {
+                        Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " has transformed into a Mermaid.");
+                    }
                 }
             } else if (mermaid.isMermaid() || mermaid.isUnderwater()) {
                 mermaid.setUnderwater(false);
@@ -353,7 +356,9 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                         PlayerSkinComponent skinComponent = (PlayerSkinComponent) mermaid.getPlayerSkinComponent().clone();
                         commandBuffer.replaceComponent(ref, PlayerSkinComponent.getComponentType(), skinComponent);
 
-                        Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " has transformed back into a Human.");
+                        if(Mermaids.getConfig().get().ifConsoleLogs()) {
+                            Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " has transformed back into a Human.");
+                        }
                     } else {
                         player.sendMessage(Message.raw("Mermaids: Error: WaterSystem: Mermaid Component == null [water.isDrying]"));
                         Mermaids.LOGGER.atSevere().log(player.getDisplayName() + " had an error of getting the Mermaid Component. Error: WaterSystem: Mermaid Component == null [water.isDrying]");

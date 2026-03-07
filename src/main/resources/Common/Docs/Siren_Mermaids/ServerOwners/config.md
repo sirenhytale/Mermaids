@@ -1,0 +1,68 @@
+---
+name: Mermaids Config
+description: Mermaids Mod - Config
+author: Siren
+---
+### Mermaids Config
+
+#### This is the default config values and descriptions for config version 9:
+- “Config-Information”
+  - Default Value: A long string that tells you to go to mermaids.dev/mermaids/config or curseforge page.
+  - Description: Information about how to find stuff related to the config.
+- “ConfigVersion”
+  - Default Value: 9
+  - Description: Current Version when you have loaded for the plugin.
+- “PluginName”
+  - Default Value: “Mermaids”
+  - Description: Plugin name.
+- “Version”
+  - Default Value: "1.4.1"
+  - Description: Version of the last ran mod jar.
+- “Website”
+  - Default Value: “https://mermaids.dev/mermaids/”
+  - Description: Official website for the Mermaids mod.
+- “Download-Site”
+  - Default Value: “https://www.curseforge.com/hytale/mods/mermaids”
+  - Description: Website to download this mod, check for updates, and information.
+- "Enable-Generic-Console-Logs"
+  - Default Value: false
+  - Description: Send console logs for majority of mermaid actions: transforming and modifying settings.
+- “Transformation-Mode”
+  - Default Value: 0
+  - Description: TransformationMode = 0 : Transform when entering water, TransformationMode = 1 : Requires user to drink Mermaid Potion to Transform.
+- “Always-A-Mermaid-Even-On-Land”
+  - Default Value: false
+  - Description: If you have permissions to be a Mermaid, than you’ll always be transformed into a Mermaid even on land.
+- “Require-Transformation-Permission”
+  - Default Value: false
+  - Description: Requires the player to have the permission – mermaids.transform – to transform into a Mermaid.
+- “Require-Mermaids-UI-Permission”
+  - Default Value: false
+  - Description: Requires the player to have the permission – mermaids.ui – to run the command /mermaids ui or /mermaid.
+- “Items-Can-Increase-Swim-Speed”
+  - Default Value: true
+  - Description: Some items like fishbone harpoon and some modded related items will give you increased swim speed as a mermaid.
+- “Blocks-Can-Cause-Transformations”
+  - Default Value: true
+  - Description: Some blocks like mud and a cauldron will cause you to transform into a mermaid.
+- “Rain-Can-Cause-Transformations”
+  - Default Value: false
+  - Description: Walking into the rain will cause you to transform into a mermaid.
+- “Mermaid-Have-A-Glow/Light”
+  - Default Value: true
+  - Description: The mermaid model will light of a glow allowing the player to see better underwater.
+- “Mermaid-Glow/Light-Radius”
+  - Default Value: 33
+  - Description: The radius of the mermaid glow.
+- “EasyHunger-By:Haasapenas-Compatibility”
+  - Default Value: true
+  - Description: Compatibility with the EasyHunger Mod, see Compatibilities page for more info.
+- “AquaThirst&Hunger-By:Jume-Compatibility”
+  - Default Value: true
+  - Description: Compatibility with the Aqua Thirst & Hunger Mod, see Compatibilities page for more info.
+- “DivingTale-By:xnrdev-Compatibility”
+  - Default Value: true
+  - Description: Compatibility with the [xnrdev] DivingTale Mod, see Compatibilities page for more info.
+- “DebugMode”
+  - Default Value: false
+  - Description: Run the plugin in debug mode to get alerts about most actions of the plugin.

@@ -79,7 +79,9 @@ public class MermaidV1UIPage extends InteractiveCustomUIPage<MermaidV1UIPage.Mer
                 }
 
                 player.sendMessage(Message.raw("You have selected the " + msgMerTail + " mermaid tail."));
-                Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " has switched the Mermaid tail to " + msgMerTail + ".");
+                if(Mermaids.getConfig().get().ifConsoleLogs()) {
+                    Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " has switched the Mermaid tail to " + msgMerTail + ".");
+                }
 
                 String oldMermaidTail = mermaidSettings.getMermaidTail();
                 mermaidSettings.setMermaidTail(mermaidTailPath);
@@ -132,7 +134,9 @@ public class MermaidV1UIPage extends InteractiveCustomUIPage<MermaidV1UIPage.Mer
                 }
 
                 player.sendMessage(Message.raw("You have selected the " + msgTailColor + " tail color."));
-                Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " has switched the Mermaid tail color to " + msgTailColor + ".");
+                if(Mermaids.getConfig().get().ifConsoleLogs()) {
+                    Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " has switched the Mermaid tail color to " + msgTailColor + ".");
+                }
 
                 String oldTailColor = mermaidSettings.getTailColor();
                 mermaidSettings.setTailColor(mermaidTailColorPath);

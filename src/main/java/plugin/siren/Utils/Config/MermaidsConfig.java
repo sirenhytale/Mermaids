@@ -32,6 +32,10 @@ public class MermaidsConfig {
                     (merConfig, dsStr, extraInfo) -> merConfig.DownloadSite = dsStr, // Setter
                     (merConfig, extraInfo) -> merConfig.DownloadSite)                    // Getter
             .add()
+            .append(new KeyedCodec<Boolean>("Enable-Generic-Console-Logs", Codec.BOOLEAN),
+                    (merConfig, egclBool, extraInfo) -> merConfig.ConsoleLogs = egclBool, // Setter
+                    (merConfig, extraInfo) -> merConfig.ConsoleLogs)                    // Getter
+            .add()
             .append(new KeyedCodec<Integer>("Transformation-Mode", Codec.INTEGER),
                     (merConfig, tmInt, extraInfo) -> merConfig.TransformationMode = tmInt, // Setter
                     (merConfig, extraInfo) -> merConfig.TransformationMode)                    // Getter
@@ -92,7 +96,7 @@ public class MermaidsConfig {
 
     private String InformationDefault = "Confused about what one of these statement do? Go to https://mermaids.dev/mermaids/config/ or check out the Mermaids page on the Curseforge website and scroll down to Config Extra Info.";
     private String Information = InformationDefault;
-    private final int ConfigVersionDefault = 8;
+    private final int ConfigVersionDefault = 9;
     private int ConfigVersion = ConfigVersionDefault;
     private String PluginName = "Mermaids";
     private String Version = Mermaids.getVersion();
@@ -100,6 +104,7 @@ public class MermaidsConfig {
     private String Website = WebsiteDefault;
     private String DownloadSiteDefault = "https://www.curseforge.com/hytale/mods/mermaids";
     private String DownloadSite = DownloadSiteDefault;
+    private boolean ConsoleLogs = false;
     private int TransformationMode = 0;
     private String TransModeDesc = "TransformationMode = 0 : Transform when entering water, TransformationMode = 1 : Requires user to drink Mermaid Potion to Transform";
     private boolean MermaidOnLand = false;
@@ -165,6 +170,10 @@ public class MermaidsConfig {
 
     public void setPluginVersion(String version){
         this.Version = version;
+    }
+
+    public boolean ifConsoleLogs(){
+        return this.ConsoleLogs;
     }
 
     public int getTransformationMode(){

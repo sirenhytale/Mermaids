@@ -61,7 +61,9 @@ public class PlayerReadyEventM {
                     player.sendMessage(Message.raw("You now have the Mermaid Component!"));
                 }
 
-                Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " now has the Mermaid Component.");
+                if(Mermaids.getConfig().get().ifConsoleLogs()) {
+                    Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " now has the Mermaid Component.");
+                }
             }else{
                 if (Mermaids.ifDebug()) {
                     player.sendMessage(Message.raw("You already have the Mermaid Component!"));
@@ -79,7 +81,9 @@ public class PlayerReadyEventM {
                 if (Mermaids.ifDebug()) {
                     player.sendMessage(Message.raw("You now have the Mermaid Settings Component!"));
 
-                    Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " now has the Mermaid Settings Component.");
+                    if(Mermaids.getConfig().get().ifConsoleLogs()) {
+                        Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " now has the Mermaid Settings Component.");
+                    }
                 }
 
                 MermaidSettings mermaidSett = store.getComponent(ref, Mermaids.get().getMermaidSetingsComponentType());
@@ -92,7 +96,9 @@ public class PlayerReadyEventM {
                             mermaidSett.setTailColor("MermaidPlayerGrayscale");
                             mermaidSett.setTailColorV2("MermaidTextureV2");
 
-                            Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " has updated saved Mermaid Tail to V2.");
+                            if(Mermaids.getConfig().get().ifConsoleLogs()) {
+                                Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " has updated saved Mermaid Tail to V2.");
+                            }
                         }
                     }else{
                         if(mermaidSett.getMermaidTail().equalsIgnoreCase("MermaidV2")){
@@ -120,7 +126,9 @@ public class PlayerReadyEventM {
                             mermaidSett.setTailColor("MermaidPlayerGrayscale");
                             mermaidSett.setTailColorV2("MermaidTextureV2");
 
-                            Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " has updated saved Mermaid Tail to V2.");
+                            if(Mermaids.getConfig().get().ifConsoleLogs()) {
+                                Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " has updated saved Mermaid Tail to V2.");
+                            }
                         }
                     }else{
                         if(mermaidSett.getMermaidTail().equalsIgnoreCase("MermaidV2")){
