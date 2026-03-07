@@ -12,6 +12,7 @@ import com.hypixel.hytale.math.vector.Vector3d;
 import com.hypixel.hytale.protocol.*;
 import com.hypixel.hytale.protocol.packets.entities.EntityUpdates;
 import com.hypixel.hytale.protocol.packets.interface_.HudComponent;
+import com.hypixel.hytale.server.core.HytaleServer;
 import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.asset.type.blocktype.config.BlockType;
 import com.hypixel.hytale.server.core.asset.type.gameplay.PlayerConfig;
@@ -40,9 +41,11 @@ import com.hypixel.hytale.server.core.universe.Universe;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.chunk.WorldChunk;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import dev.hardaway.wardrobe.impl.player.PlayerWardrobeComponent;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import plugin.siren.Compatibility.AquaThirstHunger.AquaThirstHungerCompact;
 import plugin.siren.Compatibility.EasyHunger.EasyHungerCompat;
+import plugin.siren.Compatibility.PlaceholderAPI.PlaceholderAPICompat;
 import plugin.siren.Contributions.starman.modelutils.ModelHelper;
 import plugin.siren.Mermaids;
 
@@ -428,6 +431,13 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                                     }
                                 }
                             }
+                        }
+                    }
+
+                    if (HytaleServer.get().getPluginManager().getPlugin(PluginIdentifier.fromString("Hardaway:Wardrobe")) != null) {
+                        PlayerWardrobeComponent wardrobe = commandBuffer.getComponent(ref, PlayerWardrobeComponent.getComponentType());
+                        if(wardrobe != null){
+                            wardrobe.rebuild();
                         }
                     }
 

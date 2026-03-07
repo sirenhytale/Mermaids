@@ -6,7 +6,7 @@
 
     <groupId>plugin.siren</groupId>
     <artifactId>Mermaids</artifactId>
-    <version>1.4.0</version>
+    <version>1.4.1</version>
 
     <properties>
         <maven.compiler.source>25</maven.compiler.source>
@@ -71,6 +71,13 @@
             <groupId>at.helpch</groupId>
             <artifactId>placeholderapi-hytale</artifactId>
             <version>1.0.7</version>
+            <scope>provided</scope>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.Hardaway</groupId>
+            <artifactId>Wardrobe</artifactId>
+            <version>0.3.2</version>
             <scope>provided</scope>
             <optional>true</optional>
         </dependency>
