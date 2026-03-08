@@ -20,7 +20,7 @@ import java.util.ArrayList;
  * Link: https://github.com/SyperAI/hytale-model-utils
  *
  * Modified: Siren
- * Date: 2026/03/07
+ * Date: 2026/03/08
  *
  */
 
@@ -28,15 +28,55 @@ public class AttachmentsHelper {
     static CosmeticRegistry reg = CosmeticsModule.get().getRegistry();
 
     public static void addAttachment(ArrayList<ModelAttachment> attachments, PlayerSkinPart part, @Nullable String gradientId, @Nullable PlayerSkinPart.Variant variant) {
-        attachments.add(
-                new ModelAttachment(
-                        variant != null ? variant.getModel() : part.getModel(),
-                        variant != null ? variant.getGreyscaleTexture() : part.getGreyscaleTexture(),
-                        part.getGradientSet(),
-                        gradientId,
+        if(variant != null) {
+            attachments.add(
+                    new ModelAttachment(
+                            variant.getModel(),
+                            variant.getGreyscaleTexture(),
+                            part.getGradientSet(),
+                            gradientId,
+                            1.0
+                    )
+            );
+        }else{
+            if(part.getGreyscaleTexture() == null) {
+                String partToString = part.getTextures().toString();
+                if(partToString != null && !partToString.isEmpty()) {
+                    String partWithoutBrace = partToString.substring(1);
+                    if(partWithoutBrace != null) {
+                        String[] partToStringParts = partWithoutBrace.split("=>");
+                        if(partToStringParts.length >= 1) {
+                            String key = partToStringParts[0];
+                            if(key != null) {
+                                String attTexture = part.getTextures().get(key).getTexture();
+                                String attGradientSet = part.getTextures().get(key).getBaseColor()[0];
+                                if(attTexture != null && attGradientSet != null) {
+                                    attachments.add(
+                                            new ModelAttachment(
+                                                    part.getModel(),
+                                                    attTexture,
+                                                    attGradientSet,
+                                                    gradientId,
+                                                    1.0
+                                            )
+                                    );
+                                }
+                            }
+                        }
+                    }
+                }
+            }else{
+                attachments.add(
+                        new ModelAttachment(
+                                part.getModel(),
+                                part.getGreyscaleTexture(),
+                                part.getGradientSet(),
+                                gradientId,
                         1.0
-                )
-        );
+                    )
+                );
+            }
+        }
     }
 
     public static ModelAttachment[] parseSkin(PlayerSkin skin, @Nullable ArrayList<String> ignore, @Nullable String defaultGradientId) {
