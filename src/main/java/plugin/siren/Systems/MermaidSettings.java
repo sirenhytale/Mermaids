@@ -61,8 +61,8 @@ public class MermaidSettings implements Component<EntityStore> {
                     (merSettings) -> merSettings.tailColor)                    // Getter
             .add()
             .append(new KeyedCodec<String>("MermaidTailColorV2Alpha200", Codec.STRING),
-                    (merSettings, mtcStr) -> merSettings.tailColor = mtcStr, // Setter
-                    (merSettings) -> merSettings.tailColor)                    // Getter
+                    (merSettings, mtcStr) -> merSettings.tailColorV2 = mtcStr, // Setter
+                    (merSettings) -> merSettings.tailColorV2)                    // Getter
             .add()
             .append(new KeyedCodec<Boolean>("MermaidV2Model", Codec.BOOLEAN),
                     (merSettings, mv2mBool) -> merSettings.mermaidV2Model = mv2mBool, // Setter

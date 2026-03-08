@@ -16,6 +16,12 @@ Group {
 
     Group #TailColor1 {
       $SB.@SelectorBlock {
+        @Name = "Pink Tail";
+      }
+    }
+
+    Group #TailColor2 {
+      $SB.@SelectorBlock {
         @Name = "Color-Coded Tail";
       }
     }

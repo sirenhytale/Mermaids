@@ -109,8 +109,11 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
                     msgTailColor = "Orange";
                     mermaidTailColorPath = "MermaidTextureV2";
                 } else if (data.tailColor.equalsIgnoreCase("1")) {
-                    msgTailColor = "Color-Coded";
+                    msgTailColor = "Pink";
                     mermaidTailColorPath = "MermaidV2Texture_PINK";
+                } else if (data.tailColor.equalsIgnoreCase("2")) {
+                    msgTailColor = "Color-Coded";
+                    mermaidTailColorPath = "MermaidV2Texture_ColorCoded";
                 }
 
                 player.sendMessage(Message.raw("You have selected the " + msgTailColor + " tail color."));
@@ -183,7 +186,7 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
                 "color",
                 "server.customUI.mermaid.category.color",
                 "Pages/MermaidUI/Categories/TailColorContent.ui",
-                2
+                3
         );
 
         private final String id;
