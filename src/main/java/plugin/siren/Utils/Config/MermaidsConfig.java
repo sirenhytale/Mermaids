@@ -88,6 +88,10 @@ public class MermaidsConfig {
                     (merConfig, dtbxcBool, extraInfo) -> merConfig.DivingTaleCompat = dtbxcBool, // Setter
                     (merConfig, extraInfo) -> merConfig.DivingTaleCompat)                    // Getter
             .add()
+            .append(new KeyedCodec<Boolean>("MoreNPC-By:BlueEyesWhiteMen-Compatibility", Codec.BOOLEAN),
+                    (merConfig, mnbbcBool, extraInfo) -> merConfig.MoreNPCCompat = mnbbcBool, // Setter
+                    (merConfig, extraInfo) -> merConfig.MoreNPCCompat)                    // Getter
+            .add()
             .append(new KeyedCodec<Boolean>("DebugMode", Codec.BOOLEAN),
                     (merConfig, dmBool, extraInfo) -> merConfig.DebugMode = dmBool, // Setter
                     (merConfig, extraInfo) -> merConfig.DebugMode)                    // Getter
@@ -96,7 +100,7 @@ public class MermaidsConfig {
 
     private String InformationDefault = "Confused about what one of these statement do? Go to https://mermaids.dev/mermaids/config/ or check out the Mermaids page on the Curseforge website and scroll down to Config Extra Info.";
     private String Information = InformationDefault;
-    private final int ConfigVersionDefault = 9;
+    private final int ConfigVersionDefault = 10;
     private int ConfigVersion = ConfigVersionDefault;
     private String PluginName = "Mermaids";
     private String Version = Mermaids.getVersion();
@@ -118,6 +122,7 @@ public class MermaidsConfig {
     private boolean EasyHungerCompat = true;
     private boolean AquaThirstHungerCompat = true;
     private boolean DivingTaleCompat = true;
+    private boolean MoreNPCCompat = true;
     private boolean DebugMode = false;
 
     private boolean RequireForceMermaid = false;
@@ -250,6 +255,10 @@ public class MermaidsConfig {
 
     public boolean getDivingTaleCompat(){
         return this.DivingTaleCompat;
+    }
+
+    public boolean getMoreNPCCompat(){
+        return this.MoreNPCCompat;
     }
 
     public boolean ifDebugMode(){

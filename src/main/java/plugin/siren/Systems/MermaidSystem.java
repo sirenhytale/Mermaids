@@ -24,7 +24,7 @@ import com.hypixel.hytale.server.core.entity.entities.player.hud.HudManager;
 import com.hypixel.hytale.server.core.entity.entities.player.movement.MovementManager;
 import com.hypixel.hytale.server.core.entity.movement.MovementStatesComponent;
 import com.hypixel.hytale.server.core.inventory.Inventory;
-import com.hypixel.hytale.server.core.inventory.InventoryComponent;
+//import com.hypixel.hytale.server.core.inventory.InventoryComponent;
 import com.hypixel.hytale.server.core.inventory.ItemStack;
 import com.hypixel.hytale.server.core.inventory.container.ItemContainer;
 import com.hypixel.hytale.server.core.modules.entity.component.ModelComponent;
@@ -409,11 +409,15 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
 
                                             EquipmentUpdate update = new EquipmentUpdate();
 
+                                            /* UPDATE 4
                                             ItemContainer armor = null;
                                             InventoryComponent.Hotbar armorComponent = commandBuffer.getComponent(ref, InventoryComponent.Hotbar.getComponentType());
                                             if(armorComponent != null) {
                                                 armor = armorComponent.getInventory();
                                             }
+                                            */
+                                            Inventory inventory = player.getInventory();
+                                            ItemContainer armor = inventory.getArmor();
 
                                             update.armorIds = new String[armor.getCapacity()];
                                             Arrays.fill(update.armorIds, "");
@@ -443,13 +447,20 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                                                 }
                                             }
 
+                                            /* UPDATE 4
                                             InventoryComponent.Hotbar hotbarComponent = commandBuffer.getComponent(ref, InventoryComponent.Hotbar.getComponentType());
+
                                             if(hotbarComponent != null) {
                                                 ItemStack itemInHand = hotbarComponent.getActiveItem();
                                                 update.rightHandItemId = itemInHand != null ? itemInHand.getItemId() : "Empty";
                                                 ItemStack utilityItem = hotbarComponent.getActiveItem();
                                                 update.leftHandItemId = utilityItem != null ? utilityItem.getItemId() : "Empty";
                                             }
+                                             */
+                                            ItemStack itemInHand = inventory.getItemInHand();
+                                            update.rightHandItemId = itemInHand != null ? itemInHand.getItemId() : "Empty";
+                                            ItemStack utilityItem = inventory.getUtilityItem();
+                                            update.leftHandItemId = utilityItem != null ? utilityItem.getItemId() : "Empty";
 
                                             updateList.add(update);
 
@@ -486,11 +497,14 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                     if (movementState.getMovementStates().swimming || movementState.getMovementStates().swimJumping || movementState.getMovementStates().inFluid ||
                             (mermaid.isInFluidBlock() && (movementState.getMovementStates().sitting || movementState.getMovementStates().sleeping))) {
                         if(Mermaids.getConfig().get().getItemIncreaseSwimSpeed()) {
+                            /* UPDATE 4
                             ItemStack itemInHand = null;
                             InventoryComponent.Hotbar hotbarComponent = commandBuffer.getComponent(ref, InventoryComponent.Hotbar.getComponentType());
                             if(hotbarComponent != null) {
                                 itemInHand = hotbarComponent.getActiveItem();
                             }
+                             */
+                            ItemStack itemInHand = player.getInventory().getItemInHand();
 
                             if (itemInHand != null && itemInHand.getItemId().equalsIgnoreCase("weapon_spear_fishbone")) {
                                 movement.getSettings().swimJumpForce = 16f;
@@ -506,6 +520,7 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                                 movement.getSettings().forwardSprintSpeedMultiplier = 1.85f;
                             }
 
+                            // DIVING TALE
                             if (Mermaids.getConfig().get().getDivingTaleCompat()) {
                                 if (itemInHand != null &&
                                         (itemInHand.getItemId().equalsIgnoreCase("Harpoon_Copper") || itemInHand.getItemId().equalsIgnoreCase("Harpoon_Iron"))) {
@@ -524,6 +539,18 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                                     movement.getSettings().forwardSprintSpeedMultiplier = 2.05f;
                                 } else if (itemInHand != null &&
                                         (itemInHand.getItemId().equalsIgnoreCase("Harpoon_Mithril"))) {
+                                    movement.getSettings().swimJumpForce = 17f;
+                                    movement.getSettings().baseSpeed = 16.5f;
+                                    movement.getSettings().forwardCrouchSpeedMultiplier = 1f;
+                                    movement.getSettings().backwardCrouchSpeedMultiplier = 0.95f;
+                                    movement.getSettings().forwardSprintSpeedMultiplier = 2.15f;
+                                }
+                            }
+
+                            // MORENPC
+                            if(Mermaids.getConfig().get().getMoreNPCCompat()) {
+                                if (itemInHand != null &&
+                                        (itemInHand.getItemId().equalsIgnoreCase("Weapon_Trident_Icy"))) {
                                     movement.getSettings().swimJumpForce = 17f;
                                     movement.getSettings().baseSpeed = 16.5f;
                                     movement.getSettings().forwardCrouchSpeedMultiplier = 1f;
@@ -636,11 +663,15 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
 
                                             EquipmentUpdate update = new EquipmentUpdate();
 
+                                            /* UPDATE 4
                                             ItemContainer armor = null;
                                             InventoryComponent.Hotbar armorComponent = commandBuffer.getComponent(ref, InventoryComponent.Hotbar.getComponentType());
                                             if(armorComponent != null) {
                                                 armor = armorComponent.getInventory();
                                             }
+                                             */
+                                            Inventory inventory = player.getInventory();
+                                            ItemContainer armor = inventory.getArmor();
 
                                             update.armorIds = new String[armor.getCapacity()];
                                             Arrays.fill(update.armorIds, "");
@@ -668,6 +699,7 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                                                 update.armorIds[ItemArmorSlot.Legs.ordinal()] = "";
                                             }
 
+                                            /* UPDATE 4
                                             InventoryComponent.Hotbar hotbarComponent = commandBuffer.getComponent(ref, InventoryComponent.Hotbar.getComponentType());
                                             if(hotbarComponent != null) {
                                                 ItemStack itemInHand = hotbarComponent.getActiveItem();
@@ -675,6 +707,11 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                                                 ItemStack utilityItem = hotbarComponent.getActiveItem();
                                                 update.leftHandItemId = utilityItem != null ? utilityItem.getItemId() : "Empty";
                                             }
+                                             */
+                                            ItemStack itemInHand = inventory.getItemInHand();
+                                            update.rightHandItemId = itemInHand != null ? itemInHand.getItemId() : "Empty";
+                                            ItemStack utilityItem = inventory.getUtilityItem();
+                                            update.leftHandItemId = utilityItem != null ? utilityItem.getItemId() : "Empty";
 
                                             updateList.add(update);
 

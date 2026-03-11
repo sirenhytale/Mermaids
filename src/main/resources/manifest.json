@@ -20,7 +20,8 @@
     "hexvane:OrbisOrigins": "*",
     "Hardaway:Wardrobe": "*",
     "IwakuraEnterprises:Voile": "*",
-    "Buuz135:BetterModlist": "*"
+    "Buuz135:BetterModlist": "*",
+    "Reset:MoreNPC": "*"
   },
   "LoadBefore": {},
   "DisabledByDefault": false,
