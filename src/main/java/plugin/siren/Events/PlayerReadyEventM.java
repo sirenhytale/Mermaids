@@ -15,6 +15,9 @@ import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import plugin.siren.Mermaids;
 import plugin.siren.Systems.MermaidComponent;
 import plugin.siren.Systems.MermaidSettings;
+import plugin.siren.Utils.API.UpdateChecker;
+
+import java.awt.*;
 
 public class PlayerReadyEventM {
     public static void onPlayerReadyEvent(PlayerReadyEvent event){
@@ -142,6 +145,15 @@ public class PlayerReadyEventM {
 
                 if(!merSett.getTailColorV2().equalsIgnoreCase("MermaidTextureV2") && !merSett.getTailColorV2().equalsIgnoreCase("MermaidV2Texture_PINK") && !merSett.getTailColorV2().equalsIgnoreCase("MermaidV2Texture_ColorCoded")){
                     merSett.setTailColorV2("MermaidTextureV2");
+                }
+            }
+
+            String recentVersion = UpdateChecker.checkForUpdate();
+            if(!Mermaids.getVersion().equalsIgnoreCase(recentVersion)){
+                String versionMessage = "Your Mermaids version is outdated, Mermaids has released v" + recentVersion +".";
+                Mermaids.LOGGER.atInfo().log(versionMessage);
+                if(player.hasPermission("*") && Mermaids.getConfig().get().ifNewVersion()){
+                    player.sendMessage(Message.raw(versionMessage).color(Color.CYAN));
                 }
             }
         });
