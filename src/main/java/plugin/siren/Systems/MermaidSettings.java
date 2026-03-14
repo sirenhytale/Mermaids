@@ -5,10 +5,14 @@ import com.hypixel.hytale.codec.KeyedCodec;
 import com.hypixel.hytale.codec.builder.BuilderCodec;
 import com.hypixel.hytale.common.plugin.PluginIdentifier;
 import com.hypixel.hytale.component.Component;
+import com.hypixel.hytale.protocol.Cosmetic;
 import com.hypixel.hytale.server.core.HytaleServer;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import plugin.siren.Mermaids;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MermaidSettings implements Component<EntityStore> {
 
@@ -103,7 +107,11 @@ public class MermaidSettings implements Component<EntityStore> {
         this.toggleMermaid = true;
         this.permanentPotion = false;
 
-        this.mermaidTail = "MermaidV2";
+        if(Mermaids.ifVersion1()){
+            this.mermaidTail = "MermaidBigFinPlayer";
+        }else{
+            this.mermaidTail = "MermaidV2";
+        }
         this.tailColor = "MermaidPlayerGrayscale";
         this.tailColorV2 = "MermaidTextureV2";
 

@@ -53,6 +53,7 @@ import plugin.siren.Contributions.starman.modelutils.ModelHelper;
 import plugin.siren.Mermaids;
 
 import javax.annotation.Nonnull;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -411,7 +412,7 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
 
                                             /* UPDATE 4
                                             ItemContainer armor = null;
-                                            InventoryComponent.Hotbar armorComponent = commandBuffer.getComponent(ref, InventoryComponent.Hotbar.getComponentType());
+                                            InventoryComponent.Armor armorComponent = commandBuffer.getComponent(ref, InventoryComponent.Armor.getComponentType());
                                             if(armorComponent != null) {
                                                 armor = armorComponent.getInventory();
                                             }
@@ -665,7 +666,7 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
 
                                             /* UPDATE 4
                                             ItemContainer armor = null;
-                                            InventoryComponent.Hotbar armorComponent = commandBuffer.getComponent(ref, InventoryComponent.Hotbar.getComponentType());
+                                            InventoryComponent.Armor armorComponent = commandBuffer.getComponent(ref, InventoryComponent.Armor.getComponentType());
                                             if(armorComponent != null) {
                                                 armor = armorComponent.getInventory();
                                             }
@@ -717,6 +718,58 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
 
                                             entityUpdate.updates = updateList.toArray(ComponentUpdate[]::new);
                                             entityViewer.packetReceiver.writeNoCache(new EntityUpdates(null, new EntityUpdate[]{entityUpdate}));
+
+                                            List<Cosmetic[]> cosmeticsToHide = new ArrayList<>();
+                                            Cosmetic[] emptyCosmeticList = {};
+                                            for(i = 0; i < 4; i++){
+                                                cosmeticsToHide.add(emptyCosmeticList);
+                                            }
+                                            /* UPDATE 4
+                                            ItemContainer armorContainer = null;
+                                            if(armorComponent != null) {
+                                                armorContainer = armorComponent.getInventory();
+                                            }
+                                             */
+                                            ItemContainer armorContainer = inventory.getArmor();
+                                            armorContainer.forEachWithMeta((slot,itemStack, armorPacket) -> armorPacket.set((int) slot, itemStack.getItem().getArmor().toPacket().cosmeticsToHide), cosmeticsToHide);
+
+                                            List<Integer> cosmeticValues = new ArrayList<>();
+                                            if(cosmeticsToHide != null && !cosmeticsToHide.isEmpty()){
+                                                for(Cosmetic[] cosmetics : cosmeticsToHide){
+                                                    for(Cosmetic cosmetic : cosmetics){
+                                                        cosmeticValues.add(cosmetic.getValue());
+                                                    }
+                                                }
+                                            }
+
+                                            if(!mermaid.getCosmeticsToHide().equals(cosmeticValues)) {
+                                                if(Mermaids.ifDebug()){
+                                                    Mermaids.LOGGER.atInfo().log(cosmeticsToHide.toString());
+                                                    Mermaids.LOGGER.atInfo().log(mermaid.getCosmeticsToHide().toString());
+                                                }
+
+                                                mermaid.setCosmeticsToHide(cosmeticValues);
+                                                player.sendMessage(Message.raw("updating model"));
+
+                                                PlayerSkin skin = mermaid.getMermaidSkin();
+
+                                                if (Mermaids.ifDebug()) {
+                                                    player.sendMessage(Message.raw("Replacing Skin"));
+                                                }
+
+                                                String mermaidTailModel = mermaidSettings.getMermaidTail();
+                                                if(Mermaids.ifDebug() && mermaidSettings.ifUseMermaidV2()){
+                                                    mermaidTailModel = "MermaidV2";
+                                                }
+
+                                                ModelAsset modelAsset = ModelAsset.getAssetMap().getAsset(mermaidTailModel);
+                                                if (modelAsset == null) {
+                                                    player.sendMessage(Message.raw("Mermaids: Error: WaterSystem: " + mermaidTailModel + " Model not found"));
+                                                    Mermaids.LOGGER.atSevere().log(player.getDisplayName() + " had an error of getting the Mermaid Model. Error: WaterSystem: " + mermaidTailModel + " Model not found.");
+                                                } else {
+                                                    ModelHelper.applySkin(Model.createUnitScaleModel(modelAsset), skin.clone(), ref, commandBuffer, player, mermaid, mermaidSettings);
+                                                }
+                                            }
                                         }
                                     }
                                 }

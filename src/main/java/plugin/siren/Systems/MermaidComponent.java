@@ -1,13 +1,17 @@
 package plugin.siren.Systems;
 
 import com.hypixel.hytale.component.Component;
+import com.hypixel.hytale.protocol.Cosmetic;
 import com.hypixel.hytale.protocol.PlayerSkin;
 import com.hypixel.hytale.server.core.entity.entities.player.movement.MovementManager;
 import com.hypixel.hytale.server.core.modules.entity.component.ModelComponent;
 import com.hypixel.hytale.server.core.modules.entity.player.PlayerSkinComponent;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import plugin.siren.Mermaids;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class MermaidComponent implements Component<EntityStore> {
@@ -32,6 +36,8 @@ public class MermaidComponent implements Component<EntityStore> {
     private float potionElapsedTime;
     private float dryingElapsedTime;
 
+    List<Integer> cosmeticsToHide;
+
     public MermaidComponent(){
         this(new PlayerSkin());
     }
@@ -53,6 +59,8 @@ public class MermaidComponent implements Component<EntityStore> {
         this.armorElapsedTime = 0f;
         this.potionElapsedTime = 0f;
         this.dryingElapsedTime = 0f;
+
+        this.cosmeticsToHide = new ArrayList<>();
     }
 
     public MermaidComponent(MermaidComponent other){
@@ -75,6 +83,8 @@ public class MermaidComponent implements Component<EntityStore> {
         this.armorElapsedTime = other.armorElapsedTime;
         this.potionElapsedTime = other.potionElapsedTime;
         this.dryingElapsedTime = other.dryingElapsedTime;
+
+        this.cosmeticsToHide = other.cosmeticsToHide;
     }
 
     @Nullable
@@ -146,7 +156,9 @@ public class MermaidComponent implements Component<EntityStore> {
         mermaidSkin.pants = null;
         mermaidSkin.underwear = null;
         mermaidSkin.overpants = null;
-        mermaidSkin.bodyCharacteristic = null;
+        if(Mermaids.ifVersion1()) {
+            mermaidSkin.bodyCharacteristic = null;
+        }
 
         return mermaidSkin;
     }
@@ -243,4 +255,11 @@ public class MermaidComponent implements Component<EntityStore> {
         this.dryingElapsedTime += 1f;
     }
 
+    public List<Integer> getCosmeticsToHide() {
+        return this.cosmeticsToHide;
+    }
+
+    public void setCosmeticsToHide(List<Integer> hideCosmetics){
+        this.cosmeticsToHide = hideCosmetics;
+    }
 }
