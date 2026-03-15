@@ -674,6 +674,8 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                                             Inventory inventory = player.getInventory();
                                             ItemContainer armor = inventory.getArmor();
 
+                                            List<Integer> armorVisibilityList = new ArrayList<>();
+
                                             update.armorIds = new String[armor.getCapacity()];
                                             Arrays.fill(update.armorIds, "");
                                             armor.forEachWithMeta((slot, itemStack, armorIds) -> armorIds[slot] = itemStack.getItemId(), update.armorIds);
@@ -687,17 +689,21 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                                                         .getArmorVisibilityOption();
                                                 if (armorVisibilityOption.canHideHelmet() && playerSettings.hideHelmet()) {
                                                     update.armorIds[ItemArmorSlot.Head.ordinal()] = "";
+                                                    armorVisibilityList.add(0);
                                                 }
 
                                                 if (armorVisibilityOption.canHideCuirass() && playerSettings.hideCuirass()) {
                                                     update.armorIds[ItemArmorSlot.Chest.ordinal()] = "";
+                                                    armorVisibilityList.add(1);
                                                 }
 
                                                 if (armorVisibilityOption.canHideGauntlets() && playerSettings.hideGauntlets()) {
                                                     update.armorIds[ItemArmorSlot.Hands.ordinal()] = "";
+                                                    armorVisibilityList.add(2);
                                                 }
 
                                                 update.armorIds[ItemArmorSlot.Legs.ordinal()] = "";
+                                                armorVisibilityList.add(3);
                                             }
 
                                             /* UPDATE 4
@@ -719,55 +725,68 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                                             entityUpdate.updates = updateList.toArray(ComponentUpdate[]::new);
                                             entityViewer.packetReceiver.writeNoCache(new EntityUpdates(null, new EntityUpdate[]{entityUpdate}));
 
-                                            List<Cosmetic[]> cosmeticsToHide = new ArrayList<>();
-                                            Cosmetic[] emptyCosmeticList = {};
-                                            for(i = 0; i < 4; i++){
-                                                cosmeticsToHide.add(emptyCosmeticList);
-                                            }
+                                            if(i == 0) {
+                                                List<Cosmetic[]> cosmeticsToHide = new ArrayList<>();
+                                                Cosmetic[] emptyCosmeticList = {};
+                                                for (int j = 0; j < 4; j++) {
+                                                    cosmeticsToHide.add(emptyCosmeticList);
+                                                }
                                             /* UPDATE 4
                                             ItemContainer armorContainer = null;
                                             if(armorComponent != null) {
                                                 armorContainer = armorComponent.getInventory();
                                             }
                                              */
-                                            ItemContainer armorContainer = inventory.getArmor();
-                                            armorContainer.forEachWithMeta((slot,itemStack, armorPacket) -> armorPacket.set((int) slot, itemStack.getItem().getArmor().toPacket().cosmeticsToHide), cosmeticsToHide);
+                                                ItemContainer armorContainer = inventory.getArmor();
+                                                armorContainer.forEachWithMeta((slot, itemStack, armorPacket) -> armorPacket.set((int) slot, itemStack.getItem().getArmor().toPacket().cosmeticsToHide), cosmeticsToHide);
 
-                                            List<Integer> cosmeticValues = new ArrayList<>();
-                                            if(cosmeticsToHide != null && !cosmeticsToHide.isEmpty()){
-                                                for(Cosmetic[] cosmetics : cosmeticsToHide){
-                                                    for(Cosmetic cosmetic : cosmetics){
-                                                        cosmeticValues.add(cosmetic.getValue());
+                                                List<Integer> cosmeticValues = new ArrayList<>();
+                                                if (cosmeticsToHide != null && !cosmeticsToHide.isEmpty()) {
+                                                    /*for (Cosmetic[] cosmetics : cosmeticsToHide) {
+                                                        for (Cosmetic cosmetic : cosmetics) {
+                                                            cosmeticValues.add(cosmetic.getValue());
+                                                        }
+                                                    }*/
+                                                    for (int j = 0; j < 4; j++) {
+                                                        boolean allowedToHide = true;
+                                                        for(int armorVisability : armorVisibilityList){
+                                                            if(armorVisability == j){
+                                                                allowedToHide = false;
+                                                            }
+                                                        }
+
+                                                        if(allowedToHide){
+                                                            Cosmetic[] cosmetics = cosmeticsToHide.get(j);
+                                                            if(cosmetics != null && cosmetics.length >= 1) {
+                                                                for (Cosmetic cosmetic : cosmetics) {
+                                                                    cosmeticValues.add(cosmetic.getValue());
+                                                                }
+                                                            }
+                                                        }
                                                     }
                                                 }
-                                            }
 
-                                            if(!mermaid.getCosmeticsToHide().equals(cosmeticValues)) {
-                                                if(Mermaids.ifDebug()){
-                                                    Mermaids.LOGGER.atInfo().log(cosmeticsToHide.toString());
-                                                    Mermaids.LOGGER.atInfo().log(mermaid.getCosmeticsToHide().toString());
-                                                }
+                                                if (!mermaid.getCosmeticsToHide().equals(cosmeticValues)) {
+                                                    mermaid.setCosmeticsToHide(cosmeticValues);
 
-                                                mermaid.setCosmeticsToHide(cosmeticValues);
-                                                player.sendMessage(Message.raw("updating model"));
+                                                    PlayerSkin skin = mermaid.getMermaidSkin();
 
-                                                PlayerSkin skin = mermaid.getMermaidSkin();
+                                                    if (Mermaids.ifDebug()) {
+                                                        player.sendMessage(Message.raw("Replacing Skin"));
+                                                    }
 
-                                                if (Mermaids.ifDebug()) {
-                                                    player.sendMessage(Message.raw("Replacing Skin"));
-                                                }
+                                                    String mermaidTailModel = mermaidSettings.getMermaidTail();
+                                                    if (Mermaids.ifDebug() && mermaidSettings.ifUseMermaidV2()) {
+                                                        mermaidTailModel = "MermaidV2";
+                                                    }
 
-                                                String mermaidTailModel = mermaidSettings.getMermaidTail();
-                                                if(Mermaids.ifDebug() && mermaidSettings.ifUseMermaidV2()){
-                                                    mermaidTailModel = "MermaidV2";
-                                                }
-
-                                                ModelAsset modelAsset = ModelAsset.getAssetMap().getAsset(mermaidTailModel);
-                                                if (modelAsset == null) {
-                                                    player.sendMessage(Message.raw("Mermaids: Error: WaterSystem: " + mermaidTailModel + " Model not found"));
-                                                    Mermaids.LOGGER.atSevere().log(player.getDisplayName() + " had an error of getting the Mermaid Model. Error: WaterSystem: " + mermaidTailModel + " Model not found.");
-                                                } else {
-                                                    ModelHelper.applySkin(Model.createUnitScaleModel(modelAsset), skin.clone(), ref, commandBuffer, player, mermaid, mermaidSettings);
+                                                    ModelAsset modelAsset = ModelAsset.getAssetMap().getAsset(mermaidTailModel);
+                                                    if (modelAsset == null) {
+                                                        player.sendMessage(Message.raw("Mermaids: Error: WaterSystem: " + mermaidTailModel + " Model not found"));
+                                                        Mermaids.LOGGER.atSevere().log(player.getDisplayName() + " had an error of getting the Mermaid Model. Error: WaterSystem: " + mermaidTailModel + " Model not found.");
+                                                    } else {
+                                                        ModelHelper.applySkin(Model.createUnitScaleModel(modelAsset), skin.clone(), ref, commandBuffer, player, mermaid, mermaidSettings);
+                                                    }
                                                 }
                                             }
                                         }

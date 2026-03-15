@@ -63,7 +63,6 @@ public class ModelHelper {
                 String enumName = upperSnakeName + "S";
                 checkCosmeticType = enumName;
             }
-            Mermaids.LOGGER.atInfo().log(checkCosmeticType);
 
             // 0 - part id; 1 - gradient id; 2 - variant
             String[] cosmeticParts = skinPartValue.split("\\.");
@@ -71,9 +70,6 @@ public class ModelHelper {
             if(checkCosmeticType.equalsIgnoreCase("BODY_CHARACTERISTIC") || checkCosmeticType.equalsIgnoreCase("BODY_CHARACTERISTICS")){
                 if (cosmeticParts.length > 1) {
                     gradientId = cosmeticParts[1];
-                    Mermaids.LOGGER.atInfo().log("update default to " + gradientId);
-                } else {
-                    Mermaids.LOGGER.atInfo().log("failed to update" + gradientId);
                 }
             }
         }
