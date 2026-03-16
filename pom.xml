@@ -6,7 +6,7 @@
 
     <groupId>plugin.siren</groupId>
     <artifactId>Mermaids</artifactId>
-    <version>1.4.3</version>
+    <version>ALPHA-2.0.0-2026.03.15</version>
 
     <properties>
         <maven.compiler.source>25</maven.compiler.source>

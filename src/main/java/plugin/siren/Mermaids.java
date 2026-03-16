@@ -5,6 +5,7 @@ import com.hypixel.hytale.component.ComponentType;
 import com.hypixel.hytale.event.EventRegistration;
 import com.hypixel.hytale.logger.HytaleLogger;
 import com.hypixel.hytale.server.core.HytaleServer;
+import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.command.system.CommandRegistration;
 import com.hypixel.hytale.server.core.event.events.player.PlayerReadyEvent;
 import com.hypixel.hytale.server.core.modules.interaction.interaction.config.Interaction;
@@ -21,13 +22,15 @@ import plugin.siren.Events.PlayerReadyEventM;
 import plugin.siren.Systems.MermaidComponent;
 import plugin.siren.Systems.MermaidSettings;
 import plugin.siren.Systems.MermaidSystem;
+import plugin.siren.Utils.API.UpdateChecker;
 import plugin.siren.Utils.Config.MermaidsConfig;
 
 import javax.annotation.Nonnull;
+import java.awt.*;
 
 public class Mermaids extends JavaPlugin {
-    private static final boolean v1 = true;
-    private static final String VERSION = "1.4.3";//"Alpha 2.0.0-2026.03.01";
+    private static final boolean v1 = false;
+    private static final String VERSION = "Alpha 2.0.0-2026.03.15";//"Alpha 2.0.0-2026.03.01";
     private static final boolean DEBUG = false;
 
     private static Mermaids plugin;
@@ -117,13 +120,32 @@ public class Mermaids extends JavaPlugin {
         }
 
         LOGGER.atInfo().log("Version " + VERSION + " of Mermaids has successfully loaded.");
+
         if(!ifVersion1()){
             LOGGER.atInfo().log("= =- -=- -=- -=- -=- -=- -=- -=- -= =");
             LOGGER.atInfo().log("Loaded Mermaids in Alpha state.");
         }
+
         if(ifDebug()){
             LOGGER.atInfo().log("= =- -=- -=- -=- -=- -=- -=- -=- -= =");
             LOGGER.atInfo().log("Loaded Mermaids in Debug mode.");
+        }
+
+        String recentVersion = UpdateChecker.checkForUpdate();
+        if(!Mermaids.getVersion().equalsIgnoreCase(recentVersion)){
+            LOGGER.atInfo().log("= =- -=- -=- -=- -=- -=- -=- -=- -= =");
+            if(Mermaids.ifVersion1()) {
+                String versionMessage = "The Mermaids mod version is outdated, Mermaids has released v" + recentVersion + ".";
+                Mermaids.LOGGER.atInfo().log(versionMessage);
+            }else{
+                if(!recentVersion.equalsIgnoreCase("released")) {
+                    String versionMessage = "The Alpha Mermaids mod version is outdated, Mermaids has released " + recentVersion + ".";
+                    Mermaids.LOGGER.atInfo().log(versionMessage);
+                }else{
+                    String versionMessage = "The Alpha Mermaids mod version 2.0.0 has been released, the server is currently on an outdated version of the Mermaids mod.";
+                    Mermaids.LOGGER.atInfo().log(versionMessage);
+                }
+            }
         }
         LOGGER.atInfo().log("===---==---==---==---==---==---==---==---===");
     }

@@ -1,5 +1,5 @@
 {
-  "Parent": "Player",
+  "Parent": "MermaidPlayer",
   "Model": "Characters/SirensMermaid/Mermaidv2.blockymodel",
   "Texture": "Characters/SirensMermaid/MermaidTextures/MermaidTextureV2.png",
   "AnimationSets": {
