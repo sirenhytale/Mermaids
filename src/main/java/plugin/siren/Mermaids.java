@@ -27,10 +27,11 @@ import plugin.siren.Utils.Config.MermaidsConfig;
 
 import javax.annotation.Nonnull;
 import java.awt.*;
+import java.util.concurrent.TimeUnit;
 
 public class Mermaids extends JavaPlugin {
     private static final boolean v1 = false;
-    private static final String VERSION = "Alpha 2.0.0-2026.03.15";//"Alpha 2.0.0-2026.03.01";
+    private static final String VERSION = "Alpha 2.0.0-2026.03.14";//"Alpha 2.0.0-2026.03.01";
     private static final boolean DEBUG = false;
 
     private static Mermaids plugin;
@@ -132,18 +133,42 @@ public class Mermaids extends JavaPlugin {
         }
 
         String recentVersion = UpdateChecker.checkForUpdate();
-        if(!Mermaids.getVersion().equalsIgnoreCase(recentVersion)){
+        if(!VERSION.equalsIgnoreCase(recentVersion)){
             LOGGER.atInfo().log("= =- -=- -=- -=- -=- -=- -=- -=- -= =");
             if(Mermaids.ifVersion1()) {
                 String versionMessage = "The Mermaids mod version is outdated, Mermaids has released v" + recentVersion + ".";
-                Mermaids.LOGGER.atInfo().log(versionMessage);
+                LOGGER.atInfo().log(versionMessage);
+
+                Runnable updateCheckRunnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        LOGGER.atInfo().log(versionMessage);
+                    }
+                };
+                HytaleServer.SCHEDULED_EXECUTOR.schedule(updateCheckRunnable,5, TimeUnit.SECONDS);
             }else{
                 if(!recentVersion.equalsIgnoreCase("released")) {
                     String versionMessage = "The Alpha Mermaids mod version is outdated, Mermaids has released " + recentVersion + ".";
-                    Mermaids.LOGGER.atInfo().log(versionMessage);
+                    LOGGER.atInfo().log(versionMessage);
+
+                    Runnable updateCheckRunnable = new Runnable() {
+                        @Override
+                        public void run() {
+                            LOGGER.atInfo().log(versionMessage);
+                        }
+                    };
+                    HytaleServer.SCHEDULED_EXECUTOR.schedule(updateCheckRunnable,5, TimeUnit.SECONDS);
                 }else{
                     String versionMessage = "The Alpha Mermaids mod version 2.0.0 has been released, the server is currently on an outdated version of the Mermaids mod.";
-                    Mermaids.LOGGER.atInfo().log(versionMessage);
+                    LOGGER.atInfo().log(versionMessage);
+
+                    Runnable updateCheckRunnable = new Runnable() {
+                        @Override
+                        public void run() {
+                            LOGGER.atInfo().log(versionMessage);
+                        }
+                    };
+                    HytaleServer.SCHEDULED_EXECUTOR.schedule(updateCheckRunnable,15, TimeUnit.SECONDS);
                 }
             }
         }
