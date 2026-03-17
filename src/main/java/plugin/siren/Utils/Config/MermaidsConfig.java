@@ -92,6 +92,10 @@ public class MermaidsConfig {
                     (merConfig, mnbbcBool, extraInfo) -> merConfig.MoreNPCCompat = mnbbcBool, // Setter
                     (merConfig, extraInfo) -> merConfig.MoreNPCCompat)                    // Getter
             .add()
+            .append(new KeyedCodec<Boolean>("Keyblades Reimagined-By:TaHie-Compatibility", Codec.BOOLEAN),
+                    (merConfig, kbrbthcBool, extraInfo) -> merConfig.KeybladeReimagCompat = kbrbthcBool, // Setter
+                    (merConfig, extraInfo) -> merConfig.KeybladeReimagCompat)                    // Getter
+            .add()
             .append(new KeyedCodec<Boolean>("New-Version-Message", Codec.BOOLEAN),
                     (merConfig, nvmBool, extraInfo) -> merConfig.NewVersion = nvmBool, // Setter
                     (merConfig, extraInfo) -> merConfig.NewVersion)                    // Getter
@@ -127,6 +131,7 @@ public class MermaidsConfig {
     private boolean AquaThirstHungerCompat = true;
     private boolean DivingTaleCompat = true;
     private boolean MoreNPCCompat = true;
+    private boolean KeybladeReimagCompat = true;
     private boolean NewVersion = true;
     private boolean DebugMode = false;
 
@@ -264,6 +269,10 @@ public class MermaidsConfig {
 
     public boolean getMoreNPCCompat(){
         return this.MoreNPCCompat;
+    }
+
+    public boolean getKeybladeReimagCompat(){
+        return this.KeybladeReimagCompat;
     }
 
     public boolean ifNewVersion(){

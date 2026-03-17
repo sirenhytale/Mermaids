@@ -559,6 +559,25 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                                     movement.getSettings().forwardSprintSpeedMultiplier = 2.15f;
                                 }
                             }
+
+                            // KEYBLADE REIMAGINED
+                            if(Mermaids.getConfig().get().getKeybladeReimagCompat()){
+                                if (itemInHand != null &&
+                                        (itemInHand.getItemId().equalsIgnoreCase("Sword_Keyblade_Crabclaw"))) {
+                                    movement.getSettings().swimJumpForce = 15.25f;
+                                    movement.getSettings().baseSpeed = 13f;
+                                    movement.getSettings().forwardCrouchSpeedMultiplier = 1f;
+                                    movement.getSettings().backwardCrouchSpeedMultiplier = 0.85f;
+                                    movement.getSettings().forwardSprintSpeedMultiplier = 1.9f;
+                                } else if (itemInHand != null &&
+                                        (itemInHand.getItemId().equalsIgnoreCase("Sword_Keyblade_Crabclaw_Epic"))) {
+                                    movement.getSettings().swimJumpForce = 16f;
+                                    movement.getSettings().baseSpeed = 15f;
+                                    movement.getSettings().forwardCrouchSpeedMultiplier = 1f;
+                                    movement.getSettings().backwardCrouchSpeedMultiplier = 0.9f;
+                                    movement.getSettings().forwardSprintSpeedMultiplier = 2.05f;
+                                }
+                            }
                         }else{
                             movement.getSettings().swimJumpForce = 14.5f;
                             movement.getSettings().baseSpeed = 11.5f;

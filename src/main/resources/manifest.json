@@ -21,7 +21,8 @@
     "Hardaway:Wardrobe": "*",
     "IwakuraEnterprises:Voile": "*",
     "Buuz135:BetterModlist": "*",
-    "Reset:MoreNPC": "*"
+    "Reset:MoreNPC": "*",
+    "TaHie:Keyblades Reimagined": "*"
   },
   "LoadBefore": {},
   "DisabledByDefault": false,
