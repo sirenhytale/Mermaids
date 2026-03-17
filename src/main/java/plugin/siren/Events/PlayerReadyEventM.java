@@ -151,23 +151,29 @@ public class PlayerReadyEventM {
             String recentVersion = UpdateChecker.checkForUpdate();
             if(!Mermaids.getVersion().equalsIgnoreCase(recentVersion)){
                 if(Mermaids.ifVersion1()) {
-                    String versionMessage = "The Mermaids mod version is outdated, Mermaids has released v" + recentVersion + ".";
-                    Mermaids.LOGGER.atInfo().log(versionMessage);
+                    String translationId = "server.updateChecker.mermaids.release.message";
+                    Message versionMessage = Message.translation(translationId).param("new-version", recentVersion);
+
+                    Mermaids.LOGGER.atInfo().log(versionMessage.getAnsiMessage());
                     if (player.hasPermission("*") && Mermaids.getConfig().get().ifNewVersion()) {
-                        player.sendMessage(Message.raw(versionMessage).color(Color.CYAN));
+                        player.sendMessage(versionMessage.color(Color.CYAN));
                     }
                 }else{
                     if(!recentVersion.equalsIgnoreCase("released")) {
-                        String versionMessage = "The Alpha Mermaids mod version is outdated, Mermaids has released " + recentVersion + ".";
-                        Mermaids.LOGGER.atInfo().log(versionMessage);
+                        String translationId = "server.updateChecker.mermaids.alpha.2.0.0.message";
+                        Message versionMessage = Message.translation(translationId).param("new-version", recentVersion);
+
+                        Mermaids.LOGGER.atInfo().log(versionMessage.getAnsiMessage());
                         if (player.hasPermission("*") && Mermaids.getConfig().get().ifNewVersion()) {
-                            player.sendMessage(Message.raw(versionMessage).color(Color.CYAN));
+                            player.sendMessage(versionMessage.color(Color.CYAN));
                         }
                     }else{
-                        String versionMessage = "The Alpha Mermaids mod version 2.0.0 has been released, the server is currently on an outdated version of the Mermaids mod.";
-                        Mermaids.LOGGER.atInfo().log(versionMessage);
+                        String translationId = "server.updateChecker.mermaids.alpha.2.0.0.released.message";
+                        Message versionMessage = Message.translation(translationId).param("new-version", recentVersion);
+
+                        Mermaids.LOGGER.atInfo().log(versionMessage.getAnsiMessage());
                         if (player.hasPermission("*") && Mermaids.getConfig().get().ifNewVersion()) {
-                            player.sendMessage(Message.raw(versionMessage).color(Color.CYAN));
+                            player.sendMessage(versionMessage.color(Color.CYAN));
                         }
                     }
                 }

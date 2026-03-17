@@ -17,34 +17,63 @@ import javax.annotation.Nonnull;
 
 public class TransformModeCmd extends AbstractPlayerCommand {
     public TransformModeCmd() {
-        super("transformmode", "Set the Transformation mode.");
+        super("transformmode", "server.commands.mermaids.admin.transformMode.desc");
 
         this.requirePermission("mermaids.admin.mode");
     }
 
-    RequiredArg<Integer> msgTransModeArg = this.withRequiredArg("Transformation Mode [0 or 1]", "value to set as transform mode (0 or 1).", ArgTypes.INTEGER);
+    RequiredArg<Integer> transformModeArg = this.withRequiredArg("Transformation Mode [0 or 1]", "server.commands.mermaids.admin.transformMode.arg0.desc", ArgTypes.INTEGER);
 
     @Override
     protected void execute(@Nonnull CommandContext commandContext, @Nonnull Store<EntityStore> store, @Nonnull Ref<EntityStore> ref, @Nonnull PlayerRef playerRef, @Nonnull World world) {
         Player player = store.getComponent(ref, Player.getComponentType());
 
-        int transMode = msgTransModeArg.get(commandContext);
+        int transformMode = transformModeArg.get(commandContext);
 
-        if(transMode != 0 && transMode != 1){
-            player.sendMessage(Message.raw("Invalid Transformation Mode.\nMode 0 : Transform when entering water.\nMode 1 : Requires user to drink Mermaid Potion to Transform."));
-        }
+        if(transformMode == 0 || transformMode == 1){
+            Mermaids.getConfig().get().setTransformationMode(transformMode);
+            Mermaids.getConfig().save();
 
-        Mermaids.getConfig().get().setTransformationMode(transMode);
-        Mermaids.getConfig().save();
+            if(transformMode == 0){
+                if(player != null) {
+                    String playerTranslationId = "server.commands.mermaids.admin.transformMode.playerMsg.set0";
+                    player.sendMessage(Message.translation(playerTranslationId));
 
-        if(transMode == 0){
-            player.sendMessage(Message.raw("You have modified the transformation mode to 0.\nTransforming into a Mermaid when enter water is active."));
-            Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " has modified the transformation mode to 0 : Transforming into a Mermaid when enter water is active.");
-        }
+                    String consoleTranslationId = "server.commands.mermaids.admin.transformMode.consoleMsg.set0";
+                    String consoleMessage = Message.translation(consoleTranslationId).param("username", player.getDisplayName()).getAnsiMessage();
+                    Mermaids.LOGGER.atInfo().log(consoleMessage);
+                }else{
+                    String playerTranslationId = "server.commands.mermaids.admin.transformMode.playerMsg.set0";
+                    player.sendMessage(Message.translation(playerTranslationId));
 
-        if(transMode == 1){
-            player.sendMessage(Message.raw("You have modified the transformation mode to 1.\nTransforming into a Mermaid requires the player to drink the Mermaid Potion."));
-            Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " has modified the transformation mode to 1 : Transforming into a Mermaid requires the player to drink the Mermaid Potion.");
+                    String consoleTranslationId = "server.commands.mermaids.admin.transformMode.consoleMsg.set0";
+                    String consoleMessage = Message.translation(consoleTranslationId).param("username", "Unknown").getAnsiMessage();
+                    Mermaids.LOGGER.atInfo().log(consoleMessage);
+                }
+            }
+
+            if(transformMode == 1){
+                if(player != null) {
+                    String playerTranslationId = "server.commands.mermaids.admin.transformMode.playerMsg.set1";
+                    player.sendMessage(Message.translation(playerTranslationId));
+
+                    String consoleTranslationId = "server.commands.mermaids.admin.transformMode.consoleMsg.set1";
+                    String consoleMessage = Message.translation(consoleTranslationId).param("username", player.getDisplayName()).getAnsiMessage();
+                    Mermaids.LOGGER.atInfo().log(consoleMessage);
+                }else{
+                    String playerTranslationId = "server.commands.mermaids.admin.transformMode.playerMsg.set1";
+                    player.sendMessage(Message.translation(playerTranslationId));
+
+                    String consoleTranslationId = "server.commands.mermaids.admin.transformMode.consoleMsg.set1";
+                    String consoleMessage = Message.translation(consoleTranslationId).param("username", "Unknown").getAnsiMessage();
+                    Mermaids.LOGGER.atInfo().log(consoleMessage);
+                }
+            }
+        }else{
+            if(player != null){
+                String playerTranslationId = "server.commands.mermaids.admin.transformMode.playerMsg.invalid";
+                player.sendMessage(Message.translation(playerTranslationId));
+            }
         }
     }
 }

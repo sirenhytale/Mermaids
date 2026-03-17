@@ -14,10 +14,11 @@ import plugin.siren.Mermaids;
 import plugin.siren.Systems.MermaidSettings;
 
 import javax.annotation.Nonnull;
+import java.awt.*;
 
 public class MermaidsPermPotionRemove extends AbstractPlayerCommand {
     public MermaidsPermPotionRemove() {
-        super("permpotionremove", "Removes the permanent potion transformation.");
+        super("permpotionremove", "server.commands.mermaids.permPotionRemove.desc");
 
         this.setPermissionGroup(GameMode.Adventure);
     }
@@ -27,12 +28,25 @@ public class MermaidsPermPotionRemove extends AbstractPlayerCommand {
         Player player = store.getComponent(ref, Player.getComponentType());
 
         MermaidSettings mermaidSettings = store.getComponent(ref, Mermaids.get().getMermaidSetingsComponentType());
-        mermaidSettings.setPermanentPotion(false);
+        if(mermaidSettings != null) {
+            mermaidSettings.setPermanentPotion(false);
 
-        player.sendMessage(Message.raw("You have removed the permanent mermaid potion effect from yourself."));
+            String playerTranslationId = "server.commands.mermaids.permPotionRemove.playerMsg.removed";
+            String consoleTranslationId = "server.commands.mermaids.permPotionRemove.consoleMsg.removed";
+            if(player != null) {
+                player.sendMessage(Message.translation(playerTranslationId));
 
-        if(Mermaids.getConfig().get().ifConsoleLogs()) {
-            Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " has removed the permanent mermaid potion effect from themselves.");
+                String consoleMessage = Message.translation(consoleTranslationId).param("username", player.getDisplayName()).getAnsiMessage();
+                Mermaids.LOGGER.atInfo().log(consoleMessage);
+            }else{
+                String consoleMessage = Message.translation(consoleTranslationId).param("username", "Unknown").getAnsiMessage();
+                Mermaids.LOGGER.atInfo().log(consoleMessage);
+            }
+        }else{
+            if(player != null){
+                String playerTranslationId = "server.commands.mermaids.permPotionRemove.playerMsg.issue";
+                player.sendMessage(Message.translation(playerTranslationId).color(Color.RED));
+            }
         }
     }
 }

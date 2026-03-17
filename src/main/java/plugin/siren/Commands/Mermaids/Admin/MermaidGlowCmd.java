@@ -17,30 +17,40 @@ import javax.annotation.Nonnull;
 
 public class MermaidGlowCmd extends AbstractPlayerCommand {
     public MermaidGlowCmd() {
-        super("mermaidglow", "Toggles to allow the mermaid model to glow.");
+        super("mermaidglow", "server.commands.mermaids.admin.mermaidGlow.desc");
 
         this.requirePermission("mermaids.admin.mermaidglow");
     }
 
-    RequiredArg<Boolean> msgMerGlowArg = this.withRequiredArg("Allow Mermaid Glow", "Boolean to toggle mermaid glow.", ArgTypes.BOOLEAN);
+    RequiredArg<Boolean> mermaidGlowArg = this.withRequiredArg("Allow Mermaid Glow", "server.commands.mermaids.admin.mermaidGlow.arg0.desc", ArgTypes.BOOLEAN);
 
     @Override
     protected void execute(@Nonnull CommandContext commandContext, @Nonnull Store<EntityStore> store, @Nonnull Ref<EntityStore> ref, @Nonnull PlayerRef playerRef, @Nonnull World world) {
         Player player = store.getComponent(ref, Player.getComponentType());
 
-        boolean merGlow = msgMerGlowArg.get(commandContext);
+        boolean mermaidGlow = mermaidGlowArg.get(commandContext);
 
-        Mermaids.getConfig().get().setMermaidLight(merGlow);
+        Mermaids.getConfig().get().setMermaidLight(mermaidGlow);
         Mermaids.getConfig().save();
 
-        String toggledStr = "";
-        if (merGlow) {
-            toggledStr = "Enabled";
+        String playerTranslationId = "";
+        String consoleTranslationId = "";
+        if (mermaidGlow) {
+            playerTranslationId = "server.commands.mermaids.admin.mermaidGlow.playerMsg.enabled";
+            consoleTranslationId = "server.commands.mermaids.admin.mermaidGlow.consoleMsg.enabled";
         } else {
-            toggledStr = "Disabled";
+            playerTranslationId = "server.commands.mermaids.admin.mermaidGlow.playerMsg.disabled";
+            consoleTranslationId = "server.commands.mermaids.admin.mermaidGlow.consoleMsg.disabled";
         }
-        player.sendMessage(Message.raw("You have " + toggledStr + " mermaid glow."));
 
-        Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " has toggled mermaid glow: " + String.valueOf(merGlow) + ".");
+        if(player != null) {
+            player.sendMessage(Message.translation(playerTranslationId));
+
+            String consoleMessage = Message.translation(consoleTranslationId).param("username", player.getDisplayName()).getAnsiMessage();
+            Mermaids.LOGGER.atInfo().log(consoleMessage);
+        }else{
+            String consoleMessage = Message.translation(consoleTranslationId).param("username", "Unknown").getAnsiMessage();
+            Mermaids.LOGGER.atInfo().log(consoleMessage);
+        }
     }
 }

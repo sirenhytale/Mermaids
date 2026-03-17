@@ -17,30 +17,40 @@ import javax.annotation.Nonnull;
 
 public class MermaidOnLandCmd extends AbstractPlayerCommand {
     public MermaidOnLandCmd() {
-        super("mermaidonland", "Toggles to allow users to be a Mermaid on land.");
+        super("mermaidonland", "server.commands.mermaids.admin.mermaidOnLand.desc");
 
         this.requirePermission("mermaids.admin.mermaidonland");
     }
 
-    RequiredArg<Boolean> msgMerOnLandArg = this.withRequiredArg("Toggle Always being a Mermaid", "Boolean to toggle Mermaid on Land.", ArgTypes.BOOLEAN);
+    RequiredArg<Boolean> mermaidOnLandArg = this.withRequiredArg("Toggle Always being a Mermaid", "server.commands.mermaids.admin.mermaidOnLand.arg0.desc", ArgTypes.BOOLEAN);
 
     @Override
     protected void execute(@Nonnull CommandContext commandContext, @Nonnull Store<EntityStore> store, @Nonnull Ref<EntityStore> ref, @Nonnull PlayerRef playerRef, @Nonnull World world) {
         Player player = store.getComponent(ref, Player.getComponentType());
 
-        boolean merOnLand = msgMerOnLandArg.get(commandContext);
+        boolean mermaidOnLand = mermaidOnLandArg.get(commandContext);
 
-        Mermaids.getConfig().get().setMermaidOnLand(merOnLand);
+        Mermaids.getConfig().get().setMermaidOnLand(mermaidOnLand);
         Mermaids.getConfig().save();
 
-        String toggledStr = "";
-        if (merOnLand) {
-            toggledStr = "Enabled";
+        String playerTranslationId = "";
+        String consoleTranslationId = "";
+        if (mermaidOnLand) {
+            playerTranslationId = "server.commands.mermaids.admin.mermaidOnLand.playerMsg.enabled";
+            consoleTranslationId = "server.commands.mermaids.admin.mermaidOnLand.consoleMsg.enabled";
         } else {
-            toggledStr = "Disabled";
+            playerTranslationId = "server.commands.mermaids.admin.mermaidOnLand.playerMsg.disabled";
+            consoleTranslationId = "server.commands.mermaids.admin.mermaidOnLand.consoleMsg.disabled";
         }
-        player.sendMessage(Message.raw("You have " + toggledStr + " mermaid transformation on land."));
 
-        Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " has toggled mermaid transformation on land: " + String.valueOf(merOnLand) + ".");
+        if(player != null) {
+            player.sendMessage(Message.translation(playerTranslationId));
+
+            String consoleMessage = Message.translation(consoleTranslationId).param("username", player.getDisplayName()).getAnsiMessage();
+            Mermaids.LOGGER.atInfo().log(consoleMessage);
+        }else{
+            String consoleMessage = Message.translation(consoleTranslationId).param("username", "Unknown").getAnsiMessage();
+            Mermaids.LOGGER.atInfo().log(consoleMessage);
+        }
     }
 }

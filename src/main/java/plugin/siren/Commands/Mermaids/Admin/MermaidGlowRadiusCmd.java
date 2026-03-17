@@ -17,24 +17,35 @@ import javax.annotation.Nonnull;
 
 public class MermaidGlowRadiusCmd extends AbstractPlayerCommand {
     public MermaidGlowRadiusCmd() {
-        super("mermaidglowradius", "Set the radius of the Mermaid glow.");
+        super("mermaidglowradius", "server.commands.mermaids.admin.mermaidGlowRadius.desc");
 
         this.requirePermission("mermaids.admin.mermaidglow");
     }
 
-    RequiredArg<Integer> msgMerGlowRadiusArg = this.withRequiredArg("Glow Radius", "value to set as Mermaid glow (default 33).", ArgTypes.INTEGER);
+    RequiredArg<Integer> mermaidGlowRadiusArg = this.withRequiredArg("Glow Radius", "server.commands.mermaids.admin.mermaidGlowRadius.arg0.desc", ArgTypes.INTEGER);
 
     @Override
     protected void execute(@Nonnull CommandContext commandContext, @Nonnull Store<EntityStore> store, @Nonnull Ref<EntityStore> ref, @Nonnull PlayerRef playerRef, @Nonnull World world) {
         Player player = store.getComponent(ref, Player.getComponentType());
 
-        int merGlowRadius = msgMerGlowRadiusArg.get(commandContext);
+        int mermaidGlowRadius = mermaidGlowRadiusArg.get(commandContext);
 
-        Mermaids.getConfig().get().setLightRadius(merGlowRadius);
+        Mermaids.getConfig().get().setLightRadius(mermaidGlowRadius);
         Mermaids.getConfig().save();
 
-        player.sendMessage(Message.raw("You have changed the mermaid glow radius to " + String.valueOf(merGlowRadius) + "."));
+        String playerTranslationId = "server.commands.mermaids.admin.mermaidGlowRadius.playerMsg.set";
+        Message playerMessage = Message.translation(playerTranslationId).param("radius", mermaidGlowRadius);
 
-        Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " has changed the mermaid glow radius to " + String.valueOf(merGlowRadius) + ".");
+        if(player != null) {
+            player.sendMessage(playerMessage);
+
+            String consoleTranslationId = "commands.mermaids.admin.mermaidGlowRadius.consoleMsg.set";
+            String consoleMessage = Message.translation(consoleTranslationId).param("username", player.getDisplayName()).param("radius", mermaidGlowRadius).getAnsiMessage();
+            Mermaids.LOGGER.atInfo().log(consoleMessage);
+        }else{
+            String consoleTranslationId = "commands.mermaids.admin.mermaidGlowRadius.consoleMsg.set";
+            String consoleMessage = Message.translation(consoleTranslationId).param("username", "Unknown").param("radius", mermaidGlowRadius).getAnsiMessage();
+            Mermaids.LOGGER.atInfo().log(consoleMessage);
+        }
     }
 }

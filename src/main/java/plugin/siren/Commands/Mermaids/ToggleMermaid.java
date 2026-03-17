@@ -16,35 +16,43 @@ import plugin.siren.Mermaids;
 import plugin.siren.Systems.MermaidSettings;
 
 import javax.annotation.Nonnull;
+import java.awt.*;
 
 public class ToggleMermaid extends AbstractPlayerCommand {
     public ToggleMermaid() {
-        super("toggle", "Toggles if you can be mermaid or not.");
+        super("toggle", "server.commands.mermaids.toggle.desc");
         this.requirePermission("mermaids.toggle");
         this.setPermissionGroup(GameMode.Creative);
     }
 
-    RequiredArg<Boolean> msgMerToggleArg = this.withRequiredArg("Allow Mermaid Transformations", "Boolean to allow for the mermaid transformations to happen.", ArgTypes.BOOLEAN);
+    RequiredArg<Boolean> mermaidToggleArg = this.withRequiredArg("Allow Mermaid Transformations", "server.commands.mermaids.toggle.arg0.desc", ArgTypes.BOOLEAN);
 
     @Override
     protected void execute(@Nonnull CommandContext commandContext, @Nonnull Store<EntityStore> store, @Nonnull Ref<EntityStore> ref, @Nonnull PlayerRef playerRef, @Nonnull World world) {
         Player player = store.getComponent(ref, Player.getComponentType());
 
-        boolean merToggle = msgMerToggleArg.get(commandContext);
+        boolean mermaidToggle = mermaidToggleArg.get(commandContext);
 
         MermaidSettings mermaidSettings = store.getComponent(ref, Mermaids.get().getMermaidSetingsComponentType());
-        mermaidSettings.setToggleMermaid(merToggle);
+        if(mermaidSettings != null) {
+            mermaidSettings.setToggleMermaid(mermaidToggle);
 
-        String toggledStr = "";
-        if (merToggle) {
-            toggledStr = "Enabled";
-        } else {
-            toggledStr = "Disabled";
-        }
-        player.sendMessage(Message.raw("You have " + toggledStr + " transforming into a mermaid."));
+            String playerTranslationId = "server.commands.mermaids.toggle.playerMsg.removed";
+            String consoleTranslationId = "server.commands.mermaids.toggle.playerMsg.removed";
+            if(player != null) {
+                player.sendMessage(Message.translation(playerTranslationId));
 
-        if(Mermaids.getConfig().get().ifConsoleLogs()) {
-            Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " has toggled transforming into a Mermaid: " + String.valueOf(merToggle) + ".");
+                String consoleMessage = Message.translation(consoleTranslationId).param("username", player.getDisplayName()).getAnsiMessage();
+                Mermaids.LOGGER.atInfo().log(consoleMessage);
+            }else{
+                String consoleMessage = Message.translation(consoleTranslationId).param("username", "Unknown").getAnsiMessage();
+                Mermaids.LOGGER.atInfo().log(consoleMessage);
+            }
+        }else{
+            if(player != null){
+                String playerTranslationId = "server.commands.mermaids.toggle.playerMsg.issue";
+                player.sendMessage(Message.translation(playerTranslationId).color(Color.RED));
+            }
         }
     }
 }

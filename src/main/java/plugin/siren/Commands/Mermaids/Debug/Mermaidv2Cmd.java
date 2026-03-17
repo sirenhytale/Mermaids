@@ -19,31 +19,41 @@ import javax.annotation.Nonnull;
 
 public class Mermaidv2Cmd extends AbstractPlayerCommand {
     public Mermaidv2Cmd() {
-        super("mermaidv2", "Toggles to test the Mermaid v2 Model.");
+        super("mermaidv2", "server.commands.mermaids.debug.mermaidV2.desc");
 
         this.requirePermission("mermaids.debug.mermaidv2");
         this.setPermissionGroup(GameMode.Creative);
     }
 
-    RequiredArg<Boolean> msgMerV2Arg = this.withRequiredArg("Use Model v2", "Boolean to toggle Mermaid v2 Model.", ArgTypes.BOOLEAN);
+    RequiredArg<Boolean> mermaidV2Arg = this.withRequiredArg("Use Model v2", "server.commands.mermaids.debug.mermaidV2.arg0.desc", ArgTypes.BOOLEAN);
 
     @Override
     protected void execute(@Nonnull CommandContext commandContext, @Nonnull Store<EntityStore> store, @Nonnull Ref<EntityStore> ref, @Nonnull PlayerRef playerRef, @Nonnull World world) {
         Player player = store.getComponent(ref, Player.getComponentType());
 
-        boolean merV2 = msgMerV2Arg.get(commandContext);
+        boolean mermaidV2 = mermaidV2Arg.get(commandContext);
 
         MermaidSettings mermaidSettings = store.getComponent(ref, Mermaids.get().getMermaidSetingsComponentType());
-        mermaidSettings.setMermaidV2Model(merV2);
+        mermaidSettings.setMermaidV2Model(mermaidV2);
 
-        String toggledStr = "";
-        if (merV2) {
-            toggledStr = "Enabled";
+        String playerTranslationId = "";
+        String consoleTranslationId = "";
+        if (mermaidV2) {
+            playerTranslationId = "server.commands.mermaids.debug.mermaidV2.playerMsg.enabled";
+            consoleTranslationId = "server.commands.mermaids.debug.mermaidV2.consoleMsg.enabled";
         } else {
-            toggledStr = "Disabled";
+            playerTranslationId = "server.commands.mermaids.debug.mermaidV2.playerMsg.disabled";
+            consoleTranslationId = "server.commands.mermaids.debug.mermaidV2.consoleMsg.disabled";
         }
-        player.sendMessage(Message.raw("You have " + toggledStr + " using the Mermaid V2 Tail model (Currently in Development, not final product)."));
 
-        Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " has toggled to use the Mermaid Tail Model v2: " + String.valueOf(merV2) + ".");
+        if(player != null) {
+            player.sendMessage(Message.translation(playerTranslationId));
+
+            String consoleMessage = Message.translation(consoleTranslationId).param("username", player.getDisplayName()).getAnsiMessage();
+            Mermaids.LOGGER.atInfo().log(consoleMessage);
+        }else{
+            String consoleMessage = Message.translation(consoleTranslationId).param("username", "Unknown").getAnsiMessage();
+            Mermaids.LOGGER.atInfo().log(consoleMessage);
+        }
     }
 }

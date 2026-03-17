@@ -17,30 +17,40 @@ import javax.annotation.Nonnull;
 
 public class RainTransformCmd extends AbstractPlayerCommand {
     public RainTransformCmd() {
-        super("raintransform", "Toggles to allow users to transform from rain/snow.");
+        super("raintransform", "server.commands.mermaids.admin.rainTransform.desc");
 
         this.requirePermission("mermaids.admin.raintransform");
     }
 
-    RequiredArg<Boolean> msgMerRainTransArg = this.withRequiredArg("Allow Rain Transformation", "Boolean to toggle rain transformations.", ArgTypes.BOOLEAN);
+    RequiredArg<Boolean> rainTransformArg = this.withRequiredArg("Allow Rain Transformation", "server.commands.mermaids.admin.rainTransform.arg0.desc", ArgTypes.BOOLEAN);
 
     @Override
     protected void execute(@Nonnull CommandContext commandContext, @Nonnull Store<EntityStore> store, @Nonnull Ref<EntityStore> ref, @Nonnull PlayerRef playerRef, @Nonnull World world) {
         Player player = store.getComponent(ref, Player.getComponentType());
 
-        boolean merRainTrans = msgMerRainTransArg.get(commandContext);
+        boolean rainTransform = rainTransformArg.get(commandContext);
 
-        Mermaids.getConfig().get().setRainTransformation(merRainTrans);
+        Mermaids.getConfig().get().setRainTransformation(rainTransform);
         Mermaids.getConfig().save();
 
-        String toggledStr = "";
-        if (merRainTrans) {
-            toggledStr = "Enabled";
+        String playerTranslationId = "";
+        String consoleTranslationId = "";
+        if (rainTransform) {
+            playerTranslationId = "server.commands.mermaids.admin.rainTransform.playerMsg.enabled";
+            consoleTranslationId = "server.commands.mermaids.admin.rainTransform.consoleMsg.enabled";
         } else {
-            toggledStr = "Disabled";
+            playerTranslationId = "server.commands.mermaids.admin.rainTransform.playerMsg.disabled";
+            consoleTranslationId = "server.commands.mermaids.admin.rainTransform.consoleMsg.disabled";
         }
-        player.sendMessage(Message.raw("You have " + toggledStr + " rain transformations."));
 
-        Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " has toggled rain transformations: " + String.valueOf(merRainTrans) + ".");
+        if(player != null) {
+            player.sendMessage(Message.translation(playerTranslationId));
+
+            String consoleMessage = Message.translation(consoleTranslationId).param("username", player.getDisplayName()).getAnsiMessage();
+            Mermaids.LOGGER.atInfo().log(consoleMessage);
+        }else{
+            String consoleMessage = Message.translation(consoleTranslationId).param("username", "Unknown").getAnsiMessage();
+            Mermaids.LOGGER.atInfo().log(consoleMessage);
+        }
     }
 }

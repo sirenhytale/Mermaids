@@ -209,8 +209,7 @@ public class Mermaids extends JavaPlugin {
     }
 
     public static boolean ifDebug(){
-        boolean showDebug = plugin.DEBUG || plugin.config.get().ifDebugMode();
-        return showDebug;
+        return plugin.DEBUG || plugin.config.get().ifDebugMode();
     }
 
     public static boolean ifVersion1(){

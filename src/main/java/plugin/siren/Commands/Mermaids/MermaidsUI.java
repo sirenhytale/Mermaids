@@ -20,7 +20,7 @@ import java.util.concurrent.CompletableFuture;
 
 public class MermaidsUI extends AbstractAsyncCommand {
     public MermaidsUI() {
-        super("ui", "Opens the Mermaids plugin UI.");
+        super("ui", "server.commands.mermaid.desc");
 
         if (Mermaids.getConfig().get().getRequireUIPermission()) {
             this.requirePermission("mermaids.ui");

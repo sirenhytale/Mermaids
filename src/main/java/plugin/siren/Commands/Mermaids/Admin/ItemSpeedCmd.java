@@ -14,34 +14,33 @@ import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import plugin.siren.Mermaids;
 
 import javax.annotation.Nonnull;
-import java.util.UUID;
 
-public class BlockTransformCmd extends AbstractPlayerCommand {
-    public BlockTransformCmd() {
-        super("blocktransform", "server.commands.mermaids.admin.blockTransform.desc");
+public class ItemSpeedCmd extends AbstractPlayerCommand {
+    public ItemSpeedCmd() {
+        super("itemspeed", "server.commands.mermaids.admin.itemSpeed.desc");
 
-        this.requirePermission("mermaids.admin.blocktransform");
+        this.requirePermission("mermaids.admin.itemspeed");
     }
 
-    RequiredArg<Boolean> blockTransformArg = this.withRequiredArg("Allow Block Transformation", "server.commands.mermaids.admin.blockTransform.arg0.desc", ArgTypes.BOOLEAN);
+    RequiredArg<Boolean> itemSpeedArg = this.withRequiredArg("Allow Items to Increase Speed", "server.commands.mermaids.admin.itemSpeed.arg0.desc", ArgTypes.BOOLEAN);
 
     @Override
     protected void execute(@Nonnull CommandContext commandContext, @Nonnull Store<EntityStore> store, @Nonnull Ref<EntityStore> ref, @Nonnull PlayerRef playerRef, @Nonnull World world) {
         Player player = store.getComponent(ref, Player.getComponentType());
 
-        boolean blockTransform = blockTransformArg.get(commandContext);
+        boolean itemSpeed = itemSpeedArg.get(commandContext);
 
-        Mermaids.getConfig().get().setBlockTransformation(blockTransform);
+        Mermaids.getConfig().get().setItemIncreaseSwimSpeed(itemSpeed);
         Mermaids.getConfig().save();
 
         String playerTranslationId = "";
         String consoleTranslationId = "";
-        if (blockTransform) {
-            playerTranslationId = "server.commands.mermaids.admin.blockTransform.playerMsg.enabled";
-            consoleTranslationId = "server.commands.mermaids.admin.blockTransform.consoleMsg.enabled";
+        if (itemSpeed) {
+            playerTranslationId = "server.commands.mermaids.admin.itemSpeed.playerMsg.enabled";
+            consoleTranslationId = "server.commands.mermaids.admin.itemSpeed.consoleMsg.enabled";
         } else {
-            playerTranslationId = "server.commands.mermaids.admin.blockTransform.playerMsg.disabled";
-            consoleTranslationId = "server.commands.mermaids.admin.blockTransform.consoleMsg.disabled";
+            playerTranslationId = "server.commands.mermaids.admin.itemSpeed.playerMsg.disabled";
+            consoleTranslationId = "server.commands.mermaids.admin.itemSpeed.consoleMsg.disabled";
         }
 
         if(player != null) {

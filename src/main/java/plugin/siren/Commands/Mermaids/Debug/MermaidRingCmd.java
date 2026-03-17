@@ -17,7 +17,7 @@ import javax.annotation.Nonnull;
 
 public class MermaidRingCmd extends AbstractPlayerCommand {
     public MermaidRingCmd() {
-        super("givemermaidring", "Gives the player the Mermaid Ring.");
+        super("givemermaidring", "server.commands.mermaids.debug.giveMermaidRing.desc");
 
         this.requirePermission("mermaids.debug.mermaidring");
         this.setPermissionGroup(GameMode.Creative);
@@ -27,11 +27,18 @@ public class MermaidRingCmd extends AbstractPlayerCommand {
     protected void execute(@Nonnull CommandContext commandContext, @Nonnull Store<EntityStore> store, @Nonnull Ref<EntityStore> ref, @Nonnull PlayerRef playerRef, @Nonnull World world) {
         Player player = store.getComponent(ref, Player.getComponentType());
 
-        Player playerComponent = store.getComponent(ref, Player.getComponentType());
-        playerComponent.getInventory().getCombinedHotbarFirst().addItemStack(new ItemStack("Mermaids_Weapon_Spell_Ring", 1));
+        if(player != null) {
+            Player playerComponent = store.getComponent(ref, Player.getComponentType());
+            if(playerComponent != null) {
+                playerComponent.getInventory().getCombinedHotbarFirst().addItemStack(new ItemStack("Mermaids_Weapon_Spell_Ring", 1));
 
-        player.sendMessage(Message.raw("You have been given the Mermaid Ring (Currently in Development, not final product)."));
+                String playerTranslationId = "server.commands.mermaids.debug.giveMermaidRing.playerMsg.received";
+                player.sendMessage(Message.translation(playerTranslationId));
 
-        Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " has been given the Mermaid Ring.");
+                String consoleTranslationId = "server.commands.mermaids.debug.giveMermaidRing.consoleMsg.received";
+                String consoleMessage = Message.translation(consoleTranslationId).param("username", player.getDisplayName()).getAnsiMessage();
+                Mermaids.LOGGER.atInfo().log(consoleMessage);
+            }
+        }
     }
 }
