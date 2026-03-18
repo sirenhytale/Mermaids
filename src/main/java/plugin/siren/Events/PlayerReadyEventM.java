@@ -148,36 +148,7 @@ public class PlayerReadyEventM {
                 }
             }
 
-            String recentVersion = UpdateChecker.checkForUpdate();
-            if(!Mermaids.getVersion().equalsIgnoreCase(recentVersion)){
-                if(Mermaids.ifVersion1()) {
-                    String translationId = "server.updateChecker.mermaids.release.message";
-                    Message versionMessage = Message.translation(translationId).param("new-version", recentVersion);
-
-                    Mermaids.LOGGER.atInfo().log(versionMessage.getAnsiMessage());
-                    if (player.hasPermission("*") && Mermaids.getConfig().get().ifNewVersion()) {
-                        player.sendMessage(versionMessage.color(Color.CYAN));
-                    }
-                }else{
-                    if(!recentVersion.equalsIgnoreCase("released")) {
-                        String translationId = "server.updateChecker.mermaids.alpha.2.0.0.message";
-                        Message versionMessage = Message.translation(translationId).param("new-version", recentVersion);
-
-                        Mermaids.LOGGER.atInfo().log(versionMessage.getAnsiMessage());
-                        if (player.hasPermission("*") && Mermaids.getConfig().get().ifNewVersion()) {
-                            player.sendMessage(versionMessage.color(Color.CYAN));
-                        }
-                    }else{
-                        String translationId = "server.updateChecker.mermaids.alpha.2.0.0.released.message";
-                        Message versionMessage = Message.translation(translationId).param("new-version", recentVersion);
-
-                        Mermaids.LOGGER.atInfo().log(versionMessage.getAnsiMessage());
-                        if (player.hasPermission("*") && Mermaids.getConfig().get().ifNewVersion()) {
-                            player.sendMessage(versionMessage.color(Color.CYAN));
-                        }
-                    }
-                }
-            }
+            UpdateChecker.sendUpdateMessage(player);
         });
     }
 }

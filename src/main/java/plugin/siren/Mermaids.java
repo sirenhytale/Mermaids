@@ -132,46 +132,7 @@ public class Mermaids extends JavaPlugin {
             LOGGER.atInfo().log("Loaded Mermaids in Debug mode.");
         }
 
-        String recentVersion = UpdateChecker.checkForUpdate();
-        if(!VERSION.equalsIgnoreCase(recentVersion)){
-            LOGGER.atInfo().log("= =- -=- -=- -=- -=- -=- -=- -=- -= =");
-            if(Mermaids.ifVersion1()) {
-                String versionMessage = "The Mermaids mod version is outdated, Mermaids has released v" + recentVersion + ".";
-                LOGGER.atInfo().log(versionMessage);
-
-                Runnable updateCheckRunnable = new Runnable() {
-                    @Override
-                    public void run() {
-                        LOGGER.atInfo().log(versionMessage);
-                    }
-                };
-                HytaleServer.SCHEDULED_EXECUTOR.schedule(updateCheckRunnable,5, TimeUnit.SECONDS);
-            }else{
-                if(!recentVersion.equalsIgnoreCase("released")) {
-                    String versionMessage = "The Alpha Mermaids mod version is outdated, Mermaids has released " + recentVersion + ".";
-                    LOGGER.atInfo().log(versionMessage);
-
-                    Runnable updateCheckRunnable = new Runnable() {
-                        @Override
-                        public void run() {
-                            LOGGER.atInfo().log(versionMessage);
-                        }
-                    };
-                    HytaleServer.SCHEDULED_EXECUTOR.schedule(updateCheckRunnable,5, TimeUnit.SECONDS);
-                }else{
-                    String versionMessage = "The Alpha Mermaids mod version 2.0.0 has been released, the server is currently on an outdated version of the Mermaids mod.";
-                    LOGGER.atInfo().log(versionMessage);
-
-                    Runnable updateCheckRunnable = new Runnable() {
-                        @Override
-                        public void run() {
-                            LOGGER.atInfo().log(versionMessage);
-                        }
-                    };
-                    HytaleServer.SCHEDULED_EXECUTOR.schedule(updateCheckRunnable,15, TimeUnit.SECONDS);
-                }
-            }
-        }
+        UpdateChecker.sendUpdateMessage(true);
         LOGGER.atInfo().log("===---==---==---==---==---==---==---==---===");
     }
 
