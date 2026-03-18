@@ -23,7 +23,7 @@ import java.util.List;
  * Link: https://github.com/SyperAI/hytale-model-utils
  *
  * Modified: Siren
- * Date: 2026/03/13
+ * Date: 2026/03/17
  *
  */
 
@@ -142,6 +142,10 @@ public class AttachmentsHelper {
                 cosmeticType = CosmeticType.valueOf(enumName);
                 checkCosmeticType = enumName;
             }
+
+            /*if(checkCosmeticType.equalsIgnoreCase("BODY_CHARACTERISTIC") || checkCosmeticType.equalsIgnoreCase("BODY_CHARACTERISTICS")){
+                continue;
+            }*/
 
             List<Integer> cosmeticsToHide = mermaid.getCosmeticsToHide();
             boolean hideAttachment = false;

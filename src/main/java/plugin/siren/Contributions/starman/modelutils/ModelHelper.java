@@ -29,7 +29,7 @@ import static plugin.siren.Contributions.starman.modelutils.AttachmentsHelper.re
  * Link: https://github.com/SyperAI/hytale-model-utils
  *
  * Modified: Siren
- * Date: 2026/03/14
+ * Date: 2026/03/17
  *
  */
 
@@ -74,6 +74,10 @@ public class ModelHelper {
             }
         }
 
+        if(model.getModel().equalsIgnoreCase("MermaidV2")){
+            playerSkin.bodyCharacteristic = null;
+        }
+
         var attachments = AttachmentsHelper.parseSkin(playerSkin, null, gradientId, mermaid);
 
         String texturePath = model.getTexture();
@@ -99,7 +103,7 @@ public class ModelHelper {
                 model.getModel(),
                 texturePath,
                 playerModel.getGradientSet(),
-                playerModel.getGradientId(),
+                gradientId,
                 model.getEyeHeight(),
                 model.getCrouchOffset(),
                 model.getSittingOffset(),

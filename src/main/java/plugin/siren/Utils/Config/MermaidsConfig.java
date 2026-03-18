@@ -108,7 +108,7 @@ public class MermaidsConfig {
 
     private String InformationDefault = "Confused about what one of these statement do? Go to https://mermaids.dev/mermaids/config/ or check out the Mermaids page on the Curseforge website and scroll down to Config Extra Info.";
     private String Information = InformationDefault;
-    private final int ConfigVersionDefault = 10;
+    private final int ConfigVersionDefault = 11;
     private int ConfigVersion = ConfigVersionDefault;
     private String PluginName = "Mermaids";
     private String Version = Mermaids.getVersion();

@@ -83,11 +83,27 @@
         }
       ]
     },
+    "FluidIdle": {
+      "Animations": [
+        {
+          "Animation": "Characters/SirensMermaid/Animations/Mermaids/Swim/Mermaidv2_Fluid_Idle.blockyanim",
+          "Speed": 0.35
+        }
+      ]
+    },
     "FluidWalk": {
       "Animations": [
         {
           "Animation": "Characters/SirensMermaid/Animations/Mermaids/Swim/Mermaidv2_Fluid_Walkv4.blockyanim",
           "Speed": 1.35
+        }
+      ]
+    },
+    "FluidWalkBackward": {
+      "Animations": [
+        {
+          "Animation": "Characters/SirensMermaid/Animations/Mermaids/Swim/Mermaidv2_Fluid_Walk_Backward.blockyanim",
+          "Speed": 1.3
         }
       ]
     },
@@ -100,6 +116,14 @@
       ]
     }
   },
+  "FluidRunBackward": {
+    "Animations": [
+      {
+        "Animation": "Characters/SirensMermaid/Animations/Mermaids/Swim/Mermaidv2_Fluid_Walk_Backward.blockyanim",
+        "Speed": 1.45
+      }
+    ]
+  },
   "FluidSprint": {
     "Animations": [
       {
@@ -111,21 +135,21 @@
   "Sleep": {
     "Animations": [
       {
-        "Animation": "Characters/SirensMermaid/Animations/Mermaids/Flavor/Sleep.blockyanim"
+        "Animation": "Characters/SirensMermaid/Animations/Mermaids/Flavor/Mermaid_Sleep.blockyanim"
       }
     ]
   },
   "Sleep2": {
     "Animations": [
       {
-        "Animation": "Characters/SirensMermaid/Animations/Mermaids/Flavor/Sleep2.blockyanim"
+        "Animation": "Characters/SirensMermaid/Animations/Mermaids/Flavor/Mermaid_Sleep2.blockyanim"
       }
     ]
   },
   "Sit": {
     "Animations": [
       {
-        "Animation": "Characters/SirensMermaid/Animations/Mermaids/Flavor/Sit.blockyanim",
+        "Animation": "Characters/SirensMermaid/Animations/Mermaids/Flavor/Mermaid_Sit.blockyanim",
         "Looping": true,
         "Speed": 0.5
       }
@@ -134,7 +158,7 @@
   "Sit2": {
     "Animations": [
       {
-        "Animation": "Characters/SirensMermaid/Animations/Mermaids/Flavor/Sit2.blockyanim",
+        "Animation": "Characters/SirensMermaid/Animations/Mermaids/Flavor/Mermaid_Sit2.blockyanim",
         "Looping": true,
         "Speed": 0.5
       }
@@ -143,7 +167,7 @@
   "SitGround": {
     "Animations": [
       {
-        "Animation": "Characters/SirensMermaid/Animations/Mermaids/Flavor/Sit_Ground.blockyanim",
+        "Animation": "Characters/SirensMermaid/Animations/Mermaids/Flavor/Mermaid_Sit_Ground.blockyanim",
         "Looping": true,
         "Speed": 0.5
       }
