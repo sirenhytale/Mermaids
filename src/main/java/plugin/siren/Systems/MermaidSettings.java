@@ -5,135 +5,71 @@ import com.hypixel.hytale.codec.KeyedCodec;
 import com.hypixel.hytale.codec.builder.BuilderCodec;
 import com.hypixel.hytale.common.plugin.PluginIdentifier;
 import com.hypixel.hytale.component.Component;
-import com.hypixel.hytale.protocol.Cosmetic;
 import com.hypixel.hytale.server.core.HytaleServer;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
-import plugin.siren.Mermaids;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.List;
 
 public class MermaidSettings implements Component<EntityStore> {
-
-    public static final BuilderCodec<MermaidSettings> CODECV1 = BuilderCodec.builder(MermaidSettings.class, MermaidSettings::new)
-            .append(new KeyedCodec<Boolean>("MermaidToggle", Codec.BOOLEAN),
-                    (merSettings, mtBool) -> merSettings.toggleMermaid = mtBool, // Setter
-                    (merSettings) -> merSettings.toggleMermaid)                    // Getter
-            .add()
-            .append(new KeyedCodec<Boolean>("MermaidTransPermPotion", Codec.BOOLEAN),
-                    (merSettings, mtppBool) -> merSettings.permanentPotion = mtppBool, // Setter
-                    (merSettings) -> merSettings.permanentPotion)                    // Getter
-            .add()
-            .append(new KeyedCodec<String>("MermaidTailModel", Codec.STRING),
-                    (merSettings, mtmStr) -> merSettings.mermaidTail = mtmStr, // Setter
-                    (merSettings) -> merSettings.mermaidTail)                    // Getter
-            .add()
-            .append(new KeyedCodec<String>("MermaidTailColor", Codec.STRING),
-                    (merSettings, mtcStr) -> merSettings.tailColor = mtcStr, // Setter
-                    (merSettings) -> merSettings.tailColor)                    // Getter
-            .add()
-            .append(new KeyedCodec<Boolean>("MermaidV2Model", Codec.BOOLEAN),
-                    (merSettings, mv2mBool) -> merSettings.mermaidV2Model = mv2mBool, // Setter
-                    (merSettings) -> merSettings.mermaidV2Model)                    // Getter
-            .add()
-            .append(new KeyedCodec<Boolean>("ForceMermaidOrbisOrigin", Codec.BOOLEAN),
-                    (merSettings, fmooBool) -> merSettings.forceMermaidOrbisOrigin = fmooBool, // Setter
-                    (merSettings) -> merSettings.forceMermaidOrbisOrigin)                    // Getter
-            .add()
-            .append(new KeyedCodec<Boolean>("ForceMermaid", Codec.BOOLEAN),
-                    (merSettings, fmBool) -> merSettings.forceMermaid = fmBool, // Setter
-                    (merSettings) -> merSettings.forceMermaid)                    // Getter
-            .add()
-            .build();
-
     public static final BuilderCodec<MermaidSettings> CODEC = BuilderCodec.builder(MermaidSettings.class, MermaidSettings::new)
-            .append(new KeyedCodec<Boolean>("MermaidToggle", Codec.BOOLEAN),
+            .append(new KeyedCodec<Boolean>("Mermaid-Toggle_ALPHA", Codec.BOOLEAN),
                     (merSettings, mtBool) -> merSettings.toggleMermaid = mtBool, // Setter
                     (merSettings) -> merSettings.toggleMermaid)                    // Getter
             .add()
-            .append(new KeyedCodec<Boolean>("MermaidTransPermPotion", Codec.BOOLEAN),
+            .append(new KeyedCodec<Boolean>("Mermaid-Transformation-PermPotion_ALPHA", Codec.BOOLEAN),
                     (merSettings, mtppBool) -> merSettings.permanentPotion = mtppBool, // Setter
                     (merSettings) -> merSettings.permanentPotion)                    // Getter
             .add()
-            .append(new KeyedCodec<String>("MermaidTailModelAlpha200", Codec.STRING),
+            .append(new KeyedCodec<String>("Mermaid-Tail-Model_ALPHA", Codec.STRING),
                     (merSettings, mtmStr) -> merSettings.mermaidTail = mtmStr, // Setter
                     (merSettings) -> merSettings.mermaidTail)                    // Getter
             .add()
-            .append(new KeyedCodec<String>("MermaidTailColorAlpha200", Codec.STRING),
+            .append(new KeyedCodec<String>("Mermaid-Tail-Color_ALPHA", Codec.STRING),
                     (merSettings, mtcStr) -> merSettings.tailColor = mtcStr, // Setter
                     (merSettings) -> merSettings.tailColor)                    // Getter
             .add()
-            .append(new KeyedCodec<String>("MermaidTailColorV2Alpha200", Codec.STRING),
-                    (merSettings, mtcStr) -> merSettings.tailColorV2 = mtcStr, // Setter
-                    (merSettings) -> merSettings.tailColorV2)                    // Getter
-            .add()
-            .append(new KeyedCodec<Boolean>("MermaidV2Model", Codec.BOOLEAN),
-                    (merSettings, mv2mBool) -> merSettings.mermaidV2Model = mv2mBool, // Setter
-                    (merSettings) -> merSettings.mermaidV2Model)                    // Getter
-            .add()
-            .append(new KeyedCodec<Boolean>("Alpha2.0.0", Codec.BOOLEAN),
-                    (merSettings, a200Bool) -> merSettings.alpha200 = a200Bool, // Setter
-                    (merSettings) -> merSettings.alpha200)                    // Getter
-            .add()
-            .append(new KeyedCodec<Boolean>("ForceMermaid", Codec.BOOLEAN),
+            .append(new KeyedCodec<Boolean>("Force-Mermaid_ALPHA", Codec.BOOLEAN),
                     (merSettings, fmBool) -> merSettings.forceMermaid = fmBool, // Setter
                     (merSettings) -> merSettings.forceMermaid)                    // Getter
             .add()
-            .append(new KeyedCodec<Boolean>("ForceMermaidOrbisOrigin", Codec.BOOLEAN),
+            .append(new KeyedCodec<Boolean>("Force-Mermaid-OrbisOrigin_ALPHA", Codec.BOOLEAN),
                     (merSettings, fmooBool) -> merSettings.forceMermaidOrbisOrigin = fmooBool, // Setter
                     (merSettings) -> merSettings.forceMermaidOrbisOrigin)                    // Getter
             .add()
             .build();
-
-    private boolean forceMermaid;
-    private boolean forceMermaidOrbisOrigin;
 
     private boolean toggleMermaid;
     private boolean permanentPotion;
 
     private String mermaidTail;
     private String tailColor;
-    private String tailColorV2;
 
-    private boolean mermaidV2Model;
+    private boolean forceMermaid;
+    private boolean forceMermaidOrbisOrigin;
 
-    private boolean alpha200;
+    private final String defaultMermaidTail = "Mermaids_Mermaid";
+    private final String defaultTailColor = "Mermaids_Mermaid_Orange_Texture";
 
     public MermaidSettings(){
-        this.forceMermaid = false;
-        this.forceMermaidOrbisOrigin = false;
-
         this.toggleMermaid = true;
         this.permanentPotion = false;
 
-        if(Mermaids.ifVersion1()){
-            this.mermaidTail = "MermaidBigFinPlayer";
-        }else{
-            this.mermaidTail = "MermaidV2";
-        }
-        this.tailColor = "MermaidPlayerGrayscale";
-        this.tailColorV2 = "MermaidTextureV2";
+        this.mermaidTail = defaultMermaidTail;
+        this.tailColor = defaultTailColor;
 
-        this.mermaidV2Model = false;
-
-        this.alpha200 = false;
+        this.forceMermaid = false;
+        this.forceMermaidOrbisOrigin = false;
     }
 
     public MermaidSettings(MermaidSettings other){
-        this.forceMermaid = other.forceMermaid;
-        this.forceMermaidOrbisOrigin = other.forceMermaidOrbisOrigin;
-
         this.toggleMermaid = other.toggleMermaid;
         this.permanentPotion = other.permanentPotion;
 
         this.mermaidTail = other.mermaidTail;
         this.tailColor = other.tailColor;
-        this.tailColorV2 = other.tailColorV2;
 
-        this.mermaidV2Model = other.mermaidV2Model;
-
-        this.alpha200 = other.alpha200;
+        this.forceMermaid = other.forceMermaid;
+        this.forceMermaidOrbisOrigin = other.forceMermaidOrbisOrigin;
     }
 
     @Nullable
@@ -202,27 +138,11 @@ public class MermaidSettings implements Component<EntityStore> {
         this.tailColor = tailColor;
     }
 
-    public String getTailColorV2() {
-        return tailColorV2;
+    public String getDefaultMermaidTail(){
+        return this.defaultMermaidTail;
     }
 
-    public void setTailColorV2(String tailColor) {
-        this.tailColorV2 = tailColor;
-    }
-
-    public boolean ifUseMermaidV2(){
-        return mermaidV2Model;
-    }
-
-    public void setMermaidV2Model(boolean useMermaidV2){
-        this.mermaidV2Model = useMermaidV2;
-    }
-
-    public boolean getAlpha200(){
-        return this.alpha200;
-    }
-
-    public void setAlpha200(boolean alpha){
-        this.alpha200 = alpha;
+    public String getDefaultTailColor(){
+        return this.defaultTailColor;
     }
 }

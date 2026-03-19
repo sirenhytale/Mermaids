@@ -5,21 +5,14 @@ import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.protocol.ColorLight;
 import com.hypixel.hytale.protocol.PlayerSkin;
 import com.hypixel.hytale.server.core.asset.type.model.config.Model;
-import com.hypixel.hytale.server.core.asset.type.model.config.ModelAttachment;
-import com.hypixel.hytale.server.core.cosmetics.CosmeticType;
-import com.hypixel.hytale.server.core.cosmetics.PlayerSkinPart;
 import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.modules.entity.component.ModelComponent;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
-import io.sentry.Attachment;
 import plugin.siren.Mermaids;
 import plugin.siren.Systems.MermaidComponent;
 import plugin.siren.Systems.MermaidSettings;
 
 import java.lang.reflect.Field;
-import java.util.List;
-
-import static plugin.siren.Contributions.starman.modelutils.AttachmentsHelper.reg;
 
 /*
  *
@@ -29,7 +22,7 @@ import static plugin.siren.Contributions.starman.modelutils.AttachmentsHelper.re
  * Link: https://github.com/SyperAI/hytale-model-utils
  *
  * Modified: Siren
- * Date: 2026/03/17
+ * Date: 2026/03/19
  *
  */
 
@@ -81,11 +74,8 @@ public class ModelHelper {
         var attachments = AttachmentsHelper.parseSkin(playerSkin, null, gradientId, mermaid);
 
         String texturePath = model.getTexture();
-        if(model.getModel().equals("Characters/MermaidPlayer.blockymodel") || model.getModel().equals("Characters/MermaidBigFinPlayer.blockymodel")){
-            texturePath = "Characters/PlayerTextures/" + mermaidSettings.getTailColor() + ".png";
-        }
-        if(model.getModel().equals("Characters/SirensMermaid/Mermaidv2.blockymodel")){
-            texturePath = "Characters/SirensMermaid/MermaidTextures/" + mermaidSettings.getTailColorV2() + ".png";
+        if(model.getModel().equals("Characters/SirensMermaid/Mermaids_Mermaid.blockymodel")){
+            texturePath = "Characters/SirensMermaid/MermaidTextures/" + mermaidSettings.getTailColor() + ".png";
         }
 
         ColorLight modelLight = playerModel.getLight();

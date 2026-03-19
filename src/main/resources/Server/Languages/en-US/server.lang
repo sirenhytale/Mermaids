@@ -1,6 +1,6 @@
 # === commands ===
 
-commands.mermaid.desc = Command opens the Mermaids plugin UI.
+commands.mermaids.mermaid.desc = Command opens the Mermaids plugin UI.
 commands.mermaids.admin.desc = Mermaids admin command line.
 commands.mermaids.admin.blockTransform.desc = Command toggles to allow users to transform from liquid blocks.
 commands.mermaids.admin.blockTransform.arg0.desc = Boolean to set block transformations.
@@ -45,14 +45,9 @@ commands.mermaids.admin.transformMode.consoleMsg.set0 = {username} has modified 
 commands.mermaids.admin.transformMode.consoleMsg.set1 = {username} has modified the transformation mode to 1, only allows transformation into a mermaid when the user drinks a Mermaid Potion.
 commands.mermaids.debug.desc = Mermaids debug command line.
 commands.mermaids.debug.giveMermaidRing.desc = Command gives the player the Mermaid Ring.
+commands.mermaids.debug.giveMermaidRing.playerMsg.inventoryFull = Your inventory is full, free up an empty space to receive the Mermaid Ring.
 commands.mermaids.debug.giveMermaidRing.playerMsg.received = You have been given the Mermaid Ring (Currently in Development, not final product).
 commands.mermaids.debug.giveMermaidRing.consoleMsg.received = {username} has been given the Mermaid Ring (WIP Item).
-commands.mermaids.debug.mermaidV2.desc = Command toggles to test the Mermaid v2 Model.
-commands.mermaids.debug.mermaidV2.arg0.desc = Boolean to set Mermaid v2 Model.
-commands.mermaids.debug.mermaidV2.playerMsg.enabled = You have allowed using the Mermaid V2 Tail model (Currently in Development, not final product).
-commands.mermaids.debug.mermaidV2.playerMsg.disabled = You have disabled using the Mermaid V2 Tail model.
-commands.mermaids.debug.mermaidV2.consoleMsg.enabled = {username} has allowed using the Mermaid V2 Tail model (Currently in Development, not final product).
-commands.mermaids.debug.mermaidV2.consoleMsg.disabled = {username} has disabled using the Mermaid V2 Tail model.
 commands.mermaids.permPotionRemove.desc = Removes the mermaid transformation effect from the permanent mermaid potion.
 commands.mermaids.permPotionRemove.playerMsg.issue = An error occurred while trying to remove the permanent mermaid potion effect from yourself.
 commands.mermaids.permPotionRemove.playerMsg.removed = You have removed the permanent mermaid potion effect from yourself.
@@ -67,25 +62,28 @@ commands.mermaids.toggle.consoleMsg.disabled = {username} has disabled transform
 
 # === customui ===
 
-customUI.mermaid.title = Mermaids
-customUI.mermaid.category.model = Mermaid Tail Model
-customUI.mermaid.category.color = Mermaid Tail Color
+customUI.mermaids.mermaidui.title = Mermaids
+customUI.mermaids.mermaidui.category.model = Mermaid Tail Model
+customUI.mermaids.mermaidui.category.color = Mermaid Tail Color
 
 # === items ===
 
-items.Mermaids_Chest_Seashell_Bra.name = Seashell Bra
-items.Mermaids_Chest_Purple_Seashell_Bra.name = Purple Seashell Bra
-items.Mermaids_Weapon_Spell_Ring.name = Mermaid Ring
+items.mermaids.Mermaids_Chest_Seashell_Bra.name = Seashell Bra
+items.mermaids.Mermaids_Chest_Seashell_Bra.desc = A seashell bra that benefits Mermaids.
+items.mermaids.Mermaids_Chest_Purple_Seashell_Bra.name = Purple Seashell Bra
+items.mermaids.Mermaids_Chest_Purple_Seashell_Bra.desc = A seashell bra that benefits Mermaids.
+items.mermaids.Mermaids_Weapon_Spell_Ring.name = Mermaid Ring
+items.mermaids.Mermaids_Weapon_Spell_Ring.desc = A Mermaid ring with powers, WIP.
 
-items.Potion_Mermaid_Transformation_Small.name = Small Potion of Mermaid Transformation
-items.Potion_Mermaid_Transformation_Small.description = Transform into a Mermaid for 3 minutes.
-items.Potion_Mermaid_Transformation_Medium.name = Medium Potion of Mermaid Transformation
-items.Potion_Mermaid_Transformation_Medium.description = Transform into a Mermaid for 10 minutes.
-items.Potion_Mermaid_Transformation_Large.name = Permanent Potion of Mermaid Transformation
-items.Potion_Mermaid_Transformation_Large.description = Permanent transform into a Mermaid when enter contact with water.
+items.mermaids.Mermaids_Potion_Mermaid_Transformation_Small.name = Small Potion of Mermaid Transformation
+items.mermaids.Mermaids_Potion_Mermaid_Transformation_Small.desc = Transform into a Mermaid for 3 minutes.
+items.mermaids.Mermaids_Potion_Mermaid_Transformation_Medium.name = Medium Potion of Mermaid Transformation
+items.mermaids.Mermaids_Potion_Mermaid_Transformation_Medium.desc = Transform into a Mermaid for 10 minutes.
+items.mermaids.Mermaids_Potion_Mermaid_Transformation_Large.name = Permanent Potion of Mermaid Transformation
+items.mermaids.Mermaids_Potion_Mermaid_Transformation_Large.desc = Permanent transform into a Mermaid when enter contact with water.
 
 # === updateChecker ===
 
-updateChecker.mermaids.release.message = The Mermaids mod version is outdated, Mermaids has released v{new-version}.
-updateChecker.mermaids.alpha.2.0.0.message = The Alpha Mermaids mod version is outdated, Mermaids has released {new-version}.
+updateChecker.mermaids.release.message = The Mermaids mod version is outdated, Mermaids has released v{recentVersion}.
+updateChecker.mermaids.alpha.2.0.0.message = The Alpha Mermaids mod version is outdated, Mermaids has released {recentVersion}.
 updateChecker.mermaids.alpha.2.0.0.released.message = The Alpha Mermaids mod version 2.0.0 has been released, the server is currently on an outdated version of the Mermaids mod.

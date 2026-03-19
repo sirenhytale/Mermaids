@@ -13,7 +13,6 @@ import com.hypixel.hytale.server.core.modules.interaction.interaction.config.Sim
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import plugin.siren.Mermaids;
-import plugin.siren.Systems.MermaidSettings;
 
 import javax.annotation.Nonnull;
 

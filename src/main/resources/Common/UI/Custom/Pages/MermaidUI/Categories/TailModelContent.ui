@@ -10,13 +10,7 @@ Group {
 
     Group #TailModel0 {
       $SB.@SelectorBlock {
-        @Name = "Mermaidv2 Model";
-      }
-    }
-
-    Group #TailModel1 {
-      $SB.@SelectorBlock {
-        @Name = "Old Mermaid Model";
+        @Name = "Mermaid Model";
       }
     }
   }

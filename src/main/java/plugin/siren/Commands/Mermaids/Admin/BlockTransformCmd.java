@@ -14,7 +14,6 @@ import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import plugin.siren.Mermaids;
 
 import javax.annotation.Nonnull;
-import java.util.UUID;
 
 public class BlockTransformCmd extends AbstractPlayerCommand {
     public BlockTransformCmd() {

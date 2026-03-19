@@ -11,7 +11,7 @@ $C.@DecoratedContainer {
       Anchor: (Full: 0);
 
       $C.@Title {
-        @Text = %server.customUI.mermaid.title;
+        @Text = %server.customUI.mermaids.mermaidui.title;
         Anchor: (Width: 200);
       }
     }

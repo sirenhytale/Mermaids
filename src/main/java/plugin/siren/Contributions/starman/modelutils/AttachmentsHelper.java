@@ -1,6 +1,5 @@
 package plugin.siren.Contributions.starman.modelutils;
 
-import com.hypixel.hytale.protocol.Cosmetic;
 import com.hypixel.hytale.protocol.PlayerSkin;
 import com.hypixel.hytale.server.core.asset.type.model.config.ModelAttachment;
 import com.hypixel.hytale.server.core.cosmetics.CosmeticRegistry;
@@ -23,7 +22,7 @@ import java.util.List;
  * Link: https://github.com/SyperAI/hytale-model-utils
  *
  * Modified: Siren
- * Date: 2026/03/17
+ * Date: 2026/03/19
  *
  */
 
@@ -34,13 +33,13 @@ public class AttachmentsHelper {
         if(variant != null) {
             String model = variant.getModel();
             String greyscaleTexture = variant.getGreyscaleTexture();
-            if(model.equalsIgnoreCase("Characters/Player.blockymodel")){
+            /*if(model.equalsIgnoreCase("Characters/Player.blockymodel")){
                 if(greyscaleTexture.equalsIgnoreCase("Characters/Player_Textures/Player_Greyscale.png")){
                     greyscaleTexture = "Characters/SirensMermaid/MermaidTextures//MermaidPlayer_Greyscale.png";
                 }else if(greyscaleTexture.equalsIgnoreCase("Characters/Player_Textures/Player_Muscular_Greyscale.png")){
                     greyscaleTexture = "Characters/SirensMermaid/MermaidTextures/MermaidPlayer_Muscular_Greyscale.png";
                 }
-            }
+            }*/
 
             attachments.add(
                     new ModelAttachment(
@@ -66,13 +65,13 @@ public class AttachmentsHelper {
                                 if(attTexture != null && attGradientSet != null) {
                                     String model = part.getModel();
                                     String greyscaleTexture = attTexture;
-                                    if(model.equalsIgnoreCase("Characters/Player.blockymodel")){
+                                    /*if(model.equalsIgnoreCase("Characters/Player.blockymodel")){
                                         if(greyscaleTexture.equalsIgnoreCase("Characters/Player_Textures/Player_Greyscale.png")){
                                             greyscaleTexture = "Characters/SirensMermaid/MermaidTextures/MermaidPlayer_Greyscale.png";
                                         }else if(greyscaleTexture.equalsIgnoreCase("Characters/Player_Textures/Player_Muscular_Greyscale.png")){
                                             greyscaleTexture = "Characters/SirensMermaid/MermaidTextures/MermaidPlayer_Muscular_Greyscale.png";
                                         }
-                                    }
+                                    }*/
                                     attachments.add(
                                             new ModelAttachment(
                                                     model,
@@ -90,13 +89,13 @@ public class AttachmentsHelper {
             }else{
                 String model = part.getModel();
                 String greyscaleTexture = part.getGreyscaleTexture();
-                if(model.equalsIgnoreCase("Characters/Player.blockymodel")){
+                /*if(model.equalsIgnoreCase("Characters/Player.blockymodel")){
                     if(greyscaleTexture.equalsIgnoreCase("Characters/Player_Textures/Player_Greyscale.png")){
                         greyscaleTexture = "Characters/SirensMermaid/MermaidTextures/MermaidPlayer_Greyscale.png";
                     }else if(greyscaleTexture.equalsIgnoreCase("Characters/Player_Textures/Player_Muscular_Greyscale.png")){
                         greyscaleTexture = "Characters/SirensMermaid/MermaidTextures/MermaidPlayer_Muscular_Greyscale.png";
                     }
-                }
+                }*/
                 attachments.add(
                         new ModelAttachment(
                                 model,
@@ -143,9 +142,9 @@ public class AttachmentsHelper {
                 checkCosmeticType = enumName;
             }
 
-            /*if(checkCosmeticType.equalsIgnoreCase("BODY_CHARACTERISTIC") || checkCosmeticType.equalsIgnoreCase("BODY_CHARACTERISTICS")){
+            if(checkCosmeticType.equalsIgnoreCase("BODY_CHARACTERISTIC") || checkCosmeticType.equalsIgnoreCase("BODY_CHARACTERISTICS")){
                 continue;
-            }*/
+            }
 
             List<Integer> cosmeticsToHide = mermaid.getCosmeticsToHide();
             boolean hideAttachment = false;

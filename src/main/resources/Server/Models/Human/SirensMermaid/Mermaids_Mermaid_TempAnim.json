@@ -1,0 +1,174 @@
+{
+  "Parent": "Player",
+  "AnimationSets": {
+    "Idle": {
+      "Animations": [
+        {
+          "Animation": "Characters/SirensMermaid/Animations/Mermaids/Swim/Mermaid_Swim_Idle.blockyanim",
+          "Looping": true,
+          "Speed": 0.5
+        }
+      ]
+    },
+    "Walk": {
+      "Animations": [
+        {
+          "Animation": "Characters/SirensMermaid/Animations/Mermaids/Swim/Mermaid_Swimv3.blockyanim",
+          "Speed": 1.0,
+          "FootstepIntervals": [
+            25,
+            75
+          ]
+        }
+      ]
+    },
+    "WalkBackward": {
+      "Animations": [
+        {
+          "Animation": "Characters/SirensMermaid/Animations/Mermaids/Swim/Mermaid_Swim_Backward.blockyanim",
+          "Speed": 1.0,
+          "FootstepIntervals": [
+            25,
+            75
+          ]
+        }
+      ]
+    },
+    "Run": {
+      "Animations": [
+        {
+          "Animation": "Characters/SirensMermaid/Animations/Mermaids/Swim/Mermaid_Swim_Fastv2.blockyanim",
+          "Speed": 0.9,
+          "FootstepIntervals": [
+            25,
+            75
+          ]
+        }
+      ]
+    },
+    "RunBackward": {
+      "Animations": [
+        {
+          "Animation": "Characters/SirensMermaid/Animations/Mermaids/Swim/Mermaid_Swim_Backward.blockyanim",
+          "Speed": 0.9,
+          "FootstepIntervals": [
+            25,
+            75
+          ]
+        }
+      ]
+    },
+    "Sprint": {
+      "Animations": [
+        {
+          "Animation": "Characters/SirensMermaid/Animations/Mermaids/Swim/Mermaid_Divev2.blockyanim",
+          "Speed": 1.1,
+          "FootstepIntervals": [
+            25,
+            75
+          ]
+        }
+      ]
+    },
+    "Crouch": {
+      "Animations": [
+        {
+          "Animation": "Characters/SirensMermaid/Animations/Mermaids/Swim/Mermaid_Swim_Idle.blockyanim",
+          "BlendingDuration": 0.1,
+          "Speed": 0.5,
+          "FootstepIntervals": [
+            25,
+            75
+          ]
+        }
+      ]
+    },
+    "CrouchWalk": {
+      "Animations": [
+        {
+          "Animation": "Characters/SirensMermaid/Animations/Mermaids/Swim/Mermaid_Swimv3.blockyanim",
+          "BlendingDuration": 0.1,
+          "Speed": 0.8,
+          "FootstepIntervals": [
+            25,
+            75
+          ]
+        }
+      ]
+    },
+    "CrouchWalkBackward": {
+      "Animations": [
+        {
+          "Animation": "Characters/SirensMermaid/Animations/Mermaids/Swim/Mermaid_Swim_Backward.blockyanim",
+          "BlendingDuration": 0.1,
+          "Speed": 0.8,
+          "FootstepIntervals": [
+            25,
+            75
+          ]
+        }
+      ]
+    },
+    "Jump": {
+      "Animations": [
+        {
+          "Animation": "Characters/SirensMermaid/Animations/Mermaids/Swim/Mermaid_Divev2.blockyanim",
+          "BlendingDuration": 0.1,
+          "Looping": false,
+          "Speed": 1,
+          "SoundEventId": "SFX_Player_Jump"
+        }
+      ]
+    },
+    "JumpCrouch": {
+      "Animations": [
+        {
+          "Animation": "Characters/SirensMermaid/Animations/Mermaids/Swim/Mermaid_Divev2.blockyanim",
+          "Speed": 1,
+          "SoundEventId": "SFX_Player_Jump"
+        }
+      ]
+    },
+    "JumpWalk": {
+      "Animations": [
+        {
+          "Animation": "Characters/SirensMermaid/Animations/Mermaids/Swim/Mermaid_Divev2.blockyanim",
+          "BlendingDuration": 0.1,
+          "Looping": false,
+          "Speed": 0.8,
+          "SoundEventId": "SFX_Player_Jump"
+        }
+      ]
+    },
+    "JumpRun": {
+      "Animations": [
+        {
+          "Animation": "Characters/SirensMermaid/Animations/Mermaids/Swim/Mermaid_Dive_Fastv2.blockyanim",
+          "BlendingDuration": 0.1,
+          "Looping": false,
+          "Speed": 0.8,
+          "SoundEventId": "SFX_Player_Jump"
+        }
+      ]
+    },
+    "JumpSprint": {
+      "Animations": [
+        {
+          "Animation": "Characters/SirensMermaid/Animations/Mermaids/Swim/Mermaid_Dive_Fastv2.blockyanim",
+          "BlendingDuration": 0.1,
+          "Looping": false,
+          "Speed": 0.8,
+          "SoundEventId": "SFX_Player_Jump"
+        }
+      ]
+    },
+    "Fall": {
+      "Animations": [
+        {
+          "Animation": "Characters/SirensMermaid/Animations/Mermaids/Swim/Mermaid_Swim_Sink.blockyanim",
+          "SoundEventId": "SFX_Player_Fall"
+        }
+      ]
+    }
+  }
+}

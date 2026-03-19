@@ -1,15 +1,25 @@
 {
-  "Parent": "Potion_Mermaid_Small",
+  "Parent": "Mermaids_Potion_Mermaid_Small",
   "TranslationProperties": {
-    "Name": "server.items.Potion_Mermaid_Transformation_Large.name",
-    "Description": "server.items.Potion_Mermaid_Transformation_Large.description"
+    "Name": "server.items.mermaids.Mermaids_Potion_Mermaid_Transformation_Medium.name",
+    "Description": "server.items.mermaids.Mermaids_Potion_Mermaid_Transformation_Medium.desc"
   },
-  "Icon": "Icons/ItemsGenerated/Potion_Regen_Health_Large.png",
+  "Icon": "Icons/ItemsGenerated/Potion_Regen_Health.png",
   "InteractionVars": {
     "Effect": {
       "Interactions": [
         {
-          "Type": "MermaidPotionLarge"
+          "Type": "MermaidPotionMediumEffect",
+          "EffectId": {
+            "StatModifiers": {
+              "Oxygen": 900
+            },
+            "Duration": 600,
+            "DamageCalculatorCooldown": 0,
+            "Debuff": false,
+            "StatusEffectIcon": "UI/StatusEffects/Mermaids_StatusEffect_Icon.png",
+            "OverlapBehavior": "Extend"
+          }
         }
       ]
     },
@@ -26,7 +36,7 @@
     }
   },
   "BlockType": {
-    "CustomModel": "Items/Consumables/Potions/Potion_Large.blockymodel",
+    "CustomModel": "Items/Consumables/Potions/Potion.blockymodel",
     "CustomModelTexture": [
       {
         "Texture": "Items/Consumables/Potions/Potion_Textures/Pink.png",
@@ -41,24 +51,24 @@
   "Recipe": {
     "Input": [
       {
-        "ItemId": "Potion_Mermaid_Medium",
-        "Quantity": 2
+        "ItemId": "Potion_Mermaid_Small",
+        "Quantity": 1
       },
       {
-        "ItemId": "Ingredient_Life_Essence_Concentrated",
-        "Quantity": 2
+        "ItemId": "Ingredient_Life_Essence",
+        "Quantity": 60
       },
       {
         "ItemId": "Ingredient_Water_Essence",
-        "Quantity": 7
+        "Quantity": 3
       },
       {
         "ItemId": "Ingredient_Ice_Essence",
-        "Quantity": 2
+        "Quantity": 1
       },
       {
-        "ItemId": "Food_Fish_Raw",
-        "Quantity": 17
+        "ItemId": "Deco_Coral_Shell",
+        "Quantity": 7
       }
     ],
     "BenchRequirement": [
@@ -71,8 +81,8 @@
         "RequiredTierLevel": 2
       }
     ],
-    "TimeSeconds": 2
+    "TimeSeconds": 1
   },
-  "ItemLevel": 30,
-  "Quality": "Rare"
+  "ItemLevel": 20,
+  "Quality": "Uncommon"
 }

@@ -88,67 +88,15 @@ public class PlayerReadyEventM {
                         Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " now has the Mermaid Settings Component.");
                     }
                 }
-
-                MermaidSettings mermaidSett = store.getComponent(ref, Mermaids.get().getMermaidSetingsComponentType());
-                if(mermaidSett != null){
-                    if(!Mermaids.ifVersion1()) {
-                        if (!mermaidSett.getAlpha200()) {
-                            mermaidSett.setAlpha200(true);
-
-                            mermaidSett.setMermaidTail("MermaidV2");
-                            mermaidSett.setTailColor("MermaidPlayerGrayscale");
-                            mermaidSett.setTailColorV2("MermaidTextureV2");
-
-                            if(Mermaids.getConfig().get().ifConsoleLogs()) {
-                                Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " has updated saved Mermaid Tail to V2.");
-                            }
-                        }
-                    }else{
-                        if(mermaidSett.getMermaidTail().equalsIgnoreCase("MermaidV2")){
-                            mermaidSett.setMermaidTail("MermaidBigFinPlayer");
-                            mermaidSett.setTailColor("MermaidPlayerGrayscale");
-                        }
-                    }
-                }else{
-                    Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " failed to get mermaidSett Mermaid Settings Component.");
-                }
             }else{
                 if (Mermaids.ifDebug()) {
                     player.sendMessage(Message.raw("You already have the Mermaid Settings Component!"));
 
                     Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " tried to receive Mermaid Settings Component but already has it.");
                 }
-
-                //MermaidSettings mermaidSett = store.getComponent(ref, Mermaids.get().getMermaidSetingsComponentType());
-                //if(mermaidSett != null){
-                    if(!Mermaids.ifVersion1()) {
-                        if (!merSett.getAlpha200()) {
-                            merSett.setAlpha200(true);
-
-                            merSett.setMermaidTail("MermaidV2");
-                            merSett.setTailColor("MermaidPlayerGrayscale");
-                            merSett.setTailColorV2("MermaidTextureV2");
-
-                            if(Mermaids.getConfig().get().ifConsoleLogs()) {
-                                Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " has updated saved Mermaid Tail to V2.");
-                            }
-                        }
-                    }else{
-                        if(merSett.getMermaidTail().equalsIgnoreCase("MermaidV2")){
-                            merSett.setMermaidTail("MermaidBigFinPlayer");
-                            merSett.setTailColor("MermaidPlayerGrayscale");
-                        }
-                    }
-                //}else{
-                //    Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " failed to get mermaidSett Mermaid Settings Component.");
-                //}
-
-                if(!merSett.getTailColorV2().equalsIgnoreCase("MermaidTextureV2") && !merSett.getTailColorV2().equalsIgnoreCase("MermaidV2Texture_PINK") && !merSett.getTailColorV2().equalsIgnoreCase("MermaidV2Texture_ColorCoded")){
-                    merSett.setTailColorV2("MermaidTextureV2");
-                }
             }
 
-            UpdateChecker.sendUpdateMessage(player);
+            //UpdateChecker.sendUpdateMessage(player);
         });
     }
 }

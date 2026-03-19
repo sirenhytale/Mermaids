@@ -23,8 +23,7 @@ import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.entity.entities.player.hud.HudManager;
 import com.hypixel.hytale.server.core.entity.entities.player.movement.MovementManager;
 import com.hypixel.hytale.server.core.entity.movement.MovementStatesComponent;
-import com.hypixel.hytale.server.core.inventory.Inventory;
-//import com.hypixel.hytale.server.core.inventory.InventoryComponent;
+import com.hypixel.hytale.server.core.inventory.InventoryComponent;
 import com.hypixel.hytale.server.core.inventory.ItemStack;
 import com.hypixel.hytale.server.core.inventory.container.ItemContainer;
 import com.hypixel.hytale.server.core.modules.entity.component.ModelComponent;
@@ -40,15 +39,12 @@ import com.hypixel.hytale.server.core.plugin.PluginManager;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.Universe;
 import com.hypixel.hytale.server.core.universe.world.World;
-import com.hypixel.hytale.server.core.universe.world.chunk.BlockComponentChunk;
 import com.hypixel.hytale.server.core.universe.world.chunk.WorldChunk;
-import com.hypixel.hytale.server.core.universe.world.storage.ChunkStore;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import dev.hardaway.wardrobe.impl.player.PlayerWardrobeComponent;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import plugin.siren.Compatibility.AquaThirstHunger.AquaThirstHungerCompact;
 import plugin.siren.Compatibility.EasyHunger.EasyHungerCompat;
-import plugin.siren.Compatibility.PlaceholderAPI.PlaceholderAPICompat;
 import plugin.siren.Contributions.starman.modelutils.ModelHelper;
 import plugin.siren.Mermaids;
 
@@ -83,7 +79,7 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
             //Check to see if Raining or on a transformation block
             if (Mermaids.getConfig().get().getBlockTransformation() || Mermaids.getConfig().get().getRainTransformation()) {
                 World world = player.getWorld();
-                if (world != null){//world.getName().equals("default")) {
+                if (world != null){
                     world.execute(() -> {
                         if(ref == null || !ref.isValid()){
                             Mermaids.LOGGER.atFine().log("Failed to get reference : MermaidSystem - World execution");
@@ -93,20 +89,6 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                                 Vector3d pos = transform.getPosition();
 
                                 if (Mermaids.getConfig().get().getBlockTransformation()) {
-                                    /*Ref<ChunkStore> chunkRef = world.getChunkStore().getChunkReference(ChunkUtil.indexChunkFromBlock(pos.getX(),pos.getZ()));
-
-                                    Store<ChunkStore> chunkStore = chunkRef.getStore();
-
-                                    BlockComponentChunk blocksComponent = chunkStore.getComponent(chunkRef, BlockComponentChunk.getComponentType());
-                                    if(blocksComponent != null){
-                                        int blockIndex = ChunkUtil.indexBlockInColumn((int) Math.floor(pos.getX()), (int) Math.floor(pos.getY()), (int) Math.floor(pos.getZ()));
-
-                                        Ref<ChunkStore> blockRef = blocksComponent.getEntityReference(blockIndex);
-                                        if(blockRef != null){
-
-                                        }
-                                    }*/
-
                                     BlockType footBlockType = world.getBlockType((int) Math.floor(pos.getX()), (int) Math.floor(pos.getY()), (int) Math.floor(pos.getZ()));
                                     String footBlockId = footBlockType.getId();
 
@@ -214,7 +196,6 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
 
                                 int footFluidId = world.getFluidId((int)Math.floor(pos.getX()), (int)Math.floor(pos.getY()), (int)Math.floor(pos.getZ()));
                                 int bodyFluidID = world.getFluidId((int)Math.floor(pos.getX()), (int)Math.floor(pos.getY())+1, (int)Math.floor(pos.getZ()));
-                                ///int belowFluidID = 0;//world.getFluidId((int)Math.floor(pos.getX()), (int)Math.floor(pos.getY())-1, (int)Math.floor(pos.getZ()));
                                 if(footFluidId > 0 || bodyFluidID > 0){
                                     mermaid.setInFluidBlock(true);
                                 }
@@ -306,9 +287,6 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                         }
 
                         String mermaidTailModel = mermaidSettings.getMermaidTail();
-                        if(Mermaids.ifDebug() && mermaidSettings.ifUseMermaidV2()){
-                            mermaidTailModel = "MermaidV2";
-                        }
 
                         ModelAsset modelAsset = ModelAsset.getAssetMap().getAsset(mermaidTailModel);
                         if (modelAsset == null) {
@@ -410,15 +388,11 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
 
                                             EquipmentUpdate update = new EquipmentUpdate();
 
-                                            /* UPDATE 4
                                             ItemContainer armor = null;
                                             InventoryComponent.Armor armorComponent = commandBuffer.getComponent(ref, InventoryComponent.Armor.getComponentType());
                                             if(armorComponent != null) {
                                                 armor = armorComponent.getInventory();
                                             }
-                                            */
-                                            Inventory inventory = player.getInventory();
-                                            ItemContainer armor = inventory.getArmor();
 
                                             update.armorIds = new String[armor.getCapacity()];
                                             Arrays.fill(update.armorIds, "");
@@ -448,20 +422,13 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                                                 }
                                             }
 
-                                            /* UPDATE 4
                                             InventoryComponent.Hotbar hotbarComponent = commandBuffer.getComponent(ref, InventoryComponent.Hotbar.getComponentType());
-
                                             if(hotbarComponent != null) {
                                                 ItemStack itemInHand = hotbarComponent.getActiveItem();
                                                 update.rightHandItemId = itemInHand != null ? itemInHand.getItemId() : "Empty";
                                                 ItemStack utilityItem = hotbarComponent.getActiveItem();
                                                 update.leftHandItemId = utilityItem != null ? utilityItem.getItemId() : "Empty";
                                             }
-                                             */
-                                            ItemStack itemInHand = inventory.getItemInHand();
-                                            update.rightHandItemId = itemInHand != null ? itemInHand.getItemId() : "Empty";
-                                            ItemStack utilityItem = inventory.getUtilityItem();
-                                            update.leftHandItemId = utilityItem != null ? utilityItem.getItemId() : "Empty";
 
                                             updateList.add(update);
 
@@ -498,14 +465,11 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                     if (movementState.getMovementStates().swimming || movementState.getMovementStates().swimJumping || movementState.getMovementStates().inFluid ||
                             (mermaid.isInFluidBlock() && (movementState.getMovementStates().sitting || movementState.getMovementStates().sleeping))) {
                         if(Mermaids.getConfig().get().getItemIncreaseSwimSpeed()) {
-                            /* UPDATE 4
                             ItemStack itemInHand = null;
                             InventoryComponent.Hotbar hotbarComponent = commandBuffer.getComponent(ref, InventoryComponent.Hotbar.getComponentType());
                             if(hotbarComponent != null) {
                                 itemInHand = hotbarComponent.getActiveItem();
                             }
-                             */
-                            ItemStack itemInHand = player.getInventory().getItemInHand();
 
                             if (itemInHand != null && itemInHand.getItemId().equalsIgnoreCase("weapon_spear_fishbone")) {
                                 movement.getSettings().swimJumpForce = 16f;
@@ -599,7 +563,8 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                 }
 
                 if(onLand){
-                    /*HudManager playerHud = player.getHudManager();
+                    /* Custom HUD for drying out on land 1/2
+                    HudManager playerHud = player.getHudManager();
                     playerHud.showHudComponents(playerRef, HudComponent.Oxygen);
 
                     EntityStatMap statMapComponent = commandBuffer.getComponent(ref, EntityStatMap.getComponentType());
@@ -633,20 +598,20 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                         }
                     }
 
-                    //HudManager playerHud = player.getHudManager();
-                    //playerHud.hideHudComponents(playerRef, HudComponent.Oxygen);
+                    /* Custom HUD for drying out on land 2/2
+                    HudManager playerHud = player.getHudManager();
+                    playerHud.hideHudComponents(playerRef, HudComponent.Oxygen);
+                     */
 
-                    if(!Mermaids.ifVersion1()) {
-                        float stamina = statMapComponent.get(DefaultEntityStatTypes.getStamina()).get();
-                        if (movementState.getMovementStates().sprinting) {
-                            float newStamina = ((stamina + mermaid.getPreviousStamina()) / 2f);
+                    float stamina = statMapComponent.get(DefaultEntityStatTypes.getStamina()).get();
+                    if (movementState.getMovementStates().sprinting) {
+                        float newStamina = ((stamina + mermaid.getPreviousStamina()) / 2f);
 
-                            statMapComponent.setStatValue(DefaultEntityStatTypes.getStamina(), newStamina);
+                        statMapComponent.setStatValue(DefaultEntityStatTypes.getStamina(), newStamina);
+                        mermaid.setPreviousStamina(stamina);
+                    } else {
+                        if (stamina != mermaid.getPreviousStamina()) {
                             mermaid.setPreviousStamina(stamina);
-                        } else {
-                            if (stamina != mermaid.getPreviousStamina()) {
-                                mermaid.setPreviousStamina(stamina);
-                            }
                         }
                     }
                 }
@@ -683,15 +648,11 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
 
                                             EquipmentUpdate update = new EquipmentUpdate();
 
-                                            /* UPDATE 4
                                             ItemContainer armor = null;
                                             InventoryComponent.Armor armorComponent = commandBuffer.getComponent(ref, InventoryComponent.Armor.getComponentType());
                                             if(armorComponent != null) {
                                                 armor = armorComponent.getInventory();
                                             }
-                                             */
-                                            Inventory inventory = player.getInventory();
-                                            ItemContainer armor = inventory.getArmor();
 
                                             List<Integer> armorVisibilityList = new ArrayList<>();
 
@@ -725,7 +686,6 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                                                 armorVisibilityList.add(3);
                                             }
 
-                                            /* UPDATE 4
                                             InventoryComponent.Hotbar hotbarComponent = commandBuffer.getComponent(ref, InventoryComponent.Hotbar.getComponentType());
                                             if(hotbarComponent != null) {
                                                 ItemStack itemInHand = hotbarComponent.getActiveItem();
@@ -733,11 +693,6 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                                                 ItemStack utilityItem = hotbarComponent.getActiveItem();
                                                 update.leftHandItemId = utilityItem != null ? utilityItem.getItemId() : "Empty";
                                             }
-                                             */
-                                            ItemStack itemInHand = inventory.getItemInHand();
-                                            update.rightHandItemId = itemInHand != null ? itemInHand.getItemId() : "Empty";
-                                            ItemStack utilityItem = inventory.getUtilityItem();
-                                            update.leftHandItemId = utilityItem != null ? utilityItem.getItemId() : "Empty";
 
                                             updateList.add(update);
 
@@ -750,22 +705,9 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                                                 for (int j = 0; j < 4; j++) {
                                                     cosmeticsToHide.add(emptyCosmeticList);
                                                 }
-                                            /* UPDATE 4
-                                            ItemContainer armorContainer = null;
-                                            if(armorComponent != null) {
-                                                armorContainer = armorComponent.getInventory();
-                                            }
-                                             */
-                                                ItemContainer armorContainer = inventory.getArmor();
-                                                armorContainer.forEachWithMeta((slot, itemStack, armorPacket) -> armorPacket.set((int) slot, itemStack.getItem().getArmor().toPacket().cosmeticsToHide), cosmeticsToHide);
 
                                                 List<Integer> cosmeticValues = new ArrayList<>();
                                                 if (cosmeticsToHide != null && !cosmeticsToHide.isEmpty()) {
-                                                    /*for (Cosmetic[] cosmetics : cosmeticsToHide) {
-                                                        for (Cosmetic cosmetic : cosmetics) {
-                                                            cosmeticValues.add(cosmetic.getValue());
-                                                        }
-                                                    }*/
                                                     for (int j = 0; j < 4; j++) {
                                                         boolean allowedToHide = true;
                                                         for(int armorVisability : armorVisibilityList){
@@ -795,9 +737,6 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                                                     }
 
                                                     String mermaidTailModel = mermaidSettings.getMermaidTail();
-                                                    if (Mermaids.ifDebug() && mermaidSettings.ifUseMermaidV2()) {
-                                                        mermaidTailModel = "MermaidV2";
-                                                    }
 
                                                     ModelAsset modelAsset = ModelAsset.getAssetMap().getAsset(mermaidTailModel);
                                                     if (modelAsset == null) {

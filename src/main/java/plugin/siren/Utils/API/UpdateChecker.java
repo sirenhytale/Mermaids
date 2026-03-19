@@ -17,11 +17,8 @@ import java.util.concurrent.TimeUnit;
 public class UpdateChecker {
     public static String checkForUpdate(){
         try{
-            URL url = new URL("https://api.mermaids.dev/versions/mermaids/release/");
-
-            if(!Mermaids.ifVersion1()){
-                url = new URL("https://api.mermaids.dev/versions/mermaids/alpha/2.0.0/");
-            }
+            //URL url = new URL("https://api.mermaids.dev/versions/mermaids/release/");
+            URL url = new URL("https://api.mermaids.dev/versions/mermaids/pre-release/alpha/2.0.0/");
 
             URLConnection connection = url.openConnection();
             InputStream inputStream = connection.getInputStream();
@@ -30,9 +27,9 @@ public class UpdateChecker {
                 String line = null;
 
                 while((line = bufferedReader.readLine()) != null){
-                    if(line.contains("<h1>") && line.contains("</h1>")){
-                        line = line.substring(line.indexOf("<h1>") + 4);
-                        line = line.substring(0, line.indexOf("</"));
+                    if(line.contains("<h1>{ version: ") && line.contains(" }</h1>")){
+                        line = line.substring(line.indexOf("<h1>{ version: ") + 15);
+                        line = line.substring(0, line.indexOf(" }</"));
                         return line;
                     }
                 }
@@ -63,9 +60,33 @@ public class UpdateChecker {
                 Mermaids.LOGGER.atInfo().log("= =- -=- -=- -=- -=- -=- -=- -=- -= =");
             }
 
-            if(Mermaids.ifVersion1()) {
-                String translationId = "server.updateChecker.mermaids.release.message";
-                Message versionMessage = Message.translation(translationId).param("new-version", recentVersion);
+            /*    RELEASE UPDATE MESSAGE
+            String translationId = "server.updateChecker.mermaids.release.message";
+            Message versionMessage = Message.translation(translationId).param("new-version", recentVersion);
+
+            Mermaids.LOGGER.atInfo().log(versionMessage.getAnsiMessage());
+
+            Runnable updateCheckRunnable = new Runnable() {
+                @Override
+                public void run() {
+                    UpdateChecker.sendUpdateMessage();
+                }
+            };
+
+            if(startUp) {
+                HytaleServer.SCHEDULED_EXECUTOR.schedule(updateCheckRunnable, 15, TimeUnit.SECONDS);
+            }
+
+            if(sendToPlayer && player != null) {
+                if (player.hasPermission("*") && Mermaids.getConfig().get().ifNewVersion()) {
+                    player.sendMessage(versionMessage.color(Color.CYAN));
+                }
+            }
+            DELETE EVERYTHING BELOW ON RELEASE OF 2.0.0, UPDATE URL LINK */
+
+            if(!recentVersion.equalsIgnoreCase("released")) {
+                String translationId = "server.updateChecker.mermaids.alpha.2.0.0.message";
+                Message versionMessage = Message.translation(translationId).param("recentVersion", recentVersion);
 
                 Mermaids.LOGGER.atInfo().log(versionMessage.getAnsiMessage());
 
@@ -86,49 +107,25 @@ public class UpdateChecker {
                     }
                 }
             }else{
-                if(!recentVersion.equalsIgnoreCase("released")) {
-                    String translationId = "server.updateChecker.mermaids.alpha.2.0.0.message";
-                    Message versionMessage = Message.translation(translationId).param("new-version", recentVersion);
+                String translationId = "server.updateChecker.mermaids.alpha.2.0.0.released.message";
+                Message versionMessage = Message.translation(translationId).param("recentVersion", recentVersion);
 
-                    Mermaids.LOGGER.atInfo().log(versionMessage.getAnsiMessage());
+                Mermaids.LOGGER.atInfo().log(versionMessage.getAnsiMessage());
 
-                    Runnable updateCheckRunnable = new Runnable() {
-                        @Override
-                        public void run() {
-                            UpdateChecker.sendUpdateMessage();
-                        }
-                    };
-
-                    if(startUp) {
-                        HytaleServer.SCHEDULED_EXECUTOR.schedule(updateCheckRunnable, 15, TimeUnit.SECONDS);
+                Runnable updateCheckRunnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        UpdateChecker.sendUpdateMessage();
                     }
+                };
 
-                    if(sendToPlayer && player != null) {
-                        if (player.hasPermission("*") && Mermaids.getConfig().get().ifNewVersion()) {
-                            player.sendMessage(versionMessage.color(Color.CYAN));
-                        }
-                    }
-                }else{
-                    String translationId = "server.updateChecker.mermaids.alpha.2.0.0.released.message";
-                    Message versionMessage = Message.translation(translationId).param("new-version", recentVersion);
+                if(startUp) {
+                    HytaleServer.SCHEDULED_EXECUTOR.schedule(updateCheckRunnable, 15, TimeUnit.SECONDS);
+                }
 
-                    Mermaids.LOGGER.atInfo().log(versionMessage.getAnsiMessage());
-
-                    Runnable updateCheckRunnable = new Runnable() {
-                        @Override
-                        public void run() {
-                            UpdateChecker.sendUpdateMessage();
-                        }
-                    };
-
-                    if(startUp) {
-                        HytaleServer.SCHEDULED_EXECUTOR.schedule(updateCheckRunnable, 15, TimeUnit.SECONDS);
-                    }
-
-                    if(sendToPlayer && player != null) {
-                        if (player.hasPermission("*") && Mermaids.getConfig().get().ifNewVersion()) {
-                            player.sendMessage(versionMessage.color(Color.CYAN));
-                        }
+                if(sendToPlayer && player != null) {
+                    if (player.hasPermission("*") && Mermaids.getConfig().get().ifNewVersion()) {
+                        player.sendMessage(versionMessage.color(Color.CYAN));
                     }
                 }
             }

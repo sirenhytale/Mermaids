@@ -7,7 +7,6 @@ import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import org.jetbrains.annotations.NotNull;
 import plugin.siren.Mermaids;
-import plugin.siren.Systems.MermaidComponent;
 import plugin.siren.api.MermaidsAPI;
 
 public class PlaceholderAPICompat extends PlaceholderExpansion {

@@ -7,7 +7,10 @@ import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.command.system.CommandContext;
 import com.hypixel.hytale.server.core.command.system.basecommands.AbstractPlayerCommand;
 import com.hypixel.hytale.server.core.entity.entities.Player;
+import com.hypixel.hytale.server.core.inventory.InventoryComponent;
 import com.hypixel.hytale.server.core.inventory.ItemStack;
+import com.hypixel.hytale.server.core.inventory.transaction.ItemStackTransaction;
+import com.hypixel.hytale.server.core.inventory.transaction.Transaction;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
@@ -28,16 +31,35 @@ public class MermaidRingCmd extends AbstractPlayerCommand {
         Player player = store.getComponent(ref, Player.getComponentType());
 
         if(player != null) {
-            Player playerComponent = store.getComponent(ref, Player.getComponentType());
-            if(playerComponent != null) {
-                playerComponent.getInventory().getCombinedHotbarFirst().addItemStack(new ItemStack("Mermaids_Weapon_Spell_Ring", 1));
+            InventoryComponent.Hotbar hotbarComponent = store.getComponent(ref, InventoryComponent.Hotbar.getComponentType());
+            if(hotbarComponent != null) {
+                ItemStackTransaction itemStackTransaction = hotbarComponent.getInventory().addItemStack(new ItemStack("Mermaids_Weapon_Spell_Ring", 1));
 
-                String playerTranslationId = "server.commands.mermaids.debug.giveMermaidRing.playerMsg.received";
-                player.sendMessage(Message.translation(playerTranslationId));
+                if(itemStackTransaction.getRemainder() == null) {
+                    String playerTranslationId = "server.commands.mermaids.debug.giveMermaidRing.playerMsg.received";
+                    player.sendMessage(Message.translation(playerTranslationId));
 
-                String consoleTranslationId = "server.commands.mermaids.debug.giveMermaidRing.consoleMsg.received";
-                String consoleMessage = Message.translation(consoleTranslationId).param("username", player.getDisplayName()).getAnsiMessage();
-                Mermaids.LOGGER.atInfo().log(consoleMessage);
+                    String consoleTranslationId = "server.commands.mermaids.debug.giveMermaidRing.consoleMsg.received";
+                    String consoleMessage = Message.translation(consoleTranslationId).param("username", player.getDisplayName()).getAnsiMessage();
+                    Mermaids.LOGGER.atInfo().log(consoleMessage);
+                }else{
+                    InventoryComponent.Storage storageComponent = store.getComponent(ref, InventoryComponent.Storage.getComponentType());
+                    if(storageComponent != null){
+                        ItemStackTransaction StorageItemStackTransaction = storageComponent.getInventory().addItemStack(new ItemStack("Mermaids_Weapon_Spell_Ring", 1));
+
+                        if(StorageItemStackTransaction.getRemainder() == null) {
+                            String playerTranslationId = "server.commands.mermaids.debug.giveMermaidRing.playerMsg.received";
+                            player.sendMessage(Message.translation(playerTranslationId));
+
+                            String consoleTranslationId = "server.commands.mermaids.debug.giveMermaidRing.consoleMsg.received";
+                            String consoleMessage = Message.translation(consoleTranslationId).param("username", player.getDisplayName()).getAnsiMessage();
+                            Mermaids.LOGGER.atInfo().log(consoleMessage);
+                        }else{
+                            String playerTranslationId = "server.commands.mermaids.debug.giveMermaidRing.playerMsg.inventoryFull";
+                            player.sendMessage(Message.translation(playerTranslationId));
+                        }
+                    }
+                }
             }
         }
     }

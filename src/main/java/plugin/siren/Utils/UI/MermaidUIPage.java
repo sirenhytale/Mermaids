@@ -69,15 +69,15 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
                 boolean closeUI = false;
 
                 String msgMerTail = "ERROR GETTING TAIL";
-                String mermaidTailPath = "MermaidV2";
+                String mermaidTailPath = mermaidSettings.getDefaultMermaidTail();
                 if (data.tailModel.equalsIgnoreCase("0")) {
-                    msgMerTail = "MermaidV2 Model";
-                    mermaidTailPath = "MermaidV2";
-                } else if (data.tailModel.equalsIgnoreCase("1")) {
+                    msgMerTail = "Mermaid Model";
+                    mermaidTailPath = "Mermaids_Mermaid";
+                }/* else if (data.tailModel.equalsIgnoreCase("1")) {
                     msgMerTail = "Old Mermaid Model";
                     mermaidTailPath = "MermaidBigFinPlayer";
                     closeUI = true;
-                }
+                }*/
 
                 player.sendMessage(Message.raw("You have selected the " + msgMerTail + " mermaid tail."));
                 if(Mermaids.getConfig().get().ifConsoleLogs()) {
@@ -104,16 +104,16 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
                 }
             } else if (data.tailColor != null) {
                 String msgTailColor = "ERROR GETTING COLOR";
-                String mermaidTailColorPath = "MermaidTextureV2";
+                String mermaidTailColorPath = mermaidSettings.getDefaultTailColor();
                 if (data.tailColor.equalsIgnoreCase("0")) {
                     msgTailColor = "Orange";
-                    mermaidTailColorPath = "MermaidTextureV2";
+                    mermaidTailColorPath = "Mermaids_Mermaid_Orange_Texture";
                 } else if (data.tailColor.equalsIgnoreCase("1")) {
                     msgTailColor = "Pink";
-                    mermaidTailColorPath = "MermaidV2Texture_PINK";
+                    mermaidTailColorPath = "Mermaids_Mermaid_Pink_Texture";
                 } else if (data.tailColor.equalsIgnoreCase("2")) {
                     msgTailColor = "Color-Coded";
-                    mermaidTailColorPath = "MermaidV2Texture_ColorCoded";
+                    mermaidTailColorPath = "Mermaids_Mermaid_ColorCoded_Texture";
                 }
 
                 player.sendMessage(Message.raw("You have selected the " + msgTailColor + " tail color."));
@@ -122,7 +122,7 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
                 }
 
                 String oldTailColor = mermaidSettings.getTailColor();
-                mermaidSettings.setTailColorV2(mermaidTailColorPath);
+                mermaidSettings.setTailColor(mermaidTailColorPath);
 
                 String activeMermaidTail = mermaidSettings.getMermaidTail();
                 if (!oldTailColor.equals(mermaidTailColorPath) && mermaid.isMermaid()) {
@@ -178,13 +178,13 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
     private static enum Category {
         MODEL(
                 "model",
-                "server.customUI.mermaid.category.model",
+                "server.customUI.mermaids.mermaidui.category.model",
                 "Pages/MermaidUI/Categories/TailModelContent.ui",
-                2
+                1
         ),
         COLOR(
                 "color",
-                "server.customUI.mermaid.category.color",
+                "server.customUI.mermaids.mermaidui.category.color",
                 "Pages/MermaidUI/Categories/TailColorContent.ui",
                 3
         );

@@ -1,20 +1,35 @@
 {
-  "Parent": "Potion_Mermaid_Small",
+  "Parent": "Potion_Template",
   "TranslationProperties": {
-    "Name": "server.items.Potion_Mermaid_Transformation_Medium.name",
-    "Description": "server.items.Potion_Mermaid_Transformation_Medium.description"
+    "Name": "server.items.mermaids.Mermaids_Potion_Mermaid_Transformation_Small.name",
+    "Description": "server.items.mermaids.Mermaids_Potion_Mermaid_Transformation_Small.desc"
   },
-  "Icon": "Icons/ItemsGenerated/Potion_Regen_Health.png",
+  "Icon": "Icons/ItemsGenerated/Potion_Regen_Health_Small.png",
+  "IconProperties": {
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Scale": 0.9,
+    "Translation": [
+      0,
+      -9
+    ]
+  },
+  "Interactions": {
+    "Secondary": "Root_Secondary_Consume_Potion"
+  },
   "InteractionVars": {
     "Effect": {
       "Interactions": [
         {
-          "Type": "MermaidPotionMediumEffect",
+          "Type": "MermaidPotionSmallEffect",
           "EffectId": {
             "StatModifiers": {
               "Oxygen": 900
             },
-            "Duration": 600,
+            "Duration": 180,
             "DamageCalculatorCooldown": 0,
             "Debuff": false,
             "StatusEffectIcon": "UI/StatusEffects/Mermaids_StatusEffect_Icon.png",
@@ -36,7 +51,7 @@
     }
   },
   "BlockType": {
-    "CustomModel": "Items/Consumables/Potions/Potion.blockymodel",
+    "CustomModel": "Items/Consumables/Potions/Potion_Small.blockymodel",
     "CustomModelTexture": [
       {
         "Texture": "Items/Consumables/Potions/Potion_Textures/Pink.png",
@@ -51,24 +66,20 @@
   "Recipe": {
     "Input": [
       {
-        "ItemId": "Potion_Mermaid_Small",
+        "ItemId": "Potion_Empty",
         "Quantity": 1
       },
       {
         "ItemId": "Ingredient_Life_Essence",
-        "Quantity": 60
+        "Quantity": 50
       },
       {
         "ItemId": "Ingredient_Water_Essence",
-        "Quantity": 3
-      },
-      {
-        "ItemId": "Ingredient_Ice_Essence",
         "Quantity": 1
       },
       {
-        "ItemId": "Deco_Coral_Shell",
-        "Quantity": 7
+        "ItemId": "Plant_Seaweed_Grass_Stack",
+        "Quantity": 15
       }
     ],
     "BenchRequirement": [
@@ -77,12 +88,21 @@
         "Type": "Crafting",
         "Categories": [
           "Alchemy_Potions_Misc"
-        ],
-        "RequiredTierLevel": 2
+        ]
       }
     ],
     "TimeSeconds": 1
   },
-  "ItemLevel": 20,
-  "Quality": "Uncommon"
+  "ItemLevel": 10,
+  "Quality": "Common",
+  "Tags": {
+    "Type": [
+      "Potion"
+    ],
+    "Family": [
+      "Mermaids"
+    ]
+  },
+  "MaxStack": 10,
+  "DropOnDeath": true
 }
