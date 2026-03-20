@@ -5,13 +5,15 @@ import com.hypixel.hytale.codec.KeyedCodec;
 import com.hypixel.hytale.codec.builder.BuilderCodec;
 import com.hypixel.hytale.common.plugin.PluginIdentifier;
 import com.hypixel.hytale.component.Component;
+import com.hypixel.hytale.component.ComponentType;
 import com.hypixel.hytale.server.core.HytaleServer;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import plugin.siren.Mermaids;
 
 import javax.annotation.Nullable;
 
-public class MermaidSettings implements Component<EntityStore> {
-    public static final BuilderCodec<MermaidSettings> CODEC = BuilderCodec.builder(MermaidSettings.class, MermaidSettings::new)
+public class MermaidSettingsComponent implements Component<EntityStore> {
+    public static final BuilderCodec<MermaidSettingsComponent> CODEC = BuilderCodec.builder(MermaidSettingsComponent.class, MermaidSettingsComponent::new)
             .append(new KeyedCodec<Boolean>("Mermaid-Toggle_ALPHA", Codec.BOOLEAN),
                     (merSettings, mtBool) -> merSettings.toggleMermaid = mtBool, // Setter
                     (merSettings) -> merSettings.toggleMermaid)                    // Getter
@@ -50,7 +52,11 @@ public class MermaidSettings implements Component<EntityStore> {
     private final String defaultMermaidTail = "Mermaids_Mermaid";
     private final String defaultTailColor = "Mermaids_Mermaid_Orange_Texture";
 
-    public MermaidSettings(){
+    public static ComponentType<EntityStore, MermaidSettingsComponent> getComponentType(){
+        return Mermaids.get().getMermaidSettingsComponentType();
+    }
+
+    public MermaidSettingsComponent(){
         this.toggleMermaid = true;
         this.permanentPotion = false;
 
@@ -61,7 +67,7 @@ public class MermaidSettings implements Component<EntityStore> {
         this.forceMermaidOrbisOrigin = false;
     }
 
-    public MermaidSettings(MermaidSettings other){
+    public MermaidSettingsComponent(MermaidSettingsComponent other){
         this.toggleMermaid = other.toggleMermaid;
         this.permanentPotion = other.permanentPotion;
 
@@ -75,7 +81,7 @@ public class MermaidSettings implements Component<EntityStore> {
     @Nullable
     @Override
     public Component<EntityStore> clone() {
-        return new MermaidSettings(this);
+        return new MermaidSettingsComponent(this);
     }
 
     public boolean isForcedMermaid(){

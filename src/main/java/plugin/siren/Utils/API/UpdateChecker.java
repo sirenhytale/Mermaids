@@ -42,40 +42,43 @@ public class UpdateChecker {
     }
 
     public static void sendUpdateMessage(){
-        sendUpdateMessage(null, false, false);
+        sendUpdateMessage(null, false);
     }
 
-    public static void sendUpdateMessage(boolean startUp){
-        sendUpdateMessage(null, false, startUp);
-    }
-
-    public static void sendUpdateMessage(Player player){
-        sendUpdateMessage(player, true, false);
-    }
-
-    public static void sendUpdateMessage(@Nullable Player player, boolean sendToPlayer, boolean startUp){
-        String recentVersion = UpdateChecker.checkForUpdate();
-        if(!Mermaids.getVersion().equalsIgnoreCase(recentVersion)){
-            if(startUp) {
+    public static void sendUpdateMessage(Type type){
+        if(Type.StartUp.getValue() == type.getValue()) {
+            String recentVersion = UpdateChecker.checkForUpdate();
+            if(!Mermaids.getVersion().equalsIgnoreCase(recentVersion)) {
                 Mermaids.LOGGER.atInfo().log("= =- -=- -=- -=- -=- -=- -=- -=- -= =");
+                Mermaids.LOGGER.atInfo().log("The Mermaids mod version is outdated, Mermaids has released v" + recentVersion + ".");
             }
-
-            /*    RELEASE UPDATE MESSAGE
-            String translationId = "server.updateChecker.mermaids.release.message";
-            Message versionMessage = Message.translation(translationId).param("new-version", recentVersion);
-
-            Mermaids.LOGGER.atInfo().log(versionMessage.getAnsiMessage());
 
             Runnable updateCheckRunnable = new Runnable() {
                 @Override
                 public void run() {
-                    UpdateChecker.sendUpdateMessage();
+                    sendUpdateMessage();
                 }
             };
 
-            if(startUp) {
-                HytaleServer.SCHEDULED_EXECUTOR.schedule(updateCheckRunnable, 15, TimeUnit.SECONDS);
-            }
+            HytaleServer.SCHEDULED_EXECUTOR.scheduleAtFixedRate(updateCheckRunnable, 15, 60*60*8, TimeUnit.SECONDS);
+        }else{
+            sendUpdateMessage();
+        }
+    }
+
+    public static void sendUpdateMessage(Player player){
+        sendUpdateMessage(player, true);
+    }
+
+    public static void sendUpdateMessage(@Nullable Player player, boolean sendToPlayer){
+        String recentVersion = UpdateChecker.checkForUpdate();
+        if(!Mermaids.getVersion().equalsIgnoreCase(recentVersion)){
+
+            /*    RELEASE UPDATE MESSAGE
+            String translationId = "server.updateChecker.mermaids.release.message";
+            Message versionMessage = Message.translation(translationId).param("version", recentVersion);
+
+            Mermaids.LOGGER.atInfo().log(versionMessage.getAnsiMessage());
 
             if(sendToPlayer && player != null) {
                 if (player.hasPermission("*") && Mermaids.getConfig().get().ifNewVersion()) {
@@ -84,51 +87,33 @@ public class UpdateChecker {
             }
             DELETE EVERYTHING BELOW ON RELEASE OF 2.0.0, UPDATE URL LINK */
 
-            if(!recentVersion.equalsIgnoreCase("released")) {
-                String translationId = "server.updateChecker.mermaids.alpha.2.0.0.message";
-                Message versionMessage = Message.translation(translationId).param("recentVersion", recentVersion);
+            String translationId = "server.updateChecker.mermaids.alpha.2.0.0.message";
+            if(recentVersion.equalsIgnoreCase("released")) {
+                translationId = "server.updateChecker.mermaids.alpha.2.0.0.released.message";
+            }
 
-                Mermaids.LOGGER.atInfo().log(versionMessage.getAnsiMessage());
+            Message versionMessage = Message.translation(translationId).param("version", recentVersion);
 
-                Runnable updateCheckRunnable = new Runnable() {
-                    @Override
-                    public void run() {
-                        UpdateChecker.sendUpdateMessage();
-                    }
-                };
+            Mermaids.LOGGER.atInfo().log(versionMessage.getAnsiMessage());
 
-                if(startUp) {
-                    HytaleServer.SCHEDULED_EXECUTOR.schedule(updateCheckRunnable, 15, TimeUnit.SECONDS);
-                }
-
-                if(sendToPlayer && player != null) {
-                    if (player.hasPermission("*") && Mermaids.getConfig().get().ifNewVersion()) {
-                        player.sendMessage(versionMessage.color(Color.CYAN));
-                    }
-                }
-            }else{
-                String translationId = "server.updateChecker.mermaids.alpha.2.0.0.released.message";
-                Message versionMessage = Message.translation(translationId).param("recentVersion", recentVersion);
-
-                Mermaids.LOGGER.atInfo().log(versionMessage.getAnsiMessage());
-
-                Runnable updateCheckRunnable = new Runnable() {
-                    @Override
-                    public void run() {
-                        UpdateChecker.sendUpdateMessage();
-                    }
-                };
-
-                if(startUp) {
-                    HytaleServer.SCHEDULED_EXECUTOR.schedule(updateCheckRunnable, 15, TimeUnit.SECONDS);
-                }
-
-                if(sendToPlayer && player != null) {
-                    if (player.hasPermission("*") && Mermaids.getConfig().get().ifNewVersion()) {
-                        player.sendMessage(versionMessage.color(Color.CYAN));
-                    }
+            if(sendToPlayer && player != null) {
+                if (player.hasPermission("*") && Mermaids.getConfig().get().ifNewVersion()) {
+                    player.sendMessage(versionMessage.color(Color.CYAN));
                 }
             }
+        }
+    }
+
+    public enum Type {
+        StartUp(0);
+
+        private final int value;
+        private Type(int value){
+            this.value = value;
+        }
+
+        public int getValue(){
+            return this.value;
         }
     }
 }

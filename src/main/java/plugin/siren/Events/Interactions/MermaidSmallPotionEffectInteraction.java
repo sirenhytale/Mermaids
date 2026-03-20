@@ -47,7 +47,7 @@ public class MermaidSmallPotionEffectInteraction extends ApplyEffectInteraction 
             return;
         }
 
-        MermaidComponent mermaid = commandBuffer.getComponent(ref, Mermaids.get().getMermaidComponentType());
+        MermaidComponent mermaid = commandBuffer.getComponent(ref, MermaidComponent.getComponentType());
         if (mermaid == null) {
             Mermaids.get().getLogger().atFine().log("In MermaidSmallPotionEffectInteraction, failed to get mermaidComponent.");
             return;

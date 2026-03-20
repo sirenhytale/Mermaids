@@ -5,7 +5,7 @@ import com.hypixel.hytale.component.Store;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import plugin.siren.Mermaids;
 import plugin.siren.Systems.MermaidComponent;
-import plugin.siren.Systems.MermaidSettings;
+import plugin.siren.Systems.MermaidSettingsComponent;
 
 public class MermaidsAPI {
 
@@ -17,7 +17,7 @@ public class MermaidsAPI {
      * @return  boolean of rather the reference is a mermaid
      */
     public static boolean isMermaid(Store<EntityStore> store, Ref<EntityStore> ref){
-        MermaidComponent mermaid = store.getComponent(ref, Mermaids.get().getMermaidComponentType());
+        MermaidComponent mermaid = store.getComponent(ref, MermaidComponent.getComponentType());
         if(mermaid == null){
             Mermaids.LOGGER.atSevere().log("ERROR: isMermaid: Mermaid Component is null for MermaidsAPI getMermaid -- returning false");
             return false;
@@ -34,7 +34,7 @@ public class MermaidsAPI {
      * @return  boolean of rather the reference is underwater
      */
     public static boolean isUnderwater(Store<EntityStore> store, Ref<EntityStore> ref){
-        MermaidComponent mermaid = store.getComponent(ref, Mermaids.get().getMermaidComponentType());
+        MermaidComponent mermaid = store.getComponent(ref, MermaidComponent.getComponentType());
         if(mermaid == null){
             Mermaids.LOGGER.atSevere().log("ERROR: isUnderwater: Mermaid Component is null for MermaidsAPI getMermaid -- returning false");
             return false;
@@ -51,7 +51,7 @@ public class MermaidsAPI {
      * @return  boolean of rather the reference is forced to be a mermaid
      */
     public static boolean isForcedMermaid(Store<EntityStore> store, Ref<EntityStore> ref){
-        MermaidSettings mermaidSettings = store.getComponent(ref, Mermaids.get().getMermaidSetingsComponentType());
+        MermaidSettingsComponent mermaidSettings = store.getComponent(ref, MermaidSettingsComponent.getComponentType());
         if(mermaidSettings == null){
             Mermaids.LOGGER.atSevere().log("ERROR: isForcedMermaid: Mermaid Settings Component is null for MermaidsAPI getMermaid -- returning false");
             return false;
@@ -68,7 +68,7 @@ public class MermaidsAPI {
      * @param  forcedMermaid  rather to force to (not) be a mermaid
      */
     public static void setForcedMermaid(Store<EntityStore> store, Ref<EntityStore> ref, boolean forcedMermaid){
-        MermaidSettings mermaidSettings = store.getComponent(ref, Mermaids.get().getMermaidSetingsComponentType());
+        MermaidSettingsComponent mermaidSettings = store.getComponent(ref, MermaidSettingsComponent.getComponentType());
         if(mermaidSettings == null){
             Mermaids.LOGGER.atSevere().log("ERROR: isForcedMermaid: Mermaid Settings Component is null for MermaidsAPI getMermaid -- doing nothing");
         }else{
@@ -120,7 +120,7 @@ public class MermaidsAPI {
      * @return  boolean of rather the reference is forced to be a mermaid
      */
     public static boolean isForcedMermaidOrbisOrigin(Store<EntityStore> store, Ref<EntityStore> ref){
-        MermaidSettings mermaidSettings = store.getComponent(ref, Mermaids.get().getMermaidSetingsComponentType());
+        MermaidSettingsComponent mermaidSettings = store.getComponent(ref, MermaidSettingsComponent.getComponentType());
         if(mermaidSettings == null){
             Mermaids.LOGGER.atSevere().log("ERROR: isForcedMermaidOrbisOrigin: Mermaid Settings Component is null for MermaidsAPI getMermaid -- returning false");
             return false;
@@ -137,7 +137,7 @@ public class MermaidsAPI {
      * @param  forcedMermaid  rather to force to (not) be a mermaid
      */
     public static void setForcedMermaidOrbisOrigin(Store<EntityStore> store, Ref<EntityStore> ref, boolean forcedMermaid){
-        MermaidSettings mermaidSettings = store.getComponent(ref, Mermaids.get().getMermaidSetingsComponentType());
+        MermaidSettingsComponent mermaidSettings = store.getComponent(ref, MermaidSettingsComponent.getComponentType());
         if(mermaidSettings == null){
             Mermaids.LOGGER.atSevere().log("ERROR: isForcedMermaidOrbisOrigin: Mermaid Settings Component is null for MermaidsAPI getMermaid -- doing nothing");
         }else{

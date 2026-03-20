@@ -10,7 +10,7 @@ import com.hypixel.hytale.server.core.modules.entity.component.ModelComponent;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import plugin.siren.Mermaids;
 import plugin.siren.Systems.MermaidComponent;
-import plugin.siren.Systems.MermaidSettings;
+import plugin.siren.Systems.MermaidSettingsComponent;
 
 import java.lang.reflect.Field;
 
@@ -29,7 +29,7 @@ import java.lang.reflect.Field;
 public class ModelHelper {
 
     // Applies given skin on given model
-    public static Model applySkin(Model model, PlayerSkin playerSkin, MermaidComponent mermaid, MermaidSettings mermaidSettings) {
+    public static Model applySkin(Model model, PlayerSkin playerSkin, MermaidComponent mermaid, MermaidSettingsComponent mermaidSettings) {
         ModelComponent modelComponent = (ModelComponent) mermaid.getModelComponent().clone();
         Model playerModel = modelComponent.getModel();
 
@@ -113,13 +113,13 @@ public class ModelHelper {
     }
 
     // Applies given skin on given player reference
-    public static void applySkin(Model model, PlayerSkin skin, Ref<EntityStore> ref, CommandBuffer commandBuffer, Player player, MermaidComponent mermaid, MermaidSettings mermaidSettings) {
+    public static void applySkin(Model model, PlayerSkin skin, Ref<EntityStore> ref, CommandBuffer commandBuffer, Player player, MermaidComponent mermaid, MermaidSettingsComponent mermaidSettings) {
         var skinnedModel = applySkin(model, skin, mermaid, mermaidSettings);
 
         commandBuffer.replaceComponent(ref, ModelComponent.getComponentType(), new ModelComponent(skinnedModel));
     }
 
-    public static void applySkin(Model model, PlayerSkin skin, Ref<EntityStore> ref, MermaidComponent mermaid, MermaidSettings mermaidSettings) {
+    public static void applySkin(Model model, PlayerSkin skin, Ref<EntityStore> ref, MermaidComponent mermaid, MermaidSettingsComponent mermaidSettings) {
         var skinnedModel = applySkin(model, skin, mermaid, mermaidSettings);
 
         var store = ref.getStore();

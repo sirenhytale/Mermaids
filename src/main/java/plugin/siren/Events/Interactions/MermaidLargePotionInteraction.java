@@ -10,7 +10,7 @@ import com.hypixel.hytale.server.core.modules.interaction.interaction.CooldownHa
 import com.hypixel.hytale.server.core.modules.interaction.interaction.config.SimpleInstantInteraction;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import plugin.siren.Mermaids;
-import plugin.siren.Systems.MermaidSettings;
+import plugin.siren.Systems.MermaidSettingsComponent;
 
 import javax.annotation.Nonnull;
 
@@ -41,7 +41,7 @@ public class MermaidLargePotionInteraction extends SimpleInstantInteraction {
             return;
         }
 
-        MermaidSettings mermaidSettings = buffer.getComponent(ref, Mermaids.get().getMermaidSetingsComponentType());
+        MermaidSettingsComponent mermaidSettings = buffer.getComponent(ref, MermaidSettingsComponent.getComponentType());
         if (mermaidSettings == null) {
             Mermaids.get().getLogger().atFine().log("In MermaidLargePotionInteraction, failed to get mermaidSettings Component.");
             return;

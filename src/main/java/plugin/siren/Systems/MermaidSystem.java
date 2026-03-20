@@ -55,9 +55,9 @@ import java.util.List;
 
 public class MermaidSystem extends EntityTickingSystem<EntityStore> {
     private final ComponentType<EntityStore, MermaidComponent> mermaidComponentType;
-    private final ComponentType<EntityStore, MermaidSettings> mermaidSettingsComponentType;
+    private final ComponentType<EntityStore, MermaidSettingsComponent> mermaidSettingsComponentType;
 
-    public MermaidSystem(ComponentType<EntityStore, MermaidComponent> mermaidComponentType, ComponentType<EntityStore, MermaidSettings> mermaidSettingsComponentType){
+    public MermaidSystem(ComponentType<EntityStore, MermaidComponent> mermaidComponentType, ComponentType<EntityStore, MermaidSettingsComponent> mermaidSettingsComponentType){
         this.mermaidComponentType = mermaidComponentType;
         this.mermaidSettingsComponentType = mermaidSettingsComponentType;
     }
@@ -71,7 +71,7 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
             Mermaids.LOGGER.atFine().log("Failed to get reference : MermaidSystem");
         }else {
             MermaidComponent mermaid = archetypeChunk.getComponent(index, mermaidComponentType);
-            MermaidSettings mermaidSettings = archetypeChunk.getComponent(index, mermaidSettingsComponentType);
+            MermaidSettingsComponent mermaidSettings = archetypeChunk.getComponent(index, mermaidSettingsComponentType);
 
             Player player = commandBuffer.getComponent(ref, Player.getComponentType());
             PlayerRef playerRef = commandBuffer.getComponent(ref, PlayerRef.getComponentType());

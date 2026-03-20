@@ -14,10 +14,8 @@ import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import plugin.siren.Mermaids;
 import plugin.siren.Systems.MermaidComponent;
-import plugin.siren.Systems.MermaidSettings;
+import plugin.siren.Systems.MermaidSettingsComponent;
 import plugin.siren.Utils.API.UpdateChecker;
-
-import java.awt.*;
 
 public class PlayerReadyEventM {
     public static void onPlayerReadyEvent(PlayerReadyEvent event){
@@ -28,7 +26,7 @@ public class PlayerReadyEventM {
             Ref<EntityStore> ref = event.getPlayerRef();
             Store<EntityStore> store = ref.getStore();
 
-            MermaidComponent merComp = store.getComponent(ref, Mermaids.get().getMermaidComponentType());
+            MermaidComponent merComp = store.getComponent(ref, MermaidComponent.getComponentType());
             if (merComp == null) {
                 MermaidComponent mermaid = new MermaidComponent();
 
@@ -58,7 +56,7 @@ public class PlayerReadyEventM {
                     player.sendMessage(Message.raw("Set the ModelComponent"));
                 }
 
-                store.putComponent(ref, Mermaids.get().getMermaidComponentType(), mermaid);
+                store.putComponent(ref, MermaidComponent.getComponentType(), mermaid);
 
                 if (Mermaids.ifDebug()) {
                     player.sendMessage(Message.raw("You now have the Mermaid Component!"));
@@ -75,11 +73,11 @@ public class PlayerReadyEventM {
                 }
             }
 
-            MermaidSettings merSett = store.getComponent(ref, Mermaids.get().getMermaidSetingsComponentType());
+            MermaidSettingsComponent merSett = store.getComponent(ref, MermaidSettingsComponent.getComponentType());
             if (merSett == null) {
-                MermaidSettings mermaidSettings = new MermaidSettings();
+                MermaidSettingsComponent mermaidSettings = new MermaidSettingsComponent();
 
-                store.putComponent(ref, Mermaids.get().getMermaidSetingsComponentType(), mermaidSettings);
+                store.putComponent(ref, MermaidSettingsComponent.getComponentType(), mermaidSettings);
 
                 if (Mermaids.ifDebug()) {
                     player.sendMessage(Message.raw("You now have the Mermaid Settings Component!"));
@@ -96,7 +94,7 @@ public class PlayerReadyEventM {
                 }
             }
 
-            //UpdateChecker.sendUpdateMessage(player);
+            UpdateChecker.sendUpdateMessage(player);
         });
     }
 }

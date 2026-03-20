@@ -84,6 +84,6 @@ items.mermaids.Mermaids_Potion_Mermaid_Transformation_Large.desc = Permanent tra
 
 # === updateChecker ===
 
-updateChecker.mermaids.release.message = The Mermaids mod version is outdated, Mermaids has released v{recentVersion}.
-updateChecker.mermaids.alpha.2.0.0.message = The Alpha Mermaids mod version is outdated, Mermaids has released {recentVersion}.
+updateChecker.mermaids.release.message = The Mermaids mod version is outdated, Mermaids has released v{version}.
+updateChecker.mermaids.alpha.2.0.0.message = The Alpha Mermaids mod version is outdated, Mermaids has released {version}.
 updateChecker.mermaids.alpha.2.0.0.released.message = The Alpha Mermaids mod version 2.0.0 has been released, the server is currently on an outdated version of the Mermaids mod.

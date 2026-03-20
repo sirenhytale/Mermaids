@@ -11,7 +11,7 @@ import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import plugin.siren.Mermaids;
-import plugin.siren.Systems.MermaidSettings;
+import plugin.siren.Systems.MermaidSettingsComponent;
 
 import javax.annotation.Nonnull;
 import java.awt.*;
@@ -27,7 +27,7 @@ public class MermaidsPermPotionRemove extends AbstractPlayerCommand {
     protected void execute(@Nonnull CommandContext commandContext, @Nonnull Store<EntityStore> store, @Nonnull Ref<EntityStore> ref, @Nonnull PlayerRef playerRef, @Nonnull World world) {
         Player player = store.getComponent(ref, Player.getComponentType());
 
-        MermaidSettings mermaidSettings = store.getComponent(ref, Mermaids.get().getMermaidSetingsComponentType());
+        MermaidSettingsComponent mermaidSettings = store.getComponent(ref, MermaidSettingsComponent.getComponentType());
         if(mermaidSettings != null) {
             mermaidSettings.setPermanentPotion(false);
 

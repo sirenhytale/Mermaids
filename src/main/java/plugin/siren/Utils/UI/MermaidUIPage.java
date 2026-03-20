@@ -22,7 +22,7 @@ import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import plugin.siren.Contributions.starman.modelutils.ModelHelper;
 import plugin.siren.Mermaids;
 import plugin.siren.Systems.MermaidComponent;
-import plugin.siren.Systems.MermaidSettings;
+import plugin.siren.Systems.MermaidSettingsComponent;
 
 import javax.annotation.Nonnull;
 
@@ -47,8 +47,8 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
     public void handleDataEvent(@Nonnull Ref<EntityStore> ref, @Nonnull Store<EntityStore> store, @Nonnull MermaidUIPage.MermaidUIEventData data) {
         Player player = store.getComponent(ref, Player.getComponentType());
 
-        MermaidComponent mermaid = store.getComponent(ref, Mermaids.get().getMermaidComponentType());
-        MermaidSettings mermaidSettings = store.getComponent(ref, Mermaids.get().getMermaidSetingsComponentType());
+        MermaidComponent mermaid = store.getComponent(ref, MermaidComponent.getComponentType());
+        MermaidSettingsComponent mermaidSettings = store.getComponent(ref, MermaidSettingsComponent.getComponentType());
 
         if(mermaid != null && mermaidSettings != null) {
             UICommandBuilder commandBuilder = new UICommandBuilder();

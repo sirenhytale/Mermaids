@@ -1,11 +1,13 @@
 package plugin.siren.Systems;
 
 import com.hypixel.hytale.component.Component;
+import com.hypixel.hytale.component.ComponentType;
 import com.hypixel.hytale.protocol.PlayerSkin;
 import com.hypixel.hytale.server.core.entity.entities.player.movement.MovementManager;
 import com.hypixel.hytale.server.core.modules.entity.component.ModelComponent;
 import com.hypixel.hytale.server.core.modules.entity.player.PlayerSkinComponent;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import plugin.siren.Mermaids;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -35,6 +37,10 @@ public class MermaidComponent implements Component<EntityStore> {
     private float dryingElapsedTime;
 
     List<Integer> cosmeticsToHide;
+
+    public static ComponentType<EntityStore, MermaidComponent> getComponentType(){
+        return Mermaids.get().getMermaidComponentType();
+    }
 
     public MermaidComponent(){
         this(new PlayerSkin());

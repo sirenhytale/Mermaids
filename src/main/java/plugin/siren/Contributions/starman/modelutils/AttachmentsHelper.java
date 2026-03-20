@@ -22,7 +22,7 @@ import java.util.List;
  * Link: https://github.com/SyperAI/hytale-model-utils
  *
  * Modified: Siren
- * Date: 2026/03/19
+ * Date: 2026/03/20
  *
  */
 
@@ -31,20 +31,10 @@ public class AttachmentsHelper {
 
     public static void addAttachment(ArrayList<ModelAttachment> attachments, PlayerSkinPart part, @Nullable String gradientId, @Nullable PlayerSkinPart.Variant variant) {
         if(variant != null) {
-            String model = variant.getModel();
-            String greyscaleTexture = variant.getGreyscaleTexture();
-            /*if(model.equalsIgnoreCase("Characters/Player.blockymodel")){
-                if(greyscaleTexture.equalsIgnoreCase("Characters/Player_Textures/Player_Greyscale.png")){
-                    greyscaleTexture = "Characters/SirensMermaid/MermaidTextures//MermaidPlayer_Greyscale.png";
-                }else if(greyscaleTexture.equalsIgnoreCase("Characters/Player_Textures/Player_Muscular_Greyscale.png")){
-                    greyscaleTexture = "Characters/SirensMermaid/MermaidTextures/MermaidPlayer_Muscular_Greyscale.png";
-                }
-            }*/
-
             attachments.add(
                     new ModelAttachment(
-                            model,
-                            greyscaleTexture,
+                            variant.getModel(),
+                            variant.getGreyscaleTexture(),
                             part.getGradientSet(),
                             gradientId,
                             1.0
@@ -63,19 +53,10 @@ public class AttachmentsHelper {
                                 String attTexture = part.getTextures().get(key).getTexture();
                                 String attGradientSet = part.getTextures().get(key).getBaseColor()[0];
                                 if(attTexture != null && attGradientSet != null) {
-                                    String model = part.getModel();
-                                    String greyscaleTexture = attTexture;
-                                    /*if(model.equalsIgnoreCase("Characters/Player.blockymodel")){
-                                        if(greyscaleTexture.equalsIgnoreCase("Characters/Player_Textures/Player_Greyscale.png")){
-                                            greyscaleTexture = "Characters/SirensMermaid/MermaidTextures/MermaidPlayer_Greyscale.png";
-                                        }else if(greyscaleTexture.equalsIgnoreCase("Characters/Player_Textures/Player_Muscular_Greyscale.png")){
-                                            greyscaleTexture = "Characters/SirensMermaid/MermaidTextures/MermaidPlayer_Muscular_Greyscale.png";
-                                        }
-                                    }*/
                                     attachments.add(
                                             new ModelAttachment(
-                                                    model,
-                                                    greyscaleTexture,
+                                                    part.getModel(),
+                                                    attTexture,
                                                     attGradientSet,
                                                     gradientId,
                                                     1.0
@@ -87,19 +68,10 @@ public class AttachmentsHelper {
                     }
                 }
             }else{
-                String model = part.getModel();
-                String greyscaleTexture = part.getGreyscaleTexture();
-                /*if(model.equalsIgnoreCase("Characters/Player.blockymodel")){
-                    if(greyscaleTexture.equalsIgnoreCase("Characters/Player_Textures/Player_Greyscale.png")){
-                        greyscaleTexture = "Characters/SirensMermaid/MermaidTextures/MermaidPlayer_Greyscale.png";
-                    }else if(greyscaleTexture.equalsIgnoreCase("Characters/Player_Textures/Player_Muscular_Greyscale.png")){
-                        greyscaleTexture = "Characters/SirensMermaid/MermaidTextures/MermaidPlayer_Muscular_Greyscale.png";
-                    }
-                }*/
                 attachments.add(
                         new ModelAttachment(
-                                model,
-                                greyscaleTexture,
+                                part.getModel(),
+                                part.getGreyscaleTexture(),
                                 part.getGradientSet(),
                                 gradientId,
                         1.0

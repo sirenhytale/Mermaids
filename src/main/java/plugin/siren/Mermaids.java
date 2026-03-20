@@ -5,7 +5,6 @@ import com.hypixel.hytale.component.ComponentType;
 import com.hypixel.hytale.event.EventRegistration;
 import com.hypixel.hytale.logger.HytaleLogger;
 import com.hypixel.hytale.server.core.HytaleServer;
-import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.command.system.CommandRegistration;
 import com.hypixel.hytale.server.core.event.events.player.PlayerReadyEvent;
 import com.hypixel.hytale.server.core.modules.interaction.interaction.config.Interaction;
@@ -20,16 +19,15 @@ import plugin.siren.Contributions.al3x.HStats;
 import plugin.siren.Events.Interactions.*;
 import plugin.siren.Events.PlayerReadyEventM;
 import plugin.siren.Systems.MermaidComponent;
-import plugin.siren.Systems.MermaidSettings;
+import plugin.siren.Systems.MermaidSettingsComponent;
 import plugin.siren.Systems.MermaidSystem;
 import plugin.siren.Utils.API.UpdateChecker;
 import plugin.siren.Utils.Config.MermaidsConfig;
 
 import javax.annotation.Nonnull;
-import java.awt.*;
 
 public class Mermaids extends JavaPlugin {
-    private static final String VERSION = "Alpha 2.0.0-2026.03.17";//"Alpha 2.0.0-2026.03.01";
+    private static final String VERSION = "Alpha 2.0.0-2026.03.19";//"Alpha 2.0.0-2026.03.01";
     private static final boolean DEBUG = false;
 
     private static Mermaids plugin;
@@ -37,7 +35,7 @@ public class Mermaids extends JavaPlugin {
     private final Config<MermaidsConfig> config;
 
     private ComponentType<EntityStore, MermaidComponent> mermaidComponent;
-    private ComponentType<EntityStore, MermaidSettings> mermaidSettingsComponent;
+    private ComponentType<EntityStore, MermaidSettingsComponent> mermaidSettingsComponent;
 
     public Mermaids(@Nonnull JavaPluginInit init){
         super(init);
@@ -85,7 +83,7 @@ public class Mermaids extends JavaPlugin {
             LOGGER.atInfo().log("Failed to register Mermaid Component.");
         }
 
-        this.mermaidSettingsComponent = this.getEntityStoreRegistry().registerComponent(MermaidSettings.class, "MermaidSettings", MermaidSettings.CODEC);
+        this.mermaidSettingsComponent = this.getEntityStoreRegistry().registerComponent(MermaidSettingsComponent.class, "MermaidSettings", MermaidSettingsComponent.CODEC);
         if (this.mermaidSettingsComponent != null) {
             LOGGER.atInfo().log("Registered Mermaid Settings Component.");
         } else {
@@ -116,7 +114,8 @@ public class Mermaids extends JavaPlugin {
             LOGGER.atInfo().log("Loaded Mermaids in Debug mode.");
         }
 
-        //UpdateChecker.sendUpdateMessage(true);
+        UpdateChecker.sendUpdateMessage(UpdateChecker.Type.StartUp);
+
         LOGGER.atInfo().log("===---==---==---==---==---==---==---==---===");
     }
 
@@ -133,11 +132,7 @@ public class Mermaids extends JavaPlugin {
         return mermaidComponent;
     }
 
-    public ComponentType<EntityStore, MermaidSettings> getMermaidSetingsComponentType(){
-        return this.getMermaidSettingsComponentType();
-    }
-
-    public ComponentType<EntityStore, MermaidSettings> getMermaidSettingsComponentType(){
+    public ComponentType<EntityStore, MermaidSettingsComponent> getMermaidSettingsComponentType(){
         return mermaidSettingsComponent;
     }
 

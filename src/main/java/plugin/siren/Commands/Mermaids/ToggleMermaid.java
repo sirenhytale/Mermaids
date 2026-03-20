@@ -13,7 +13,7 @@ import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import plugin.siren.Mermaids;
-import plugin.siren.Systems.MermaidSettings;
+import plugin.siren.Systems.MermaidSettingsComponent;
 
 import javax.annotation.Nonnull;
 import java.awt.*;
@@ -33,7 +33,7 @@ public class ToggleMermaid extends AbstractPlayerCommand {
 
         boolean mermaidToggle = mermaidToggleArg.get(commandContext);
 
-        MermaidSettings mermaidSettings = store.getComponent(ref, Mermaids.get().getMermaidSetingsComponentType());
+        MermaidSettingsComponent mermaidSettings = store.getComponent(ref, MermaidSettingsComponent.getComponentType());
         if(mermaidSettings != null) {
             mermaidSettings.setToggleMermaid(mermaidToggle);
 

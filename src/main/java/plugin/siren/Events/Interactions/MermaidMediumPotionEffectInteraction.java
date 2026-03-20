@@ -47,7 +47,7 @@ public class MermaidMediumPotionEffectInteraction extends ApplyEffectInteraction
             return;
         }
 
-        MermaidComponent mermaid = buffer.getComponent(ref, Mermaids.get().getMermaidComponentType());
+        MermaidComponent mermaid = buffer.getComponent(ref, MermaidComponent.getComponentType());
         if (mermaid == null) {
             Mermaids.get().getLogger().atFine().log("In MermaidMediumPotionEffectInteraction, failed to get mermaidComponent.");
             return;
