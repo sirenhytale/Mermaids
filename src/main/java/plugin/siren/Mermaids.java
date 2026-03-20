@@ -21,7 +21,7 @@ import plugin.siren.Events.PlayerReadyEventM;
 import plugin.siren.Systems.MermaidComponent;
 import plugin.siren.Systems.MermaidSettingsComponent;
 import plugin.siren.Systems.MermaidSystem;
-import plugin.siren.Utils.API.UpdateChecker;
+import plugin.siren.Utils.API.MermaidsUpdateChecker;
 import plugin.siren.Utils.Config.MermaidsConfig;
 
 import javax.annotation.Nonnull;
@@ -114,7 +114,7 @@ public class Mermaids extends JavaPlugin {
             LOGGER.atInfo().log("Loaded Mermaids in Debug mode.");
         }
 
-        UpdateChecker.sendUpdateMessage(UpdateChecker.Type.StartUp);
+        MermaidsUpdateChecker.sendUpdateMessage(MermaidsUpdateChecker.Type.StartUp);
 
         LOGGER.atInfo().log("===---==---==---==---==---==---==---==---===");
     }

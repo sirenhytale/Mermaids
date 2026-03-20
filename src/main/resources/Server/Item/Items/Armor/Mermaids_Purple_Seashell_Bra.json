@@ -3,21 +3,8 @@
     "Name": "server.items.mermaids.Mermaids_Chest_Purple_Seashell_Bra.name",
     "Description": "server.items.mermaids.Mermaids_Chest_Purple_Seashell_Bra.desc"
   },
-  "Parent": "Armor_Cloth_Wool_Chest",
+  "Parent": "Mermaids_Seashell_Bra",
   "Icon": "Icons/ItemsGenerated/Mermaids_Seashell_Bra_Purple.png",
-  "IconProperties": {
-    "Scale": 0.55,
-    "Rotation": [
-      22.5,
-      47.815,
-      22.5
-    ],
-    "Translation": [
-      0,
-      -64
-    ]
-  },
-  "Model": "Items/Armor/Mermaids/Mermaids_Seashell_Bra.blockymodel",
   "Texture": "Items/Armor/Mermaids/Mermaids_Seashell_Bra_Purple.png",
   "Recipe": {
     "TimeSeconds": 1,
@@ -41,50 +28,6 @@
       }
     ],
     "KnowledgeRequired": false
-  },
-  "Armor": {
-    "ArmorSlot": "Chest",
-    "BaseDamageResistance": 0,
-    "CosmeticsToHide": [
-      "Overtop",
-      "Undertop"
-    ],
-    "StatModifiers": {
-      "Oxygen": [
-        {
-          "Amount": 250,
-          "CalculationType": "Additive"
-        }
-      ],
-      "Health": [
-        {
-          "Amount": 10,
-          "CalculationType": "Additive"
-        }
-      ]
-    },
-    "DamageResistance": {
-      "Physical": [
-        {
-          "Amount": 0.03,
-          "CalculationType": "Multiplicative"
-        }
-      ],
-      "Projectile": [
-        {
-          "Amount": 0.03,
-          "CalculationType": "Multiplicative"
-        }
-      ]
-    }
-  },
-  "Tags": {
-    "Type": [
-      "Armor"
-    ],
-    "Family": [
-      "Mermaids"
-    ]
   },
   "MaxDurability": 165
 }

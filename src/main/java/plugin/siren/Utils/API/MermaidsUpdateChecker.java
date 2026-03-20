@@ -14,7 +14,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.concurrent.TimeUnit;
 
-public class UpdateChecker {
+public class MermaidsUpdateChecker {
     public static String checkForUpdate(){
         try{
             //URL url = new URL("https://api.mermaids.dev/versions/mermaids/release/");
@@ -47,7 +47,7 @@ public class UpdateChecker {
 
     public static void sendUpdateMessage(Type type){
         if(Type.StartUp.getValue() == type.getValue()) {
-            String recentVersion = UpdateChecker.checkForUpdate();
+            String recentVersion = MermaidsUpdateChecker.checkForUpdate();
             if(!Mermaids.getVersion().equalsIgnoreCase(recentVersion)) {
                 Mermaids.LOGGER.atInfo().log("= =- -=- -=- -=- -=- -=- -=- -=- -= =");
                 Mermaids.LOGGER.atInfo().log("The Mermaids mod version is outdated, Mermaids has released v" + recentVersion + ".");
@@ -71,7 +71,7 @@ public class UpdateChecker {
     }
 
     public static void sendUpdateMessage(@Nullable Player player, boolean sendToPlayer){
-        String recentVersion = UpdateChecker.checkForUpdate();
+        String recentVersion = MermaidsUpdateChecker.checkForUpdate();
         if(!Mermaids.getVersion().equalsIgnoreCase(recentVersion)){
 
             /*    RELEASE UPDATE MESSAGE

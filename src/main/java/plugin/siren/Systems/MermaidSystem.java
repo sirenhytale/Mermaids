@@ -426,7 +426,10 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                                             if(hotbarComponent != null) {
                                                 ItemStack itemInHand = hotbarComponent.getActiveItem();
                                                 update.rightHandItemId = itemInHand != null ? itemInHand.getItemId() : "Empty";
-                                                ItemStack utilityItem = hotbarComponent.getActiveItem();
+                                            }
+                                            InventoryComponent.Utility utilityComponent = commandBuffer.getComponent(ref, InventoryComponent.Utility.getComponentType());
+                                            if(utilityComponent != null){
+                                                ItemStack utilityItem = utilityComponent.getActiveItem();
                                                 update.leftHandItemId = utilityItem != null ? utilityItem.getItemId() : "Empty";
                                             }
 
@@ -690,7 +693,10 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                                             if(hotbarComponent != null) {
                                                 ItemStack itemInHand = hotbarComponent.getActiveItem();
                                                 update.rightHandItemId = itemInHand != null ? itemInHand.getItemId() : "Empty";
-                                                ItemStack utilityItem = hotbarComponent.getActiveItem();
+                                            }
+                                            InventoryComponent.Utility utilityComponent = commandBuffer.getComponent(ref, InventoryComponent.Utility.getComponentType());
+                                            if(utilityComponent != null){
+                                                ItemStack utilityItem = utilityComponent.getActiveItem();
                                                 update.leftHandItemId = utilityItem != null ? utilityItem.getItemId() : "Empty";
                                             }
 

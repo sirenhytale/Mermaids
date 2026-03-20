@@ -15,7 +15,7 @@ import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import plugin.siren.Mermaids;
 import plugin.siren.Systems.MermaidComponent;
 import plugin.siren.Systems.MermaidSettingsComponent;
-import plugin.siren.Utils.API.UpdateChecker;
+import plugin.siren.Utils.API.MermaidsUpdateChecker;
 
 public class PlayerReadyEventM {
     public static void onPlayerReadyEvent(PlayerReadyEvent event){
@@ -94,7 +94,7 @@ public class PlayerReadyEventM {
                 }
             }
 
-            UpdateChecker.sendUpdateMessage(player);
+            MermaidsUpdateChecker.sendUpdateMessage(player);
         });
     }
 }
