@@ -60,7 +60,7 @@ public class MermaidsUpdateChecker {
                 }
             };
 
-            HytaleServer.SCHEDULED_EXECUTOR.scheduleAtFixedRate(updateCheckRunnable, 15, 60*60*8, TimeUnit.SECONDS);
+            HytaleServer.SCHEDULED_EXECUTOR.scheduleAtFixedRate(updateCheckRunnable, 15, 60*60*6, TimeUnit.SECONDS);
         }else{
             sendUpdateMessage();
         }

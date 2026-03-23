@@ -27,8 +27,8 @@ import plugin.siren.Utils.Config.MermaidsConfig;
 import javax.annotation.Nonnull;
 
 public class Mermaids extends JavaPlugin {
-    private static final String VERSION = "Alpha 2.0.0-2026.03.19";//"Alpha 2.0.0-2026.03.01";
-    private static final boolean DEBUG = false;
+    private static final String VERSION = "Alpha 2.0.0-2026.03.22";//"Alpha 2.0.0-2026.03.01";
+    private static final boolean DEBUG = true;
 
     private static Mermaids plugin;
     public static final HytaleLogger LOGGER = HytaleLogger.forEnclosingClass();

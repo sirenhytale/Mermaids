@@ -9,6 +9,8 @@ import com.hypixel.hytale.component.ComponentType;
 import com.hypixel.hytale.server.core.HytaleServer;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import plugin.siren.Mermaids;
+import plugin.siren.Utils.Cosmetics.MermaidCosmetic;
+import plugin.siren.Utils.Cosmetics.MermaidCosmeticType;
 
 import javax.annotation.Nullable;
 
@@ -30,6 +32,14 @@ public class MermaidSettingsComponent implements Component<EntityStore> {
                     (merSettings, mtcStr) -> merSettings.tailColor = mtcStr, // Setter
                     (merSettings) -> merSettings.tailColor)                    // Getter
             .add()
+            .append(new KeyedCodec<Integer>("Mermaid-Cosmetic-Dorsal-Fin_ALPHA", Codec.INTEGER),
+                    (merSettings, mcdfStr) -> merSettings.dorsalFin = mcdfStr, // Setter
+                    (merSettings) -> merSettings.dorsalFin)                    // Getter
+            .add()
+            .append(new KeyedCodec<Integer>("Mermaid-Cosmetic-Pelvic-Fin_ALPHA", Codec.INTEGER),
+                    (merSettings, mcpfStr) -> merSettings.pelvicFin = mcpfStr, // Setter
+                    (merSettings) -> merSettings.pelvicFin)                    // Getter
+            .add()
             .append(new KeyedCodec<Boolean>("Force-Mermaid_ALPHA", Codec.BOOLEAN),
                     (merSettings, fmBool) -> merSettings.forceMermaid = fmBool, // Setter
                     (merSettings) -> merSettings.forceMermaid)                    // Getter
@@ -45,6 +55,9 @@ public class MermaidSettingsComponent implements Component<EntityStore> {
 
     private String mermaidTail;
     private String tailColor;
+
+    private int dorsalFin;
+    private int pelvicFin;
 
     private boolean forceMermaid;
     private boolean forceMermaidOrbisOrigin;
@@ -62,6 +75,8 @@ public class MermaidSettingsComponent implements Component<EntityStore> {
 
         this.mermaidTail = defaultMermaidTail;
         this.tailColor = defaultTailColor;
+        this.dorsalFin = -1;
+        this.pelvicFin = -1;
 
         this.forceMermaid = false;
         this.forceMermaidOrbisOrigin = false;
@@ -73,6 +88,8 @@ public class MermaidSettingsComponent implements Component<EntityStore> {
 
         this.mermaidTail = other.mermaidTail;
         this.tailColor = other.tailColor;
+        this.dorsalFin = other.dorsalFin;
+        this.pelvicFin = other.pelvicFin;
 
         this.forceMermaid = other.forceMermaid;
         this.forceMermaidOrbisOrigin = other.forceMermaidOrbisOrigin;
@@ -150,5 +167,69 @@ public class MermaidSettingsComponent implements Component<EntityStore> {
 
     public String getDefaultTailColor(){
         return this.defaultTailColor;
+    }
+
+    public boolean hasMermaidCosmetic(MermaidCosmeticType cosmeticType){
+        if(cosmeticType.equals(MermaidCosmeticType.DORSAL_FIN)){
+            if(dorsalFin == -1){
+                return false;
+            }
+            return true;
+        }
+        if(cosmeticType.equals(MermaidCosmeticType.PELVIC_FIN)) {
+            if (pelvicFin == -1) {
+                return false;
+            }
+            return true;
+        }
+
+        return false;
+    }
+
+    public MermaidCosmetic getMermaidCosmetic(MermaidCosmeticType cosmeticType) {
+        if(cosmeticType.equals(MermaidCosmeticType.DORSAL_FIN)){
+            if(hasMermaidCosmetic(cosmeticType)) {
+                return MermaidCosmetic.get(dorsalFin);
+            }
+
+            return null;
+        }
+        if(cosmeticType.equals(MermaidCosmeticType.PELVIC_FIN)){
+            if(hasMermaidCosmetic(cosmeticType)) {
+                return MermaidCosmetic.get(pelvicFin);
+            }
+
+            return null;
+        }
+
+        return null;
+    }
+
+    public int getMermaidCosmeticValue(MermaidCosmeticType cosmeticType) {
+        if(cosmeticType.equals(MermaidCosmeticType.DORSAL_FIN)){
+            if(hasMermaidCosmetic(cosmeticType)) {
+                return dorsalFin;
+            }
+
+            return -1;
+        }
+        if(cosmeticType.equals(MermaidCosmeticType.PELVIC_FIN)){
+            if(hasMermaidCosmetic(cosmeticType)) {
+                return pelvicFin;
+            }
+
+            return -1;
+        }
+
+        return -1;
+    }
+
+    public void setMermaidCosmetic(MermaidCosmeticType cosmeticType, int cosmeticValue) {
+        if(cosmeticType.equals(MermaidCosmeticType.DORSAL_FIN)){
+            dorsalFin = cosmeticValue;
+        }
+        if(cosmeticType.equals(MermaidCosmeticType.PELVIC_FIN)){
+            pelvicFin = cosmeticValue;
+        }
     }
 }

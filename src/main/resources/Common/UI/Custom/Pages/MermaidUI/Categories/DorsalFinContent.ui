@@ -1,0 +1,23 @@
+$C = "../../../Common.ui";
+$SB = "../SelectorButton.ui";
+
+Group {
+  LayoutMode: Top;
+
+  Group {
+    Anchor: (Bottom: 25);
+    LayoutMode: Top;
+
+    Group #DorsalFin0 {
+      $SB.@SelectorBlock {
+        @Name = "None";
+      }
+    }
+
+    Group #DorsalFin1 {
+      $SB.@SelectorBlock {
+        @Name = "Full Back";
+      }
+    }
+  }
+}

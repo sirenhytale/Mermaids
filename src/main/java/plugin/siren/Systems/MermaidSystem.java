@@ -712,6 +712,11 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                                                     cosmeticsToHide.add(emptyCosmeticList);
                                                 }
 
+                                                if(armorComponent != null) {
+                                                    ItemContainer armorContainer = armorComponent.getInventory();//inventory.getArmor();
+                                                    armorContainer.forEachWithMeta((slot, itemStack, armorPacket) -> armorPacket.set((int) slot, itemStack.getItem().getArmor().toPacket().cosmeticsToHide), cosmeticsToHide);
+                                                }
+
                                                 List<Integer> cosmeticValues = new ArrayList<>();
                                                 if (cosmeticsToHide != null && !cosmeticsToHide.isEmpty()) {
                                                     for (int j = 0; j < 4; j++) {

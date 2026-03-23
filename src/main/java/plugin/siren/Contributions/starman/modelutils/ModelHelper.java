@@ -11,6 +11,7 @@ import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import plugin.siren.Mermaids;
 import plugin.siren.Systems.MermaidComponent;
 import plugin.siren.Systems.MermaidSettingsComponent;
+import plugin.siren.Utils.Cosmetics.MermaidCosmeticAttachments;
 
 import java.lang.reflect.Field;
 
@@ -22,7 +23,7 @@ import java.lang.reflect.Field;
  * Link: https://github.com/SyperAI/hytale-model-utils
  *
  * Modified: Siren
- * Date: 2026/03/19
+ * Date: 2026/03/20
  *
  */
 
@@ -71,7 +72,9 @@ public class ModelHelper {
             playerSkin.bodyCharacteristic = null;
         }
 
-        var attachments = AttachmentsHelper.parseSkin(playerSkin, null, gradientId, mermaid);
+        var defaultAttachments = AttachmentsHelper.parseSkin(playerSkin, null, gradientId, mermaid);
+
+        var attachments = MermaidCosmeticAttachments.addAttachment(defaultAttachments, mermaidSettings);
 
         String texturePath = model.getTexture();
         if(model.getModel().equals("Characters/SirensMermaid/Mermaids_Mermaid.blockymodel")){

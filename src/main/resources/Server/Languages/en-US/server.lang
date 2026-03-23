@@ -64,7 +64,17 @@ commands.mermaids.toggle.consoleMsg.disabled = {username} has disabled transform
 
 customUI.mermaids.mermaidui.title = Mermaids
 customUI.mermaids.mermaidui.category.model = Mermaid Tail Model
+customUI.mermaids.mermaidui.category.model.playerMsg.modify = You have selected the {model} mermaid tail.
+customUI.mermaids.mermaidui.category.model.consoleMsg.modify = {username} has switched the Mermaid tail to {model}.
 customUI.mermaids.mermaidui.category.color = Mermaid Tail Color
+customUI.mermaids.mermaidui.category.color.playerMsg.modify = You have selected the {color} tail color.
+customUI.mermaids.mermaidui.category.color.consoleMsg.modify = {username} has switched the mermaid tail color to {color}.
+customUI.mermaids.mermaidui.category.dorsal_fin = Mermaid Back fins
+customUI.mermaids.mermaidui.category.dorsal_fin.playerMsg.modify = You have switched the back fins to {fin}.
+customUI.mermaids.mermaidui.category.dorsal_fin.consoleMsg.modify = {username} has switched the mermaid tail back fins to {fin}.
+customUI.mermaids.mermaidui.category.pelvic_fin = Mermaid Side Fins
+customUI.mermaids.mermaidui.category.pelvic_fin.playerMsg.modify = You have switched the side fins to {fin}.
+customUI.mermaids.mermaidui.category.pelvic_fin.consoleMsg.modify = {username} has switched the mermaid tail side fins to {fin}.
 
 # === items ===
 
