@@ -1,18 +1,20 @@
 package plugin.siren.Utils.Cosmetics;
 
 import com.hypixel.hytale.server.core.asset.type.model.config.ModelAttachment;
+import plugin.siren.Systems.MermaidSettingsComponent;
 
 public enum MermaidCosmetic {
-    Long_Side_Fins(0, "Characters/SirensMermaid/Cosmetics/Mermaid/Dorsal_Fins/LongDorsalFins.blockymodel", "Characters/SirensMermaid/Cosmetics/Mermaid/Dorsal_Fins/LongDorsalFinTexture.png", MermaidCosmeticType.DORSAL_FIN);
+    Long_Back_Fins(0, "Characters/SirensMermaid/Cosmetics/Mermaid/Dorsal_Fins/Mermaids_LongDorsalFins.blockymodel", "Characters/SirensMermaid/Cosmetics/Mermaid/Dorsal_Fins/LongDorsalFins/Mermaids_LongDorsalFins_Orange_Texture.png", MermaidCosmeticType.DORSAL_FIN),
+    Top_Side_Fins(1, "Characters/SirensMermaid/Cosmetics/Mermaid/Pelvic_Fins/Mermaids_TopPelvicFins.blockymodel", "Characters/SirensMermaid/Cosmetics/Mermaid/Pelvic_Fins/TopPelvicFins/Mermaids_TopPelvicFins_Orange_Texture.png", MermaidCosmeticType.PELVIC_FIN);
 
     private final int value;
     private final String model;
-    private final String texture;
+    private final String deafultTexture;
     private final MermaidCosmeticType type;
-    private MermaidCosmetic(int value, String model, String texture, MermaidCosmeticType type){
+    private MermaidCosmetic(int value, String model, String deafultTexture, MermaidCosmeticType type){
         this.value = value;
         this.model = model;
-        this.texture = texture;
+        this.deafultTexture = deafultTexture;
         this.type = type;
     }
 
@@ -35,20 +37,18 @@ public enum MermaidCosmetic {
         return this.model;
     }
 
-    public String getTexture(){
-        return this.texture;
+    public String getDefaultTexture(){
+        return this.deafultTexture;
     }
 
     public MermaidCosmeticType getType(){
         return type;
     }
 
-    public ModelAttachment getAsModelAttachment(String mermaidModelTexture){
-        if(mermaidModelTexture.equalsIgnoreCase("Mermaids_Mermaid_Orange_Texture")){
-            return new ModelAttachment(model, texture, null, null, 1.0);
-        }else{
-            return new ModelAttachment(model, "Characters/SirensMermaid/Cosmetics/Mermaid/Dorsal_Fins/LongDorsalFinPinkTexture.png", null, null, 1.0);
-        }
-        //return new ModelAttachment(model, texture, null, null, 1.0);
+    public ModelAttachment getAsModelAttachment(MermaidSettingsComponent mermaidSettings){
+        MermaidCosmeticSkin.TextureColor textureColor = mermaidSettings.getCosmeticColor();
+        String textureString = MermaidCosmeticSkin.getTexture(value, textureColor);
+
+        return new ModelAttachment(model, textureString, null, null, 1.0);
     }
 }

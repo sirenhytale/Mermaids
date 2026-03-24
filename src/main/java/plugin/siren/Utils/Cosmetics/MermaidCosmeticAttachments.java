@@ -21,13 +21,13 @@ public class MermaidCosmeticAttachments {
         if(mermaidSettings.hasMermaidCosmetic(MermaidCosmeticType.DORSAL_FIN)){
             MermaidCosmetic dorsalCosmetic = mermaidSettings.getMermaidCosmetic(MermaidCosmeticType.DORSAL_FIN);
 
-            attachments.add(dorsalCosmetic.getAsModelAttachment(mermaidSettings.getTailColor()));
+            attachments.add(dorsalCosmetic.getAsModelAttachment(mermaidSettings));
         }
 
         if(mermaidSettings.hasMermaidCosmetic(MermaidCosmeticType.PELVIC_FIN)){
             MermaidCosmetic pelvicCosmetic = mermaidSettings.getMermaidCosmetic(MermaidCosmeticType.PELVIC_FIN);
 
-            attachments.add(pelvicCosmetic.getAsModelAttachment(mermaidSettings.getTailColor()));
+            attachments.add(pelvicCosmetic.getAsModelAttachment(mermaidSettings));
         }
 
         if(Mermaids.ifDebug()){

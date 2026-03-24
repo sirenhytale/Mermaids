@@ -22,7 +22,38 @@ Group {
 
     Group #TailColor2 {
       $SB.@SelectorBlock {
-        @Name = "Color-Coded Tail";
+        @Name = "Purple Tail";
+      }
+    }
+
+
+    Group #TailColor3 {
+      $SB.@SelectorBlock {
+        @Name = "Rose Tail";
+      }
+    }
+
+    Group #TailColor4 {
+      $SB.@SelectorBlock {
+        @Name = "Lime Tail";
+      }
+    }
+
+    Group #TailColor5 {
+      $SB.@SelectorBlock {
+        @Name = "Blue Tail";
+      }
+    }
+
+    Group #TailColor6 {
+      $SB.@SelectorBlock {
+        @Name = "Aqua Tail";
+      }
+    }
+
+    Group #TailColor7 {
+      $SB.@SelectorBlock {
+        @Name = "Cyan Tail";
       }
     }
   }

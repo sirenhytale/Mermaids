@@ -24,6 +24,7 @@ import plugin.siren.Mermaids;
 import plugin.siren.Systems.MermaidComponent;
 import plugin.siren.Systems.MermaidSettingsComponent;
 import plugin.siren.Utils.Cosmetics.MermaidCosmetic;
+import plugin.siren.Utils.Cosmetics.MermaidCosmeticSkin;
 import plugin.siren.Utils.Cosmetics.MermaidCosmeticType;
 
 import javax.annotation.Nonnull;
@@ -113,12 +114,43 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
                 if (data.tailColor.equalsIgnoreCase("0")) {
                     msgTailColor = "Orange";
                     mermaidTailColorPath = "Mermaids_Mermaid_Orange_Texture";
+
+                    mermaidSettings.setCosmeticColor(MermaidCosmeticSkin.TextureColor.ORANGE);
                 } else if (data.tailColor.equalsIgnoreCase("1")) {
                     msgTailColor = "Pink";
                     mermaidTailColorPath = "Mermaids_Mermaid_Pink_Texture";
+
+                    mermaidSettings.setCosmeticColor(MermaidCosmeticSkin.TextureColor.PINK);
                 } else if (data.tailColor.equalsIgnoreCase("2")) {
-                    msgTailColor = "Color-Coded";
-                    mermaidTailColorPath = "Mermaids_Mermaid_ColorCoded_Texture";
+                    msgTailColor = "Purple";
+                    mermaidTailColorPath = "Mermaids_Mermaid_Purple_Texture";
+
+                    mermaidSettings.setCosmeticColor(MermaidCosmeticSkin.TextureColor.PURPLE);
+                } else if (data.tailColor.equalsIgnoreCase("3")) {
+                    msgTailColor = "Rose";
+                    mermaidTailColorPath = "Mermaids_Mermaid_Rose_Texture";
+
+                    mermaidSettings.setCosmeticColor(MermaidCosmeticSkin.TextureColor.ROSE);
+                } else if (data.tailColor.equalsIgnoreCase("4")) {
+                    msgTailColor = "Lime";
+                    mermaidTailColorPath = "Mermaids_Mermaid_Lime_Texture";
+
+                    mermaidSettings.setCosmeticColor(MermaidCosmeticSkin.TextureColor.LIME);
+                } else if (data.tailColor.equalsIgnoreCase("5")) {
+                    msgTailColor = "Blue";
+                    mermaidTailColorPath = "Mermaids_Mermaid_Blue_Texture";
+
+                    mermaidSettings.setCosmeticColor(MermaidCosmeticSkin.TextureColor.BLUE);
+                } else if (data.tailColor.equalsIgnoreCase("6")) {
+                    msgTailColor = "Aqua";
+                    mermaidTailColorPath = "Mermaids_Mermaid_Aqua_Texture";
+
+                    mermaidSettings.setCosmeticColor(MermaidCosmeticSkin.TextureColor.AQUA);
+                } else if (data.tailColor.equalsIgnoreCase("7")) {
+                    msgTailColor = "Cyan";
+                    mermaidTailColorPath = "Mermaids_Mermaid_Cyan_Texture";
+
+                    mermaidSettings.setCosmeticColor(MermaidCosmeticSkin.TextureColor.CYAN);
                 }
 
                 Message playerMessage = Message.translation("server.customUI.mermaids.mermaidui.category.color.playerMsg.modify").param("color", msgTailColor);
@@ -186,8 +218,8 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
                     pelvicFinMsg = "none";
                     pelvicFin = -1;
                 } else if (data.pelvicFin.equalsIgnoreCase("1")) {
-                    pelvicFinMsg = "all along the sides";
-                    pelvicFin = -1; //NEED TO SET
+                    pelvicFinMsg = "top fins";
+                    pelvicFin = 1; //NEED TO SET
                 }
 
                 Message playerMessage = Message.translation("server.customUI.mermaids.mermaidui.category.pelvic_fin.playerMsg.modify").param("fin", pelvicFinMsg);
@@ -274,20 +306,20 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
                 "color",
                 "server.customUI.mermaids.mermaidui.category.color",
                 "Pages/MermaidUI/Categories/TailColorContent.ui",
-                3
+                8
         ),
         DORSAL_FIN(
                 "dorsal_fin",
                 "server.customUI.mermaids.mermaidui.category.dorsal_fin",
                 "Pages/MermaidUI/Categories/DorsalFinContent.ui",
                 2
-        )/*,
+        ),
         PELVIC_FIN(
                 "pelvic_fin",
                 "server.customUI.mermaids.mermaidui.category.pelvic_fin",
                 "Pages/MermaidUI/Categories/PelvicFinContent.ui",
                 2
-        )*/;
+        );
 
         private final String id;
         private final String nameKey;
@@ -341,7 +373,7 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
                 .addField(new KeyedCodec<>("TailModel", Codec.STRING), (entry, s) -> entry.tailModel = s, entry -> entry.tailModel)
                 .addField(new KeyedCodec<>("TailColor", Codec.STRING), (entry, s) -> entry.tailColor = s, entry -> entry.tailColor)
                 .addField(new KeyedCodec<>("DorsalFin", Codec.STRING), (entry, s) -> entry.dorsalFin = s, entry -> entry.dorsalFin)
-                //.addField(new KeyedCodec<>("PelvicFin", Codec.STRING), (entry, s) -> entry.pelvicFin = s, entry -> entry.pelvicFin)
+                .addField(new KeyedCodec<>("PelvicFin", Codec.STRING), (entry, s) -> entry.pelvicFin = s, entry -> entry.pelvicFin)
                 .build();
         private String category;
         private String tailModel;

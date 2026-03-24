@@ -17,8 +17,7 @@ import java.util.concurrent.TimeUnit;
 public class MermaidsUpdateChecker {
     public static String checkForUpdate(){
         try{
-            //URL url = new URL("https://api.mermaids.dev/versions/mermaids/release/");
-            URL url = new URL("https://api.mermaids.dev/versions/mermaids/pre-release/alpha/2.0.0/");
+            URL url = new URL("https://api.mermaids.dev/versions/mermaids/release/");
 
             URLConnection connection = url.openConnection();
             InputStream inputStream = connection.getInputStream();
@@ -73,25 +72,7 @@ public class MermaidsUpdateChecker {
     public static void sendUpdateMessage(@Nullable Player player, boolean sendToPlayer){
         String recentVersion = MermaidsUpdateChecker.checkForUpdate();
         if(!Mermaids.getVersion().equalsIgnoreCase(recentVersion)){
-
-            /*    RELEASE UPDATE MESSAGE
             String translationId = "server.updateChecker.mermaids.release.message";
-            Message versionMessage = Message.translation(translationId).param("version", recentVersion);
-
-            Mermaids.LOGGER.atInfo().log(versionMessage.getAnsiMessage());
-
-            if(sendToPlayer && player != null) {
-                if (player.hasPermission("*") && Mermaids.getConfig().get().ifNewVersion()) {
-                    player.sendMessage(versionMessage.color(Color.CYAN));
-                }
-            }
-            DELETE EVERYTHING BELOW ON RELEASE OF 2.0.0, UPDATE URL LINK */
-
-            String translationId = "server.updateChecker.mermaids.alpha.2.0.0.message";
-            if(recentVersion.equalsIgnoreCase("released")) {
-                translationId = "server.updateChecker.mermaids.alpha.2.0.0.released.message";
-            }
-
             Message versionMessage = Message.translation(translationId).param("version", recentVersion);
 
             Mermaids.LOGGER.atInfo().log(versionMessage.getAnsiMessage());

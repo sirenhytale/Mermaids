@@ -10,41 +10,46 @@ import com.hypixel.hytale.server.core.HytaleServer;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import plugin.siren.Mermaids;
 import plugin.siren.Utils.Cosmetics.MermaidCosmetic;
+import plugin.siren.Utils.Cosmetics.MermaidCosmeticSkin;
 import plugin.siren.Utils.Cosmetics.MermaidCosmeticType;
 
 import javax.annotation.Nullable;
 
 public class MermaidSettingsComponent implements Component<EntityStore> {
     public static final BuilderCodec<MermaidSettingsComponent> CODEC = BuilderCodec.builder(MermaidSettingsComponent.class, MermaidSettingsComponent::new)
-            .append(new KeyedCodec<Boolean>("Mermaid-Toggle_ALPHA", Codec.BOOLEAN),
+            .append(new KeyedCodec<Boolean>("Mermaid-Toggle", Codec.BOOLEAN),
                     (merSettings, mtBool) -> merSettings.toggleMermaid = mtBool, // Setter
                     (merSettings) -> merSettings.toggleMermaid)                    // Getter
             .add()
-            .append(new KeyedCodec<Boolean>("Mermaid-Transformation-PermPotion_ALPHA", Codec.BOOLEAN),
+            .append(new KeyedCodec<Boolean>("Mermaid-Transformation-PermPotion", Codec.BOOLEAN),
                     (merSettings, mtppBool) -> merSettings.permanentPotion = mtppBool, // Setter
                     (merSettings) -> merSettings.permanentPotion)                    // Getter
             .add()
-            .append(new KeyedCodec<String>("Mermaid-Tail-Model_ALPHA", Codec.STRING),
+            .append(new KeyedCodec<String>("Mermaid-Tail-Model", Codec.STRING),
                     (merSettings, mtmStr) -> merSettings.mermaidTail = mtmStr, // Setter
                     (merSettings) -> merSettings.mermaidTail)                    // Getter
             .add()
-            .append(new KeyedCodec<String>("Mermaid-Tail-Color_ALPHA", Codec.STRING),
+            .append(new KeyedCodec<String>("Mermaid-Tail-Color", Codec.STRING),
                     (merSettings, mtcStr) -> merSettings.tailColor = mtcStr, // Setter
                     (merSettings) -> merSettings.tailColor)                    // Getter
             .add()
-            .append(new KeyedCodec<Integer>("Mermaid-Cosmetic-Dorsal-Fin_ALPHA", Codec.INTEGER),
-                    (merSettings, mcdfStr) -> merSettings.dorsalFin = mcdfStr, // Setter
+            .append(new KeyedCodec<Integer>("Mermaid-Cosmetic-Tail-Color", Codec.INTEGER),
+                    (merSettings, mctcInt) -> merSettings.cosmeticColor = mctcInt, // Setter
+                    (merSettings) -> merSettings.cosmeticColor)                    // Getter
+            .add()
+            .append(new KeyedCodec<Integer>("Mermaid-Cosmetic-Dorsal-Fin", Codec.INTEGER),
+                    (merSettings, mcdfInt) -> merSettings.dorsalFin = mcdfInt, // Setter
                     (merSettings) -> merSettings.dorsalFin)                    // Getter
             .add()
-            .append(new KeyedCodec<Integer>("Mermaid-Cosmetic-Pelvic-Fin_ALPHA", Codec.INTEGER),
-                    (merSettings, mcpfStr) -> merSettings.pelvicFin = mcpfStr, // Setter
+            .append(new KeyedCodec<Integer>("Mermaid-Cosmetic-Pelvic-Fin", Codec.INTEGER),
+                    (merSettings, mcpfInt) -> merSettings.pelvicFin = mcpfInt, // Setter
                     (merSettings) -> merSettings.pelvicFin)                    // Getter
             .add()
-            .append(new KeyedCodec<Boolean>("Force-Mermaid_ALPHA", Codec.BOOLEAN),
+            .append(new KeyedCodec<Boolean>("Force-Mermaid", Codec.BOOLEAN),
                     (merSettings, fmBool) -> merSettings.forceMermaid = fmBool, // Setter
                     (merSettings) -> merSettings.forceMermaid)                    // Getter
             .add()
-            .append(new KeyedCodec<Boolean>("Force-Mermaid-OrbisOrigin_ALPHA", Codec.BOOLEAN),
+            .append(new KeyedCodec<Boolean>("Force-Mermaid-OrbisOrigin", Codec.BOOLEAN),
                     (merSettings, fmooBool) -> merSettings.forceMermaidOrbisOrigin = fmooBool, // Setter
                     (merSettings) -> merSettings.forceMermaidOrbisOrigin)                    // Getter
             .add()
@@ -56,6 +61,7 @@ public class MermaidSettingsComponent implements Component<EntityStore> {
     private String mermaidTail;
     private String tailColor;
 
+    private int cosmeticColor;
     private int dorsalFin;
     private int pelvicFin;
 
@@ -75,6 +81,7 @@ public class MermaidSettingsComponent implements Component<EntityStore> {
 
         this.mermaidTail = defaultMermaidTail;
         this.tailColor = defaultTailColor;
+        this.cosmeticColor = 0;
         this.dorsalFin = -1;
         this.pelvicFin = -1;
 
@@ -88,6 +95,7 @@ public class MermaidSettingsComponent implements Component<EntityStore> {
 
         this.mermaidTail = other.mermaidTail;
         this.tailColor = other.tailColor;
+        this.cosmeticColor = other.cosmeticColor;
         this.dorsalFin = other.dorsalFin;
         this.pelvicFin = other.pelvicFin;
 
@@ -151,6 +159,14 @@ public class MermaidSettingsComponent implements Component<EntityStore> {
 
     public void setMermaidTail(String mermaidTail){
         this.mermaidTail = mermaidTail;
+    }
+
+    public MermaidCosmeticSkin.TextureColor getCosmeticColor(){
+        return MermaidCosmeticSkin.TextureColor.get(cosmeticColor);
+    }
+
+    public void setCosmeticColor(MermaidCosmeticSkin.TextureColor textureColor){
+        cosmeticColor = textureColor.getValue();
     }
 
     public String getTailColor() {

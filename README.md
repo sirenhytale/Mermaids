@@ -1,93 +1,97 @@
-### ![Mermaids-Banner](https://media.forgecdn.net/attachments/description/1430860/description_bdf39dac-b010-48cb-a0c8-663b91de15e0.png)
+### ![Mermaids-Banner](https://media.forgecdn.net/attachments/description/1430860/description_ddc80697-2f7f-4ad4-b9da-df3bfa931a25.png)
 
-Version 1.3.0
+Version: 2.0.0
 
-### Ever wanted to be a Mermaid? Now you can with Mermaids, this plugin allows the user to **become a Mermaid** in water!
+### <span style="color: #c2e0f4;">Ever wanted to be a Mermaid? Now you can with Mermaids, this plugin allows the user to <span style="color: #3598db;"><strong>become a Mermaid</strong></span> in water! Which gives the player increased movement speed, water breathing, night vision, and more while swimming underwater throughout seas, oceans, and rivers.</span>
 
- 
+<span style="color: #236fa1;">===--===--===--===--===--===--===--===--===--===--===--===--===--===--===--===--===</span>
 
-\===--===--===--===--===--===--===--===--===--===--===--===--===--===--===--===--===
+## <span style="color: #3598db;"><strong>Features</strong>:</span>
 
-## **Features**:
+<span style="color: #c2e0f4;">After entering the water for a couple seconds, you'll turn into a mermaid. Once you enter the land, your legs will regenerate.</span>
 
-After entering the water for a couple seconds, you'll turn into a mermaid. Once you enter the land, your legs will regenerate.
+*   <span style="color: #c2e0f4;">Grow a Mermaid Tail and keep your cosmetics</span>
+*   <span style="color: #c2e0f4;">Breathe underwater with quicker movement</span>
+*   <span style="color: #c2e0f4;">Permissions and config</span>
+*   <span style="color: #c2e0f4;">Configurable transformation option</span>
+*   <span style="color: #c2e0f4;">Custom model and animations</span>
+*   <span style="color: #c2e0f4;">and More!</span>
 
-*   Grow a Mermaid Tail and keep your cosmetics
-*   Breathe underwater with quicker movement
-*   Permissions and config
-*   Configurable transformation option
-*   Custom model and animations
-*   and More!
+<span style="color: #236fa1;">===--===--===--===--===--===--===--===--===--===--===--===--===--===--===--===--===</span>
 
-\===--===--===--===--===--===--===--===--===--===--===--===--===--===--===--===--===
+## <span style="color: #3598db;"><strong>Roadmap</strong>:</span>
 
-## **Roadmap**:
-
-*   Custom ways to become a Mermaid than just entering water
-*   Mermaid transformation particles
-*   Better tail model with multiple color textures
-*   More sea life and underwater things
-*   Better mermaid tail model, with animations going with it
-*   More mermaid cosmetic armor
-*   Fix walking on land with tail (by adding a crawling animation on land and more)
-*   Trailer and showcase video
+*   <span style="color: #c2e0f4;">More ways to become a Mermaid than just entering water</span>
+*   <span style="color: #c2e0f4;">Mermaid transformation particles</span>
+*   <span style="color: #c2e0f4;">More sea life and underwater things</span>
+*   <span style="color: #c2e0f4;">More mermaid cosmetic armor</span>
+*   <span style="color: #c2e0f4;">Fix walking on land with tail (by adding a crawling animation on land and more)</span>
 
 __Disclaimer: Plugin is still in early development so expect bugs and if you encounter any, please **report them to me**.__
 
-\===--===--===--===--===--===--===--===--===--===--===--===--===--===--===--===--===
+<span style="color: #236fa1;">===--===--===--===--===--===--===--===--===--===--===--===--===--===--===--===--===</span>
 
-## **Commands, Config, and Permissions**:
+## <span style="color: #3598db;"><strong>Commands, Config, and Permissions</strong>:</span>
 
-*   Command: /mermaids toggle true|false
-    *   Desc: Allow the player to enable or disable mermaid transformations
-    *   Permission: mermaids.toggle
-*   Command: /mermaids ui
-    *   Desc: Opens a UI to change the mermaid tail model and color (Still in Development)
-    *   Permission: mermaids.ui
-    *   Config: "Require-Mermaids-UI-Permission"
-        *   Default: Set to false 
-        *   Desc: Requires the user to have the mermaids.ui permission to run the command /mermaids to open the Mermaids UI
-*   Config: "Require-Transformation-Permission"
-    *   Default: Set to false 
-    *   Desc: Requires the user to have mermaids.transform permission to transform
-    *   Permission: mermaids.transform
-        *   Desc: Permission to allow the player to transform into a mermaid
+### <span style="color: #c2e0f4;">Commands Extra Info:</span>
 
-### Commands Extra Info:
+<div class="spoiler"><ul><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">/mermaids ui</span><ul><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Will open a UI where you can select mermaid tail model and color.</span></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">May require permission: mermaids.ui</span></li></ul></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">/mermaids toggle true|false</span><ul><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">You can enable or disable Mermaid transformations.</span></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Requires permission: mermaids.toggle</span></li></ul></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">&nbsp;/mermaids bugfix</span><ul><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Will give the player the Mermaid component, run if mermaid transformations aren't working.</span></li></ul></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">&nbsp;/mermaids permpotionremove</span><ul><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Will remove the permanent potion transformation from the player.</span></li></ul></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">/mermaids debug</span><ul><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Requires permission: mermaids.debug&nbsp;</span></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">/mermaids debug givemermaidring</span><ul><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Give the player a testing item called the Mermaid Ring.</span></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Requires permission: mermaids.debug.mermaidring</span></li></ul></li></ul></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">/mermaids admin</span><ul><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Requires permission: mermaids.admin</span></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">/mermaids admin transformmode {New Mode Integer}</span><ul><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Update the transformation mode with 0 to allow transforming when entering water and 1 to only allow transformation from drinking a potion..</span></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Requires permission: mermaids.admin.mode</span></li></ul></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">/mermaids admin itemspeed true|false</span><ul><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Toggles to allow some items to increase the swim movement speed.</span></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Requires permission: mermaids.admin.itemspeed</span></li></ul></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">/mermaids admin blockstransformation true|false</span><ul><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Toggle to allow some blocks to transform players into a mermaid.</span></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Requires permission: mermaids.admin.blocktransform</span></li></ul></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">/mermaids admin blockstransformation true|false</span><ul><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Toggle to allow some blocks to transform players into a mermaid.</span></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Requires permission: mermaids.admin.blocktransform</span></li></ul></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">/mermaids admin raintransformation true|false</span><ul><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Toggle to allow rain to transform players into a mermaid.</span></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Requires permission: mermaids.admin.raintransform</span></li></ul></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">/mermaids admin mermaidglow true|false</span><ul><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Toggle to have the mermaid model glow.</span></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Requires permission: mermaids.admin.mermaidglow</span></li></ul></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">/mermaids admin mermaidglowradius {New Radius Integer}</span><ul><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Set the radius of the mermaid glow.</span></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Requires permission: mermaids.admin.mermaidglow</span></li></ul></li></ul></li></ul></div>
 
-<div class="spoiler"><ul><li>/mermaids ui<ul><li>Will open a UI where you can select mermaid tail model and color</li><li>May require permission: mermaids.ui</li></ul></li><li>/mermaids toggle true|false<ul><li>You can enable or disable Mermaid transformations</li><li>Requires permission: mermaids.toggle</li></ul></li><li>&nbsp;/mermaids bugfix<ul><li>Will give the player the Mermaid component, run if mermaid transformations aren't working</li></ul></li><li>&nbsp;/mermaids permpotionremove<ul><li>Will remove the permanent potion transformation from the player</li></ul></li></ul></div>
+### <span style="color: #c2e0f4;">Permissions&nbsp;Extra Info:</span>
 
-### Permissions Extra Info:
+<div class="spoiler"><ul><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">mermaids.transform</span><ul><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Allows the player to mermaid transform when this option is enabled in config.</span></li></ul></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">mermaids.ui</span><ul><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Run /mermaids ui command.</span></li></ul></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">mermaids.toggle</span><ul><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Run /mermaids toggle (boolean) command.</span></li></ul></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">mermaids.debug</span><ul><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Access to the /mermaids debug commands.</span></li></ul></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">mermaids.debug.mermaidv2</span><ul><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Access to use /mermaids debug mermaidv2 true|false, which allows the user to try out the Mermaid Tail Model v2.</span></li></ul></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">mermaids.admin</span><ul><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Access to the /mermaids admin commands.</span></li></ul></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">mermaids.admin.mode</span><ul><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Access to use /mermaids admin transformmode {New Mode Integer}, which updates the transformation mode.</span></li></ul></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">mermaids.admin.mermaidonland</span><ul><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Access to use /mermaids admin mermaidonland true|false, which toggles mermaid on land for all players.</span></li></ul></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">mermaids.admin.itemspeed</span><ul><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Access to use /mermaids admin itemspeed [true/false], which toggles to allow some items to give increased swim speed.</span></li></ul></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">mermaids.admin.blocktransform</span><ul><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Access to use /mermaids admin blocktransformation true|false, which toggles to allow some blocks to transform players into a mermaid.</span></li></ul></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">mermaids.admin.raintransform</span><ul><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Access to use /mermaids admin raintransformation true|false, which toggles to allow rain to transform players into a mermaid.</span></li></ul></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">mermaids.admin.mermaidglow</span><ul><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Access to use /mermaids admin mermaidglow true|false, which toggles the mermaid model glow.</span></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Access to use /mermaids admin mermaidglowraduis {int}, that sets the radius of the mermaid glow.</span></li></ul></li></ul></div>
 
-<div class="spoiler"><ul><li>mermaids.transform<ul><li>Allows the player to mermaid transform when this option is enabled in config</li></ul></li><li>mermaids.ui<ul><li>Run /mermaids ui command</li></ul></li><li>mermaids.toggle<ul><li>Run /mermaids toggle (boolean) command</li></ul></li></ul></div>
+### <span style="color: #c2e0f4;">Config Extra Info:</span>
 
-### Config Extra Info:
+<div class="spoiler"><p><span style="color: #c2e0f4;">This is the default config values and descriptions for config version 1:</span></p><ul><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">"Config-Information"</span><ul><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Default Value: "Confused about what one of these statement do? Check out the Mermaids page on the Curseforge website and scroll down to Config Extra Info."</span></li></ul></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">"ConfigVersion"</span><ul><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Default Value: 11</span></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Description: Config Version when you first load the plugin.</span></li></ul></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">"PluginName"</span><ul><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Default Value: "Mermaids"</span></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Description: Plugin name.</span></li></ul></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">"Version"</span><ul><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Default Value: "2.0.0"</span></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Description: Plugin Verison when you first load the plugin.</span></li></ul></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">"Website"</span><ul><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Default Value: “https://mermaids.dev/mermaids/”</span></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Description: Official website for the Mermaids mod.</span></li></ul></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">"Download-Site"</span><ul><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Default Value: "https://www.curseforge.com/hytale/mods/mermaids"</span></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Description: A link to the plugin's download page and informatiton.</span></li></ul></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">"Enable-Generic-Console-Logs"</span><ul><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Default Value: false</span></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Description: Send console logs for majority of mermaid actions: transforming and modifying settings.</span></li></ul></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">"Transformation-Mode"</span><ul><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Default Value: 0</span></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Description: TransformationMode = 0 : Transform when entering water, TransformationMode = 1 : Requires user to drink Mermaid Potion to Transform.</span></li></ul></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">"Description-Transformation-Mode"</span><ul><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Default Value: A long string that tells you about the description for Transformation-Mode.</span></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Description: A description of the Transformation-Mode config option. &nbsp;</span></li></ul></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">"Always-A-Mermaid-Even-On-Land"</span><ul><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Default Value: false</span></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">If you have permissions to be a Mermaid, than you'll always be transformed into a Mermaid even on land.</span></li></ul></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">"Require-Transformation-Permission"</span><ul><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Default Value: false</span></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Description: Requires the player to have the permission -- mermaids.transform -- to transform into a Mermaid.</span></li></ul></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">"Require-Mermaids-UI-Permission"</span><ul><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Default Value: false</span></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Description: Requires the player to have the permission -- mermaids.ui -- to run the command /mermaids ui.</span></li></ul></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">“Items-Can-Increase-Swim-Speed”</span><ul><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Default Value: true</span></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Description: Some items like fishbone harpoon and some modded related items will give you increased swim speed as a mermaid.</span></li></ul></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">"Blocks-Can-Cause-Transformations"</span><ul><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Default Value: true</span></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Description: Some blocks like mud and a cauldron will cause you to transform into a mermaid.</span></li></ul></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">"Rain-Can-Cause-Transformations"</span><ul><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Default Value: false</span></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Description: Walking into the rain will cause you to transform.</span></li></ul></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">"Mermaid-Have-A-Glow/Light"</span><ul><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Default Value: true</span></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Description: The mermaid model will light of a glow allowing the player to see better underwater.</span></li></ul></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">"Mermaid-Glow/Light-Radius"</span><ul><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Default Value: 33</span></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Description: The radius of the mermaid glow.</span></li></ul></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">"EasyHunger-By:Haasapenas-Compatibility"</span><ul><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Default Value: true</span></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Description: Compatibility with the EasyHunger Mod.</span></li></ul></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">"AquaThirst&amp;Hunger-By:Jume-Compatibility"</span><ul><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Default Value: true</span></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Description: Compatibility with the Aqua Thirst &amp; Hunger Mod.</span></li></ul></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">"DivingTale-By:xnrdev-Compatibility"</span><ul><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Default Value: true</span></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Description: Compatibility with the [xnrdev] DivingTale Mod.</span></li></ul></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">"MoreNPC-By:BlueEyesWhiteMen-Compatibility"</span><ul><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Default Value: true</span></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Description: Compatibility with the MoreNPC Mod.</span></li></ul></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">"Keyblades Reimagined-By:TaHie-Compatibility"</span><ul><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Default Value: true</span></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Description: Compatibility with the Keyblades Reimagined Mod.</span></li></ul></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">"DebugMode"</span><ul><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Default Value: false</span></li><li style="color: #c2e0f4;"><span style="color: #c2e0f4;">Run the plugin in debug mode to get alerts about most actions of the plugin.</span></li></ul></li></ul></div>
 
-<div class="spoiler"><p>This is the default config values and descriptions for config version 4</p><ul><li>"Config-Information"<ul><li>Default Value: "Confused about what one of these statement do? Check out the Mermaids page on the Curseforge website and scroll down to Config Extra Info.",</li></ul></li><li>"ConfigVersion"<ul><li>Default Value: 4</li><li>Description: Config Version when you first load the plugin</li></ul></li><li>"PluginName"<ul><li>Default Value: "Mermaids"</li><li>Description: Plugin name</li></ul></li><li>"Version"<ul><li>Default Value: "1.3.0"</li><li>Description: Plugin Verison when you first load the plugin</li></ul></li><li>"Website"<ul><li>Default Value: "https://www.curseforge.com/hytale/mods/mermaids"</li><li>Description: A link to the plugin's download page and informatiton</li></ul></li><li>"DebugMode"<ul><li>Default Value: false</li><li>Run the plugin in debug mode to get alerts about most actions of the plugin</li></ul></li><li>"Transformation-Mode"<ul><li>Default Value: 0</li><li>Description: TransformationMode = 0 : Transform when entering water, TransformationMode = 1 : Requires user to drink Mermaid Potion to Transform</li></ul></li><li>"Require-Transformation-Permission"<ul><li>Default Value: false</li><li>Description: Requires the player to have the permission -- mermaids.transform -- to transform into a Mermaid</li></ul></li><li>"Require-Mermaids-UI-Permission"<ul><li>Default Value: false</li><li>Description: Requires the player to have the permission -- mermaids.ui -- to run the command /mermaids ui</li></ul></li><li>"Blocks-Can-Cause-Transformations"<ul><li>Default Value: true</li><li>Description: Some blocks like mud and a cauldron will cause you to transform into a mermaid</li></ul></li><li>"Rain-Can-Cause-Transformations"<ul><li>Default Value: false</li><li>Description: Walking into the rain will cause you to transform</li></ul></li></ul></div>
+<span style="color: #236fa1;">===--===--===--===--===--===--===--===--===--===--===--===--===--===--===--===--===</span>
 
-\===--===--===--===--===--===--===--===--===--===--===--===--===--===--===--===--===
+## <span style="color: #3598db;"><strong>HOW TO INSTALL</strong>:</span>
 
-## **HOW TO INSTALL**:
+### <span style="color: #c2e0f4;">Client:</span>
 
-### Client:
+<span style="color: #c2e0f4;">Upload the Mermaids.jar file into your %appdata%\Hytale\UserData\Mods\ Folder</span>
 
-Upload the Mermaids.jar file into your %appdata%\\Hytale\\UserData\\Mods\\ Folder
+### <span style="color: #c2e0f4;">Server:</span>
 
-### Server:
+<span style="color: #c2e0f4;">Upload the Mermaids.jar file into your servers mods\ folder</span>
 
-Upload the Mermaids.jar file into your servers mods\\ folder
+<span style="color: #c2e0f4;">Make sure you delete any previous version of Mermaids otherwise your world may not start.</span>
 
-Make sure you delete any previous version of Mermaids otherwise your world may not start.
+<span style="color: #c2e0f4;"><img src="https://media.forgecdn.net/attachments/description/1430860/description_333080fd-43c3-4097-b53b-8811ea60aecb.png" alt="Mermaids-Mermaid_showoff" width="402" height="242"></span>
 
-![Mermaids-Mermaid_showoff](https://media.forgecdn.net/attachments/description/1430860/description_7c762965-7cef-467d-b4ec-66cd9c0edbcf.png)
+<span style="color: #236fa1;">===--===--===--===--===--===--===--===--===--===--===--===--===--===--===--===--===</span>
 
-\===--===--===--===--===--===--===--===--===--===--===--===--===--===--===--===--===
+## <span style="color: #3598db;"><strong>VERSION COMPATIBILITY</strong>:</span>
 
-### **Known Bugs**
+<span style="color: #c2e0f4;">v2.0.0 : Designed: 2026.03.23-338988e70 - Active support for continued versions until specified.</span>
 
-*   Mermaid transformation cause your skin to go white and not your player's skin color.
-*   You keep your tail for a small amount of time once you go on land.
-*   Animations are weird when you hit a block or when you're above water.
-*   Seashell Bra still shows your Outer cosmetic layers when in Mermaid model.
+<span style="color: #c2e0f4;">v1.3.6-v1.4.3 : Designed: 2026.02.17-255364b8e</span>
 
-\===--===--===--===--===--===--===--===--===--===--===--===--===--===--===--===--===
+<span style="color: #c2e0f4;">v1.3.0-v1.3.5 : Designed: 2026.01.27-734d39026</span>
+
+<span style="color: #c2e0f4;">v1.0.0-v1.2.7 : Designed: 2026.01.13-dcad8778f - Supported Until: &nbsp;2026.01.24-6e2d4fc36</span>
+
+<span style="color: #236fa1;">===--===--===--===--===--===--===--===--===--===--===--===--===--===--===--===--===</span>
+
+## <span style="color: #3598db;"><strong>Known Bugs</strong>:</span>
+
+*   <span style="color: #c2e0f4;">You keep your tail for a small amount of time once you go on land.</span>
+*   <span style="color: #c2e0f4;">Animations are weird when you hit a block or when you're above water.</span>
+
+<span style="color: #236fa1;">===--===--===--===--===--===--===--===--===--===--===--===--===--===--===--===--===</span>
+
+## <span style="color: #3598db;"><strong>Support the Creator of Mermaids</strong>:</span>
+
+<span style="color: #c2e0f4;">You can support me by using my creator code <span style="color: #3598db;"><strong>SIREN</strong></span> at checkout.</span>
+
+<span style="color: #c2e0f4;"><img src="https://media.forgecdn.net/attachments/description/1430860/description_ece39324-3f17-4aec-902f-866de54a68c0.png" alt="Support Mermaids by using creator code SIREN image." width="582" height="228"></span>
+
+<span style="color: #236fa1;">===--===--===--===--===--===--===--===--===--===--===--===--===--===--===--===--===</span>
+
+<span style="color: #c2e0f4;"><a href="https://hstats.dev/mods/81231ba0-dc7e-4469-904b-00a66a9ceae6" target="_blank" rel="nofollow noopener">HStats</a> from v1.3.8, Alpha v2.0.0-2026.02.25, and later.</span>
+
+<span style="color: #c2e0f4;"><img src="https://api.hstats.dev/api/embed/81231ba0-dc7e-4469-904b-00a66a9ceae6/card.svg?theme=dark&amp;layout=history&amp;size=lg&amp;show_id=true&amp;dark=false" alt="HStats Mermaids Mod with History" width="920" height="340"></span>
+
+<span style="color: #236fa1;">===--===--===--===--===--===--===--===--===--===--===--===--===--===--===--===--===</span>
