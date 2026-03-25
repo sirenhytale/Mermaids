@@ -24,7 +24,7 @@ import plugin.siren.Systems.MermaidSystem;
 import plugin.siren.Utils.API.MermaidsUpdateChecker;
 import plugin.siren.Utils.Config.MermaidsConfig;
 import plugin.siren.Utils.Cosmetics.MermaidCosmeticSkin;
-import plugin.siren.Utils.Github.Ignore;
+import plugin.siren.Utils.Github.GithubIgnore;
 
 import javax.annotation.Nonnull;
 
@@ -45,7 +45,7 @@ public class Mermaids extends JavaPlugin {
         plugin = this;
         this.config = this.withConfig("Mermaids", MermaidsConfig.CODEC);
 
-        new HStats(Ignore.getHStatsModUUID(), VERSION);
+        new HStats(GithubIgnore.getHStatsModUUID(), VERSION);
     }
 
     @Override

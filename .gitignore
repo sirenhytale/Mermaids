@@ -39,4 +39,4 @@ build/
 .DS_Store
 
 ### MERMAIDS MOD ###
-src/main/java/plugin/siren/Utils/Github/Ignore.java
+src/main/java/plugin/siren/Utils/Github/GithubIgnore.java
