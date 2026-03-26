@@ -23,7 +23,6 @@ import plugin.siren.Contributions.starman.modelutils.ModelHelper;
 import plugin.siren.Mermaids;
 import plugin.siren.Systems.MermaidComponent;
 import plugin.siren.Systems.MermaidSettingsComponent;
-import plugin.siren.Utils.Cosmetics.MermaidCosmetic;
 import plugin.siren.Utils.Cosmetics.MermaidCosmeticSkin;
 import plugin.siren.Utils.Cosmetics.MermaidCosmeticType;
 
@@ -32,7 +31,7 @@ import javax.annotation.Nonnull;
 public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.MermaidUIEventData> {
     private static final Value<String> CATEGORY_BUTTON_STYLE = Value.ref("Pages/UIGallery/CategoryButton.ui", "LabelStyle");
     private static final Value<String> CATEGORY_BUTTON_SELECTED_STYLE = Value.ref("Pages/UIGallery/CategoryButton.ui", "SelectedLabelStyle");
-    private MermaidUIPage.Category selectedCategory = Category.MODEL;
+    private MermaidUIPage.Category selectedCategory = Category.PRESETS;
 
     public MermaidUIPage(@Nonnull PlayerRef playerRef) {
         super(playerRef, CustomPageLifetime.CanDismiss, MermaidUIPage.MermaidUIEventData.CODEC);
@@ -68,6 +67,69 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
                 }
 
                 this.sendUpdate(commandBuilder, eventBuilder, false);
+            }else if (data.tailPresets != null) {
+                boolean closeUI = false;
+
+                String msgMerPreset = "ERROR GETTING PRESET";
+
+                String mermaidTailPath = mermaidSettings.getDefaultMermaidTail();
+                String mermaidTailColorPath = mermaidSettings.getTailColor();
+
+                int dorsalFin = -1;
+                int pelvicFin = -1;
+                if (data.tailPresets.equalsIgnoreCase("0")) {
+                    msgMerPreset = "default";
+
+                    mermaidTailPath = "Mermaids_Mermaid";
+                    //mermaidTailColorPath = mermaidTailColorPath;
+
+                    dorsalFin = -1;
+                    pelvicFin = -1;
+                } else if (data.tailPresets.equalsIgnoreCase("1")) {
+                    msgMerPreset = "Full Fins";
+
+                    mermaidTailPath = "Mermaids_Mermaid";
+                    //mermaidTailColorPath = mermaidTailColorPath;
+
+                    dorsalFin = 0;
+                    pelvicFin = 1;
+                }
+
+                Message playerMessage = Message.translation("server.customUI.mermaids.mermaidui.category.presets.playerMsg.modify").param("preset", msgMerPreset);
+                player.sendMessage(playerMessage);
+
+                if(Mermaids.getConfig().get().ifConsoleLogs()) {
+                    String consoleMessage = Message.translation("customUI.mermaids.mermaidui.category.presets.consoleMsg.modify").param("username", player.getDisplayName()).param("preset", msgMerPreset).getAnsiMessage();
+                    Mermaids.LOGGER.atInfo().log(consoleMessage);
+                }
+
+                String oldMermaidTail = mermaidSettings.getMermaidTail();
+                mermaidSettings.setMermaidTail(mermaidTailPath);
+
+                String oldTailColor = mermaidSettings.getTailColor();
+                //mermaidSettings.setTailColor(mermaidTailColorPath);
+
+                int oldCosmeticDorsalValue = mermaidSettings.getMermaidCosmeticValue(MermaidCosmeticType.DORSAL_FIN);
+                mermaidSettings.setMermaidCosmetic(MermaidCosmeticType.DORSAL_FIN, dorsalFin);
+
+                int oldCosmeticPelvicValue = mermaidSettings.getMermaidCosmeticValue(MermaidCosmeticType.PELVIC_FIN);
+                mermaidSettings.setMermaidCosmetic(MermaidCosmeticType.PELVIC_FIN, pelvicFin);
+
+                if ((!oldMermaidTail.equals(mermaidTailPath) || !oldTailColor.equals(mermaidTailColorPath) || dorsalFin != oldCosmeticDorsalValue || pelvicFin != oldCosmeticPelvicValue) && mermaid.isMermaid()) {
+                    ModelAsset modelAsset = ModelAsset.getAssetMap().getAsset(mermaidTailPath);
+                    if (modelAsset == null) {
+                        player.sendMessage(Message.raw("Mermaids: Error: MermaidV2UIPage: " + mermaidTailPath + " Model not found"));
+                        Mermaids.LOGGER.atSevere().log(player.getDisplayName() + " had an error of getting the Mermaid Model. Error: MermaidV2UIPage: " + mermaidTailPath + " Model not found.");
+                    } else {
+                        ModelHelper.applySkin(Model.createUnitScaleModel(modelAsset), mermaid.getMermaidSkin().clone(), ref, mermaid, mermaidSettings);
+                    }
+                }
+
+                this.sendUpdate(commandBuilder, eventBuilder, false);
+
+                if(closeUI){
+                    player.getPageManager().setPage(ref, store, Page.None);
+                }
             } else if (data.tailModel != null) {
                 boolean closeUI = false;
 
@@ -272,22 +334,27 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
         commandBuilder.clear("#CategoryContent");
         commandBuilder.append("#CategoryContent", category.getContentPath());
 
-        if(category.id.equalsIgnoreCase("model")) {
+        if (category.id.equalsIgnoreCase("presets")) {
+            for (int i = 0; i < category.getTailSelectionCount(); i++) {
+                String selector = "#CategoryContent #TailPreset" + i + " #Selector";
+                eventBuilder.addEventBinding(CustomUIEventBindingType.Activating, selector, EventData.of("TailPresets", String.valueOf(i)));
+            }
+        } else if(category.id.equalsIgnoreCase("model")) {
             for (int i = 0; i < category.getTailSelectionCount(); i++) {
                 String selector = "#CategoryContent #TailModel" + i + " #Selector";
                 eventBuilder.addEventBinding(CustomUIEventBindingType.Activating, selector, EventData.of("TailModel", String.valueOf(i)));
             }
-        } else if(category.id.equalsIgnoreCase("color")) {
+        } else if (category.id.equalsIgnoreCase("color")) {
             for (int i = 0; i < category.getTailSelectionCount(); i++) {
                 String selector = "#CategoryContent #TailColor" + i + " #Selector";
                 eventBuilder.addEventBinding(CustomUIEventBindingType.Activating, selector, EventData.of("TailColor", String.valueOf(i)));
             }
-        } else if(category.id.equalsIgnoreCase("dorsal_fin")) {
+        } else if (category.id.equalsIgnoreCase("dorsal_fin")) {
             for (int i = 0; i < category.getTailSelectionCount(); i++) {
                 String selector = "#CategoryContent #DorsalFin" + i + " #Selector";
                 eventBuilder.addEventBinding(CustomUIEventBindingType.Activating, selector, EventData.of("DorsalFin", String.valueOf(i)));
             }
-        } else if(category.id.equalsIgnoreCase("pelvic_fin")) {
+        } else if (category.id.equalsIgnoreCase("pelvic_fin")) {
             for (int i = 0; i < category.getTailSelectionCount(); i++) {
                 String selector = "#CategoryContent #PelvicFin" + i + " #Selector";
                 eventBuilder.addEventBinding(CustomUIEventBindingType.Activating, selector, EventData.of("PelvicFin", String.valueOf(i)));
@@ -296,12 +363,18 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
     }
 
     private static enum Category {
-        MODEL(
+        PRESETS(
+                "presets",
+                "server.customUI.mermaids.mermaidui.category.presets",
+                "Pages/MermaidUI/Categories/TailPresetsContent.ui",
+                2
+        ),
+        /*MODEL(
                 "model",
                 "server.customUI.mermaids.mermaidui.category.model",
                 "Pages/MermaidUI/Categories/TailModelContent.ui",
                 1
-        ),
+        ),*/
         COLOR(
                 "color",
                 "server.customUI.mermaids.mermaidui.category.color",
@@ -356,12 +429,13 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
                 }
             }
 
-            return MODEL;
+            return PRESETS;
         }
     }
 
     public static class MermaidUIEventData {
         static final String KEY_CATEGORY = "Category";
+        static final String KEY_TAIL_PRESETS = "TailPresets";
         static final String KEY_TAIL_MODEL = "TailModel";
         static final String KEY_TAIL_COLOR = "TailColor";
         static final String KEY_DORSAL_FIN = "DorsalFin";
@@ -369,13 +443,15 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
         public static final BuilderCodec<MermaidUIEventData> CODEC = BuilderCodec.builder(
                         MermaidUIPage.MermaidUIEventData.class, MermaidUIPage.MermaidUIEventData::new
                 )
-                .addField(new KeyedCodec<>("Category", Codec.STRING), (entry, s) -> entry.category = s, entry -> entry.category)
-                .addField(new KeyedCodec<>("TailModel", Codec.STRING), (entry, s) -> entry.tailModel = s, entry -> entry.tailModel)
-                .addField(new KeyedCodec<>("TailColor", Codec.STRING), (entry, s) -> entry.tailColor = s, entry -> entry.tailColor)
-                .addField(new KeyedCodec<>("DorsalFin", Codec.STRING), (entry, s) -> entry.dorsalFin = s, entry -> entry.dorsalFin)
-                .addField(new KeyedCodec<>("PelvicFin", Codec.STRING), (entry, s) -> entry.pelvicFin = s, entry -> entry.pelvicFin)
+                .addField(new KeyedCodec<>(KEY_CATEGORY, Codec.STRING), (entry, s) -> entry.category = s, entry -> entry.category)
+                .addField(new KeyedCodec<>(KEY_TAIL_PRESETS, Codec.STRING), (entry, s) -> entry.tailPresets = s, entry -> entry.tailPresets)
+                .addField(new KeyedCodec<>(KEY_TAIL_MODEL, Codec.STRING), (entry, s) -> entry.tailModel = s, entry -> entry.tailModel)
+                .addField(new KeyedCodec<>(KEY_TAIL_COLOR, Codec.STRING), (entry, s) -> entry.tailColor = s, entry -> entry.tailColor)
+                .addField(new KeyedCodec<>(KEY_DORSAL_FIN, Codec.STRING), (entry, s) -> entry.dorsalFin = s, entry -> entry.dorsalFin)
+                .addField(new KeyedCodec<>(KEY_PELVIC_FIN, Codec.STRING), (entry, s) -> entry.pelvicFin = s, entry -> entry.pelvicFin)
                 .build();
         private String category;
+        private String tailPresets;
         private String tailModel;
         private String tailColor;
         private String dorsalFin;

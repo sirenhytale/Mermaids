@@ -63,6 +63,9 @@ commands.mermaids.toggle.consoleMsg.disabled = {username} has disabled transform
 # === customui ===
 
 customUI.mermaids.mermaidui.title = Mermaids
+customUI.mermaids.mermaidui.category.presets = Mermaid Tail Presets
+customUI.mermaids.mermaidui.category.presets.playerMsg.modify = You have equipped the {preset} mermaid tail preset.
+customUI.mermaids.mermaidui.category.presets.consoleMsg.modify = {username} has equipped the {preset} mermaid tail preset.
 customUI.mermaids.mermaidui.category.model = Mermaid Tail Model
 customUI.mermaids.mermaidui.category.model.playerMsg.modify = You have selected the {model} mermaid tail.
 customUI.mermaids.mermaidui.category.model.consoleMsg.modify = {username} has switched the Mermaid tail to {model}.
