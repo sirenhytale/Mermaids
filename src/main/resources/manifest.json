@@ -2,7 +2,7 @@
   "Group": "Siren",
   "Name": "Mermaids",
   "Version": "2.0.0",
-  "Description": "Ever wanted to be a Mermaid? Now you can with Mermaids, this plugin allows the user to become a Mermaid in water!",
+  "Description": "Ever wanted to be a Mermaid? Now you can with Mermaids, this mod allows the user to become a Mermaid in water!",
   "Authors": [
     {
       "Name": "Siren",
@@ -10,7 +10,7 @@
     }
   ],
   "Website": "https://www.mermaids.dev/mermaids/",
-  "ServerVersion": "2026.03.23-338988e70",
+  "ServerVersion": "2026.03.26-89796e57b",
   "Dependencies": {},
   "OptionalDependencies": {
     "Haas:EasyHunger": "*",

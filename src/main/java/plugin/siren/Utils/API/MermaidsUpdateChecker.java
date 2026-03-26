@@ -34,6 +34,8 @@ public class MermaidsUpdateChecker {
                 }
             }
         } catch (Exception e) {
+            Mermaids.LOGGER.atInfo().log("Exception with MermaidsUpdateChecker : " + e.toString());
+
             return Mermaids.getVersion();
         }
 
