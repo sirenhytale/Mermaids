@@ -78,6 +78,9 @@ customUI.mermaids.mermaidui.category.dorsal_fin.consoleMsg.modify = {username} h
 customUI.mermaids.mermaidui.category.pelvic_fin = Mermaid Side Fins
 customUI.mermaids.mermaidui.category.pelvic_fin.playerMsg.modify = You have switched the side fins to {fin}.
 customUI.mermaids.mermaidui.category.pelvic_fin.consoleMsg.modify = {username} has switched the mermaid tail side fins to {fin}.
+customUI.mermaids.mermaidui.category.auricle_fin = Mermaid Ear Fins
+customUI.mermaids.mermaidui.category.auricle_fin.playerMsg.modify = You have switched the ear fins to {fin}.
+customUI.mermaids.mermaidui.category.auricle_fin.consoleMsg.modify = {username} has switched the mermaid ear fins to {fin}.
 
 # === items ===
 

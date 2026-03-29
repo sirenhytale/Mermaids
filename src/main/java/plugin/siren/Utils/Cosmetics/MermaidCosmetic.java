@@ -5,7 +5,8 @@ import plugin.siren.Systems.MermaidSettingsComponent;
 
 public enum MermaidCosmetic {
     Long_Back_Fins(0, "Characters/SirensMermaid/Cosmetics/Mermaid/Dorsal_Fins/Mermaids_LongDorsalFins.blockymodel", "Characters/SirensMermaid/Cosmetics/Mermaid/Dorsal_Fins/LongDorsalFins/Mermaids_LongDorsalFins_Orange_Texture.png", MermaidCosmeticType.DORSAL_FIN),
-    Top_Side_Fins(1, "Characters/SirensMermaid/Cosmetics/Mermaid/Pelvic_Fins/Mermaids_TopPelvicFins.blockymodel", "Characters/SirensMermaid/Cosmetics/Mermaid/Pelvic_Fins/TopPelvicFins/Mermaids_TopPelvicFins_Orange_Texture.png", MermaidCosmeticType.PELVIC_FIN);
+    Top_Side_Fins(1, "Characters/SirensMermaid/Cosmetics/Mermaid/Pelvic_Fins/Mermaids_TopPelvicFins.blockymodel", "Characters/SirensMermaid/Cosmetics/Mermaid/Pelvic_Fins/TopPelvicFins/Mermaids_TopPelvicFins_Orange_Texture.png", MermaidCosmeticType.PELVIC_FIN),
+    Ear_Fins(2, "Characters/SirensMermaid/Cosmetics/Mermaid/Auricle_Fins/Mermaids_EarFins.blockymodel", "Characters/SirensMermaid/Cosmetics/Mermaid/Auricle_Fins/EarFins/Mermaids_EarFins_Orange.png", MermaidCosmeticType.AURICLE_FIN);
 
     private final int value;
     private final String model;
@@ -41,13 +42,19 @@ public enum MermaidCosmetic {
         return this.deafultTexture;
     }
 
+    public String getTexture(MermaidSettingsComponent mermaidSettings){
+        MermaidCosmeticSkin.TextureColor textureColor = mermaidSettings.getCosmeticColor();
+        String textureString = MermaidCosmeticSkin.getTexture(value, textureColor);
+
+        return textureString;
+    }
+
     public MermaidCosmeticType getType(){
         return type;
     }
 
     public ModelAttachment getAsModelAttachment(MermaidSettingsComponent mermaidSettings){
-        MermaidCosmeticSkin.TextureColor textureColor = mermaidSettings.getCosmeticColor();
-        String textureString = MermaidCosmeticSkin.getTexture(value, textureColor);
+        String textureString = getTexture(mermaidSettings);
 
         return new ModelAttachment(model, textureString, null, null, 1.0);
     }

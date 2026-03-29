@@ -8,6 +8,10 @@ import com.hypixel.hytale.server.core.cosmetics.CosmeticsModule;
 import com.hypixel.hytale.server.core.cosmetics.PlayerSkinPart;
 import plugin.siren.Mermaids;
 import plugin.siren.Systems.MermaidComponent;
+import plugin.siren.Systems.MermaidSettingsComponent;
+import plugin.siren.Utils.Cosmetics.MermaidCosmetic;
+import plugin.siren.Utils.Cosmetics.MermaidCosmeticSkin;
+import plugin.siren.Utils.Cosmetics.MermaidCosmeticType;
 
 import javax.annotation.Nullable;
 import java.lang.reflect.Field;
@@ -22,24 +26,36 @@ import java.util.List;
  * Link: https://github.com/SyperAI/hytale-model-utils
  *
  * Modified: Siren
- * Date: 2026/03/20
+ * Date: 2026/03/29
  *
  */
 
 public class AttachmentsHelper {
     static CosmeticRegistry reg = CosmeticsModule.get().getRegistry();
 
-    public static void addAttachment(ArrayList<ModelAttachment> attachments, PlayerSkinPart part, @Nullable String gradientId, @Nullable PlayerSkinPart.Variant variant) {
+    public static void addAttachment(ArrayList<ModelAttachment> attachments, PlayerSkinPart part, @Nullable String gradientId, @Nullable PlayerSkinPart.Variant variant){
+        addAttachment(attachments, part, gradientId, variant, null, null);
+    }
+
+    public static void addAttachment(ArrayList<ModelAttachment> attachments, PlayerSkinPart part, @Nullable String gradientId, @Nullable PlayerSkinPart.Variant variant, @Nullable MermaidSettingsComponent mermaidSettings, @Nullable MermaidCosmeticType mermaidCosmeticType) {
+        boolean auricleFin = mermaidCosmeticType != null && mermaidCosmeticType.equals(MermaidCosmeticType.AURICLE_FIN) && mermaidSettings != null && mermaidSettings.hasMermaidCosmetic(mermaidCosmeticType);
         if(variant != null) {
-            attachments.add(
-                    new ModelAttachment(
-                            variant.getModel(),
-                            variant.getGreyscaleTexture(),
-                            part.getGradientSet(),
-                            gradientId,
-                            1.0
-                    )
-            );
+            if(auricleFin){
+                Mermaids.LOGGER.atInfo().log("INSIDE LOOP");
+                MermaidCosmetic mermaidCosmetic = mermaidSettings.getMermaidCosmetic(mermaidCosmeticType);
+
+                attachments.add(mermaidCosmetic.getAsModelAttachment(mermaidSettings));
+            }else {
+                attachments.add(
+                        new ModelAttachment(
+                                variant.getModel(),
+                                variant.getGreyscaleTexture(),
+                                part.getGradientSet(),
+                                gradientId,
+                                1.0
+                        )
+                );
+            }
         }else{
             if(part.getGreyscaleTexture() == null) {
                 String partToString = part.getTextures().toString();
@@ -53,35 +69,47 @@ public class AttachmentsHelper {
                                 String attTexture = part.getTextures().get(key).getTexture();
                                 String attGradientSet = part.getTextures().get(key).getBaseColor()[0];
                                 if(attTexture != null && attGradientSet != null) {
-                                    attachments.add(
-                                            new ModelAttachment(
-                                                    part.getModel(),
-                                                    attTexture,
-                                                    attGradientSet,
-                                                    gradientId,
-                                                    1.0
-                                            )
-                                    );
+                                    if(auricleFin){
+                                        MermaidCosmetic mermaidCosmetic = mermaidSettings.getMermaidCosmetic(mermaidCosmeticType);
+
+                                        attachments.add(mermaidCosmetic.getAsModelAttachment(mermaidSettings));
+                                    }else {
+                                        attachments.add(
+                                                new ModelAttachment(
+                                                        part.getModel(),
+                                                        attTexture,
+                                                        attGradientSet,
+                                                        gradientId,
+                                                        1.0
+                                                )
+                                        );
+                                    }
                                 }
                             }
                         }
                     }
                 }
             }else{
-                attachments.add(
-                        new ModelAttachment(
-                                part.getModel(),
-                                part.getGreyscaleTexture(),
-                                part.getGradientSet(),
-                                gradientId,
-                        1.0
-                    )
-                );
+                if(auricleFin){
+                    MermaidCosmetic mermaidCosmetic = mermaidSettings.getMermaidCosmetic(mermaidCosmeticType);
+
+                    attachments.add(mermaidCosmetic.getAsModelAttachment(mermaidSettings));
+                }else {
+                    attachments.add(
+                            new ModelAttachment(
+                                    part.getModel(),
+                                    part.getGreyscaleTexture(),
+                                    part.getGradientSet(),
+                                    gradientId,
+                                    1.0
+                            )
+                    );
+                }
             }
         }
     }
 
-    public static ModelAttachment[] parseSkin(PlayerSkin skin, @Nullable ArrayList<String> ignore, @Nullable String defaultGradientId, @Nullable MermaidComponent mermaid) {
+    public static ModelAttachment[] parseSkin(PlayerSkin skin, @Nullable ArrayList<String> ignore, @Nullable String defaultGradientId, @Nullable MermaidComponent mermaid, @Nullable MermaidSettingsComponent mermaidSettings) {
         ArrayList<ModelAttachment> attachments = new ArrayList<>();
 
         // We go through all the fields of the class PlayerSkin
@@ -209,6 +237,10 @@ public class AttachmentsHelper {
             }
 
             if(!hideAttachment) {
+                Mermaids.LOGGER.atInfo().log(checkCosmeticType);
+                if(checkCosmeticType.equalsIgnoreCase("EARS")){
+                    addAttachment(attachments, skinPart, gradientId, skinPartVariant, mermaidSettings, MermaidCosmeticType.AURICLE_FIN);
+                }
                 addAttachment(attachments, skinPart, gradientId, skinPartVariant);
             }
         }

@@ -30,6 +30,12 @@ public class MermaidCosmeticAttachments {
             attachments.add(pelvicCosmetic.getAsModelAttachment(mermaidSettings));
         }
 
+        if(mermaidSettings.hasMermaidCosmetic(MermaidCosmeticType.AURICLE_FIN)){
+            MermaidCosmetic pelvicCosmetic = mermaidSettings.getMermaidCosmetic(MermaidCosmeticType.AURICLE_FIN);
+
+            attachments.add(pelvicCosmetic.getAsModelAttachment(mermaidSettings));
+        }
+
         if(Mermaids.ifDebug()){
             Mermaids.LOGGER.atInfo().log(attachments.toString());
         }

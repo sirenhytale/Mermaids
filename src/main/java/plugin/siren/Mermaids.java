@@ -30,7 +30,7 @@ import javax.annotation.Nonnull;
 
 public class Mermaids extends JavaPlugin {
     private static final String VERSION = "2.0.0";
-    private static final boolean DEBUG = false;
+    private static final boolean DEBUG = true;
 
     private static Mermaids plugin;
     public static final HytaleLogger LOGGER = HytaleLogger.forEnclosingClass();

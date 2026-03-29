@@ -60,10 +60,10 @@ public class MermaidSettingsComponent implements Component<EntityStore> {
 
     private String mermaidTail;
     private String tailColor;
-
     private int cosmeticColor;
     private int dorsalFin;
     private int pelvicFin;
+    private int auricleFin;
 
     private boolean forceMermaid;
     private boolean forceMermaidOrbisOrigin;
@@ -84,6 +84,7 @@ public class MermaidSettingsComponent implements Component<EntityStore> {
         this.cosmeticColor = 0;
         this.dorsalFin = -1;
         this.pelvicFin = -1;
+        this.auricleFin = -1;
 
         this.forceMermaid = false;
         this.forceMermaidOrbisOrigin = false;
@@ -98,6 +99,7 @@ public class MermaidSettingsComponent implements Component<EntityStore> {
         this.cosmeticColor = other.cosmeticColor;
         this.dorsalFin = other.dorsalFin;
         this.pelvicFin = other.pelvicFin;
+        this.auricleFin = other.auricleFin;
 
         this.forceMermaid = other.forceMermaid;
         this.forceMermaidOrbisOrigin = other.forceMermaidOrbisOrigin;
@@ -198,6 +200,12 @@ public class MermaidSettingsComponent implements Component<EntityStore> {
             }
             return true;
         }
+        if(cosmeticType.equals(MermaidCosmeticType.AURICLE_FIN)){
+            if(auricleFin == -1){
+                return false;
+            }
+            return true;
+        }
 
         return false;
     }
@@ -213,6 +221,13 @@ public class MermaidSettingsComponent implements Component<EntityStore> {
         if(cosmeticType.equals(MermaidCosmeticType.PELVIC_FIN)){
             if(hasMermaidCosmetic(cosmeticType)) {
                 return MermaidCosmetic.get(pelvicFin);
+            }
+
+            return null;
+        }
+        if(cosmeticType.equals(MermaidCosmeticType.AURICLE_FIN)){
+            if(hasMermaidCosmetic(cosmeticType)) {
+                return MermaidCosmetic.get(auricleFin);
             }
 
             return null;
@@ -236,6 +251,13 @@ public class MermaidSettingsComponent implements Component<EntityStore> {
 
             return -1;
         }
+        if(cosmeticType.equals(MermaidCosmeticType.AURICLE_FIN)){
+            if(hasMermaidCosmetic(cosmeticType)) {
+                return auricleFin;
+            }
+
+            return -1;
+        }
 
         return -1;
     }
@@ -246,6 +268,9 @@ public class MermaidSettingsComponent implements Component<EntityStore> {
         }
         if(cosmeticType.equals(MermaidCosmeticType.PELVIC_FIN)){
             pelvicFin = cosmeticValue;
+        }
+        if(cosmeticType.equals(MermaidCosmeticType.AURICLE_FIN)){
+            auricleFin = cosmeticValue;
         }
     }
 }

@@ -12,6 +12,7 @@ import plugin.siren.Mermaids;
 import plugin.siren.Systems.MermaidComponent;
 import plugin.siren.Systems.MermaidSettingsComponent;
 import plugin.siren.Utils.Cosmetics.MermaidCosmeticAttachments;
+import plugin.siren.Utils.Cosmetics.MermaidCosmeticType;
 
 import java.lang.reflect.Field;
 
@@ -23,7 +24,7 @@ import java.lang.reflect.Field;
  * Link: https://github.com/SyperAI/hytale-model-utils
  *
  * Modified: Siren
- * Date: 2026/03/20
+ * Date: 2026/03/29
  *
  */
 
@@ -66,13 +67,17 @@ public class ModelHelper {
                     gradientId = cosmeticParts[1];
                 }
             }
+
+            if(checkCosmeticType.equalsIgnoreCase("EARS") && mermaidSettings.hasMermaidCosmetic(MermaidCosmeticType.AURICLE_FIN)){
+                playerSkin.ears = null;
+            }
         }
 
         if(model.getModel().equalsIgnoreCase("MermaidV2")){
             playerSkin.bodyCharacteristic = null;
         }
 
-        var defaultAttachments = AttachmentsHelper.parseSkin(playerSkin, null, gradientId, mermaid);
+        var defaultAttachments = AttachmentsHelper.parseSkin(playerSkin, null, gradientId, mermaid, mermaidSettings);
 
         var attachments = MermaidCosmeticAttachments.addAttachment(defaultAttachments, mermaidSettings);
 

@@ -62,6 +62,18 @@ public class MermaidCosmeticSkin {
         topSideFinsMap.put(TextureColor.BLUE,"Characters/SirensMermaid/Cosmetics/Mermaid/Pelvic_Fins/TopPelvicFins/Mermaids_TopPelvicFins_Blue_Texture.png");
         topSideFinsMap.put(TextureColor.CYAN,"Characters/SirensMermaid/Cosmetics/Mermaid/Pelvic_Fins/TopPelvicFins/Mermaids_TopPelvicFins_Cyan_Texture.png");
         textureMap.put(MermaidCosmetic.Top_Side_Fins,topSideFinsMap);
+
+        // Ear_Fins
+        TreeMap<TextureColor, String> earFinsMap = new TreeMap<>();
+        earFinsMap.put(TextureColor.ORANGE,"Characters/SirensMermaid/Cosmetics/Mermaid/Auricle_Fins/EarFins/Mermaids_EarFins_Orange.png");
+        earFinsMap.put(TextureColor.PINK,"Characters/SirensMermaid/Cosmetics/Mermaid/Auricle_Fins/EarFins/Mermaids_EarFins_Orange.png");
+        earFinsMap.put(TextureColor.ROSE,"Characters/SirensMermaid/Cosmetics/Mermaid/Auricle_Fins/EarFins/Mermaids_EarFins_Orange.png");
+        earFinsMap.put(TextureColor.PURPLE,"Characters/SirensMermaid/Cosmetics/Mermaid/Auricle_Fins/EarFins/Mermaids_EarFins_Orange.png");
+        earFinsMap.put(TextureColor.AQUA,"Characters/SirensMermaid/Cosmetics/Mermaid/Auricle_Fins/EarFins/Mermaids_EarFins_Orange.png");
+        earFinsMap.put(TextureColor.LIME,"Characters/SirensMermaid/Cosmetics/Mermaid/Auricle_Fins/EarFins/Mermaids_EarFins_Orange.png");
+        earFinsMap.put(TextureColor.BLUE,"Characters/SirensMermaid/Cosmetics/Mermaid/Auricle_Fins/EarFins/Mermaids_EarFins_Orange.png");
+        earFinsMap.put(TextureColor.CYAN,"Characters/SirensMermaid/Cosmetics/Mermaid/Auricle_Fins/EarFins/Mermaids_EarFins_Orange.png");
+        textureMap.put(MermaidCosmetic.Ear_Fins,earFinsMap);
     }
 
     public static String getTexture(int cosmeticValue, TextureColor textureColor){
