@@ -8,7 +8,7 @@
       "shape": {
         "type": "none",
         "offset": {"x": 0, "y": 0, "z": 0},
-        "stretch": {"x": 1, "y": 1, "z": 1},
+        "stretch": {"x": 0, "y": 0, "z": 0},
         "settings": {
           "isPiece": true
         },
@@ -26,20 +26,20 @@
           "orientation": {"x": 0, "y": 0, "z": 0.17365, "w": 0.98481},
           "shape": {
             "type": "box",
-            "offset": {"x": -4.5, "y": -1, "z": -0.5},
+            "offset": {"x": -4.5, "y": -0.5, "z": -0.5},
             "stretch": {"x": 1, "y": 1, "z": 1},
             "settings": {
               "isPiece": false,
-              "size": {"x": 1, "y": 13, "z": 1}
+              "size": {"x": 1, "y": 12, "z": 1}
             },
             "textureLayout": {
               "back": {
-                "offset": {"x": 30, "y": 0},
+                "offset": {"x": 31, "y": 0},
                 "mirror": {"x": false, "y": false},
                 "angle": 0
               },
               "right": {
-                "offset": {"x": 31, "y": 0},
+                "offset": {"x": 30, "y": 0},
                 "mirror": {"x": false, "y": false},
                 "angle": 0
               },
@@ -59,7 +59,7 @@
                 "angle": 0
               },
               "bottom": {
-                "offset": {"x": 30, "y": 12},
+                "offset": {"x": 30, "y": 11},
                 "mirror": {"x": true, "y": false},
                 "angle": 0
               }
@@ -73,15 +73,15 @@
             {
               "id": "3",
               "name": "L-Ear2",
-              "position": {"x": 0.5, "y": 5.5, "z": 1.5},
+              "position": {"x": 0.5, "y": 5, "z": 1.5},
               "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
               "shape": {
                 "type": "quad",
-                "offset": {"x": 5, "y": -3.5, "z": -1.5},
+                "offset": {"x": 5.5, "y": -3.5, "z": -1.5},
                 "stretch": {"x": 1, "y": 1, "z": 0.1},
                 "settings": {
                   "isPiece": false,
-                  "size": {"x": 10, "y": 7},
+                  "size": {"x": 11, "y": 7},
                   "normal": "+Z"
                 },
                 "textureLayout": {
@@ -100,20 +100,20 @@
             {
               "id": "4",
               "name": "L-Ear3",
-              "position": {"x": 9.5, "y": 4.5, "z": 0.5},
+              "position": {"x": 9.5, "y": 4, "z": 0.5},
               "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
               "shape": {
                 "type": "quad",
-                "offset": {"x": -5, "y": -8.5, "z": -0.5},
+                "offset": {"x": -4.5, "y": -8, "z": -0.5},
                 "stretch": {"x": 1, "y": 1, "z": 0.1},
                 "settings": {
                   "isPiece": false,
-                  "size": {"x": 8, "y": 3},
+                  "size": {"x": 9, "y": 2},
                   "normal": "-Z"
                 },
                 "textureLayout": {
                   "front": {
-                    "offset": {"x": 8, "y": 12},
+                    "offset": {"x": 9, "y": 11},
                     "mirror": {"x": true, "y": false},
                     "angle": 0
                   }
@@ -127,24 +127,24 @@
             {
               "id": "5",
               "name": "L-Ear4",
-              "position": {"x": 13.5, "y": 5.5, "z": 0.5},
+              "position": {"x": 13.5, "y": 5, "z": 0.5},
               "orientation": {"x": -0.70711, "y": 0, "z": 0, "w": 0.70711},
               "shape": {
                 "type": "box",
-                "offset": {"x": -7.5, "y": 0.5, "z": 0.5},
+                "offset": {"x": -7, "y": 0.5, "z": 0.5},
                 "stretch": {"x": 1, "y": 1, "z": 1},
                 "settings": {
                   "isPiece": false,
-                  "size": {"x": 11, "y": 1, "z": 1}
+                  "size": {"x": 12, "y": 1, "z": 1}
                 },
                 "textureLayout": {
                   "back": {
-                    "offset": {"x": 13, "y": 0},
+                    "offset": {"x": 14, "y": 0},
                     "mirror": {"x": false, "y": false},
                     "angle": 0
                   },
                   "right": {
-                    "offset": {"x": 12, "y": 0},
+                    "offset": {"x": 13, "y": 0},
                     "mirror": {"x": false, "y": false},
                     "angle": 0
                   },
@@ -159,13 +159,13 @@
                     "angle": 0
                   },
                   "top": {
-                    "offset": {"x": 1, "y": 1},
-                    "mirror": {"x": false, "y": true},
+                    "offset": {"x": 13, "y": 0},
+                    "mirror": {"x": true, "y": false},
                     "angle": 0
                   },
                   "bottom": {
-                    "offset": {"x": 13, "y": 0},
-                    "mirror": {"x": false, "y": false},
+                    "offset": {"x": 26, "y": 0},
+                    "mirror": {"x": true, "y": false},
                     "angle": 0
                   }
                 },
@@ -178,25 +178,25 @@
                 {
                   "id": "6",
                   "name": "L-Ear4--C1",
-                  "position": {"x": -1.5, "y": -0.5, "z": -3.5},
+                  "position": {"x": -2, "y": -0.5, "z": -3.5},
                   "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
                   "shape": {
                     "type": "box",
-                    "offset": {"x": 1, "y": 0.5, "z": -0.5},
+                    "offset": {"x": 1.5, "y": 0.5, "z": -0.5},
                     "stretch": {"x": 1, "y": 1, "z": 1},
                     "settings": {
                       "isPiece": false,
-                      "size": {"x": 10, "y": 1, "z": 1},
+                      "size": {"x": 11, "y": 1, "z": 1},
                       "isStaticBox": true
                     },
                     "textureLayout": {
                       "back": {
-                        "offset": {"x": 12, "y": 1},
+                        "offset": {"x": 13, "y": 1},
                         "mirror": {"x": false, "y": false},
                         "angle": 0
                       },
                       "right": {
-                        "offset": {"x": 11, "y": 1},
+                        "offset": {"x": 12, "y": 1},
                         "mirror": {"x": false, "y": false},
                         "angle": 0
                       },
@@ -211,13 +211,13 @@
                         "angle": 0
                       },
                       "top": {
-                        "offset": {"x": 11, "y": 2},
-                        "mirror": {"x": true, "y": true},
+                        "offset": {"x": 1, "y": 1},
+                        "mirror": {"x": false, "y": false},
                         "angle": 0
                       },
                       "bottom": {
-                        "offset": {"x": 12, "y": 1},
-                        "mirror": {"x": false, "y": false},
+                        "offset": {"x": 24, "y": 1},
+                        "mirror": {"x": true, "y": false},
                         "angle": 0
                       }
                     },
@@ -230,25 +230,25 @@
                 {
                   "id": "7",
                   "name": "L-Ear4--C2",
-                  "position": {"x": -1.5, "y": -0.5, "z": -7.5},
+                  "position": {"x": -2, "y": -0.5, "z": -7.5},
                   "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
                   "shape": {
                     "type": "box",
-                    "offset": {"x": 0.5, "y": 0.5, "z": -0.5},
+                    "offset": {"x": 1, "y": 0.5, "z": -0.5},
                     "stretch": {"x": 1, "y": 1, "z": 1},
                     "settings": {
                       "isPiece": false,
-                      "size": {"x": 9, "y": 1, "z": 1},
+                      "size": {"x": 10, "y": 1, "z": 1},
                       "isStaticBox": true
                     },
                     "textureLayout": {
                       "back": {
-                        "offset": {"x": 11, "y": 2},
+                        "offset": {"x": 12, "y": 2},
                         "mirror": {"x": false, "y": false},
                         "angle": 0
                       },
                       "right": {
-                        "offset": {"x": 10, "y": 2},
+                        "offset": {"x": 11, "y": 2},
                         "mirror": {"x": false, "y": false},
                         "angle": 0
                       },
@@ -263,13 +263,13 @@
                         "angle": 0
                       },
                       "top": {
-                        "offset": {"x": 10, "y": 3},
-                        "mirror": {"x": true, "y": true},
+                        "offset": {"x": 1, "y": 2},
+                        "mirror": {"x": false, "y": false},
                         "angle": 0
                       },
                       "bottom": {
-                        "offset": {"x": 11, "y": 2},
-                        "mirror": {"x": false, "y": false},
+                        "offset": {"x": 22, "y": 2},
+                        "mirror": {"x": true, "y": false},
                         "angle": 0
                       }
                     },
@@ -282,25 +282,25 @@
                 {
                   "id": "8",
                   "name": "L-Ear4--C3",
-                  "position": {"x": -1.5, "y": -0.5, "z": -11.5},
+                  "position": {"x": -2, "y": -0.5, "z": -10.5},
                   "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
                   "shape": {
                     "type": "box",
-                    "offset": {"x": 0, "y": 0.5, "z": -0.5},
+                    "offset": {"x": 0.5, "y": 0.5, "z": -0.5},
                     "stretch": {"x": 1, "y": 1, "z": 1},
                     "settings": {
                       "isPiece": false,
-                      "size": {"x": 8, "y": 1, "z": 1},
+                      "size": {"x": 9, "y": 1, "z": 1},
                       "isStaticBox": true
                     },
                     "textureLayout": {
                       "back": {
-                        "offset": {"x": 10, "y": 3},
+                        "offset": {"x": 11, "y": 3},
                         "mirror": {"x": false, "y": false},
                         "angle": 0
                       },
                       "right": {
-                        "offset": {"x": 9, "y": 3},
+                        "offset": {"x": 10, "y": 3},
                         "mirror": {"x": false, "y": false},
                         "angle": 0
                       },
@@ -315,13 +315,13 @@
                         "angle": 0
                       },
                       "top": {
-                        "offset": {"x": 9, "y": 4},
+                        "offset": {"x": 10, "y": 4},
                         "mirror": {"x": true, "y": true},
                         "angle": 0
                       },
                       "bottom": {
-                        "offset": {"x": 10, "y": 3},
-                        "mirror": {"x": false, "y": false},
+                        "offset": {"x": 20, "y": 3},
+                        "mirror": {"x": true, "y": false},
                         "angle": 0
                       }
                     },
@@ -345,7 +345,7 @@
       "shape": {
         "type": "none",
         "offset": {"x": 0, "y": 0, "z": 0},
-        "stretch": {"x": 1, "y": 1, "z": 1},
+        "stretch": {"x": 0, "y": 0, "z": 0},
         "settings": {
           "isPiece": true
         },
@@ -363,20 +363,20 @@
           "orientation": {"x": 0, "y": 0, "z": -0.17365, "w": 0.98481},
           "shape": {
             "type": "box",
-            "offset": {"x": 4.5, "y": -1, "z": -0.5},
+            "offset": {"x": 4.5, "y": -0.5, "z": -0.5},
             "stretch": {"x": 1, "y": 1, "z": 1},
             "settings": {
               "isPiece": false,
-              "size": {"x": 1, "y": 13, "z": 1}
+              "size": {"x": 1, "y": 12, "z": 1}
             },
             "textureLayout": {
               "back": {
-                "offset": {"x": 32, "y": 0},
+                "offset": {"x": 31, "y": 0},
                 "mirror": {"x": true, "y": false},
                 "angle": 0
               },
               "right": {
-                "offset": {"x": 30, "y": 0},
+                "offset": {"x": 31, "y": 0},
                 "mirror": {"x": false, "y": false},
                 "angle": 0
               },
@@ -391,13 +391,13 @@
                 "angle": 0
               },
               "top": {
-                "offset": {"x": 29, "y": 0},
-                "mirror": {"x": false, "y": false},
+                "offset": {"x": 30, "y": 1},
+                "mirror": {"x": true, "y": true},
                 "angle": 0
               },
               "bottom": {
-                "offset": {"x": 29, "y": 12},
-                "mirror": {"x": false, "y": false},
+                "offset": {"x": 30, "y": 11},
+                "mirror": {"x": true, "y": false},
                 "angle": 0
               }
             },
@@ -410,20 +410,20 @@
             {
               "id": "11",
               "name": "R-Ear2",
-              "position": {"x": -0.5, "y": 5.5, "z": 1.5},
+              "position": {"x": -0.5, "y": 5, "z": 1.5},
               "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
               "shape": {
                 "type": "quad",
-                "offset": {"x": -5, "y": -3.5, "z": -1.5},
+                "offset": {"x": -5.5, "y": -3.5, "z": -1.5},
                 "stretch": {"x": 1, "y": 1, "z": 0.1},
                 "settings": {
                   "isPiece": false,
-                  "size": {"x": 10, "y": 7},
+                  "size": {"x": 11, "y": 7},
                   "normal": "+Z"
                 },
                 "textureLayout": {
                   "front": {
-                    "offset": {"x": 10, "y": 4},
+                    "offset": {"x": 11, "y": 4},
                     "mirror": {"x": true, "y": false},
                     "angle": 0
                   }
@@ -437,20 +437,20 @@
             {
               "id": "12",
               "name": "R-Ear3",
-              "position": {"x": -9.5, "y": 4.5, "z": 0.5},
+              "position": {"x": -9.5, "y": 4, "z": 0.5},
               "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
               "shape": {
                 "type": "quad",
-                "offset": {"x": 5, "y": -8.5, "z": -0.5},
+                "offset": {"x": 4.5, "y": -8, "z": -0.5},
                 "stretch": {"x": 1, "y": 1, "z": 0.1},
                 "settings": {
                   "isPiece": false,
-                  "size": {"x": 8, "y": 3},
+                  "size": {"x": 9, "y": 2},
                   "normal": "-Z"
                 },
                 "textureLayout": {
                   "front": {
-                    "offset": {"x": 0, "y": 12},
+                    "offset": {"x": 0, "y": 11},
                     "mirror": {"x": false, "y": false},
                     "angle": 0
                   }
@@ -464,24 +464,24 @@
             {
               "id": "13",
               "name": "R-Ear4",
-              "position": {"x": -13.5, "y": 5.5, "z": 0.5},
+              "position": {"x": -13.5, "y": 5, "z": 0.5},
               "orientation": {"x": -0.70711, "y": 0, "z": 0, "w": 0.70711},
               "shape": {
                 "type": "box",
-                "offset": {"x": 7.5, "y": 0.5, "z": 0.5},
+                "offset": {"x": 7, "y": 0.5, "z": 0.5},
                 "stretch": {"x": 1, "y": 1, "z": 1},
                 "settings": {
                   "isPiece": false,
-                  "size": {"x": 11, "y": 1, "z": 1}
+                  "size": {"x": 12, "y": 1, "z": 1}
                 },
                 "textureLayout": {
                   "back": {
-                    "offset": {"x": 13, "y": 0},
+                    "offset": {"x": 14, "y": 0},
                     "mirror": {"x": false, "y": false},
                     "angle": 0
                   },
                   "right": {
-                    "offset": {"x": 12, "y": 0},
+                    "offset": {"x": 13, "y": 0},
                     "mirror": {"x": false, "y": false},
                     "angle": 0
                   },
@@ -496,13 +496,13 @@
                     "angle": 0
                   },
                   "top": {
-                    "offset": {"x": 1, "y": 0},
-                    "mirror": {"x": false, "y": false},
+                    "offset": {"x": 13, "y": 1},
+                    "mirror": {"x": true, "y": true},
                     "angle": 0
                   },
                   "bottom": {
-                    "offset": {"x": 13, "y": 0},
-                    "mirror": {"x": false, "y": false},
+                    "offset": {"x": 26, "y": 0},
+                    "mirror": {"x": true, "y": false},
                     "angle": 0
                   }
                 },
@@ -515,25 +515,25 @@
                 {
                   "id": "14",
                   "name": "R-Ear4--C1",
-                  "position": {"x": 1.5, "y": -0.5, "z": -3.5},
+                  "position": {"x": 2, "y": -0.5, "z": -3.5},
                   "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
                   "shape": {
                     "type": "box",
-                    "offset": {"x": -1, "y": 0.5, "z": -0.5},
+                    "offset": {"x": -1.5, "y": 0.5, "z": -0.5},
                     "stretch": {"x": 1, "y": 1, "z": 1},
                     "settings": {
                       "isPiece": false,
-                      "size": {"x": 10, "y": 1, "z": 1},
+                      "size": {"x": 11, "y": 1, "z": 1},
                       "isStaticBox": true
                     },
                     "textureLayout": {
                       "back": {
-                        "offset": {"x": 12, "y": 1},
+                        "offset": {"x": 13, "y": 1},
                         "mirror": {"x": false, "y": false},
                         "angle": 0
                       },
                       "right": {
-                        "offset": {"x": 11, "y": 1},
+                        "offset": {"x": 12, "y": 1},
                         "mirror": {"x": false, "y": false},
                         "angle": 0
                       },
@@ -548,13 +548,13 @@
                         "angle": 0
                       },
                       "top": {
-                        "offset": {"x": 1, "y": 1},
-                        "mirror": {"x": false, "y": false},
+                        "offset": {"x": 12, "y": 2},
+                        "mirror": {"x": true, "y": true},
                         "angle": 0
                       },
                       "bottom": {
-                        "offset": {"x": 11, "y": 1},
-                        "mirror": {"x": false, "y": false},
+                        "offset": {"x": 24, "y": 1},
+                        "mirror": {"x": true, "y": false},
                         "angle": 0
                       }
                     },
@@ -567,25 +567,25 @@
                 {
                   "id": "15",
                   "name": "R-Ear4--C2",
-                  "position": {"x": 1.5, "y": -0.5, "z": -7.5},
+                  "position": {"x": 2, "y": -0.5, "z": -7.5},
                   "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
                   "shape": {
                     "type": "box",
-                    "offset": {"x": -0.5, "y": 0.5, "z": -0.5},
+                    "offset": {"x": -1, "y": 0.5, "z": -0.5},
                     "stretch": {"x": 1, "y": 1, "z": 1},
                     "settings": {
                       "isPiece": false,
-                      "size": {"x": 9, "y": 1, "z": 1},
+                      "size": {"x": 10, "y": 1, "z": 1},
                       "isStaticBox": true
                     },
                     "textureLayout": {
                       "back": {
-                        "offset": {"x": 11, "y": 2},
+                        "offset": {"x": 12, "y": 2},
                         "mirror": {"x": false, "y": false},
                         "angle": 0
                       },
                       "right": {
-                        "offset": {"x": 10, "y": 2},
+                        "offset": {"x": 11, "y": 2},
                         "mirror": {"x": false, "y": false},
                         "angle": 0
                       },
@@ -600,13 +600,13 @@
                         "angle": 0
                       },
                       "top": {
-                        "offset": {"x": 1, "y": 2},
-                        "mirror": {"x": false, "y": false},
+                        "offset": {"x": 11, "y": 3},
+                        "mirror": {"x": true, "y": true},
                         "angle": 0
                       },
                       "bottom": {
-                        "offset": {"x": 11, "y": 2},
-                        "mirror": {"x": false, "y": false},
+                        "offset": {"x": 22, "y": 2},
+                        "mirror": {"x": true, "y": false},
                         "angle": 0
                       }
                     },
@@ -619,25 +619,25 @@
                 {
                   "id": "16",
                   "name": "R-Ear4--C3",
-                  "position": {"x": 1.5, "y": -0.5, "z": -11.5},
+                  "position": {"x": 2, "y": -0.5, "z": -10.5},
                   "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
                   "shape": {
                     "type": "box",
-                    "offset": {"x": 0, "y": 0.5, "z": -0.5},
+                    "offset": {"x": -0.5, "y": 0.5, "z": -0.5},
                     "stretch": {"x": 1, "y": 1, "z": 1},
                     "settings": {
                       "isPiece": false,
-                      "size": {"x": 8, "y": 1, "z": 1},
+                      "size": {"x": 9, "y": 1, "z": 1},
                       "isStaticBox": true
                     },
                     "textureLayout": {
                       "back": {
-                        "offset": {"x": 10, "y": 3},
+                        "offset": {"x": 11, "y": 3},
                         "mirror": {"x": false, "y": false},
                         "angle": 0
                       },
                       "right": {
-                        "offset": {"x": 9, "y": 3},
+                        "offset": {"x": 10, "y": 3},
                         "mirror": {"x": false, "y": false},
                         "angle": 0
                       },
@@ -652,13 +652,13 @@
                         "angle": 0
                       },
                       "top": {
-                        "offset": {"x": 1, "y": 3},
-                        "mirror": {"x": false, "y": false},
+                        "offset": {"x": 10, "y": 4},
+                        "mirror": {"x": true, "y": true},
                         "angle": 0
                       },
                       "bottom": {
-                        "offset": {"x": 10, "y": 3},
-                        "mirror": {"x": false, "y": false},
+                        "offset": {"x": 20, "y": 3},
+                        "mirror": {"x": true, "y": false},
                         "angle": 0
                       }
                     },

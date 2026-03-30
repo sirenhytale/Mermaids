@@ -45,6 +45,10 @@ public class MermaidSettingsComponent implements Component<EntityStore> {
                     (merSettings, mcpfInt) -> merSettings.pelvicFin = mcpfInt, // Setter
                     (merSettings) -> merSettings.pelvicFin)                    // Getter
             .add()
+            .append(new KeyedCodec<Integer>("Mermaid-Cosmetic-Auricle-Fin", Codec.INTEGER),
+                    (merSettings, mcafInt) -> merSettings.auricleFin = mcafInt, // Setter
+                    (merSettings) -> merSettings.auricleFin)                    // Getter
+            .add()
             .append(new KeyedCodec<Boolean>("Force-Mermaid", Codec.BOOLEAN),
                     (merSettings, fmBool) -> merSettings.forceMermaid = fmBool, // Setter
                     (merSettings) -> merSettings.forceMermaid)                    // Getter
@@ -52,6 +56,10 @@ public class MermaidSettingsComponent implements Component<EntityStore> {
             .append(new KeyedCodec<Boolean>("Force-Mermaid-OrbisOrigin", Codec.BOOLEAN),
                     (merSettings, fmooBool) -> merSettings.forceMermaidOrbisOrigin = fmooBool, // Setter
                     (merSettings) -> merSettings.forceMermaidOrbisOrigin)                    // Getter
+            .add()
+            .append(new KeyedCodec<Boolean>("Force-Mermaid-EndlessLeveling", Codec.BOOLEAN),
+                    (merSettings, fmelBool) -> merSettings.forceMermaidEndlessLeveling = fmelBool, // Setter
+                    (merSettings) -> merSettings.forceMermaidEndlessLeveling)                    // Getter
             .add()
             .build();
 
@@ -67,6 +75,7 @@ public class MermaidSettingsComponent implements Component<EntityStore> {
 
     private boolean forceMermaid;
     private boolean forceMermaidOrbisOrigin;
+    private boolean forceMermaidEndlessLeveling;
 
     private final String defaultMermaidTail = "Mermaids_Mermaid";
     private final String defaultTailColor = "Mermaids_Mermaid_Orange_Texture";
@@ -88,6 +97,7 @@ public class MermaidSettingsComponent implements Component<EntityStore> {
 
         this.forceMermaid = false;
         this.forceMermaidOrbisOrigin = false;
+        this.forceMermaidEndlessLeveling = false;
     }
 
     public MermaidSettingsComponent(MermaidSettingsComponent other){
@@ -103,6 +113,7 @@ public class MermaidSettingsComponent implements Component<EntityStore> {
 
         this.forceMermaid = other.forceMermaid;
         this.forceMermaidOrbisOrigin = other.forceMermaidOrbisOrigin;
+        this.forceMermaidEndlessLeveling = other.forceMermaidEndlessLeveling;
     }
 
     @Nullable
@@ -137,6 +148,20 @@ public class MermaidSettingsComponent implements Component<EntityStore> {
 
     public void setForcedMermaidOrbisOrigin(boolean forcedMermaid){
         this.forceMermaidOrbisOrigin = forcedMermaid;
+    }
+
+    public boolean isForcedMermaidEndlessLeveling(){
+        boolean forcedMermaid = false;
+
+        if (HytaleServer.get().getPluginManager().getPlugin(PluginIdentifier.fromString("com.airijko:EndlessLeveling")) != null) {
+            forcedMermaid = forceMermaidEndlessLeveling;
+        }
+
+        return forcedMermaid;
+    }
+
+    public void setForcedMermaidEndlessLeveling(boolean forcedMermaid){
+        this.forceMermaidEndlessLeveling = forcedMermaid;
     }
 
     public boolean getToggleMermaid(){

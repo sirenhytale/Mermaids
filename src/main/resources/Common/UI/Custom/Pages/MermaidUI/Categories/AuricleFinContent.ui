@@ -19,5 +19,11 @@ Group {
         @Name = "Ear Fins";
       }
     }
+
+    Group #AuricleFin2 {
+      $SB.@SelectorBlock {
+        @Name = "Spiked Ear Fins";
+      }
+    }
   }
 }

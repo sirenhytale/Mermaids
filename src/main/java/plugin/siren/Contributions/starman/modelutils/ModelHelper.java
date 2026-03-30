@@ -24,7 +24,7 @@ import java.lang.reflect.Field;
  * Link: https://github.com/SyperAI/hytale-model-utils
  *
  * Modified: Siren
- * Date: 2026/03/29
+ * Date: 2026/03/30
  *
  */
 
@@ -73,11 +73,7 @@ public class ModelHelper {
             }
         }
 
-        if(model.getModel().equalsIgnoreCase("MermaidV2")){
-            playerSkin.bodyCharacteristic = null;
-        }
-
-        var defaultAttachments = AttachmentsHelper.parseSkin(playerSkin, null, gradientId, mermaid, mermaidSettings);
+        var defaultAttachments = AttachmentsHelper.parseSkin(playerSkin, null, gradientId, mermaid);
 
         var attachments = MermaidCosmeticAttachments.addAttachment(defaultAttachments, mermaidSettings);
 

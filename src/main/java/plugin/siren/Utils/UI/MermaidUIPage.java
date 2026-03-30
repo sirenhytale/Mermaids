@@ -323,7 +323,10 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
                     auricleFin = -1;
                 } else if (data.auricleFin.equalsIgnoreCase("1")) {
                     auricleFinMsg = "default fin ears";
-                    auricleFin = 2; //NEED TO SET
+                    auricleFin = 2;
+                } else if (data.auricleFin.equalsIgnoreCase("2")) {
+                    auricleFinMsg = "spiked fin ears";
+                    auricleFin = 3;
                 }
 
                 Message playerMessage = Message.translation("server.customUI.mermaids.mermaidui.category.pelvic_fin.playerMsg.modify").param("fin", auricleFinMsg);
@@ -444,7 +447,7 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
                 "auricle_fin",
                 "server.customUI.mermaids.mermaidui.category.auricle_fin",
                 "Pages/MermaidUI/Categories/AuricleFinContent.ui",
-                2
+                3
         );
 
         private final String id;

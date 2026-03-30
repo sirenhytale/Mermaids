@@ -70,7 +70,7 @@ public class MermaidsAPI {
     public static void setForcedMermaid(Store<EntityStore> store, Ref<EntityStore> ref, boolean forcedMermaid){
         MermaidSettingsComponent mermaidSettings = store.getComponent(ref, MermaidSettingsComponent.getComponentType());
         if(mermaidSettings == null){
-            Mermaids.LOGGER.atSevere().log("ERROR: isForcedMermaid: Mermaid Settings Component is null for MermaidsAPI getMermaid -- doing nothing");
+            Mermaids.LOGGER.atSevere().log("ERROR: setForcedMermaid: Mermaid Settings Component is null for MermaidsAPI getMermaid -- doing nothing");
         }else{
             mermaidSettings.setForcedMermaid(forcedMermaid);
         }
@@ -139,9 +139,42 @@ public class MermaidsAPI {
     public static void setForcedMermaidOrbisOrigin(Store<EntityStore> store, Ref<EntityStore> ref, boolean forcedMermaid){
         MermaidSettingsComponent mermaidSettings = store.getComponent(ref, MermaidSettingsComponent.getComponentType());
         if(mermaidSettings == null){
-            Mermaids.LOGGER.atSevere().log("ERROR: isForcedMermaidOrbisOrigin: Mermaid Settings Component is null for MermaidsAPI getMermaid -- doing nothing");
+            Mermaids.LOGGER.atSevere().log("ERROR: setForcedMermaidOrbisOrigin: Mermaid Settings Component is null for MermaidsAPI getMermaid -- doing nothing");
         }else{
             mermaidSettings.setForcedMermaidOrbisOrigin(forcedMermaid);
+        }
+    }
+
+    /**
+     * Check to see if the reference is forced to be a mermaid for the Endless Leveling Mod.
+     *
+     * @param  store  The entity store, store
+     * @param  ref  The entity store, reference
+     * @return  boolean of rather the reference is forced to be a mermaid
+     */
+    public static boolean isForcedMermaidEndlessLeveling(Store<EntityStore> store, Ref<EntityStore> ref){
+        MermaidSettingsComponent mermaidSettings = store.getComponent(ref, MermaidSettingsComponent.getComponentType());
+        if(mermaidSettings == null){
+            Mermaids.LOGGER.atSevere().log("ERROR: isForcedMermaidEndlessLeveling: Mermaid Settings Component is null for MermaidsAPI getMermaid -- returning false");
+            return false;
+        }else{
+            return mermaidSettings.isForcedMermaidEndlessLeveling();
+        }
+    }
+
+    /**
+     * Force the reference to be / not be a mermaid for the Endless Leveling Mod.
+     *
+     * @param  store  The entity store, store
+     * @param  ref  The entity store, reference
+     * @param  forcedMermaid  rather to force to (not) be a mermaid
+     */
+    public static void setForcedMermaidEndlessLeveling(Store<EntityStore> store, Ref<EntityStore> ref, boolean forcedMermaid){
+        MermaidSettingsComponent mermaidSettings = store.getComponent(ref, MermaidSettingsComponent.getComponentType());
+        if(mermaidSettings == null){
+            Mermaids.LOGGER.atSevere().log("ERROR: setForcedMermaidEndlessLeveling: Mermaid Settings Component is null for MermaidsAPI getMermaid -- doing nothing");
+        }else{
+            mermaidSettings.setForcedMermaidEndlessLeveling(forcedMermaid);
         }
     }
 }
