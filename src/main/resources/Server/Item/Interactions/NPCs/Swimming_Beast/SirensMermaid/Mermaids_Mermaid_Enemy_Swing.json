@@ -1,0 +1,44 @@
+{
+  "Type": "Simple",
+  "Effects": {
+    "ItemPlayerAnimationsId": "Default",
+    "ItemAnimationId": "SwingLeft"
+  },
+  "$Comment": "Prepare Delay before damage is applied via selector",
+  "RunTime": 0.1,
+  "Next": {
+    "Type": "Selector",
+    "$Comment": "Length of Combat",
+    "RunTime": 0.25,
+    "Selector": {
+      "Id": "Horizontal",
+      "Direction": "ToLeft",
+      "TestLineOfSight": true,
+      "ExtendTop": 0.5,
+      "ExtendBottom": 0.5,
+      "StartDistance": 0.1,
+      "EndDistance": 3.5,
+      "Length": 30,
+      "RollOffset": 0,
+      "YawStartOffset": -15
+    },
+    "HitEntity": {
+      "Interactions": [
+        {
+          "Type": "Replace",
+          "DefaultValue": {
+            "Interactions": [
+              "NPC_Mermaids_Mermaid_Attack_Damage"
+            ]
+          },
+          "Var": "Melee_Damage"
+        }
+      ]
+    },
+    "Next": {
+      "Type": "Simple",
+      "$Comment": "Pad the interaction length",
+      "RunTime": 0.25
+    }
+  }
+}

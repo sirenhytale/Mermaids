@@ -10,13 +10,13 @@ author: Siren
   - Default Value: A long string that tells you to go to mermaids.dev/mermaids/config or curseforge page.
   - Description: Information about how to find stuff related to the config.
 - “ConfigVersion”
-  - Default Value: 9
+  - Default Value: 11
   - Description: Current Version when you have loaded for the plugin.
 - “PluginName”
   - Default Value: “Mermaids”
   - Description: Plugin name.
 - “Version”
-  - Default Value: "1.4.1"
+  - Default Value: "2.1.0"
   - Description: Version of the last ran mod jar.
 - “Website”
   - Default Value: “https://mermaids.dev/mermaids/”
@@ -26,13 +26,16 @@ author: Siren
   - Description: Website to download this mod, check for updates, and information.
 - "Enable-Generic-Console-Logs"
   - Default Value: false
-  - Description: Send console logs for majority of mermaid actions: transforming and modifying settings.
+  - Description: Send console logs for the majority of mermaid actions: transforming and modifying settings.
 - “Transformation-Mode”
   - Default Value: 0
   - Description: TransformationMode = 0 : Transform when entering water, TransformationMode = 1 : Requires user to drink Mermaid Potion to Transform.
+- "Description-Transformation-Mode"
+  - Default Value: A long string that tells you about the description for Transformation-Mode.
+  - Description: A description of the Transformation-Mode config option.
 - “Always-A-Mermaid-Even-On-Land”
   - Default Value: false
-  - Description: If you have permissions to be a Mermaid, than you’ll always be transformed into a Mermaid even on land.
+  - Description: If you have permissions to be a Mermaid, then you’ll always be transformed into a Mermaid even on land.
 - “Require-Transformation-Permission”
   - Default Value: false
   - Description: Requires the player to have the permission – mermaids.transform – to transform into a Mermaid.
@@ -63,6 +66,15 @@ author: Siren
 - “DivingTale-By:xnrdev-Compatibility”
   - Default Value: true
   - Description: Compatibility with the [xnrdev] DivingTale Mod, see Compatibilities page for more info.
+- “MoreNPC-By:BlueEyesWhiteMen-Compatibility”
+  - Default Value: true
+  - Description: Compatibility with the MoreNPC Mod, see Compatibilities page for more info.
+- “KeybladesReimagined-By:TaHie-Compatibility”
+  - Default Value: true
+  - Description: Compatibility with the Keyblades Reimagined Mod, see Compatibilities page for more info.
+- “New-Version-Message”
+  - Default Value: true
+  - Description: When Mermaids mod version is outdated, send a message to OPed players when they join.
 - “DebugMode”
   - Default Value: false
   - Description: Run the plugin in debug mode to get alerts about most actions of the plugin.

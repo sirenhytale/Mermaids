@@ -1,0 +1,58 @@
+{
+  "Parent": "Mermaids_Mermaid_Enemy_Orange",
+  "Texture": "Characters/SirensMermaid/MermaidTextures/Mermaids_Mermaid_Purple_Texture.png",
+  "DefaultAttachments": [
+    {
+      "Model": "Characters/Body_Attachments/Faces/Player_Face_Detached.blockymodel",
+      "Texture": "Characters/Body_Attachments/Faces/Faces_Detached_Textures/MakeUp_Face11.png",
+      "GradientSet": "Skin",
+      "GradientId": "01"
+    },
+    {
+      "Model": "Characters/Body_Attachments/Eyes/Eyes.blockymodel",
+      "Texture": "Characters/Body_Attachments/Eyes/Eyes_Textures/Plain_Greyscale.png",
+      "GradientSet": "Eyes_Gradient",
+      "GradientId": "Purple"
+    },
+    {
+      "Model": "Characters/Body_Attachments/Mouths/Mouth1.blockymodel",
+      "Texture": "Characters/Body_Attachments/Mouths/Mouth1_Textures/Makeup_Greyscale.png",
+      "GradientSet": "Skin",
+      "GradientId": "01"
+    },
+    {
+      "Model": "Characters/Haircuts/Long.blockymodel",
+      "Texture": "Characters/Haircuts/Long_Greyscale.png",
+      "GradientSet": "Hair",
+      "GradientId": "Purple"
+    },
+    {
+      "Model": "Characters/Body_Attachments/Eyebrows/Eyebrows_Medium.blockymodel",
+      "Texture": "Characters/Body_Attachments/Eyebrows/Plucked_Greyscale.png",
+      "GradientSet": "Hair",
+      "GradientId": "Purple"
+    },
+    {
+      "Model": "Cosmetics/Gloves/Bracers.blockymodel",
+      "Texture": "Cosmetics/Gloves/Bracers_Petal.png",
+      "GradientSet": "Flashy_Synthetic",
+      "GradientId": "Violet"
+    },
+    {
+      "Model": "Characters/SirensMermaid/Cosmetics/Mermaid/Dorsal_Fins/Mermaids_LongDorsalFins.blockymodel",
+      "Texture": "Characters/SirensMermaid/Cosmetics/Mermaid/Dorsal_Fins/LongDorsalFins/Mermaids_LongDorsalFins_Purple_Texture.png"
+    },
+    {
+      "Model": "Characters/SirensMermaid/Cosmetics/Mermaid/Pectoral_Fins/Mermaids_TopPectoralFins.blockymodel",
+      "Texture": "Characters/SirensMermaid/Cosmetics/Mermaid/Pectoral_Fins/TopPectoralFins/Mermaids_TopPectoralFins_Purple_Texture.png"
+    },
+    {
+      "Model": "Characters/SirensMermaid/Cosmetics/Mermaid/Auricle_Fins/Mermaids_SpikedEarFins.blockymodel",
+      "Texture": "Characters/SirensMermaid/Cosmetics/Mermaid/Auricle_Fins/SpikedEarFins/Mermaids_SpikedEarFins_Purple.png"
+    },
+    {
+      "Model": "Items/Armor/Mermaids/Mermaids_Seashell_Bra.blockymodel",
+      "Texture": "Items/Armor/Mermaids/Mermaids_Seashell_Bra_Purple.png"
+    }
+  ]
+}

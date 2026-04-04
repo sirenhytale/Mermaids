@@ -6,4 +6,8 @@ author: Siren
 
 ## Mermaids for Server Owners
 
-Download Mermaids from curseforge and upload the Mermaids.jar file into your servers mods\ folder.
+Thank you for installing the Mermaids mod. 
+
+If you ever need help, don't be afraid to reach out on the curseforge page or my discord. 
+
+If you find any bugs please report them to me, and I'm always open to hear suggestions.

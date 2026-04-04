@@ -6,17 +6,23 @@ author: Siren
 ---
 ### Mermaids Compatibilities
 
-- [EasyHunger](https://www.curseforge.com/hytale/mods/easyhunger) By: [Haasapenas](https://www.curseforge.com/members/haasapenas/projects) 
+- EasyHunger By: Haasapenas
   - Being a Mermaid fills the thirst bar to max.
-- [Aqua Thirst & Hunger](https://www.curseforge.com/hytale/mods/aqua-thirst-hunger) By: [Jume](https://www.curseforge.com/members/jume/projects) 
+- Aqua Thirst & Hunger By: Jume
   - Being a Mermaid fills the thirst bar to max.
-- [[xnrdev] DivingTale](https://www.curseforge.com/hytale/mods/diving-equipment) By: [xnrdev](https://www.curseforge.com/members/xnrdev/projects) 
+- [xnrdev] DivingTale By: xnrdev
   - All 6 harpoons will give increased movement speeds underwater.
-- [Placeholder API](https://www.curseforge.com/hytale/mods/placeholder-api) By: [funnycube](https://www.curseforge.com/members/funnycube/projects) 
-  - Adds a couple [placeholders](/mermaids/compatibilities/placeholderapi/).
-- [Orbis Origins](https://www.curseforge.com/hytale/mods/orbis-origins) By: [Hexvane](https://www.curseforge.com/members/hexvane/projects)
-  - Requires downloading the [Orbis Origins X Mermaids](https://www.curseforge.com/hytale/mods/orbis-origins-mermaids) Mod.
-- [Wardrobe](https://www.curseforge.com/hytale/mods/wardrobe) By: [jacksonhardaway](https://www.curseforge.com/members/jacksonhardaway/projects) 
+- Placeholder API By: funnycube
+  - Adds a couple placeholders, which can be viewed from www.mermaids.dev/mermaids.
+- Orbis Origins By: Hexvane
+  - Requires downloading the Orbis Origins X Mermaids Mod from Curseforge.
+- Wardrobe By: jacksonhardaway
   - Transforming back into a human from a mermaid reapplies the wardrobe cosmetics, still doesn't work on Mermaid model.
-- [Voile (in-game wiki)](https://www.curseforge.com/hytale/mods/docs) By: [Mayuna_1](https://www.curseforge.com/members/mayuna_1/projects)
-  - Adds part of the [Mermaids Docs](https://mermaids.dev/mermaids/) in-game.
+- Voile (in-game wiki) By: Mayuna_1
+  - Adds part of the www.mermaids.dev/mermaids Docs in-game.
+- Better Modlist By: Buuz135
+  - Adds the Mermaids logo to the mod list.
+- MoreNPC By: BlueEyesWhiteMen
+  - Trident will give increased movement speed underwater.
+- Keyblades Reimagined By: TaHie
+  - Some keyblades will give increased movement speed underwater.

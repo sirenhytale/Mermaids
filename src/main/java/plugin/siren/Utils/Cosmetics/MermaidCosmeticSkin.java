@@ -53,14 +53,14 @@ public class MermaidCosmeticSkin {
 
         // Top_Side_Fins
         TreeMap<TextureColor, String> topSideFinsMap = new TreeMap<>();
-        topSideFinsMap.put(TextureColor.ORANGE,"Characters/SirensMermaid/Cosmetics/Mermaid/Pelvic_Fins/TopPelvicFins/Mermaids_TopPelvicFins_Orange_Texture.png");
-        topSideFinsMap.put(TextureColor.PINK,"Characters/SirensMermaid/Cosmetics/Mermaid/Pelvic_Fins/TopPelvicFins/Mermaids_TopPelvicFins_Pink_Texture.png");
-        topSideFinsMap.put(TextureColor.ROSE,"Characters/SirensMermaid/Cosmetics/Mermaid/Pelvic_Fins/TopPelvicFins/Mermaids_TopPelvicFins_Rose_Texture.png");
-        topSideFinsMap.put(TextureColor.PURPLE,"Characters/SirensMermaid/Cosmetics/Mermaid/Pelvic_Fins/TopPelvicFins/Mermaids_TopPelvicFins_Purple_Texture.png");
-        topSideFinsMap.put(TextureColor.AQUA,"Characters/SirensMermaid/Cosmetics/Mermaid/Pelvic_Fins/TopPelvicFins/Mermaids_TopPelvicFins_Aqua_Texture.png");
-        topSideFinsMap.put(TextureColor.LIME,"Characters/SirensMermaid/Cosmetics/Mermaid/Pelvic_Fins/TopPelvicFins/Mermaids_TopPelvicFins_Lime_Texture.png");
-        topSideFinsMap.put(TextureColor.BLUE,"Characters/SirensMermaid/Cosmetics/Mermaid/Pelvic_Fins/TopPelvicFins/Mermaids_TopPelvicFins_Blue_Texture.png");
-        topSideFinsMap.put(TextureColor.CYAN,"Characters/SirensMermaid/Cosmetics/Mermaid/Pelvic_Fins/TopPelvicFins/Mermaids_TopPelvicFins_Cyan_Texture.png");
+        topSideFinsMap.put(TextureColor.ORANGE,"Characters/SirensMermaid/Cosmetics/Mermaid/Pectoral_Fins/TopPectoralFins/Mermaids_TopPectoralFins_Orange_Texture.png");
+        topSideFinsMap.put(TextureColor.PINK,"Characters/SirensMermaid/Cosmetics/Mermaid/Pectoral_Fins/TopPectoralFins/Mermaids_TopPectoralFins_Pink_Texture.png");
+        topSideFinsMap.put(TextureColor.ROSE,"Characters/SirensMermaid/Cosmetics/Mermaid/Pectoral_Fins/TopPectoralFins/Mermaids_TopPectoralFins_Rose_Texture.png");
+        topSideFinsMap.put(TextureColor.PURPLE,"Characters/SirensMermaid/Cosmetics/Mermaid/Pectoral_Fins/TopPectoralFins/Mermaids_TopPectoralFins_Purple_Texture.png");
+        topSideFinsMap.put(TextureColor.AQUA,"Characters/SirensMermaid/Cosmetics/Mermaid/Pectoral_Fins/TopPectoralFins/Mermaids_TopPectoralFins_Aqua_Texture.png");
+        topSideFinsMap.put(TextureColor.LIME,"Characters/SirensMermaid/Cosmetics/Mermaid/Pectoral_Fins/TopPectoralFins/Mermaids_TopPectoralFins_Lime_Texture.png");
+        topSideFinsMap.put(TextureColor.BLUE,"Characters/SirensMermaid/Cosmetics/Mermaid/Pectoral_Fins/TopPectoralFins/Mermaids_TopPectoralFins_Blue_Texture.png");
+        topSideFinsMap.put(TextureColor.CYAN,"Characters/SirensMermaid/Cosmetics/Mermaid/Pectoral_Fins/TopPectoralFins/Mermaids_TopPectoralFins_Cyan_Texture.png");
         textureMap.put(MermaidCosmetic.Top_Side_Fins,topSideFinsMap);
 
         // Ear_Fins

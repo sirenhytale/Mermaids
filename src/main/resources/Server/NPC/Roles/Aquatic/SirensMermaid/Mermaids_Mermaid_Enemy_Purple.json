@@ -1,0 +1,23 @@
+{
+  "Type": "Variant",
+  "Reference": "Template_Mermaids_Mermaid",
+  "Modify": {
+    "Appearance": "Mermaids_Mermaid_Enemy_Purple",
+    "FlockArray": [
+      "Mermaids_Mermaid_Enemy_Purple"
+    ],
+    "DropList": "Drop_Mermaids_Mermaid_Enemy",
+    "MaxHealth": 80,
+    "IsMemory": true,
+    "MemoriesCategory": "Abyssal",
+    "NameTranslationKey": {
+      "Compute": "NameTranslationKey"
+    }
+  },
+  "Parameters": {
+    "NameTranslationKey": {
+      "Value": "server.npcRoles.mermaids.mermaidEnemy.name",
+      "Description": "Translation key for NPC name display"
+    }
+  }
+}

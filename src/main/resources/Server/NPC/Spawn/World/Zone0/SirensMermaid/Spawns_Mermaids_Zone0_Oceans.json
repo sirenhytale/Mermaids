@@ -1,0 +1,19 @@
+{
+  "Environments": [
+    "Env_Zone0_Cold", "Env_Zone0_Temperate", "Env_Zone0_Warm", "Env_Zone4_Shores"
+  ],
+  "NPCs": [
+    {
+      "Weight": 4,
+      "Id": "Mermaids_Mermaid_Enemy_Orange",
+      "Flock": "Flock_Mermaids_Small",
+      "SpawnFluidTag": "Water"
+    },
+    {
+      "Weight": 4,
+      "Id": "Mermaids_Mermaid_Enemy_Purple",
+      "Flock": "Flock_Mermaids_Small",
+      "SpawnFluidTag": "Water"
+    }
+  ]
+}

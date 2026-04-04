@@ -72,15 +72,15 @@ customUI.mermaids.mermaidui.category.model.consoleMsg.modify = {username} has sw
 customUI.mermaids.mermaidui.category.color = Mermaid Tail Color
 customUI.mermaids.mermaidui.category.color.playerMsg.modify = You have selected the {color} tail color.
 customUI.mermaids.mermaidui.category.color.consoleMsg.modify = {username} has switched the mermaid tail color to {color}.
-customUI.mermaids.mermaidui.category.dorsal_fin = Mermaid Back fins
-customUI.mermaids.mermaidui.category.dorsal_fin.playerMsg.modify = You have switched the back fins to {fin}.
-customUI.mermaids.mermaidui.category.dorsal_fin.consoleMsg.modify = {username} has switched the mermaid tail back fins to {fin}.
-customUI.mermaids.mermaidui.category.pelvic_fin = Mermaid Side Fins
-customUI.mermaids.mermaidui.category.pelvic_fin.playerMsg.modify = You have switched the side fins to {fin}.
-customUI.mermaids.mermaidui.category.pelvic_fin.consoleMsg.modify = {username} has switched the mermaid tail side fins to {fin}.
-customUI.mermaids.mermaidui.category.auricle_fin = Mermaid Ear Fins
-customUI.mermaids.mermaidui.category.auricle_fin.playerMsg.modify = You have switched the ear fins to {fin}.
-customUI.mermaids.mermaidui.category.auricle_fin.consoleMsg.modify = {username} has switched the mermaid ear fins to {fin}.
+customUI.mermaids.mermaidui.category.dorsalFin = Mermaid Back fins
+customUI.mermaids.mermaidui.category.dorsalFin.playerMsg.modify = You have switched the back fins to {fin}.
+customUI.mermaids.mermaidui.category.dorsalFin.consoleMsg.modify = {username} has switched the mermaid tail back fins to {fin}.
+customUI.mermaids.mermaidui.category.pectoralFin = Mermaid Side Fins
+customUI.mermaids.mermaidui.category.pectoralFin.playerMsg.modify = You have switched the side fins to {fin}.
+customUI.mermaids.mermaidui.category.pectoralFin.consoleMsg.modify = {username} has switched the mermaid tail side fins to {fin}.
+customUI.mermaids.mermaidui.category.auricleFin = Mermaid Ear Fins
+customUI.mermaids.mermaidui.category.auricleFin.playerMsg.modify = You have switched the ear fins to {fin}.
+customUI.mermaids.mermaidui.category.auricleFin.consoleMsg.modify = {username} has switched the mermaid ear fins to {fin}.
 
 # === items ===
 
@@ -97,6 +97,10 @@ items.mermaids.Mermaids_Potion_Mermaid_Transformation_Medium.name = Medium Potio
 items.mermaids.Mermaids_Potion_Mermaid_Transformation_Medium.desc = Transform into a Mermaid for 10 minutes.
 items.mermaids.Mermaids_Potion_Mermaid_Transformation_Large.name = Permanent Potion of Mermaid Transformation
 items.mermaids.Mermaids_Potion_Mermaid_Transformation_Large.desc = Permanent transform into a Mermaid when enter contact with water.
+
+# === npcRoles ===
+
+npcRoles.mermaids.mermaidEnemy.name = Mermaid
 
 # === updateChecker ===
 

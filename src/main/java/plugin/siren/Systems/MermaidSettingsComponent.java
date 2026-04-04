@@ -41,9 +41,9 @@ public class MermaidSettingsComponent implements Component<EntityStore> {
                     (merSettings, mcdfInt) -> merSettings.dorsalFin = mcdfInt, // Setter
                     (merSettings) -> merSettings.dorsalFin)                    // Getter
             .add()
-            .append(new KeyedCodec<Integer>("Mermaid-Cosmetic-Pelvic-Fin", Codec.INTEGER),
-                    (merSettings, mcpfInt) -> merSettings.pelvicFin = mcpfInt, // Setter
-                    (merSettings) -> merSettings.pelvicFin)                    // Getter
+            .append(new KeyedCodec<Integer>("Mermaid-Cosmetic-Pectoral-Fin", Codec.INTEGER),
+                    (merSettings, mcpfInt) -> merSettings.pectoralFin = mcpfInt, // Setter
+                    (merSettings) -> merSettings.pectoralFin)                    // Getter
             .add()
             .append(new KeyedCodec<Integer>("Mermaid-Cosmetic-Auricle-Fin", Codec.INTEGER),
                     (merSettings, mcafInt) -> merSettings.auricleFin = mcafInt, // Setter
@@ -70,7 +70,7 @@ public class MermaidSettingsComponent implements Component<EntityStore> {
     private String tailColor;
     private int cosmeticColor;
     private int dorsalFin;
-    private int pelvicFin;
+    private int pectoralFin;
     private int auricleFin;
 
     private boolean forceMermaid;
@@ -92,7 +92,7 @@ public class MermaidSettingsComponent implements Component<EntityStore> {
         this.tailColor = defaultTailColor;
         this.cosmeticColor = 0;
         this.dorsalFin = -1;
-        this.pelvicFin = -1;
+        this.pectoralFin = -1;
         this.auricleFin = -1;
 
         this.forceMermaid = false;
@@ -108,7 +108,7 @@ public class MermaidSettingsComponent implements Component<EntityStore> {
         this.tailColor = other.tailColor;
         this.cosmeticColor = other.cosmeticColor;
         this.dorsalFin = other.dorsalFin;
-        this.pelvicFin = other.pelvicFin;
+        this.pectoralFin = other.pectoralFin;
         this.auricleFin = other.auricleFin;
 
         this.forceMermaid = other.forceMermaid;
@@ -219,8 +219,8 @@ public class MermaidSettingsComponent implements Component<EntityStore> {
             }
             return true;
         }
-        if(cosmeticType.equals(MermaidCosmeticType.PELVIC_FIN)) {
-            if (pelvicFin == -1) {
+        if(cosmeticType.equals(MermaidCosmeticType.PECTORAL_FIN)) {
+            if (pectoralFin == -1) {
                 return false;
             }
             return true;
@@ -243,9 +243,9 @@ public class MermaidSettingsComponent implements Component<EntityStore> {
 
             return null;
         }
-        if(cosmeticType.equals(MermaidCosmeticType.PELVIC_FIN)){
+        if(cosmeticType.equals(MermaidCosmeticType.PECTORAL_FIN)){
             if(hasMermaidCosmetic(cosmeticType)) {
-                return MermaidCosmetic.get(pelvicFin);
+                return MermaidCosmetic.get(pectoralFin);
             }
 
             return null;
@@ -269,9 +269,9 @@ public class MermaidSettingsComponent implements Component<EntityStore> {
 
             return -1;
         }
-        if(cosmeticType.equals(MermaidCosmeticType.PELVIC_FIN)){
+        if(cosmeticType.equals(MermaidCosmeticType.PECTORAL_FIN)){
             if(hasMermaidCosmetic(cosmeticType)) {
-                return pelvicFin;
+                return pectoralFin;
             }
 
             return -1;
@@ -291,8 +291,8 @@ public class MermaidSettingsComponent implements Component<EntityStore> {
         if(cosmeticType.equals(MermaidCosmeticType.DORSAL_FIN)){
             dorsalFin = cosmeticValue;
         }
-        if(cosmeticType.equals(MermaidCosmeticType.PELVIC_FIN)){
-            pelvicFin = cosmeticValue;
+        if(cosmeticType.equals(MermaidCosmeticType.PECTORAL_FIN)){
+            pectoralFin = cosmeticValue;
         }
         if(cosmeticType.equals(MermaidCosmeticType.AURICLE_FIN)){
             auricleFin = cosmeticValue;

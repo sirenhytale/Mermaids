@@ -11,16 +11,11 @@ author: Siren
 - /mermaids toggle [true/false]
   - Description: You can enable or disable Mermaid transformations.
   - Permissions: mermaids.toggle
-- /mermaids bugfix
-  - Description: Will give the player the Mermaid component, run if mermaid transformations aren’t working.
 - /mermaids permpotionremove
   - Description: Will remove the permanent potion transformation from the player.
 - /mermaids debug
   - Description: Mermaids debug command line.
   - Permissions: mermaids.debug
-- /mermaids debug mermaidv2 [true/false]
-  - Description: Allows the user to try out the Mermaid Tail Model v2.
-  - Permissions: mermaids.debug.mermaidv2
 - /mermaids debug givemermaidring
   - Description: Give the player a testing item called the Mermaid Ring.
   - Permissions: mermaids.debug.mermaidring
@@ -33,6 +28,9 @@ author: Siren
 - /mermaids admin mermaidonland [true/false]
   - Description: Toggle mermaid on land for all players.
   - Permissions: mermaids.admin.mermaidonland
+- /mermaids admin itemspeed [true/false]
+  - Description: Toggles to allow some items to increase the swim movement speed.
+  - Permissions: mermaids.admin.itemspeed
 - /mermaids admin blockstransformation [true/false]
   - Description: Toggle to allow some blocks to transform players into a mermaid.
   - Permissions: mermaids.admin.blocktransform

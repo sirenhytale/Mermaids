@@ -6,7 +6,7 @@
 
     <groupId>plugin.siren</groupId>
     <artifactId>Mermaids</artifactId>
-    <version>2.0.1</version>
+    <version>2.1.0</version>
 
     <properties>
         <maven.compiler.source>25</maven.compiler.source>
@@ -30,6 +30,9 @@
                             <target>
                                 <copy file="${project.build.directory}/${project.build.finalName}.jar"
                                       todir="C:\Users\dipia\OneDrive\Documents\HytalePlugins\.SERVER\Server\mods"
+                                      overwrite="true"/>
+                                <copy file="${project.build.directory}/${project.build.finalName}.jar"
+                                      todir="C:\Users\dipia\AppData\Roaming\Hytale\UserData\Mods"
                                       overwrite="true"/>
                             </target>
                         </configuration>
@@ -56,28 +59,28 @@
         <dependency>
             <groupId>com.Haas</groupId>
             <artifactId>EasyHunger</artifactId>
-            <version>1.2.3</version>
+            <version>1.2.4</version>
             <scope>provided</scope>
             <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>com.mx.jume.aquahunger</groupId>
             <artifactId>Aqua-Thirst-hunger</artifactId>
-            <version>0.13.1</version>
+            <version>0.13.2</version>
             <scope>provided</scope>
             <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>at.helpch</groupId>
             <artifactId>placeholderapi-hytale</artifactId>
-            <version>1.0.7</version>
+            <version>1.0.8</version>
             <scope>provided</scope>
             <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>com.Hardaway</groupId>
             <artifactId>Wardrobe</artifactId>
-            <version>0.3.2</version>
+            <version>0.3.3</version>
             <scope>provided</scope>
             <optional>true</optional>
         </dependency>

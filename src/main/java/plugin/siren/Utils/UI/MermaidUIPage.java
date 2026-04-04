@@ -76,7 +76,7 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
                 String mermaidTailColorPath = mermaidSettings.getTailColor();
 
                 int dorsalFin = -1;
-                int pelvicFin = -1;
+                int pectoralFin = -1;
                 int auricleFin = -1;
                 if (data.tailPresets.equalsIgnoreCase("0")) {
                     msgMerPreset = "default";
@@ -85,7 +85,7 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
                     //mermaidTailColorPath = mermaidTailColorPath;
 
                     dorsalFin = -1;
-                    pelvicFin = -1;
+                    pectoralFin = -1;
                     auricleFin = -1;
                 } else if (data.tailPresets.equalsIgnoreCase("1")) {
                     msgMerPreset = "Full Fins";
@@ -94,7 +94,7 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
                     //mermaidTailColorPath = mermaidTailColorPath;
 
                     dorsalFin = 0;
-                    pelvicFin = 1;
+                    pectoralFin = 1;
                     auricleFin = 2;
                 }
 
@@ -115,13 +115,13 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
                 int oldCosmeticDorsalValue = mermaidSettings.getMermaidCosmeticValue(MermaidCosmeticType.DORSAL_FIN);
                 mermaidSettings.setMermaidCosmetic(MermaidCosmeticType.DORSAL_FIN, dorsalFin);
 
-                int oldCosmeticPelvicValue = mermaidSettings.getMermaidCosmeticValue(MermaidCosmeticType.PELVIC_FIN);
-                mermaidSettings.setMermaidCosmetic(MermaidCosmeticType.PELVIC_FIN, pelvicFin);
+                int oldCosmeticPectoralValue = mermaidSettings.getMermaidCosmeticValue(MermaidCosmeticType.PECTORAL_FIN);
+                mermaidSettings.setMermaidCosmetic(MermaidCosmeticType.PECTORAL_FIN, pectoralFin);
 
                 int oldCosmeticAuricleValue = mermaidSettings.getMermaidCosmeticValue(MermaidCosmeticType.AURICLE_FIN);
                 mermaidSettings.setMermaidCosmetic(MermaidCosmeticType.AURICLE_FIN, auricleFin);
 
-                boolean differentFins = dorsalFin != oldCosmeticDorsalValue || pelvicFin != oldCosmeticPelvicValue ||  auricleFin != oldCosmeticAuricleValue;
+                boolean differentFins = dorsalFin != oldCosmeticDorsalValue || pectoralFin != oldCosmeticPectoralValue ||  auricleFin != oldCosmeticAuricleValue;
                 if ((!oldMermaidTail.equals(mermaidTailPath) || !oldTailColor.equals(mermaidTailColorPath) || differentFins) && mermaid.isMermaid()) {
                     ModelAsset modelAsset = ModelAsset.getAssetMap().getAsset(mermaidTailPath);
                     if (modelAsset == null) {
@@ -256,11 +256,11 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
                     dorsalFin = 0;
                 }
 
-                Message playerMessage = Message.translation("server.customUI.mermaids.mermaidui.category.dorsal_fin.playerMsg.modify").param("fin", dorsalFinMsg);
+                Message playerMessage = Message.translation("server.customUI.mermaids.mermaidui.category.dorsalFin.playerMsg.modify").param("fin", dorsalFinMsg);
                 player.sendMessage(playerMessage);
 
                 if(Mermaids.getConfig().get().ifConsoleLogs()) {
-                    String consoleMessage = Message.translation("customUI.mermaids.mermaidui.category.dorsal_fin.consoleMsg.modify").param("username", player.getDisplayName()).param("fin", dorsalFinMsg).getAnsiMessage();
+                    String consoleMessage = Message.translation("customUI.mermaids.mermaidui.category.dorsalFin.consoleMsg.modify").param("username", player.getDisplayName()).param("fin", dorsalFinMsg).getAnsiMessage();
                     Mermaids.LOGGER.atInfo().log(consoleMessage);
                 }
 
@@ -280,30 +280,30 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
                 }
 
                 this.sendUpdate(commandBuilder, eventBuilder, false);
-            } else if (data.pelvicFin != null) {
-                String pelvicFinMsg = "ERROR PELVIC FIN";
-                int pelvicFin = -1;
-                if (data.pelvicFin.equalsIgnoreCase("0")) {
-                    pelvicFinMsg = "none";
-                    pelvicFin = -1;
-                } else if (data.pelvicFin.equalsIgnoreCase("1")) {
-                    pelvicFinMsg = "top fins";
-                    pelvicFin = 1; //NEED TO SET
+            } else if (data.pectoralFin != null) {
+                String pectoralFinMsg = "ERROR PELVIC FIN";
+                int pectoralFin = -1;
+                if (data.pectoralFin.equalsIgnoreCase("0")) {
+                    pectoralFinMsg = "none";
+                    pectoralFin = -1;
+                } else if (data.pectoralFin.equalsIgnoreCase("1")) {
+                    pectoralFinMsg = "top fins";
+                    pectoralFin = 1; //NEED TO SET
                 }
 
-                Message playerMessage = Message.translation("server.customUI.mermaids.mermaidui.category.pelvic_fin.playerMsg.modify").param("fin", pelvicFinMsg);
+                Message playerMessage = Message.translation("server.customUI.mermaids.mermaidui.category.pectoralFin.playerMsg.modify").param("fin", pectoralFinMsg);
                 player.sendMessage(playerMessage);
 
                 if(Mermaids.getConfig().get().ifConsoleLogs()) {
-                    String consoleMessage = Message.translation("customUI.mermaids.mermaidui.category.pelvic_fin.consoleMsg.modify").param("username", player.getDisplayName()).param("fin", pelvicFinMsg).getAnsiMessage();
+                    String consoleMessage = Message.translation("customUI.mermaids.mermaidui.category.pectoralFin.consoleMsg.modify").param("username", player.getDisplayName()).param("fin", pectoralFinMsg).getAnsiMessage();
                     Mermaids.LOGGER.atInfo().log(consoleMessage);
                 }
 
-                int oldCosmeticValue = mermaidSettings.getMermaidCosmeticValue(MermaidCosmeticType.PELVIC_FIN);
+                int oldCosmeticValue = mermaidSettings.getMermaidCosmeticValue(MermaidCosmeticType.PECTORAL_FIN);
 
-                mermaidSettings.setMermaidCosmetic(MermaidCosmeticType.PELVIC_FIN, pelvicFin);
+                mermaidSettings.setMermaidCosmetic(MermaidCosmeticType.PECTORAL_FIN, pectoralFin);
 
-                if (oldCosmeticValue != pelvicFin && mermaid.isMermaid()) {
+                if (oldCosmeticValue != pectoralFin && mermaid.isMermaid()) {
                     String activeMermaidTail = mermaidSettings.getMermaidTail();
                     ModelAsset modelAsset = ModelAsset.getAssetMap().getAsset(activeMermaidTail);
                     if (modelAsset == null) {
@@ -316,7 +316,7 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
 
                 this.sendUpdate(commandBuilder, eventBuilder, false);
             } else if (data.auricleFin != null) {
-                String auricleFinMsg = "ERROR PELVIC FIN";
+                String auricleFinMsg = "ERROR AURICLE FIN";
                 int auricleFin = -1;
                 if (data.auricleFin.equalsIgnoreCase("0")) {
                     auricleFinMsg = "none";
@@ -329,11 +329,11 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
                     auricleFin = 3;
                 }
 
-                Message playerMessage = Message.translation("server.customUI.mermaids.mermaidui.category.pelvic_fin.playerMsg.modify").param("fin", auricleFinMsg);
+                Message playerMessage = Message.translation("server.customUI.mermaids.mermaidui.category.auricleFin.playerMsg.modify").param("fin", auricleFinMsg);
                 player.sendMessage(playerMessage);
 
                 if(Mermaids.getConfig().get().ifConsoleLogs()) {
-                    String consoleMessage = Message.translation("customUI.mermaids.mermaidui.category.pelvic_fin.consoleMsg.modify").param("username", player.getDisplayName()).param("fin", auricleFinMsg).getAnsiMessage();
+                    String consoleMessage = Message.translation("customUI.mermaids.mermaidui.category.auricleFin.consoleMsg.modify").param("username", player.getDisplayName()).param("fin", auricleFinMsg).getAnsiMessage();
                     Mermaids.LOGGER.atInfo().log(consoleMessage);
                 }
 
@@ -399,10 +399,10 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
                 String selector = "#CategoryContent #DorsalFin" + i + " #Selector";
                 eventBuilder.addEventBinding(CustomUIEventBindingType.Activating, selector, EventData.of("DorsalFin", String.valueOf(i)));
             }
-        } else if (category.id.equalsIgnoreCase("pelvic_fin")) {
+        } else if (category.id.equalsIgnoreCase("pectoral_fin")) {
             for (int i = 0; i < category.getTailSelectionCount(); i++) {
-                String selector = "#CategoryContent #PelvicFin" + i + " #Selector";
-                eventBuilder.addEventBinding(CustomUIEventBindingType.Activating, selector, EventData.of("PelvicFin", String.valueOf(i)));
+                String selector = "#CategoryContent #PectoralFin" + i + " #Selector";
+                eventBuilder.addEventBinding(CustomUIEventBindingType.Activating, selector, EventData.of("PectoralFin", String.valueOf(i)));
             }
         } else if (category.id.equalsIgnoreCase("auricle_fin")) {
             for (int i = 0; i < category.getTailSelectionCount(); i++) {
@@ -433,19 +433,19 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
         ),
         DORSAL_FIN(
                 "dorsal_fin",
-                "server.customUI.mermaids.mermaidui.category.dorsal_fin",
+                "server.customUI.mermaids.mermaidui.category.dorsalFin",
                 "Pages/MermaidUI/Categories/DorsalFinContent.ui",
                 2
         ),
-        PELVIC_FIN(
-                "pelvic_fin",
-                "server.customUI.mermaids.mermaidui.category.pelvic_fin",
-                "Pages/MermaidUI/Categories/PelvicFinContent.ui",
+        PECTORAL_FIN(
+                "pectoral_fin",
+                "server.customUI.mermaids.mermaidui.category.pectoralFin",
+                "Pages/MermaidUI/Categories/PectoralFinContent.ui",
                 2
         ),
         AURICLE_FIN(
                 "auricle_fin",
-                "server.customUI.mermaids.mermaidui.category.auricle_fin",
+                "server.customUI.mermaids.mermaidui.category.auricleFin",
                 "Pages/MermaidUI/Categories/AuricleFinContent.ui",
                 3
         );
@@ -495,7 +495,7 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
         static final String KEY_TAIL_MODEL = "TailModel";
         static final String KEY_TAIL_COLOR = "TailColor";
         static final String KEY_DORSAL_FIN = "DorsalFin";
-        static final String KEY_PELVIC_FIN = "PelvicFin";
+        static final String KEY_PECTORAL_FIN = "PectoralFin";
         static final String KEY_AURICLE_FIN = "AuricleFin";
         public static final BuilderCodec<MermaidUIEventData> CODEC = BuilderCodec.builder(
                         MermaidUIPage.MermaidUIEventData.class, MermaidUIPage.MermaidUIEventData::new
@@ -505,7 +505,7 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
                 .addField(new KeyedCodec<>(KEY_TAIL_MODEL, Codec.STRING), (entry, s) -> entry.tailModel = s, entry -> entry.tailModel)
                 .addField(new KeyedCodec<>(KEY_TAIL_COLOR, Codec.STRING), (entry, s) -> entry.tailColor = s, entry -> entry.tailColor)
                 .addField(new KeyedCodec<>(KEY_DORSAL_FIN, Codec.STRING), (entry, s) -> entry.dorsalFin = s, entry -> entry.dorsalFin)
-                .addField(new KeyedCodec<>(KEY_PELVIC_FIN, Codec.STRING), (entry, s) -> entry.pelvicFin = s, entry -> entry.pelvicFin)
+                .addField(new KeyedCodec<>(KEY_PECTORAL_FIN, Codec.STRING), (entry, s) -> entry.pectoralFin = s, entry -> entry.pectoralFin)
                 .addField(new KeyedCodec<>(KEY_AURICLE_FIN, Codec.STRING), (entry, s) -> entry.auricleFin = s, entry -> entry.auricleFin)
                 .build();
         private String category;
@@ -513,7 +513,7 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
         private String tailModel;
         private String tailColor;
         private String dorsalFin;
-        private String pelvicFin;
+        private String pectoralFin;
         private String auricleFin;
 
         public MermaidUIEventData() {

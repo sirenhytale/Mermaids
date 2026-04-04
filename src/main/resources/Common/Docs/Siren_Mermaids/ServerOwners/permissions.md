@@ -13,8 +13,6 @@ author: Siren
   - Allows the player to use the command /mermaids toggle [true/false].
 - mermaids.debug
   - Allows the player to use the command /mermaids debug command line.
-- mermaids.debug.mermaidv2
-  - Allows the player to use the command /mermaids debug mermaidv2 [true/false].
 - mermaids.debug.mermaidring
   - Allows the player to use the command /mermaids debug givemermaidring.
 - mermaids.admin
@@ -23,8 +21,8 @@ author: Siren
   - Allows the player to use the command /mermaids admin transformmode [New Mode Integer].
 - mermaids.admin.mermaidonland
   - Allows the player to use the command /mermaids admin mermaidonland [true/false].
-- mermaids.admin.itemincreasespeed
-  - Allows the player to use the command /mermaids admin itemincreasespeed [true/false].
+- mermaids.admin.itemspeed
+  - Allows the player to use the command /mermaids admin itemspeed [true/false].
 - mermaids.admin.blocktransform
   - Allows the player to use the command /mermaids admin blocktransformation [true/false].
 - mermaids.admin.raintransform

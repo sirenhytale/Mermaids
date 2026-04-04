@@ -29,7 +29,7 @@ import plugin.siren.Utils.Github.GithubIgnore;
 import javax.annotation.Nonnull;
 
 public class Mermaids extends JavaPlugin {
-    private static final String VERSION = "2.0.1";
+    private static final String VERSION = "2.1.0";
     private static final boolean DEBUG = false;
 
     private static Mermaids plugin;
@@ -52,10 +52,6 @@ public class Mermaids extends JavaPlugin {
     protected void setup(){
         LOGGER.atInfo().log("===---==---==---== MERMAIDS ==---==---==---===");
         LOGGER.atInfo().log("Mermaids has began to load.");
-
-        if (HytaleServer.get().getPluginManager().getPlugin(PluginIdentifier.fromString("HelpChat:PlaceholderAPI")) != null) {
-            new PlaceholderAPICompat().register();
-        }
 
         EventRegistration<String, PlayerReadyEvent> playerReadyEventRegistration = this.getEventRegistry().registerGlobal(PlayerReadyEvent.class, PlayerReadyEventM::onPlayerReadyEvent);
         if(playerReadyEventRegistration != null && playerReadyEventRegistration.isRegistered()) {
@@ -107,6 +103,10 @@ public class Mermaids extends JavaPlugin {
         if(configUpdated){
             config.save();
             LOGGER.atInfo().log("Updated config to latest version.");
+        }
+
+        if (HytaleServer.get().getPluginManager().getPlugin(PluginIdentifier.fromString("HelpChat:PlaceholderAPI")) != null) {
+            new PlaceholderAPICompat().register();
         }
 
         MermaidCosmeticSkin.registerCosmeticSkins();

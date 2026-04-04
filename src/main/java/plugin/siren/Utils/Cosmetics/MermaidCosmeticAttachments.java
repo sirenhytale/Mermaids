@@ -24,8 +24,8 @@ public class MermaidCosmeticAttachments {
             attachments.add(dorsalCosmetic.getAsModelAttachment(mermaidSettings));
         }
 
-        if(mermaidSettings.hasMermaidCosmetic(MermaidCosmeticType.PELVIC_FIN)){
-            MermaidCosmetic pelvicCosmetic = mermaidSettings.getMermaidCosmetic(MermaidCosmeticType.PELVIC_FIN);
+        if(mermaidSettings.hasMermaidCosmetic(MermaidCosmeticType.PECTORAL_FIN)){
+            MermaidCosmetic pelvicCosmetic = mermaidSettings.getMermaidCosmetic(MermaidCosmeticType.PECTORAL_FIN);
 
             attachments.add(pelvicCosmetic.getAsModelAttachment(mermaidSettings));
         }

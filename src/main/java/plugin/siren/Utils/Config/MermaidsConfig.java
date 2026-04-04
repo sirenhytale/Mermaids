@@ -92,7 +92,7 @@ public class MermaidsConfig {
                     (merConfig, mnbbcBool, extraInfo) -> merConfig.MoreNPCCompat = mnbbcBool, // Setter
                     (merConfig, extraInfo) -> merConfig.MoreNPCCompat)                    // Getter
             .add()
-            .append(new KeyedCodec<Boolean>("Keyblades Reimagined-By:TaHie-Compatibility", Codec.BOOLEAN),
+            .append(new KeyedCodec<Boolean>("KeybladesReimagined-By:TaHie-Compatibility", Codec.BOOLEAN),
                     (merConfig, kbrbthcBool, extraInfo) -> merConfig.KeybladeReimagCompat = kbrbthcBool, // Setter
                     (merConfig, extraInfo) -> merConfig.KeybladeReimagCompat)                    // Getter
             .add()
@@ -108,7 +108,7 @@ public class MermaidsConfig {
 
     private String InformationDefault = "Confused about what one of these statement do? Go to https://www.mermaids.dev/mermaids/config/ or check out the Mermaids page on the Curseforge website and scroll down to Config Extra Info.";
     private String Information = InformationDefault;
-    private final int ConfigVersionDefault = 11;
+    private final int ConfigVersionDefault = 12;
     private int ConfigVersion = ConfigVersionDefault;
     private String PluginName = "Mermaids";
     private String Version = Mermaids.getVersion();
