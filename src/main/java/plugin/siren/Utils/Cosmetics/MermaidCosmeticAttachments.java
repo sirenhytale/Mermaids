@@ -5,14 +5,11 @@ import plugin.siren.Mermaids;
 import plugin.siren.Systems.MermaidSettingsComponent;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MermaidCosmeticAttachments {
     public static ModelAttachment[] addAttachment(ModelAttachment[] baseAttachments, MermaidSettingsComponent mermaidSettings){
-        ArrayList<ModelAttachment> attachments = new ArrayList<>();
-
-        for(int i = 0; i < baseAttachments.length; i++){
-            attachments.add(baseAttachments[i]);
-        }
+        ArrayList<ModelAttachment> attachments = new ArrayList<>(Arrays.asList(baseAttachments));
 
         if(Mermaids.ifDebug()){
             Mermaids.LOGGER.atInfo().log("Adding MermaidCosmetics");

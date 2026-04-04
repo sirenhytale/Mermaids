@@ -13,6 +13,8 @@ public class EasyHungerCompat {
     public static void setMaxThirst(Store<EntityStore> store, Ref<EntityStore> ref){
         ThirstComponent thirst = store.getComponent(ref, ThirstComponent.getComponentType());
 
-        thirst.setThirstLevel((float)EasyHunger.get().getConfig().getMaxThirst());
+        if(thirst != null) {
+            thirst.setThirstLevel((float) EasyHunger.get().getConfig().getMaxThirst());
+        }
     }
 }
