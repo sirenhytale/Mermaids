@@ -12,6 +12,7 @@ import com.hypixel.hytale.server.core.modules.entity.component.ModelComponent;
 import com.hypixel.hytale.server.core.modules.entity.player.PlayerSkinComponent;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import plugin.siren.Compatibility.OrbisOrigins.OrbisOriginsRegistry;
 import plugin.siren.Mermaids;
 import plugin.siren.Systems.MermaidComponent;
 import plugin.siren.Systems.MermaidSettingsComponent;
@@ -92,6 +93,10 @@ public class PlayerReadyEventM {
 
                     Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " tried to receive Mermaid Settings Component but already has it.");
                 }
+            }
+
+            if(Mermaids.ifOrbisOrigins()){
+                OrbisOriginsRegistry.checkForMermaidSpecies(store, world, ref);
             }
 
             MermaidsUpdateChecker.sendUpdateMessage(player);

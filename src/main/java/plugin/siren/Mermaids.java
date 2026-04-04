@@ -14,6 +14,7 @@ import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import com.hypixel.hytale.server.core.util.Config;
 import plugin.siren.Commands.MermaidCmd;
 import plugin.siren.Commands.MermaidsCmd;
+import plugin.siren.Compatibility.OrbisOrigins.OrbisOriginsRegistry;
 import plugin.siren.Compatibility.PlaceholderAPI.PlaceholderAPICompat;
 import plugin.siren.Contributions.al3x.HStats;
 import plugin.siren.Events.Interactions.*;
@@ -23,29 +24,37 @@ import plugin.siren.Systems.MermaidSettingsComponent;
 import plugin.siren.Systems.MermaidSystem;
 import plugin.siren.Utils.API.MermaidsUpdateChecker;
 import plugin.siren.Utils.Config.MermaidsConfig;
+import plugin.siren.Utils.Config.OrbisOriginsConfig;
 import plugin.siren.Utils.Cosmetics.MermaidCosmeticSkin;
 import plugin.siren.Utils.Github.GithubIgnore;
 
 import javax.annotation.Nonnull;
+import java.util.concurrent.TimeUnit;
 
 public class Mermaids extends JavaPlugin {
-    private static final String VERSION = "2.1.0";
+    private static final String VERSION = "2.2.0";
     private static final boolean DEBUG = false;
 
     private static Mermaids plugin;
     public static final HytaleLogger LOGGER = HytaleLogger.forEnclosingClass();
     private final Config<MermaidsConfig> config;
+    private final Config<OrbisOriginsConfig> orbisOriginsConfig;
 
     private ComponentType<EntityStore, MermaidComponent> mermaidComponent;
     private ComponentType<EntityStore, MermaidSettingsComponent> mermaidSettingsComponent;
+
+    private boolean orbisOriginsCompat;
 
     public Mermaids(@Nonnull JavaPluginInit init){
         super(init);
 
         plugin = this;
-        this.config = this.withConfig("Mermaids", MermaidsConfig.CODEC);
+        this.config = this.withConfig("Config", MermaidsConfig.CODEC);
+        this.orbisOriginsConfig = this.withConfig("Compatibility/OrbisOrigins", OrbisOriginsConfig.CODEC);
 
         new HStats(GithubIgnore.getHStatsModUUID(), VERSION);
+
+        orbisOriginsCompat = false;
     }
 
     @Override
@@ -58,20 +67,6 @@ public class Mermaids extends JavaPlugin {
             LOGGER.atInfo().log("Registered Player Ready Event.");
         }else{
             LOGGER.atSevere().log("Failed to register Player Ready Event.");
-        }
-
-        CommandRegistration mermaidsCmdRegistration = this.getCommandRegistry().registerCommand(new MermaidsCmd());
-        if(mermaidsCmdRegistration != null && mermaidsCmdRegistration.isRegistered()) {
-            LOGGER.atInfo().log("Registered Mermaids Command.");
-        }else{
-            LOGGER.atSevere().log("Failed to register Mermaids Command.");
-        }
-
-        CommandRegistration mermaidCmdRegistration = this.getCommandRegistry().registerCommand(new MermaidCmd());
-        if(mermaidCmdRegistration != null && mermaidCmdRegistration.isRegistered()) {
-            LOGGER.atInfo().log("Registered Mermaid Command.");
-        }else{
-            LOGGER.atSevere().log("Failed to register Mermaid Command.");
         }
 
         this.mermaidComponent = this.getEntityStoreRegistry().registerComponent(MermaidComponent.class, MermaidComponent::new);
@@ -98,15 +93,56 @@ public class Mermaids extends JavaPlugin {
         LOGGER.atInfo().log("Registered Codec Interactions.");
 
         config.save();
-        LOGGER.atInfo().log("Loaded config settings.");
+        orbisOriginsConfig.save();
+        LOGGER.atInfo().log("Loaded all configs settings.");
+
         boolean configUpdated = config.get().ifConfigUpdate();
         if(configUpdated){
             config.save();
             LOGGER.atInfo().log("Updated config to latest version.");
         }
 
+        boolean orbisOriginsConfigUpdated = orbisOriginsConfig.get().ifConfigUpdate();
+        if(orbisOriginsConfigUpdated){
+            orbisOriginsConfig.save();
+            LOGGER.atInfo().log("Updated Orbis Origins config to latest version.");
+        }
+
         if (HytaleServer.get().getPluginManager().getPlugin(PluginIdentifier.fromString("HelpChat:PlaceholderAPI")) != null) {
             new PlaceholderAPICompat().register();
+        }
+
+        if(orbisOriginsConfig.get().isEnabledOrbisOrigins()){
+            if (HytaleServer.get().getPluginManager().getPlugin(PluginIdentifier.fromString("hexvane:OrbisOrigins")) != null) {
+                LOGGER.atInfo().log("Compatibility with Orbis Origins is successful.");
+
+                orbisOriginsCompat = true;
+
+                Runnable registerOrbisOrigins = new Runnable() {
+                    @Override
+                    public void run() {
+                        OrbisOriginsRegistry.register();
+                    }
+                };
+
+                HytaleServer.SCHEDULED_EXECUTOR.schedule(registerOrbisOrigins,3, TimeUnit.SECONDS);
+            }else{
+                LOGGER.atSevere().log("Orbis Origins is not installed!");
+            }
+        }
+
+        CommandRegistration mermaidsCmdRegistration = this.getCommandRegistry().registerCommand(new MermaidsCmd());
+        if(mermaidsCmdRegistration != null && mermaidsCmdRegistration.isRegistered()) {
+            LOGGER.atInfo().log("Registered Mermaids Command.");
+        }else{
+            LOGGER.atSevere().log("Failed to register Mermaids Command.");
+        }
+
+        CommandRegistration mermaidCmdRegistration = this.getCommandRegistry().registerCommand(new MermaidCmd());
+        if(mermaidCmdRegistration != null && mermaidCmdRegistration.isRegistered()) {
+            LOGGER.atInfo().log("Registered Mermaid Command.");
+        }else{
+            LOGGER.atSevere().log("Failed to register Mermaid Command.");
         }
 
         MermaidCosmeticSkin.registerCosmeticSkins();
@@ -150,6 +186,14 @@ public class Mermaids extends JavaPlugin {
 
     public static Config<MermaidsConfig> getConfig(){
         return plugin.config;
+    }
+
+    public static Config<OrbisOriginsConfig> getOrbisOriginsConfig(){
+        return plugin.orbisOriginsConfig;
+    }
+
+    public static boolean ifOrbisOrigins(){
+        return plugin.orbisOriginsCompat;
     }
 
     public static boolean ifDebug(){

@@ -12,7 +12,7 @@
       "Description": "Drop Items"
     },
     "FlockArray": {
-      "Value": [ "Template_Swimming_Aggressive" ],
+      "Value": [ "Template_Mermaids_Mermaid" ],
       "Description": "Array containing NPCs for this flock type"
     },
     "ViewRange": {
@@ -40,7 +40,7 @@
       "Description": "How long to wait in an alerted or threatening state before switching to active combat."
     },
     "MaxHealth": {
-      "Value": 100,
+      "Value": 80,
       "Description": "Max health for the NPC"
     },
     "Attack": {
@@ -57,11 +57,11 @@
     },
     "DefaultNPCAttitude": {
       "Value": "Ignore",
-      "Description": "The default attitude towards players"
+      "Description": "The default attitude towards NPCs"
     },
     "DefaultPlayerAttitude": {
-      "Value": "Hostile",
-      "Description": "The default attitude towards NPCs"
+      "Value": "NEUTRAL",
+      "Description": "The default attitude towards players"
     },
     "DeathParticles": {
       "Value": "Effect_Death",
@@ -108,9 +108,9 @@
   "MotionControllerList": [
     {
       "Type": "Dive",
-      "MaxSwimSpeed": 10,
-      "Acceleration": 10,
-      "MaxDiveSpeed": 12,
+      "MaxSwimSpeed": 11,
+      "Acceleration": 11,
+      "MaxDiveSpeed": 13,
       "SwimDepth": 0.6,
       "SinkRatio": 0.4,
       "MinDiveDepth": 0,
@@ -128,11 +128,11 @@
       "Interactions": [
         {
           "$Comment": "Config for a successful melee hit, default values for Effects and HitShape are not overwritten here, see each NPC_ file",
-          "Parent": "NPC_Attack_Melee_Damage",
+          "Parent": "NPC_Mermaids_Mermaid_Attack_Damage",
           "DamageCalculator": {
             "Type": "Absolute",
             "BaseDamage": {
-              "Physical": 5
+              "Physical": 12
             },
             "RandomPercentageModifier": 0.1
           }
@@ -336,11 +336,6 @@
                 "Once": true
               },
               "Actions": [
-                {
-                  "Type": "PlayAnimation",
-                  "Slot": "Status",
-                  "Animation": "SwimSink"
-                },
                 {
                   "Type": "SpawnParticles",
                   "Offset": [ 0, 1, 0 ],

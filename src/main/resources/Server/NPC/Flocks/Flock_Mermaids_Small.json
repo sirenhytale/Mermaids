@@ -2,8 +2,8 @@
   "Type": "Weighted",
   "MinSize": 1,
   "SizeWeights": [
-    20,
-    40,
-    40
+    17,
+    38,
+    45
   ]
 }

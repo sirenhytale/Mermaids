@@ -30,12 +30,26 @@ commands.mermaids.admin.mermaidOnLand.playerMsg.enabled = You have enabled merma
 commands.mermaids.admin.mermaidOnLand.playerMsg.disabled = You have disabled mermaid transformation on land.
 commands.mermaids.admin.mermaidOnLand.consoleMsg.enabled = {username} has enabled mermaid transformation on land.
 commands.mermaids.admin.mermaidOnLand.consoleMsg.disabled = {username} has disabled mermaid transformation on land.
+commands.mermaids.admin.orbisorigins.desc = The Orbis Origins Compatibility command line.
+commands.mermaids.admin.orbisOrigins.mermaidsContent.desc = Command toggles to allow normal content from the Mermaids mod.
+commands.mermaids.admin.orbisOrigins.mermaidsContent.arg0.desc = Boolean to set if the regular mermaids content is enabled.
+commands.mermaids.admin.orbisOrigins.mermaidsContent.playerMsg.enabled = You have enabled regular content from the Mermaids mod.
+commands.mermaids.admin.orbisOrigins.mermaidsContent.playerMsg.disabled = You have disabled regular content from the Mermaids mod.
+commands.mermaids.admin.orbisOrigins.mermaidsContent.consoleMsg.enabled = {username} has disable regular content from the Mermaids mod.
+commands.mermaids.admin.orbisOrigins.mermaidsContent.consoleMsg.disabled = {username} has enabled regular content from the Mermaids mod.
+commands.mermaids.admin.orbisOrigins.onlyInWater.desc = Command toggles to disable normal content from the Mermaids mod.
+commands.mermaids.admin.orbisOrigins.onlyInWater.arg0.desc = Boolean to set if the regular mermaids content is disabled.
+commands.mermaids.admin.orbisOrigins.onlyInWater.playerMsg.enabled = You have enabled that the mermaid species will transform into a mermaid only in water.
+commands.mermaids.admin.orbisOrigins.onlyInWater.playerMsg.disabled = You have disabled that the mermaid species will transform into a mermaid only in water.
+commands.mermaids.admin.orbisOrigins.onlyInWater.consoleMsg.enabled = {username} has enabled that the mermaid species will transform into a mermaid only in water.
+commands.mermaids.admin.orbisOrigins.onlyInWater.consoleMsg.disabled = {username} has disabled that the mermaid species will transform into a mermaid only in water.
 commands.mermaids.admin.rainTransform.desc = Command toggles to allow users to transform from rain/snow.
 commands.mermaids.admin.rainTransform.arg0.desc = Boolean to set rain transformations.
 commands.mermaids.admin.rainTransform.playerMsg.enabled = You have allowed mermaid rain transformations.
 commands.mermaids.admin.rainTransform.playerMsg.disabled = You have disabled mermaid rain transformations.
 commands.mermaids.admin.rainTransform.consoleMsg.enabled = {username} has allowed mermaid rain transformations.
 commands.mermaids.admin.rainTransform.consoleMsg.disabled = {username} has disabled mermaid rain transformations.
+commands.mermaids.admin.reload.desc = Command to reload all of the Mermaids configs.
 commands.mermaids.admin.transformMode.desc = Command to set the Mermaids Transformation mode.
 commands.mermaids.admin.transformMode.arg0.desc = Integer value to set as the mermaids transformation mode (0 or 1).
 commands.mermaids.admin.transformMode.playerMsg.invalid = Invalid Transformation Mode. \nMode 0 : Transform into a mermaid when entering contact with water. \nMode 1 : Only when the user drinks a Mermaid Potion, will they transform into a mermaid.
@@ -101,6 +115,11 @@ items.mermaids.Mermaids_Potion_Mermaid_Transformation_Large.desc = Permanent tra
 # === npcRoles ===
 
 npcRoles.mermaids.mermaidEnemy.name = Mermaid
+
+# === species ===
+
+species.mermaid.name = Mermaid
+species.mermaid.desc = A mythical sea creature who has the legs as a tail of a fish.
 
 # === updateChecker ===
 

@@ -126,7 +126,11 @@ public class MermaidSettingsComponent implements Component<EntityStore> {
         boolean forcedMermaid = this.forceMermaid;
 
         if (HytaleServer.get().getPluginManager().getPlugin(PluginIdentifier.fromString("hexvane:OrbisOrigins")) != null) {
-            forcedMermaid = forceMermaidOrbisOrigin || this.forceMermaid;
+            forcedMermaid = forceMermaidOrbisOrigin || forcedMermaid;
+        }
+
+        if (HytaleServer.get().getPluginManager().getPlugin(PluginIdentifier.fromString("com.airijko:EndlessLeveling")) != null) {
+            forcedMermaid = forceMermaidEndlessLeveling || forcedMermaid;
         }
 
         return forcedMermaid;

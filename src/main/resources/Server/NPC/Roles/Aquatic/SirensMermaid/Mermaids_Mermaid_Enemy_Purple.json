@@ -7,7 +7,7 @@
       "Mermaids_Mermaid_Enemy_Purple"
     ],
     "DropList": "Drop_Mermaids_Mermaid_Enemy",
-    "MaxHealth": 80,
+    "MaxHealth": 75,
     "IsMemory": true,
     "MemoriesCategory": "Abyssal",
     "NameTranslationKey": {
