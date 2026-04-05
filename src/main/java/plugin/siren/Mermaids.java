@@ -14,6 +14,7 @@ import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import com.hypixel.hytale.server.core.util.Config;
 import plugin.siren.Commands.MermaidCmd;
 import plugin.siren.Commands.MermaidsCmd;
+import plugin.siren.Compatibility.EndlessLeveling.EndlessLevelingRegistry;
 import plugin.siren.Compatibility.OrbisOrigins.OrbisOriginsRegistry;
 import plugin.siren.Compatibility.PlaceholderAPI.PlaceholderAPICompat;
 import plugin.siren.Contributions.al3x.HStats;
@@ -44,6 +45,7 @@ public class Mermaids extends JavaPlugin {
     private ComponentType<EntityStore, MermaidSettingsComponent> mermaidSettingsComponent;
 
     private boolean orbisOriginsCompat;
+    private boolean endlessLevelingCompat;
 
     public Mermaids(@Nonnull JavaPluginInit init){
         super(init);
@@ -55,6 +57,7 @@ public class Mermaids extends JavaPlugin {
         new HStats(GithubIgnore.getHStatsModUUID(), VERSION);
 
         orbisOriginsCompat = false;
+        endlessLevelingCompat = false;
     }
 
     @Override
@@ -129,6 +132,22 @@ public class Mermaids extends JavaPlugin {
             }else{
                 LOGGER.atSevere().log("Orbis Origins is not installed!");
             }
+        }
+
+        if (HytaleServer.get().getPluginManager().getPlugin(PluginIdentifier.fromString("com.airijko:EndlessLeveling")) != null){
+
+            LOGGER.atInfo().log("Compatibility with Endless Leveling is successful.");
+
+            endlessLevelingCompat = true;
+
+            Runnable registerEndlessLeveling = new Runnable() {
+                @Override
+                public void run() {
+                    EndlessLevelingRegistry.register();
+                }
+            };
+
+            HytaleServer.SCHEDULED_EXECUTOR.schedule(registerEndlessLeveling,3, TimeUnit.SECONDS);
         }
 
         CommandRegistration mermaidsCmdRegistration = this.getCommandRegistry().registerCommand(new MermaidsCmd());

@@ -22,7 +22,8 @@
     "IwakuraEnterprises:Voile": "*",
     "Buuz135:BetterModlist": "*",
     "Reset:MoreNPC": "*",
-    "TaHie:Keyblades Reimagined": "*"
+    "TaHie:Keyblades Reimagined": "*",
+    "com.airijko:EndlessLeveling": "*"
   },
   "LoadBefore": {},
   "DisabledByDefault": false,

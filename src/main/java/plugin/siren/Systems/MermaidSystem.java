@@ -38,6 +38,7 @@ import com.hypixel.hytale.server.core.permissions.PermissionsModule;
 import com.hypixel.hytale.server.core.plugin.PluginManager;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.Universe;
+import com.hypixel.hytale.server.core.universe.world.ParticleUtil;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.chunk.WorldChunk;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
@@ -51,6 +52,7 @@ import plugin.siren.Mermaids;
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 public class MermaidSystem extends EntityTickingSystem<EntityStore> {
@@ -309,6 +311,15 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
 
                     mermaid.setArmorElapsedTime(0f);
                     mermaid.setMermaid(true);
+
+                    /* Particles
+                    TransformComponent transform = commandBuffer.getComponent(ref, TransformComponent.getComponentType());
+                    if (transform != null) {
+                        Vector3d pos = transform.getPosition();
+
+                        Mermaids.LOGGER.atInfo().log("spawn particle");
+                        ParticleUtil.spawnParticleEffect("Watering_Can_Splash", pos, commandBuffer);
+                    }*/
 
                     if(Mermaids.getConfig().get().ifConsoleLogs()) {
                         Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " has transformed into a Mermaid.");
