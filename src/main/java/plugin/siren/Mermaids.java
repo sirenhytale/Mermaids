@@ -24,6 +24,7 @@ import plugin.siren.Systems.MermaidComponent;
 import plugin.siren.Systems.MermaidSettingsComponent;
 import plugin.siren.Systems.MermaidSystem;
 import plugin.siren.Utils.API.MermaidsUpdateChecker;
+import plugin.siren.Utils.Config.EndlessLevelingConfig;
 import plugin.siren.Utils.Config.MermaidsConfig;
 import plugin.siren.Utils.Config.OrbisOriginsConfig;
 import plugin.siren.Utils.Cosmetics.MermaidCosmeticSkin;
@@ -40,6 +41,7 @@ public class Mermaids extends JavaPlugin {
     public static final HytaleLogger LOGGER = HytaleLogger.forEnclosingClass();
     private final Config<MermaidsConfig> config;
     private final Config<OrbisOriginsConfig> orbisOriginsConfig;
+    private final Config<EndlessLevelingConfig> endlessLevelingConfig;
 
     private ComponentType<EntityStore, MermaidComponent> mermaidComponent;
     private ComponentType<EntityStore, MermaidSettingsComponent> mermaidSettingsComponent;
@@ -53,6 +55,7 @@ public class Mermaids extends JavaPlugin {
         plugin = this;
         this.config = this.withConfig("Config", MermaidsConfig.CODEC);
         this.orbisOriginsConfig = this.withConfig("Compatibility/OrbisOrigins", OrbisOriginsConfig.CODEC);
+        this.endlessLevelingConfig = this.withConfig("Compatibility/EndlessLeveling", EndlessLevelingConfig.CODEC);
 
         new HStats(GithubIgnore.getHStatsModUUID(), VERSION);
 
@@ -97,6 +100,7 @@ public class Mermaids extends JavaPlugin {
 
         config.save();
         orbisOriginsConfig.save();
+        endlessLevelingConfig.save();
         LOGGER.atInfo().log("Loaded all configs settings.");
 
         boolean configUpdated = config.get().ifConfigUpdate();
@@ -111,13 +115,19 @@ public class Mermaids extends JavaPlugin {
             LOGGER.atInfo().log("Updated Orbis Origins config to latest version.");
         }
 
+        boolean endlessLevelingConfigUpdated = endlessLevelingConfig.get().ifConfigUpdate();
+        if(endlessLevelingConfigUpdated){
+            endlessLevelingConfig.save();
+            LOGGER.atInfo().log("Updated Orbis Origins config to latest version.");
+        }
+
         if (HytaleServer.get().getPluginManager().getPlugin(PluginIdentifier.fromString("HelpChat:PlaceholderAPI")) != null) {
             new PlaceholderAPICompat().register();
         }
 
         if(orbisOriginsConfig.get().isEnabledOrbisOrigins()){
             if (HytaleServer.get().getPluginManager().getPlugin(PluginIdentifier.fromString("hexvane:OrbisOrigins")) != null) {
-                LOGGER.atInfo().log("Compatibility with Orbis Origins is successful.");
+                LOGGER.atInfo().log("Compatibility with Orbis Origins was successful.");
 
                 orbisOriginsCompat = true;
 
@@ -130,24 +140,27 @@ public class Mermaids extends JavaPlugin {
 
                 HytaleServer.SCHEDULED_EXECUTOR.schedule(registerOrbisOrigins,3, TimeUnit.SECONDS);
             }else{
-                LOGGER.atSevere().log("Orbis Origins is not installed!");
+                LOGGER.atWarning().log("The Orbis Origins mod is not installed, inside the Orbis Origins Leveling config. You declared to enable Orbis Origins Compatibility.");
             }
         }
 
-        if (HytaleServer.get().getPluginManager().getPlugin(PluginIdentifier.fromString("com.airijko:EndlessLeveling")) != null){
+        if(endlessLevelingConfig.get().isEnabledEndlessLeveling()) {
+            if (HytaleServer.get().getPluginManager().getPlugin(PluginIdentifier.fromString("com.airijko:EndlessLeveling")) != null) {
+                LOGGER.atInfo().log("Compatibility with Endless Leveling was successful.");
 
-            LOGGER.atInfo().log("Compatibility with Endless Leveling is successful.");
+                endlessLevelingCompat = true;
 
-            endlessLevelingCompat = true;
+                Runnable registerEndlessLeveling = new Runnable() {
+                    @Override
+                    public void run() {
+                        EndlessLevelingRegistry.register();
+                    }
+                };
 
-            Runnable registerEndlessLeveling = new Runnable() {
-                @Override
-                public void run() {
-                    EndlessLevelingRegistry.register();
-                }
-            };
-
-            HytaleServer.SCHEDULED_EXECUTOR.schedule(registerEndlessLeveling,3, TimeUnit.SECONDS);
+                HytaleServer.SCHEDULED_EXECUTOR.schedule(registerEndlessLeveling, 3, TimeUnit.SECONDS);
+            }else{
+                LOGGER.atWarning().log("The Endless Leveling mod is not installed, inside the Mermaids Endless Leveling config. You declared to enable Endless Leveling Compatibility.");
+            }
         }
 
         CommandRegistration mermaidsCmdRegistration = this.getCommandRegistry().registerCommand(new MermaidsCmd());
@@ -211,8 +224,16 @@ public class Mermaids extends JavaPlugin {
         return plugin.orbisOriginsConfig;
     }
 
+    public static Config<EndlessLevelingConfig> getEndlessLeveingConfig(){
+        return plugin.endlessLevelingConfig;
+    }
+
     public static boolean ifOrbisOrigins(){
         return plugin.orbisOriginsCompat;
+    }
+
+    public static boolean ifEndlessLeveling(){
+        return plugin.endlessLevelingCompat;
     }
 
     public static boolean ifDebug(){

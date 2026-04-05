@@ -81,7 +81,7 @@ public class MermaidsUpdateChecker {
 
             if(sendToPlayer && player != null) {
                 if (player.hasPermission("*") && Mermaids.getConfig().get().ifNewVersion()) {
-                    player.sendMessage(versionMessage.color(Color.CYAN));
+                    player.sendMessage(versionMessage.color(Color.CYAN).link("https://www.mermaids.dev/mermaids/curseforge/"));
                 }
             }
         }

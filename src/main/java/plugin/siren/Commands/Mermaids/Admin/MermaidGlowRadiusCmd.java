@@ -17,7 +17,9 @@ import javax.annotation.Nonnull;
 
 public class MermaidGlowRadiusCmd extends AbstractPlayerCommand {
     public MermaidGlowRadiusCmd() {
-        super("mermaidglowradius", "server.commands.mermaids.admin.mermaidGlowRadius.desc");
+        super("glowradius", "server.commands.mermaids.admin.mermaidGlowRadius.desc");
+
+        this.addAliases("mermaidglowradius");
 
         this.requirePermission("mermaids.admin.mermaidglow");
     }
@@ -39,11 +41,11 @@ public class MermaidGlowRadiusCmd extends AbstractPlayerCommand {
         if(player != null) {
             player.sendMessage(playerMessage);
 
-            String consoleTranslationId = "commands.mermaids.admin.mermaidGlowRadius.consoleMsg.set";
+            String consoleTranslationId = "server.commands.mermaids.admin.mermaidGlowRadius.consoleMsg.set";
             String consoleMessage = Message.translation(consoleTranslationId).param("username", player.getDisplayName()).param("radius", mermaidGlowRadius).getAnsiMessage();
             Mermaids.LOGGER.atInfo().log(consoleMessage);
         }else{
-            String consoleTranslationId = "commands.mermaids.admin.mermaidGlowRadius.consoleMsg.set";
+            String consoleTranslationId = "server.commands.mermaids.admin.mermaidGlowRadius.consoleMsg.set";
             String consoleMessage = Message.translation(consoleTranslationId).param("username", "Unknown").param("radius", mermaidGlowRadius).getAnsiMessage();
             Mermaids.LOGGER.atInfo().log(consoleMessage);
         }

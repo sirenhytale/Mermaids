@@ -19,6 +19,8 @@ public class MermaidOnLandCmd extends AbstractPlayerCommand {
     public MermaidOnLandCmd() {
         super("mermaidonland", "server.commands.mermaids.admin.mermaidOnLand.desc");
 
+        this.addAliases("onland");
+
         this.requirePermission("mermaids.admin.mermaidonland");
     }
 

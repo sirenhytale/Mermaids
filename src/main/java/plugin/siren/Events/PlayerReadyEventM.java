@@ -10,8 +10,10 @@ import com.hypixel.hytale.server.core.entity.entities.player.movement.MovementMa
 import com.hypixel.hytale.server.core.event.events.player.PlayerReadyEvent;
 import com.hypixel.hytale.server.core.modules.entity.component.ModelComponent;
 import com.hypixel.hytale.server.core.modules.entity.player.PlayerSkinComponent;
+import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import plugin.siren.Compatibility.EndlessLeveling.EndlessLevelingRegistry;
 import plugin.siren.Compatibility.OrbisOrigins.OrbisOriginsRegistry;
 import plugin.siren.Mermaids;
 import plugin.siren.Systems.MermaidComponent;
@@ -97,6 +99,15 @@ public class PlayerReadyEventM {
 
             if(Mermaids.ifOrbisOrigins()){
                 OrbisOriginsRegistry.checkForMermaidSpecies(store, world, ref);
+            }
+
+            if(Mermaids.ifEndlessLeveling()){
+                PlayerRef playerRef = store.getComponent(ref, PlayerRef.getComponentType());
+                if(playerRef != null) {
+                    EndlessLevelingRegistry.checkForMermaidRaces(store, world, ref, playerRef);
+                }else{
+                    Mermaids.LOGGER.atSevere().log("PlayerRef inside ifEndlessLeveling for onPlayerReadyEvent is null!");
+                }
             }
 
             MermaidsUpdateChecker.sendUpdateMessage(player);

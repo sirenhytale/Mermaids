@@ -19,6 +19,8 @@ public class TransformModeCmd extends AbstractPlayerCommand {
     public TransformModeCmd() {
         super("transformmode", "server.commands.mermaids.admin.transformMode.desc");
 
+        this.addAliases("mode");
+
         this.requirePermission("mermaids.admin.mode");
     }
 

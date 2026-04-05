@@ -19,6 +19,8 @@ public class BlockTransformCmd extends AbstractPlayerCommand {
     public BlockTransformCmd() {
         super("blocktransform", "server.commands.mermaids.admin.blockTransform.desc");
 
+        this.addAliases("block");
+
         this.requirePermission("mermaids.admin.blocktransform");
     }
 

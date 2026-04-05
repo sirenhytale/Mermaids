@@ -7,6 +7,8 @@ public class DebugCmd extends AbstractCommandCollection {
     public DebugCmd(){
         super("debug","server.commands.mermaids.debug.desc");
 
+        this.addAliases("d");
+
         this.addSubCommand(new MermaidRingCmd());
 
         this.requirePermission("mermaids.debug");

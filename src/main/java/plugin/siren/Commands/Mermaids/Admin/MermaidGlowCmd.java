@@ -19,6 +19,8 @@ public class MermaidGlowCmd extends AbstractPlayerCommand {
     public MermaidGlowCmd() {
         super("mermaidglow", "server.commands.mermaids.admin.mermaidGlow.desc");
 
+        this.addAliases("glow");
+
         this.requirePermission("mermaids.admin.mermaidglow");
     }
 

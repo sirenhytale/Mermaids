@@ -19,6 +19,7 @@ public class ReloadCmd extends AbstractAsyncCommand {
     protected CompletableFuture<Void> executeAsync(@Nonnull CommandContext context) {
         Mermaids.getConfig().load();
         Mermaids.getOrbisOriginsConfig().load();
+        Mermaids.getEndlessLeveingConfig().load();
 
         Mermaids.LOGGER.atInfo().log("Reloaded all of the Mermaids configs.");
 

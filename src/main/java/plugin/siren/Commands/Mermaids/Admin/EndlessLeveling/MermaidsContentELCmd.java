@@ -1,4 +1,4 @@
-package plugin.siren.Commands.Mermaids.Admin.OrbisOrigins;
+package plugin.siren.Commands.Mermaids.Admin.EndlessLeveling;
 
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.component.Store;
@@ -11,19 +11,19 @@ import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
-import plugin.siren.Compatibility.OrbisOrigins.OrbisOriginsRegistry;
+import plugin.siren.Compatibility.EndlessLeveling.EndlessLevelingRegistry;
 import plugin.siren.Mermaids;
 
 import javax.annotation.Nonnull;
 
-public class MermaidsContentCmd extends AbstractPlayerCommand {
-    public MermaidsContentCmd() {
-        super("mermaidscontent", "server.commands.mermaids.admin.orbisOrigins.mermaidsContent.desc");
+public class MermaidsContentELCmd extends AbstractPlayerCommand {
+    public MermaidsContentELCmd() {
+        super("mermaidscontent", "server.commands.mermaids.admin.endlessleveling.mermaidsContent.desc");
 
-        this.requirePermission("mermaids.admin.orbisorigins.mermaidscontent");
+        this.requirePermission("mermaids.admin.endlessleveling.mermaidscontent");
     }
 
-    RequiredArg<Boolean> mermaidsContentArg = this.withRequiredArg("Mermaids Content", "server.commands.mermaids.admin.orbisOrigins.mermaidsContent.arg0.desc", ArgTypes.BOOLEAN);
+    RequiredArg<Boolean> mermaidsContentArg = this.withRequiredArg("Mermaids Content", "server.commands.mermaids.admin.endlessleveling.mermaidsContent.arg0.desc", ArgTypes.BOOLEAN);
 
     @Override
     protected void execute(@Nonnull CommandContext commandContext, @Nonnull Store<EntityStore> store, @Nonnull Ref<EntityStore> ref, @Nonnull PlayerRef playerRef, @Nonnull World world) {
@@ -31,19 +31,19 @@ public class MermaidsContentCmd extends AbstractPlayerCommand {
 
         boolean mermaidsContent = mermaidsContentArg.get(commandContext);
 
-        Mermaids.getOrbisOriginsConfig().get().setMermaidsContent(mermaidsContent);
-        Mermaids.getOrbisOriginsConfig().save();
+        Mermaids.getEndlessLeveingConfig().get().setMermaidsContent(mermaidsContent);
+        Mermaids.getEndlessLeveingConfig().save();
 
-        OrbisOriginsRegistry.requireForcedMermaids();
+        EndlessLevelingRegistry.requireForcedMermaids();
 
         String playerTranslationId = "";
         String consoleTranslationId = "";
         if (mermaidsContent) {
-            playerTranslationId = "server.commands.mermaids.admin.orbisOrigins.mermaidsContent.playerMsg.enabled";
-            consoleTranslationId = "server.commands.mermaids.admin.orbisOrigins.mermaidsContent.consoleMsg.enabled";
+            playerTranslationId = "server.commands.mermaids.admin.orbisOrigins.endlessleveling.playerMsg.enabled";
+            consoleTranslationId = "server.commands.mermaids.admin.orbisOrigins.endlessleveling.consoleMsg.enabled";
         } else {
-            playerTranslationId = "server.commands.mermaids.admin.orbisOrigins.mermaidsContent.playerMsg.disabled";
-            consoleTranslationId = "server.commands.mermaids.admin.orbisOrigins.mermaidsContent.consoleMsg.disabled";
+            playerTranslationId = "server.commands.mermaids.admin.orbisOrigins.endlessleveling.playerMsg.disabled";
+            consoleTranslationId = "server.commands.mermaids.admin.orbisOrigins.endlessleveling.consoleMsg.disabled";
         }
 
         if(player != null) {

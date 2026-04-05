@@ -16,34 +16,34 @@ import plugin.siren.Mermaids;
 
 import javax.annotation.Nonnull;
 
-public class OnlyInWaterCmd extends AbstractPlayerCommand {
-    public OnlyInWaterCmd() {
-        super("onlyinwater", "server.commands.mermaids.orbisOrigins.onlyInWater.onlyinwater.desc");
+public class MermaidsContentOOCmd extends AbstractPlayerCommand {
+    public MermaidsContentOOCmd() {
+        super("mermaidscontent", "server.commands.mermaids.admin.orbisOrigins.mermaidsContent.desc");
 
-        this.requirePermission("mermaids.admin.orbisorigins.onlyinwater");
+        this.requirePermission("mermaids.admin.orbisorigins.mermaidscontent");
     }
 
-    RequiredArg<Boolean> onlyInWaterArg = this.withRequiredArg("Mermaid only in water", "server.commands.mermaids.admin.orbisOrigins.onlyInWater.arg0.desc", ArgTypes.BOOLEAN);
+    RequiredArg<Boolean> mermaidsContentArg = this.withRequiredArg("Mermaids Content", "server.commands.mermaids.admin.orbisOrigins.mermaidsContent.arg0.desc", ArgTypes.BOOLEAN);
 
     @Override
     protected void execute(@Nonnull CommandContext commandContext, @Nonnull Store<EntityStore> store, @Nonnull Ref<EntityStore> ref, @Nonnull PlayerRef playerRef, @Nonnull World world) {
         Player player = store.getComponent(ref, Player.getComponentType());
 
-        boolean onlyInWater = onlyInWaterArg.get(commandContext);
+        boolean mermaidsContent = mermaidsContentArg.get(commandContext);
 
-        Mermaids.getOrbisOriginsConfig().get().setMermaidOnlyInWater(onlyInWater);
+        Mermaids.getOrbisOriginsConfig().get().setMermaidsContent(mermaidsContent);
         Mermaids.getOrbisOriginsConfig().save();
 
-        OrbisOriginsRegistry.mermaidOnlyInWater();
+        OrbisOriginsRegistry.requireForcedMermaids();
 
         String playerTranslationId = "";
         String consoleTranslationId = "";
-        if (onlyInWater) {
-            playerTranslationId = "server.commands.mermaids.admin.orbisOrigins.onlyInWater.playerMsg.enabled";
-            consoleTranslationId = "server.commands.mermaids.admin.orbisOrigins.onlyInWater.consoleMsg.enabled";
+        if (mermaidsContent) {
+            playerTranslationId = "server.commands.mermaids.admin.orbisOrigins.mermaidsContent.playerMsg.enabled";
+            consoleTranslationId = "server.commands.mermaids.admin.orbisOrigins.mermaidsContent.consoleMsg.enabled";
         } else {
-            playerTranslationId = "server.commands.mermaids.admin.orbisOrigins.onlyInWater.playerMsg.disabled";
-            consoleTranslationId = "server.commands.mermaids.admin.orbisOrigins.onlyInWater.consoleMsg.disabled";
+            playerTranslationId = "server.commands.mermaids.admin.orbisOrigins.mermaidsContent.playerMsg.disabled";
+            consoleTranslationId = "server.commands.mermaids.admin.orbisOrigins.mermaidsContent.consoleMsg.disabled";
         }
 
         if(player != null) {

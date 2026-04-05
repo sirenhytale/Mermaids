@@ -1,4 +1,4 @@
-package plugin.siren.Commands.Mermaids.Admin;
+package plugin.siren.Commands.Mermaids.Admin.OrbisOrigins;
 
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.component.Store;
@@ -11,38 +11,39 @@ import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import plugin.siren.Compatibility.OrbisOrigins.OrbisOriginsRegistry;
 import plugin.siren.Mermaids;
 
 import javax.annotation.Nonnull;
 
-public class RainTransformCmd extends AbstractPlayerCommand {
-    public RainTransformCmd() {
-        super("raintransform", "server.commands.mermaids.admin.rainTransform.desc");
+public class OnlyInWaterOOCmd extends AbstractPlayerCommand {
+    public OnlyInWaterOOCmd() {
+        super("onlyinwater", "server.commands.mermaids.orbisOrigins.onlyInWater.onlyinwater.desc");
 
-        this.addAliases("rain");
-
-        this.requirePermission("mermaids.admin.raintransform");
+        this.requirePermission("mermaids.admin.orbisorigins.onlyinwater");
     }
 
-    RequiredArg<Boolean> rainTransformArg = this.withRequiredArg("Allow Rain Transformation", "server.commands.mermaids.admin.rainTransform.arg0.desc", ArgTypes.BOOLEAN);
+    RequiredArg<Boolean> onlyInWaterArg = this.withRequiredArg("Mermaid only in water", "server.commands.mermaids.admin.orbisOrigins.onlyInWater.arg0.desc", ArgTypes.BOOLEAN);
 
     @Override
     protected void execute(@Nonnull CommandContext commandContext, @Nonnull Store<EntityStore> store, @Nonnull Ref<EntityStore> ref, @Nonnull PlayerRef playerRef, @Nonnull World world) {
         Player player = store.getComponent(ref, Player.getComponentType());
 
-        boolean rainTransform = rainTransformArg.get(commandContext);
+        boolean onlyInWater = onlyInWaterArg.get(commandContext);
 
-        Mermaids.getConfig().get().setRainTransformation(rainTransform);
-        Mermaids.getConfig().save();
+        Mermaids.getOrbisOriginsConfig().get().setMermaidOnlyInWater(onlyInWater);
+        Mermaids.getOrbisOriginsConfig().save();
+
+        OrbisOriginsRegistry.mermaidOnlyInWater();
 
         String playerTranslationId = "";
         String consoleTranslationId = "";
-        if (rainTransform) {
-            playerTranslationId = "server.commands.mermaids.admin.rainTransform.playerMsg.enabled";
-            consoleTranslationId = "server.commands.mermaids.admin.rainTransform.consoleMsg.enabled";
+        if (onlyInWater) {
+            playerTranslationId = "server.commands.mermaids.admin.orbisOrigins.onlyInWater.playerMsg.enabled";
+            consoleTranslationId = "server.commands.mermaids.admin.orbisOrigins.onlyInWater.consoleMsg.enabled";
         } else {
-            playerTranslationId = "server.commands.mermaids.admin.rainTransform.playerMsg.disabled";
-            consoleTranslationId = "server.commands.mermaids.admin.rainTransform.consoleMsg.disabled";
+            playerTranslationId = "server.commands.mermaids.admin.orbisOrigins.onlyInWater.playerMsg.disabled";
+            consoleTranslationId = "server.commands.mermaids.admin.orbisOrigins.onlyInWater.consoleMsg.disabled";
         }
 
         if(player != null) {

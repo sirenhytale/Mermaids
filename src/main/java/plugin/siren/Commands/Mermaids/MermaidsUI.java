@@ -17,7 +17,7 @@ import java.util.concurrent.CompletableFuture;
 
 public class MermaidsUI extends AbstractAsyncCommand {
     public MermaidsUI() {
-        super("ui", "server.commands.mermaids.mermaid.desc");
+        super("menu", "server.commands.mermaids.mermaid.desc");
 
         if (Mermaids.getConfig().get().getRequireUIPermission()) {
             this.requirePermission("mermaids.ui");
@@ -25,6 +25,8 @@ public class MermaidsUI extends AbstractAsyncCommand {
         } else {
             this.setPermissionGroup(GameMode.Adventure);
         }
+
+        this.addAliases("ui");
     }
 
     @Nonnull

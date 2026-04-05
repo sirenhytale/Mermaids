@@ -20,7 +20,11 @@ import javax.annotation.Nonnull;
 
 public class MermaidRingCmd extends AbstractPlayerCommand {
     public MermaidRingCmd() {
-        super("givemermaidring", "server.commands.mermaids.debug.giveMermaidRing.desc");
+        super("getmermaidring", "server.commands.mermaids.debug.giveMermaidRing.desc");
+
+        this.addAliases("givemermaidring");
+        this.addAliases("givering");
+        this.addAliases("getring");
 
         this.requirePermission("mermaids.debug.mermaidring");
         this.setPermissionGroup(GameMode.Creative);

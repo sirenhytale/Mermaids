@@ -8,6 +8,19 @@ commands.mermaids.admin.blockTransform.playerMsg.enabled = You have allowed merm
 commands.mermaids.admin.blockTransform.playerMsg.disabled = You have disabled mermaid block transformations.
 commands.mermaids.admin.blockTransform.consoleMsg.enabled = {username} has allowed mermaid block transformations.
 commands.mermaids.admin.blockTransform.consoleMsg.disabled = {username} has disabled mermaid block transformations.
+commands.mermaids.admin.endlessleveling.desc = The Endless Leveling Compatibility command line.
+commands.mermaids.admin.endlessleveling.mermaidsContent.desc = Command toggles to allow normal content from the Mermaids mod.
+commands.mermaids.admin.endlessleveling.mermaidsContent.arg0.desc = Boolean to set if the regular mermaids content is enabled.
+commands.mermaids.admin.endlessleveling.mermaidsContent.playerMsg.enabled = You have enabled regular content from the Mermaids mod.
+commands.mermaids.admin.endlessleveling.mermaidsContent.playerMsg.disabled = You have disabled regular content from the Mermaids mod.
+commands.mermaids.admin.endlessleveling.mermaidsContent.consoleMsg.enabled = {username} has disable regular content from the Mermaids mod.
+commands.mermaids.admin.endlessleveling.mermaidsContent.consoleMsg.disabled = {username} has enabled regular content from the Mermaids mod.
+commands.mermaids.admin.endlessleveling.onlyInWater.desc = Command toggles to disable normal content from the Mermaids mod.
+commands.mermaids.admin.endlessleveling.onlyInWater.arg0.desc = Boolean to set if the regular mermaids content is disabled.
+commands.mermaids.admin.endlessleveling.onlyInWater.playerMsg.enabled = You have enabled that the mermaid species will transform into a mermaid only in water.
+commands.mermaids.admin.endlessleveling.onlyInWater.playerMsg.disabled = You have disabled that the mermaid species will transform into a mermaid only in water.
+commands.mermaids.admin.endlessleveling.onlyInWater.consoleMsg.enabled = {username} has enabled that the mermaid species will transform into a mermaid only in water.
+commands.mermaids.admin.endlessleveling.onlyInWater.consoleMsg.disabled = {username} has disabled that the mermaid species will transform into a mermaid only in water.
 commands.mermaids.admin.itemSpeed.desc = Command toggles to allow some items to increase the swim movement speed.
 commands.mermaids.admin.itemSpeed.arg0.desc = Boolean to set that some items will increasing swim speed.
 commands.mermaids.admin.itemSpeed.playerMsg.enabled = You have allowed that some items will increase swim speed.
@@ -115,6 +128,21 @@ items.mermaids.Mermaids_Potion_Mermaid_Transformation_Large.desc = Permanent tra
 # === npcRoles ===
 
 npcRoles.mermaids.mermaidEnemy.name = Mermaid
+
+# === races ===
+
+races.mermaid.name = Mermaid
+races.mermaid.desc = A mythical sea creature who has the tail of a fish.
+races.mermaidPathfinder.name = Mermaid Pathfinder
+races.mermaidPathfinder.desc = to-be-written
+races.mermaidTidecaller.name = Mermaid Tidecaller
+races.mermaidTidecaller.desc = to-be-written
+races.mermaidTidebreaker.name = Mermaid Tidebreaker
+races.mermaidTidebreaker.desc = to-be-written
+races.mermaidAbyssal.name = Mermaid Abyssal
+races.mermaidAbyssal.desc = to-be-written
+races.mermaidEmpress.name = Mermaid Empress
+races.mermaidEmpress.desc = The ultimate mythical sea creature who rules the seven seas.
 
 # === species ===
 

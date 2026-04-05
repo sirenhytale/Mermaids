@@ -20,6 +20,8 @@ public class MermaidsPermPotionRemove extends AbstractPlayerCommand {
     public MermaidsPermPotionRemove() {
         super("permpotionremove", "server.commands.mermaids.permPotionRemove.desc");
 
+        this.addAliases("potionremove");
+
         this.setPermissionGroup(GameMode.Adventure);
     }
 
