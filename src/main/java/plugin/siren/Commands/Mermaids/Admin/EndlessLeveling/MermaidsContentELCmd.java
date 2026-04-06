@@ -39,11 +39,11 @@ public class MermaidsContentELCmd extends AbstractPlayerCommand {
         String playerTranslationId = "";
         String consoleTranslationId = "";
         if (mermaidsContent) {
-            playerTranslationId = "server.commands.mermaids.admin.orbisOrigins.endlessleveling.playerMsg.enabled";
-            consoleTranslationId = "server.commands.mermaids.admin.orbisOrigins.endlessleveling.consoleMsg.enabled";
+            playerTranslationId = "server.commands.mermaids.admin.endlessleveling.mermaidsContent.playerMsg.enabled";
+            consoleTranslationId = "server.commands.mermaids.admin.endlessleveling.mermaidsContent.consoleMsg.enabled";
         } else {
-            playerTranslationId = "server.commands.mermaids.admin.orbisOrigins.endlessleveling.playerMsg.disabled";
-            consoleTranslationId = "server.commands.mermaids.admin.orbisOrigins.endlessleveling.consoleMsg.disabled";
+            playerTranslationId = "server.commands.mermaids.admin.endlessleveling.mermaidsContent.playerMsg.disabled";
+            consoleTranslationId = "server.commands.mermaids.admin.endlessleveling.mermaidsContent.consoleMsg.disabled";
         }
 
         if(player != null) {

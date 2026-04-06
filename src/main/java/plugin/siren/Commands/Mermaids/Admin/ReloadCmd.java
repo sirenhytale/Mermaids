@@ -2,6 +2,8 @@ package plugin.siren.Commands.Mermaids.Admin;
 
 import com.hypixel.hytale.server.core.command.system.CommandContext;
 import com.hypixel.hytale.server.core.command.system.basecommands.AbstractAsyncCommand;
+import plugin.siren.Compatibility.EndlessLeveling.EndlessLevelingRegistry;
+import plugin.siren.Compatibility.OrbisOrigins.OrbisOriginsRegistry;
 import plugin.siren.Mermaids;
 
 import javax.annotation.Nonnull;
@@ -22,6 +24,16 @@ public class ReloadCmd extends AbstractAsyncCommand {
         Mermaids.getEndlessLeveingConfig().load();
 
         Mermaids.LOGGER.atInfo().log("Reloaded all of the Mermaids configs.");
+
+        if(Mermaids.ifOrbisOrigins()){
+            OrbisOriginsRegistry.requireForcedMermaids();
+            OrbisOriginsRegistry.mermaidOnlyInWater();
+        }
+
+        if(Mermaids.ifEndlessLeveling()){
+            EndlessLevelingRegistry.requireForcedMermaids();
+            EndlessLevelingRegistry.mermaidOnlyInWater();
+        }
 
         return CompletableFuture.completedFuture(null);
     }

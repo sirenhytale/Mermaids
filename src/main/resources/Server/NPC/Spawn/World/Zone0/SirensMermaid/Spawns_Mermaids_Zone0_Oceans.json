@@ -4,13 +4,13 @@
   ],
   "NPCs": [
     {
-      "Weight": 4,
+      "Weight": 3,
       "Id": "Mermaids_Mermaid_Enemy_Orange",
       "Flock": "Flock_Mermaids_Small",
       "SpawnFluidTag": "Water"
     },
     {
-      "Weight": 4,
+      "Weight": 3,
       "Id": "Mermaids_Mermaid_Enemy_Purple",
       "Flock": "Flock_Mermaids_Small",
       "SpawnFluidTag": "Water"

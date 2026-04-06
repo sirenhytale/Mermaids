@@ -262,7 +262,7 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                 }
 
                 //Began transformation into Mermaid
-                if ((!mermaid.isMermaid() && mermaid.getElapsedTime() >= 35f) || (!mermaid.isMermaid() && (forcedMermaid || forcedMermaidWater))) {
+                if ((!mermaid.isMermaid() && mermaid.getElapsedTime() >= 35f) || (!mermaid.isMermaid() && forcedMermaid)) {
                     if (Mermaids.ifDebug()) {
                         player.sendMessage(Message.raw("Now Swimming (35 ticks)"));
                     }

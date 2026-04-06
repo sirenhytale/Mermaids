@@ -104,7 +104,7 @@ public class PlayerReadyEventM {
             if(Mermaids.ifEndlessLeveling()){
                 PlayerRef playerRef = store.getComponent(ref, PlayerRef.getComponentType());
                 if(playerRef != null) {
-                    EndlessLevelingRegistry.checkForMermaidRaces(store, world, ref, playerRef);
+                    EndlessLevelingRegistry.checkForMermaidRaces(store, ref, playerRef);
                 }else{
                     Mermaids.LOGGER.atSevere().log("PlayerRef inside ifEndlessLeveling for onPlayerReadyEvent is null!");
                 }

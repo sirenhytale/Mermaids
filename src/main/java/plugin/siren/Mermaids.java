@@ -34,7 +34,7 @@ import javax.annotation.Nonnull;
 import java.util.concurrent.TimeUnit;
 
 public class Mermaids extends JavaPlugin {
-    private static final String VERSION = "2.2.0";
+    private static final String VERSION = "2.3.0";
     private static final boolean DEBUG = false;
 
     private static Mermaids plugin;
@@ -150,14 +150,7 @@ public class Mermaids extends JavaPlugin {
 
                 endlessLevelingCompat = true;
 
-                Runnable registerEndlessLeveling = new Runnable() {
-                    @Override
-                    public void run() {
-                        EndlessLevelingRegistry.register();
-                    }
-                };
-
-                HytaleServer.SCHEDULED_EXECUTOR.schedule(registerEndlessLeveling, 3, TimeUnit.SECONDS);
+                EndlessLevelingRegistry.register();
             }else{
                 LOGGER.atWarning().log("The Endless Leveling mod is not installed, inside the Mermaids Endless Leveling config. You declared to enable Endless Leveling Compatibility.");
             }
