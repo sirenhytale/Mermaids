@@ -11,6 +11,7 @@ import com.hypixel.hytale.server.core.HytaleServer;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.Universe;
 import com.hypixel.hytale.server.core.universe.world.World;
+import com.hypixel.hytale.server.core.universe.world.events.AllWorldsLoadedEvent;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import plugin.siren.Compatibility.EndlessLeveling.Races.Adventurer.RaceMermaidPathfinder;
 import plugin.siren.Compatibility.EndlessLeveling.Races.Adventurer.RaceMermaidTidecaller;
@@ -67,9 +68,11 @@ public class EndlessLevelingRegistry {
             }
         };
 
-        HytaleServer.SCHEDULED_EXECUTOR.schedule(updateLanguageVariables,15, TimeUnit.SECONDS);
+        Mermaids.get().getEventRegistry().registerGlobal(AllWorldsLoadedEvent.class, allWorldsLoadedEvent -> {
+            HytaleServer.SCHEDULED_EXECUTOR.schedule(updateLanguageVariables,5, TimeUnit.SECONDS);
 
-        HytaleServer.SCHEDULED_EXECUTOR.scheduleAtFixedRate(runnableCheckForMermaidRaces,15, 12, TimeUnit.SECONDS);
+            HytaleServer.SCHEDULED_EXECUTOR.scheduleAtFixedRate(runnableCheckForMermaidRaces,15, 12, TimeUnit.SECONDS);
+        });
 
         requireForcedMermaids();
         mermaidOnlyInWater();

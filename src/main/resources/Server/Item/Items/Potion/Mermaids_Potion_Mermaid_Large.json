@@ -41,7 +41,7 @@
   "Recipe": {
     "Input": [
       {
-        "ItemId": "Potion_Mermaid_Medium",
+        "ItemId": "Mermaids_Potion_Mermaid_Medium",
         "Quantity": 2
       },
       {
@@ -68,7 +68,7 @@
         "Categories": [
           "Alchemy_Potions_Misc"
         ],
-        "RequiredTierLevel": 2
+        "RequiredTierLevel": 3
       }
     ],
     "TimeSeconds": 2

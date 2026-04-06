@@ -3,6 +3,7 @@ package plugin.siren.Utils.API;
 import com.hypixel.hytale.server.core.HytaleServer;
 import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.entity.entities.Player;
+import com.hypixel.hytale.server.core.universe.world.events.AllWorldsLoadedEvent;
 import plugin.siren.Mermaids;
 
 import javax.annotation.Nullable;
@@ -12,15 +13,19 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class MermaidsUpdateChecker {
-    public static String checkForUpdate(){
+    public static List<String> getVersionStrings(){
         try{
             URL url = new URL("https://api.mermaids.dev/versions/mermaids/release/");
 
             URLConnection connection = url.openConnection();
             InputStream inputStream = connection.getInputStream();
+
+            List<String> list = new ArrayList<>();
 
             try(BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))){
                 String line = null;
@@ -29,17 +34,26 @@ public class MermaidsUpdateChecker {
                     if(line.contains("<h1>{ version: ") && line.contains(" }</h1>")){
                         line = line.substring(line.indexOf("<h1>{ version: ") + 15);
                         line = line.substring(0, line.indexOf(" }</"));
-                        return line;
+                        list.add(line);
+                    }
+
+                    if(line.contains("<h3>{ ignore-version: ") && line.contains(" }</h3>")){
+                        line = line.substring(line.indexOf("<h3>{ ignore-version: ") + 22);
+                        line = line.substring(0, line.indexOf(" }</"));
+                        list.add(line);
                     }
                 }
+
+                return list;
             }
         } catch (Exception e) {
             Mermaids.LOGGER.atInfo().log("Exception with MermaidsUpdateChecker : " + e.toString());
 
-            return Mermaids.getVersion();
-        }
+            List<String> list = new ArrayList<>();
+            list.add(Mermaids.getVersion());
 
-        return Mermaids.getVersion();
+            return list;
+        }
     }
 
     public static void sendUpdateMessage(){
@@ -48,10 +62,19 @@ public class MermaidsUpdateChecker {
 
     public static void sendUpdateMessage(Type type){
         if(Type.StartUp.getValue() == type.getValue()) {
-            String recentVersion = MermaidsUpdateChecker.checkForUpdate();
-            if(!Mermaids.getVersion().equalsIgnoreCase(recentVersion)) {
+            List<String> recentVersions = MermaidsUpdateChecker.getVersionStrings();
+
+            boolean outDated = true;
+            String latestVersion = recentVersions.getFirst();
+            for(int i = 0; i < recentVersions.size(); i++){
+                if(recentVersions.get(i).equalsIgnoreCase(Mermaids.getVersion())){
+                    outDated = false;
+                }
+            }
+
+            if(outDated) {
                 Mermaids.LOGGER.atInfo().log("= =- -=- -=- -=- -=- -=- -=- -=- -= =");
-                Mermaids.LOGGER.atInfo().log("The Mermaids mod version is outdated, Mermaids has released v" + recentVersion + ".");
+                Mermaids.LOGGER.atInfo().log("The Mermaids mod version is outdated, Mermaids has released v" + latestVersion + ".");
             }
 
             Runnable updateCheckRunnable = new Runnable() {
@@ -61,7 +84,9 @@ public class MermaidsUpdateChecker {
                 }
             };
 
-            HytaleServer.SCHEDULED_EXECUTOR.scheduleAtFixedRate(updateCheckRunnable, 15, 60*60*6, TimeUnit.SECONDS);
+            Mermaids.get().getEventRegistry().registerGlobal(AllWorldsLoadedEvent.class, allWorldsLoadedEvent -> {
+                HytaleServer.SCHEDULED_EXECUTOR.scheduleAtFixedRate(updateCheckRunnable, 3, 60*60*6, TimeUnit.SECONDS);
+            });
         }else{
             sendUpdateMessage();
         }
@@ -72,15 +97,24 @@ public class MermaidsUpdateChecker {
     }
 
     public static void sendUpdateMessage(@Nullable Player player, boolean sendToPlayer){
-        String recentVersion = MermaidsUpdateChecker.checkForUpdate();
-        if(!Mermaids.getVersion().equalsIgnoreCase(recentVersion)){
+        List<String> recentVersions = MermaidsUpdateChecker.getVersionStrings();
+
+        boolean outDated = true;
+        String latestVersion = recentVersions.getFirst();
+        for(int i = 0; i < recentVersions.size(); i++){
+            if(recentVersions.get(i).equalsIgnoreCase(Mermaids.getVersion())){
+                outDated = false;
+            }
+        }
+
+        if(outDated){
             String translationId = "server.updateChecker.mermaids.release.message";
-            Message versionMessage = Message.translation(translationId).param("version", recentVersion);
+            Message versionMessage = Message.translation(translationId).param("version", latestVersion);
 
             Mermaids.LOGGER.atInfo().log(versionMessage.getAnsiMessage());
 
             if(sendToPlayer && player != null) {
-                if (player.hasPermission("*") && Mermaids.getConfig().get().ifNewVersion()) {
+                if ((player.hasPermission("*") || player.hasPermission("mermaids.admin")) && Mermaids.getConfig().get().ifNewVersion()) {
                     player.sendMessage(versionMessage.color(Color.CYAN).link("https://www.mermaids.dev/mermaids/curseforge/"));
                 }
             }

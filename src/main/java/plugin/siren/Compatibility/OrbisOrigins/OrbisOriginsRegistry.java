@@ -8,6 +8,7 @@ import com.hypixel.hytale.server.core.HytaleServer;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.Universe;
 import com.hypixel.hytale.server.core.universe.world.World;
+import com.hypixel.hytale.server.core.universe.world.events.AllWorldsLoadedEvent;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import plugin.siren.Mermaids;
 import plugin.siren.Systems.MermaidSettingsComponent;
@@ -77,7 +78,9 @@ public class OrbisOriginsRegistry {
 
         SpeciesRegistry.registerSpecies(mermaidSpecies);
 
-        HytaleServer.SCHEDULED_EXECUTOR.scheduleAtFixedRate(runnableCheckForMermaidSpecies,15, 8, TimeUnit.SECONDS);
+        Mermaids.get().getEventRegistry().registerGlobal(AllWorldsLoadedEvent.class, allWorldsLoadedEvent -> {
+            HytaleServer.SCHEDULED_EXECUTOR.scheduleAtFixedRate(runnableCheckForMermaidSpecies,15, 8, TimeUnit.SECONDS);
+        });
 
         requireForcedMermaids();
         mermaidOnlyInWater();
