@@ -70,16 +70,16 @@
         "Quantity": 1
       },
       {
+        "ItemId": "Mermaids_Mermaid_Scale",
+        "Quantity": 1
+      },
+      {
         "ItemId": "Ingredient_Life_Essence",
         "Quantity": 50
       },
       {
         "ItemId": "Ingredient_Water_Essence",
         "Quantity": 1
-      },
-      {
-        "ItemId": "Plant_Seaweed_Grass_Stack",
-        "Quantity": 15
       }
     ],
     "BenchRequirement": [

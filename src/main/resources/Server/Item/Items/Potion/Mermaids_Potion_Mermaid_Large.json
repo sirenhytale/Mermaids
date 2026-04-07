@@ -45,6 +45,14 @@
         "Quantity": 2
       },
       {
+        "ItemId": "Mermaids_Mermaid_Tear",
+        "Quantity": 3
+      },
+      {
+        "ItemId": "Mermaids_Mermaid_Scale",
+        "Quantity": 3
+      },
+      {
         "ItemId": "Ingredient_Life_Essence_Concentrated",
         "Quantity": 2
       },
@@ -55,10 +63,6 @@
       {
         "ItemId": "Ingredient_Ice_Essence",
         "Quantity": 2
-      },
-      {
-        "ItemId": "Food_Fish_Raw",
-        "Quantity": 17
       }
     ],
     "BenchRequirement": [

@@ -29,6 +29,34 @@
             }
           }
         ]
+      },
+      {
+        "Type": "Choice",
+        "Weight": 75,
+        "Containers": [
+          {
+            "Type": "Single",
+            "Item": {
+              "ItemId": "Mermaids_Mermaid_Scale",
+              "QuantityMin": 0,
+              "QuantityMax": 1
+            }
+          }
+        ]
+      },
+      {
+        "Type": "Choice",
+        "Weight": 25,
+        "Containers": [
+          {
+            "Type": "Single",
+            "Item": {
+              "ItemId": "Mermaids_Mermaid_Tear",
+              "QuantityMin": 0,
+              "QuantityMax": 1
+            }
+          }
+        ]
       }
     ]
   }

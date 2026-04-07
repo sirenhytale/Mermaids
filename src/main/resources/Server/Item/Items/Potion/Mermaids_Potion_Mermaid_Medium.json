@@ -55,6 +55,10 @@
         "Quantity": 1
       },
       {
+        "ItemId": "Mermaids_Mermaid_Scale",
+        "Quantity": 1
+      },
+      {
         "ItemId": "Ingredient_Life_Essence",
         "Quantity": 60
       },
@@ -65,10 +69,6 @@
       {
         "ItemId": "Ingredient_Ice_Essence",
         "Quantity": 1
-      },
-      {
-        "ItemId": "Deco_Coral_Shell",
-        "Quantity": 7
       }
     ],
     "BenchRequirement": [
