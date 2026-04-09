@@ -48,6 +48,10 @@ public class MermaidsConfig {
                     (merConfig, aameolBool, extraInfo) -> merConfig.MermaidOnLand = aameolBool, // Setter
                     (merConfig, extraInfo) -> merConfig.MermaidOnLand)                    // Getter
             .add()
+            .append(new KeyedCodec<Boolean>("Mermaid-On-Land-Speed-Debuff", Codec.BOOLEAN),
+                    (merConfig, molsdBool, extraInfo) -> merConfig.LandSpeedDebuff = molsdBool, // Setter
+                    (merConfig, extraInfo) -> merConfig.LandSpeedDebuff)                    // Getter
+            .add()
             .append(new KeyedCodec<Boolean>("Require-Transformation-Permission", Codec.BOOLEAN),
                     (merConfig, rtpBool, extraInfo) -> merConfig.RequireTransPerm = rtpBool, // Setter
                     (merConfig, extraInfo) -> merConfig.RequireTransPerm)                    // Getter
@@ -108,7 +112,7 @@ public class MermaidsConfig {
 
     private String InformationDefault = "Confused about what one of these statement do? Go to https://www.mermaids.dev/mermaids/config/ or check out the Mermaids page on the Curseforge website and scroll down to Config Extra Info.";
     private String Information = InformationDefault;
-    private final int ConfigVersionDefault = 13;
+    private final int ConfigVersionDefault = 14;
     private int ConfigVersion = ConfigVersionDefault;
     private String PluginName = "Mermaids";
     private String Version = Mermaids.getVersion();
@@ -120,6 +124,7 @@ public class MermaidsConfig {
     private int TransformationMode = 0;
     private String TransModeDesc = "TransformationMode = 0 : Transform when entering water, TransformationMode = 1 : Requires user to drink Mermaid Potion to Transform";
     private boolean MermaidOnLand = false;
+    private boolean LandSpeedDebuff = true;
     private boolean RequireTransPerm = false;
     private boolean RequireUIPerm = false;
     private boolean ItemSwimSpeed = true;
@@ -205,6 +210,14 @@ public class MermaidsConfig {
 
     public void setMermaidOnLand(boolean onLand){
         this.MermaidOnLand = onLand;
+    }
+
+    public boolean getMermaidOnLandSpeedDebuff(){
+        return this.LandSpeedDebuff;
+    }
+
+    public void setMermaidOnLandSpeedDebuff(boolean debuff){
+        this.LandSpeedDebuff = debuff;
     }
 
     public boolean getRequireTransformationPermission(){

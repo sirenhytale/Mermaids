@@ -16,8 +16,8 @@ import plugin.siren.Systems.MermaidSettingsComponent;
 import javax.annotation.Nonnull;
 import java.awt.*;
 
-public class MermaidsPermPotionRemove extends AbstractPlayerCommand {
-    public MermaidsPermPotionRemove() {
+public class PermPotionRemoveCmd extends AbstractPlayerCommand {
+    public PermPotionRemoveCmd() {
         super("permpotionremove", "server.commands.mermaids.permPotionRemove.desc");
 
         this.addAliases("potionremove");

@@ -18,8 +18,8 @@ import plugin.siren.Systems.MermaidSettingsComponent;
 import javax.annotation.Nonnull;
 import java.awt.*;
 
-public class ToggleMermaid extends AbstractPlayerCommand {
-    public ToggleMermaid() {
+public class ToggleCmd extends AbstractPlayerCommand {
+    public ToggleCmd() {
         super("toggle", "server.commands.mermaids.toggle.desc");
         this.requirePermission("mermaids.toggle");
         this.setPermissionGroup(GameMode.Creative);

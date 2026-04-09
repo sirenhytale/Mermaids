@@ -60,7 +60,7 @@ public class MermaidsUpdateChecker {
         sendUpdateMessage(null, false);
     }
 
-    public static void sendUpdateMessage(Type type){
+    public static String sendUpdateMessage(Type type){
         if(Type.StartUp.getValue() == type.getValue()) {
             List<String> recentVersions = MermaidsUpdateChecker.getVersionStrings();
 
@@ -87,9 +87,19 @@ public class MermaidsUpdateChecker {
             Mermaids.get().getEventRegistry().registerGlobal(AllWorldsLoadedEvent.class, allWorldsLoadedEvent -> {
                 HytaleServer.SCHEDULED_EXECUTOR.scheduleAtFixedRate(updateCheckRunnable, 3, 60*60*6, TimeUnit.SECONDS);
             });
+        }else if(Type.InfoCmd.getValue() == type.getValue()){
+            List<String> recentVersions = MermaidsUpdateChecker.getVersionStrings();
+
+            if(recentVersions.isEmpty()){
+                return Mermaids.getVersion();
+            }else{
+                return recentVersions.getFirst();
+            }
         }else{
             sendUpdateMessage();
         }
+
+        return null;
     }
 
     public static void sendUpdateMessage(Player player){
@@ -122,7 +132,8 @@ public class MermaidsUpdateChecker {
     }
 
     public enum Type {
-        StartUp(0);
+        StartUp(0),
+        InfoCmd(1);
 
         private final int value;
         private Type(int value){

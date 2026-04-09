@@ -15,8 +15,8 @@ import plugin.siren.Utils.UI.MermaidUIPage;
 import javax.annotation.Nonnull;
 import java.util.concurrent.CompletableFuture;
 
-public class MermaidsUI extends AbstractAsyncCommand {
-    public MermaidsUI() {
+public class MermaidsUICmd extends AbstractAsyncCommand {
+    public MermaidsUICmd() {
         super("menu", "server.commands.mermaids.mermaid.desc");
 
         if (Mermaids.getConfig().get().getRequireUIPermission()) {

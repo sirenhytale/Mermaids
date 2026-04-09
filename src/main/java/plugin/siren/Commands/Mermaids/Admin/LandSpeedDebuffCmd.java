@@ -15,34 +15,36 @@ import plugin.siren.Mermaids;
 
 import javax.annotation.Nonnull;
 
-public class MermaidOnLandCmd extends AbstractPlayerCommand {
-    public MermaidOnLandCmd() {
-        super("mermaidonland", "server.commands.mermaids.admin.mermaidOnLand.desc");
+public class LandSpeedDebuffCmd extends AbstractPlayerCommand {
+    public LandSpeedDebuffCmd() {
+        super("landspeeddebuff", "server.commands.mermaids.admin.landspeeddebuff.desc");
 
-        this.addAliases("onland");
+        this.addAliases("mermaidonlandspeeddebuff");
+        this.addAliases("onlandspeeddebuff");
+        this.addAliases("landdebuff");
 
         this.requirePermission("mermaids.admin.mermaidonland");
     }
 
-    RequiredArg<Boolean> mermaidOnLandArg = this.withRequiredArg("Toggle Mermaid On Land", "server.commands.mermaids.admin.mermaidOnLand.arg0.desc", ArgTypes.BOOLEAN);
+    RequiredArg<Boolean> landSpeedDebuffArg = this.withRequiredArg("Toggle Mermaid Land Speed Debuff", "server.commands.mermaids.admin.landspeeddebuff.arg0.desc", ArgTypes.BOOLEAN);
 
     @Override
     protected void execute(@Nonnull CommandContext commandContext, @Nonnull Store<EntityStore> store, @Nonnull Ref<EntityStore> ref, @Nonnull PlayerRef playerRef, @Nonnull World world) {
         Player player = store.getComponent(ref, Player.getComponentType());
 
-        boolean mermaidOnLand = mermaidOnLandArg.get(commandContext);
+        boolean landSpeedDebuff = landSpeedDebuffArg.get(commandContext);
 
-        Mermaids.getConfig().get().setMermaidOnLand(mermaidOnLand);
+        Mermaids.getConfig().get().setMermaidOnLandSpeedDebuff(landSpeedDebuff);
         Mermaids.getConfig().save();
 
         String playerTranslationId = "";
         String consoleTranslationId = "";
-        if (mermaidOnLand) {
-            playerTranslationId = "server.commands.mermaids.admin.mermaidOnLand.playerMsg.enabled";
-            consoleTranslationId = "server.commands.mermaids.admin.mermaidOnLand.consoleMsg.enabled";
+        if (landSpeedDebuff) {
+            playerTranslationId = "server.commands.mermaids.admin.landspeeddebuff.playerMsg.enabled";
+            consoleTranslationId = "server.commands.mermaids.admin.landspeeddebuff.consoleMsg.enabled";
         } else {
-            playerTranslationId = "server.commands.mermaids.admin.mermaidOnLand.playerMsg.disabled";
-            consoleTranslationId = "server.commands.mermaids.admin.mermaidOnLand.consoleMsg.disabled";
+            playerTranslationId = "server.commands.mermaids.admin.landspeeddebuff.playerMsg.disabled";
+            consoleTranslationId = "server.commands.mermaids.admin.landspeeddebuff.consoleMsg.disabled";
         }
 
         if(player != null) {

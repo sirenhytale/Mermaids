@@ -198,11 +198,13 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
 
                                 int footFluidId = world.getFluidId((int)Math.floor(pos.getX()), (int)Math.floor(pos.getY()), (int)Math.floor(pos.getZ()));
                                 int bodyFluidID = world.getFluidId((int)Math.floor(pos.getX()), (int)Math.floor(pos.getY())+1, (int)Math.floor(pos.getZ()));
-                                if(footFluidId > 0 || bodyFluidID > 0){
+                                int belowFootFluidID = world.getFluidId((int)Math.floor(pos.getX()), (int)Math.floor(pos.getY())-1, (int)Math.floor(pos.getZ()));
+
+                                if(footFluidId > 0 || bodyFluidID > 0 || belowFootFluidID > 0){
                                     mermaid.setInFluidBlock(true);
                                 }
 
-                                if(footFluidId == 0 && bodyFluidID == 0 && mermaid.isInFluidBlock()){
+                                if(footFluidId == 0 && bodyFluidID == 0 && belowFootFluidID == 0 && mermaid.isInFluidBlock()){
                                     mermaid.setInFluidBlock(false);
                                 }
                             }
@@ -487,13 +489,13 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
 
                             if (itemInHand != null && itemInHand.getItemId().equalsIgnoreCase("weapon_spear_fishbone")) {
                                 movement.getSettings().swimJumpForce = 16f;
-                                movement.getSettings().baseSpeed = 15f;
+                                movement.getSettings().baseSpeed = 16f;
                                 movement.getSettings().forwardCrouchSpeedMultiplier = 1f;
                                 movement.getSettings().backwardCrouchSpeedMultiplier = 0.9f;
                                 movement.getSettings().forwardSprintSpeedMultiplier = 2.05f;
                             } else {
                                 movement.getSettings().swimJumpForce = 14.5f;
-                                movement.getSettings().baseSpeed = 11.5f;
+                                movement.getSettings().baseSpeed = 12.5f;
                                 movement.getSettings().forwardCrouchSpeedMultiplier = 1f;
                                 movement.getSettings().backwardCrouchSpeedMultiplier = 0.8f;
                                 movement.getSettings().forwardSprintSpeedMultiplier = 1.85f;
@@ -504,7 +506,7 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                                 if (itemInHand != null &&
                                         (itemInHand.getItemId().equalsIgnoreCase("Harpoon_Copper") || itemInHand.getItemId().equalsIgnoreCase("Harpoon_Iron"))) {
                                     movement.getSettings().swimJumpForce = 15.25f;
-                                    movement.getSettings().baseSpeed = 13f;
+                                    movement.getSettings().baseSpeed = 14f;
                                     movement.getSettings().forwardCrouchSpeedMultiplier = 1f;
                                     movement.getSettings().backwardCrouchSpeedMultiplier = 0.85f;
                                     movement.getSettings().forwardSprintSpeedMultiplier = 1.9f;
@@ -512,14 +514,14 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                                         (itemInHand.getItemId().equalsIgnoreCase("Harpoon_Thorium") || itemInHand.getItemId().equalsIgnoreCase("Harpoon_Cobalt")
                                                 || itemInHand.getItemId().equalsIgnoreCase("Harpoon_Adamantite"))) {
                                     movement.getSettings().swimJumpForce = 16f;
-                                    movement.getSettings().baseSpeed = 15f;
+                                    movement.getSettings().baseSpeed = 16f;
                                     movement.getSettings().forwardCrouchSpeedMultiplier = 1f;
                                     movement.getSettings().backwardCrouchSpeedMultiplier = 0.9f;
                                     movement.getSettings().forwardSprintSpeedMultiplier = 2.05f;
                                 } else if (itemInHand != null &&
                                         (itemInHand.getItemId().equalsIgnoreCase("Harpoon_Mithril"))) {
                                     movement.getSettings().swimJumpForce = 17f;
-                                    movement.getSettings().baseSpeed = 16.5f;
+                                    movement.getSettings().baseSpeed = 17.5f;
                                     movement.getSettings().forwardCrouchSpeedMultiplier = 1f;
                                     movement.getSettings().backwardCrouchSpeedMultiplier = 0.95f;
                                     movement.getSettings().forwardSprintSpeedMultiplier = 2.15f;
@@ -531,7 +533,7 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                                 if (itemInHand != null &&
                                         (itemInHand.getItemId().equalsIgnoreCase("Weapon_Trident_Icy"))) {
                                     movement.getSettings().swimJumpForce = 17f;
-                                    movement.getSettings().baseSpeed = 16.5f;
+                                    movement.getSettings().baseSpeed = 17.5f;
                                     movement.getSettings().forwardCrouchSpeedMultiplier = 1f;
                                     movement.getSettings().backwardCrouchSpeedMultiplier = 0.95f;
                                     movement.getSettings().forwardSprintSpeedMultiplier = 2.15f;
@@ -543,14 +545,14 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                                 if (itemInHand != null &&
                                         (itemInHand.getItemId().equalsIgnoreCase("Sword_Keyblade_Crabclaw"))) {
                                     movement.getSettings().swimJumpForce = 15.25f;
-                                    movement.getSettings().baseSpeed = 13f;
+                                    movement.getSettings().baseSpeed = 14f;
                                     movement.getSettings().forwardCrouchSpeedMultiplier = 1f;
                                     movement.getSettings().backwardCrouchSpeedMultiplier = 0.85f;
                                     movement.getSettings().forwardSprintSpeedMultiplier = 1.9f;
                                 } else if (itemInHand != null &&
                                         (itemInHand.getItemId().equalsIgnoreCase("Sword_Keyblade_Crabclaw_Epic"))) {
                                     movement.getSettings().swimJumpForce = 16f;
-                                    movement.getSettings().baseSpeed = 15f;
+                                    movement.getSettings().baseSpeed = 16f;
                                     movement.getSettings().forwardCrouchSpeedMultiplier = 1f;
                                     movement.getSettings().backwardCrouchSpeedMultiplier = 0.9f;
                                     movement.getSettings().forwardSprintSpeedMultiplier = 2.05f;
@@ -564,11 +566,13 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                             movement.getSettings().forwardSprintSpeedMultiplier = 1.85f;
                         }
                     } else {
-                        movement.getSettings().jumpForce = 8f;
-                        movement.getSettings().baseSpeed = 3f;
-                        movement.getSettings().forwardCrouchSpeedMultiplier = 0.35f;
-                        movement.getSettings().backwardCrouchSpeedMultiplier = 0.25f;
-                        movement.getSettings().forwardSprintSpeedMultiplier = 1.35f;
+                        if(Mermaids.getConfig().get().getMermaidOnLandSpeedDebuff()) {
+                            movement.getSettings().jumpForce = 8f;
+                            movement.getSettings().baseSpeed = 3f;
+                            movement.getSettings().forwardCrouchSpeedMultiplier = 0.35f;
+                            movement.getSettings().backwardCrouchSpeedMultiplier = 0.25f;
+                            movement.getSettings().forwardSprintSpeedMultiplier = 1.35f;
+                        }
                         onLand = true;
                     }
                     movement.update(playerRef.getPacketHandler());

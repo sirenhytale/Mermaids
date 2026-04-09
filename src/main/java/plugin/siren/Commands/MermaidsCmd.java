@@ -10,9 +10,10 @@ public class MermaidsCmd extends AbstractCommandCollection {
         super("mermaids","Mermaids command line");
 
         this.addSubCommand(new AdminCmd());
-        this.addSubCommand(new ToggleMermaid());
-        this.addSubCommand(new MermaidsUI());
-        this.addSubCommand(new MermaidsPermPotionRemove());
+        this.addSubCommand(new InfoCmd());
+        this.addSubCommand(new ToggleCmd());
+        this.addSubCommand(new MermaidsUICmd());
+        this.addSubCommand(new PermPotionRemoveCmd());
 
         if(Mermaids.ifDebug()){
             this.addSubCommand(new DebugCmd());
