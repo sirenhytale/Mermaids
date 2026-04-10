@@ -23,6 +23,7 @@ import plugin.siren.Contributions.starman.modelutils.ModelHelper;
 import plugin.siren.Mermaids;
 import plugin.siren.Systems.MermaidComponent;
 import plugin.siren.Systems.MermaidSettingsComponent;
+import plugin.siren.Utils.Cosmetics.MermaidCosmetic;
 import plugin.siren.Utils.Cosmetics.MermaidCosmeticSkin;
 import plugin.siren.Utils.Cosmetics.MermaidCosmeticType;
 
@@ -253,7 +254,13 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
                     dorsalFin = -1;
                 } else if (data.dorsalFin.equalsIgnoreCase("1")) {
                     dorsalFinMsg = "all along the back";
-                    dorsalFin = 0;
+                    dorsalFin = MermaidCosmetic.Long_Back_Fins.getValue();
+                }else if (data.dorsalFin.equalsIgnoreCase("2")) {
+                    dorsalFinMsg = "fin";
+                    dorsalFin = MermaidCosmetic.Dorsal_Fin.getValue();
+                }else if (data.dorsalFin.equalsIgnoreCase("3")) {
+                    dorsalFinMsg = "large fin";
+                    dorsalFin = MermaidCosmetic.Dorsal_Fin_Large.getValue();
                 }
 
                 Message playerMessage = Message.translation("server.customUI.mermaids.mermaidui.category.dorsalFin.playerMsg.modify").param("fin", dorsalFinMsg);
@@ -288,7 +295,13 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
                     pectoralFin = -1;
                 } else if (data.pectoralFin.equalsIgnoreCase("1")) {
                     pectoralFinMsg = "top fins";
-                    pectoralFin = 1; //NEED TO SET
+                    pectoralFin = MermaidCosmetic.Top_Side_Fins.getValue(); //NEED TO SET
+                } else if (data.pectoralFin.equalsIgnoreCase("2")) {
+                    pectoralFinMsg = "flippers";
+                    pectoralFin = MermaidCosmetic.Flippers.getValue(); //NEED TO SET
+                } else if (data.pectoralFin.equalsIgnoreCase("3")) {
+                    pectoralFinMsg = "large flippers";
+                    pectoralFin = MermaidCosmetic.Flippers_Large.getValue(); //NEED TO SET
                 }
 
                 Message playerMessage = Message.translation("server.customUI.mermaids.mermaidui.category.pectoralFin.playerMsg.modify").param("fin", pectoralFinMsg);
@@ -323,10 +336,10 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
                     auricleFin = -1;
                 } else if (data.auricleFin.equalsIgnoreCase("1")) {
                     auricleFinMsg = "default fin ears";
-                    auricleFin = 2;
+                    auricleFin = MermaidCosmetic.Ear_Fins.getValue();
                 } else if (data.auricleFin.equalsIgnoreCase("2")) {
                     auricleFinMsg = "spiked fin ears";
-                    auricleFin = 3;
+                    auricleFin = MermaidCosmetic.Spiked_Ear_Fins.getValue();
                 }
 
                 Message playerMessage = Message.translation("server.customUI.mermaids.mermaidui.category.auricleFin.playerMsg.modify").param("fin", auricleFinMsg);
@@ -435,13 +448,13 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
                 "dorsal_fin",
                 "server.customUI.mermaids.mermaidui.category.dorsalFin",
                 "Pages/MermaidUI/Categories/DorsalFinContent.ui",
-                2
+                4
         ),
         PECTORAL_FIN(
                 "pectoral_fin",
                 "server.customUI.mermaids.mermaidui.category.pectoralFin",
                 "Pages/MermaidUI/Categories/PectoralFinContent.ui",
-                2
+                4
         ),
         AURICLE_FIN(
                 "auricle_fin",

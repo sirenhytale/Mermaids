@@ -9,6 +9,8 @@ public class MermaidsCmd extends AbstractCommandCollection {
     public MermaidsCmd(){
         super("mermaids","Mermaids command line");
 
+        this.addAliases("mer");
+
         this.addSubCommand(new AdminCmd());
         this.addSubCommand(new InfoCmd());
         this.addSubCommand(new ToggleCmd());

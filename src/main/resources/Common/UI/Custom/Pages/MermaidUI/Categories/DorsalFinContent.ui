@@ -19,5 +19,17 @@ Group {
         @Name = "Full Back";
       }
     }
+
+    Group #DorsalFin2 {
+      $SB.@SelectorBlock {
+        @Name = "Fin";
+      }
+    }
+
+    Group #DorsalFin3 {
+      $SB.@SelectorBlock {
+        @Name = "Large Fin";
+      }
+    }
   }
 }

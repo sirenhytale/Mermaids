@@ -35,7 +35,7 @@ public class InfoCmd extends AbstractPlayerCommand {
         String latestVersion = MermaidsUpdateChecker.sendUpdateMessage(MermaidsUpdateChecker.Type.InfoCmd);
 
         if(player != null){
-            Message mermaidTitle = Message.raw("Mermaids").bold(true).color(Color.BLUE).link("https://www.mermaids.dev/mermaids/");
+            Message mermaidTitle = Message.raw("Mermaids by Siren").bold(true).color(Color.BLUE).link("https://www.mermaids.dev/mermaids/");
             Message versionMessage = Message.translation("server.commands.mermaids.info.playerMsg.version").param("version", version).color(Color.CYAN);
 
             player.sendMessage(mermaidTitle);
