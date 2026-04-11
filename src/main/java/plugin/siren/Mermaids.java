@@ -34,7 +34,7 @@ import javax.annotation.Nonnull;
 import java.util.concurrent.TimeUnit;
 
 public class Mermaids extends JavaPlugin {
-    private static final String VERSION = "2.4.0";
+    private static final String VERSION = "2.4.1";
     private static final boolean DEBUG = false;
 
     private static Mermaids plugin;

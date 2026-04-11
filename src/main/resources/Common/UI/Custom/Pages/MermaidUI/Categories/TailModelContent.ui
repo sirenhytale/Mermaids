@@ -16,7 +16,7 @@ Group {
 
     Group #TailModel1 {
       $SB.@SelectorBlock {
-        @Name = "Ocean Fluke Model";
+        @Name = "Mammal Model";
       }
     }
   }

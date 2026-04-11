@@ -40,5 +40,6 @@
     "Radius": 1
   },
   "ItemSoundSetId": "ISS_Items_Gems",
+  "MaxStack": 1,
   "DropOnDeath": true
 }

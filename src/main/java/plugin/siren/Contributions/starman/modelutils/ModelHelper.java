@@ -85,14 +85,24 @@ public class ModelHelper {
             MermaidColor mermaidColor = mermaidSettings.getCosmeticColor();
             for(MermaidColor color : modelId.getColorList()){
                 if(mermaidColor == color){
-                    texturePath = "Characters/SirensMermaid/MermaidTextures/" + mermaidSettings.getTailColor() + ".png";
+                    for(String texture : modelId.getTextureList()){
+                        String mermaidTailColor = mermaidSettings.getTailColor();
+                        if(texture.equalsIgnoreCase(mermaidTailColor)){
+                            texturePath = "Characters/SirensMermaid/MermaidTextures/" + mermaidTailColor + ".png";
+                        }
+                    }
                 }
             }
-        }if(modelId == MermaidModel.Ocean_Fluke){
+        }else if(modelId == MermaidModel.Ocean_Fluke){
             MermaidColor mermaidColor = mermaidSettings.getCosmeticColor();
             for(MermaidColor color : modelId.getColorList()){
                 if(mermaidColor == color){
-                    texturePath = "Characters/SirensMermaid/MermaidOceanFlukeTextures/" + mermaidSettings.getTailColor() + ".png";
+                    for(String texture : modelId.getTextureList()){
+                        String mermaidTailColor = mermaidSettings.getTailColor();
+                        if(texture.equalsIgnoreCase(mermaidTailColor)){
+                            texturePath = "Characters/SirensMermaid/MermaidOceanFlukeTextures/" + mermaidTailColor + ".png";
+                        }
+                    }
                 }
             }
         }

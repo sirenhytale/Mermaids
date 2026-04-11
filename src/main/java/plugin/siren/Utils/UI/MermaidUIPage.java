@@ -215,7 +215,7 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
 
                 String msgMerTail = "ERROR GETTING TAIL";
                 String mermaidTailPath = mermaidSettings.getDefaultMermaidTail();
-                String mermaidTailColorPath = mermaidSettings.getDefaultTailColor();
+                String mermaidTailColorPath = mermaidSettings.getTailColor();
                 MermaidColor mermaidTailColor = mermaidSettings.getCosmeticColor();
                 MermaidModel modelId = mermaidSettings.getMermaidTailId();
                 if (data.tailModel.equalsIgnoreCase("0")) {
@@ -235,7 +235,7 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
 
                     modelId = MermaidModel.Mermaid;
                 } else if (data.tailModel.equalsIgnoreCase("1")) {
-                    msgMerTail = "Ocean Fluke Model";
+                    msgMerTail = "Mammal Model";
                     mermaidTailPath = MermaidModel.Ocean_Fluke.getModel();
 
                     boolean allowedColor = false;

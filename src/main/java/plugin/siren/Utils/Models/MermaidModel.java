@@ -10,6 +10,7 @@ public enum MermaidModel  {
     private final int value;
     private final String model;
     private final List<MermaidColor> colorList;
+    private final List<String> textureColors;
     private final MermaidModelType type;
     private MermaidModel(int value, String model, MermaidModelType type){
         this.value = value;
@@ -18,7 +19,6 @@ public enum MermaidModel  {
 
         if(value == 0){
             List<MermaidColor> colors = new ArrayList<>();
-
             colors.add(MermaidColor.ORANGE);
             colors.add(MermaidColor.PINK);
             colors.add(MermaidColor.ROSE);
@@ -27,8 +27,18 @@ public enum MermaidModel  {
             colors.add(MermaidColor.LIME);
             colors.add(MermaidColor.BLUE);
             colors.add(MermaidColor.CYAN);
-
             this.colorList = colors;
+
+            List<String> textures = new ArrayList<>();
+            textures.add("Mermaids_Mermaid_Orange_Texture");
+            textures.add("Mermaids_Mermaid_Pink_Texture");
+            textures.add("Mermaids_Mermaid_Rose_Texture");
+            textures.add("Mermaids_Mermaid_Purple_Texture");
+            textures.add("Mermaids_Mermaid_Aqua_Texture");
+            textures.add("Mermaids_Mermaid_Lime_Texture");
+            textures.add("Mermaids_Mermaid_Blue_Texture");
+            textures.add("Mermaids_Mermaid_Cyan_Texture");
+            this.textureColors = textures;
         }else if(value == 1){
             List<MermaidColor> colors = new ArrayList<>();
 
@@ -36,8 +46,14 @@ public enum MermaidModel  {
             colors.add(MermaidColor.GRAY);
 
             this.colorList = colors;
+
+            List<String> textures = new ArrayList<>();
+            textures.add("Mermaids_Mermaid_Orca_Texture");
+            textures.add("Mermaids_Mermaid_Dolphin_Texture");
+            this.textureColors = textures;
         }else{
             this.colorList = new ArrayList<>();
+            this.textureColors = new ArrayList<>();
         }
     }
 
@@ -73,6 +89,10 @@ public enum MermaidModel  {
 
     public List<MermaidColor> getColorList(){
         return this.colorList;
+    }
+
+    public List<String> getTextureList(){
+        return this.textureColors;
     }
 
     public MermaidModelType getType(){
