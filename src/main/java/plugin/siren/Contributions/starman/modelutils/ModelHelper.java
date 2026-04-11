@@ -13,6 +13,8 @@ import plugin.siren.Systems.MermaidComponent;
 import plugin.siren.Systems.MermaidSettingsComponent;
 import plugin.siren.Utils.Cosmetics.MermaidCosmeticAttachments;
 import plugin.siren.Utils.Cosmetics.MermaidCosmeticType;
+import plugin.siren.Utils.Models.MermaidColor;
+import plugin.siren.Utils.Models.MermaidModel;
 
 import java.lang.reflect.Field;
 
@@ -24,7 +26,7 @@ import java.lang.reflect.Field;
  * Link: https://github.com/SyperAI/hytale-model-utils
  *
  * Modified: Siren
- * Date: 2026/03/30
+ * Date: 2026/04/10
  *
  */
 
@@ -78,8 +80,21 @@ public class ModelHelper {
         var attachments = MermaidCosmeticAttachments.addAttachment(defaultAttachments, mermaidSettings);
 
         String texturePath = model.getTexture();
-        if(model.getModel().equals("Characters/SirensMermaid/Mermaids_Mermaid.blockymodel")){
-            texturePath = "Characters/SirensMermaid/MermaidTextures/" + mermaidSettings.getTailColor() + ".png";
+        MermaidModel modelId = mermaidSettings.getMermaidTailId();
+        if(modelId == MermaidModel.Mermaid){
+            MermaidColor mermaidColor = mermaidSettings.getCosmeticColor();
+            for(MermaidColor color : modelId.getColorList()){
+                if(mermaidColor == color){
+                    texturePath = "Characters/SirensMermaid/MermaidTextures/" + mermaidSettings.getTailColor() + ".png";
+                }
+            }
+        }if(modelId == MermaidModel.Ocean_Fluke){
+            MermaidColor mermaidColor = mermaidSettings.getCosmeticColor();
+            for(MermaidColor color : modelId.getColorList()){
+                if(mermaidColor == color){
+                    texturePath = "Characters/SirensMermaid/MermaidOceanFlukeTextures/" + mermaidSettings.getTailColor() + ".png";
+                }
+            }
         }
 
         ColorLight modelLight = playerModel.getLight();

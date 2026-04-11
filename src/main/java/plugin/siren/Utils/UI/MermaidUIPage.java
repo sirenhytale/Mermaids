@@ -26,6 +26,8 @@ import plugin.siren.Systems.MermaidSettingsComponent;
 import plugin.siren.Utils.Cosmetics.MermaidCosmetic;
 import plugin.siren.Utils.Cosmetics.MermaidCosmeticSkin;
 import plugin.siren.Utils.Cosmetics.MermaidCosmeticType;
+import plugin.siren.Utils.Models.MermaidColor;
+import plugin.siren.Utils.Models.MermaidModel;
 
 import javax.annotation.Nonnull;
 
@@ -42,9 +44,16 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
     public void build(
             @Nonnull Ref<EntityStore> ref, @Nonnull UICommandBuilder commandBuilder, @Nonnull UIEventBuilder eventBuilder, @Nonnull Store<EntityStore> store
     ) {
+        MermaidSettingsComponent mermaidSettings = store.getComponent(ref, MermaidSettingsComponent.getComponentType());
+
         commandBuilder.append("Pages/MermaidUI/MermaidUIPage.ui");
-        this.buildCategoryList(commandBuilder, eventBuilder);
-        this.displayCategory(this.selectedCategory, commandBuilder, eventBuilder);
+
+        if(mermaidSettings != null) {
+            this.buildCategoryList(commandBuilder, eventBuilder, mermaidSettings);
+            this.displayCategory(this.selectedCategory, commandBuilder, eventBuilder);
+        }else{
+            Mermaids.LOGGER.atWarning().log("ERROR: MermaidUIPage build mermaidSettings is null!");
+        }
     }
 
     public void handleDataEvent(@Nonnull Ref<EntityStore> ref, @Nonnull Store<EntityStore> store, @Nonnull MermaidUIPage.MermaidUIEventData data) {
@@ -60,8 +69,14 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
                 MermaidUIPage.Category newCategory = MermaidUIPage.Category.fromId(data.category);
                 if (newCategory != this.selectedCategory) {
                     int oldIndex = this.selectedCategory.ordinal();
+                    if(oldIndex >= 3){
+                        oldIndex--;
+                    }
                     commandBuilder.set("#CategoryList[" + oldIndex + "].Style", CATEGORY_BUTTON_STYLE);
                     int newIndex = newCategory.ordinal();
+                    if(newIndex >= 3){
+                        newIndex--;
+                    }
                     commandBuilder.set("#CategoryList[" + newIndex + "].Style", CATEGORY_BUTTON_SELECTED_STYLE);
                     this.selectedCategory = newCategory;
                     this.displayCategory(this.selectedCategory, commandBuilder, eventBuilder);
@@ -69,12 +84,15 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
 
                 this.sendUpdate(commandBuilder, eventBuilder, false);
             }else if (data.tailPresets != null) {
-                boolean closeUI = false;
+                boolean closeUI = true;
 
                 String msgMerPreset = "ERROR GETTING PRESET";
 
                 String mermaidTailPath = mermaidSettings.getDefaultMermaidTail();
-                String mermaidTailColorPath = mermaidSettings.getTailColor();
+                String mermaidTailColorPath = mermaidSettings.getDefaultTailColor();
+                MermaidColor mermaidTailColor = mermaidSettings.getCosmeticColor();
+
+                MermaidModel modelId = mermaidSettings.getMermaidTailId();
 
                 int dorsalFin = -1;
                 int pectoralFin = -1;
@@ -82,8 +100,20 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
                 if (data.tailPresets.equalsIgnoreCase("0")) {
                     msgMerPreset = "default";
 
-                    mermaidTailPath = "Mermaids_Mermaid";
-                    //mermaidTailColorPath = mermaidTailColorPath;
+                    mermaidTailPath = MermaidModel.Mermaid.getModel();
+
+                    boolean allowedColor = false;
+                    for(MermaidColor color : MermaidModel.Mermaid.getColorList()){
+                        if(mermaidTailColor == color){
+                            allowedColor = true;
+                        }
+                    }
+                    if(!allowedColor){
+                        mermaidTailColor = MermaidModel.Mermaid.getColorList().getFirst();
+                        mermaidTailColorPath = "Mermaids_Mermaid_Orange_Texture";
+                    }
+
+                    modelId = MermaidModel.Mermaid;
 
                     dorsalFin = -1;
                     pectoralFin = -1;
@@ -91,27 +121,69 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
                 } else if (data.tailPresets.equalsIgnoreCase("1")) {
                     msgMerPreset = "Full Fins";
 
-                    mermaidTailPath = "Mermaids_Mermaid";
-                    //mermaidTailColorPath = mermaidTailColorPath;
+                    mermaidTailPath = MermaidModel.Mermaid.getModel();
 
-                    dorsalFin = 0;
-                    pectoralFin = 1;
-                    auricleFin = 2;
+                    boolean allowedColor = false;
+                    for(MermaidColor color : MermaidModel.Mermaid.getColorList()){
+                        if(mermaidTailColor == color){
+                            allowedColor = true;
+                        }
+                    }
+                    if(!allowedColor){
+                        mermaidTailColor = MermaidModel.Mermaid.getColorList().getFirst();
+                        mermaidTailColorPath = "Mermaids_Mermaid_Orange_Texture";
+                    }
+
+                    modelId = MermaidModel.Mermaid;
+
+                    dorsalFin = MermaidCosmetic.Long_Back_Fins.getValue();
+                    pectoralFin = MermaidCosmetic.Top_Side_Fins.getValue();
+                    auricleFin = MermaidCosmetic.Ear_Fins.getValue();
+                } else if (data.tailPresets.equalsIgnoreCase("2")) {
+                    msgMerPreset = "Orca";
+
+                    mermaidTailPath = MermaidModel.Ocean_Fluke.getModel();
+                    mermaidTailColor = MermaidColor.BLACK;
+                    mermaidTailColorPath = "Mermaids_Mermaid_Orca_Texture";
+
+                    modelId = MermaidModel.Ocean_Fluke;
+
+                    dorsalFin = MermaidCosmetic.Dorsal_Fin_Large.getValue();
+                    pectoralFin = MermaidCosmetic.Flippers_Large.getValue();
+                    auricleFin = -1;
+                } else if (data.tailPresets.equalsIgnoreCase("3")) {
+                    msgMerPreset = "Dolphin";
+
+                    mermaidTailPath = MermaidModel.Ocean_Fluke.getModel();
+                    mermaidTailColor = MermaidColor.GRAY;
+                    mermaidTailColorPath = "Mermaids_Mermaid_Dolphin_Texture";
+
+                    modelId = MermaidModel.Ocean_Fluke;
+
+                    dorsalFin = MermaidCosmetic.Dorsal_Fin.getValue();
+                    pectoralFin = MermaidCosmetic.Flippers.getValue();
+                    auricleFin = -1;
                 }
 
                 Message playerMessage = Message.translation("server.customUI.mermaids.mermaidui.category.presets.playerMsg.modify").param("preset", msgMerPreset);
                 player.sendMessage(playerMessage);
 
                 if(Mermaids.getConfig().get().ifConsoleLogs()) {
-                    String consoleMessage = Message.translation("customUI.mermaids.mermaidui.category.presets.consoleMsg.modify").param("username", player.getDisplayName()).param("preset", msgMerPreset).getAnsiMessage();
+                    String consoleMessage = Message.translation("server.customUI.mermaids.mermaidui.category.presets.consoleMsg.modify").param("username", player.getDisplayName()).param("preset", msgMerPreset).getAnsiMessage();
                     Mermaids.LOGGER.atInfo().log(consoleMessage);
                 }
 
                 String oldMermaidTail = mermaidSettings.getMermaidTail();
                 mermaidSettings.setMermaidTail(mermaidTailPath);
 
-                String oldTailColor = mermaidSettings.getTailColor();
-                //mermaidSettings.setTailColor(mermaidTailColorPath);
+                String oldTailColorPath = mermaidSettings.getTailColor();
+                mermaidSettings.setTailColor(mermaidTailColorPath);
+
+                MermaidColor oldTailColor = mermaidSettings.getCosmeticColor();
+                mermaidSettings.setCosmeticColor(mermaidTailColor);
+
+                MermaidModel oldMermaidTailId = mermaidSettings.getMermaidTailId();
+                mermaidSettings.setMermaidTailId(modelId);
 
                 int oldCosmeticDorsalValue = mermaidSettings.getMermaidCosmeticValue(MermaidCosmeticType.DORSAL_FIN);
                 mermaidSettings.setMermaidCosmetic(MermaidCosmeticType.DORSAL_FIN, dorsalFin);
@@ -123,7 +195,7 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
                 mermaidSettings.setMermaidCosmetic(MermaidCosmeticType.AURICLE_FIN, auricleFin);
 
                 boolean differentFins = dorsalFin != oldCosmeticDorsalValue || pectoralFin != oldCosmeticPectoralValue ||  auricleFin != oldCosmeticAuricleValue;
-                if ((!oldMermaidTail.equals(mermaidTailPath) || !oldTailColor.equals(mermaidTailColorPath) || differentFins) && mermaid.isMermaid()) {
+                if ((!oldMermaidTail.equals(mermaidTailPath) || (!oldTailColorPath.equals(mermaidTailColorPath)) || (oldTailColor != mermaidTailColor) || (oldMermaidTailId != modelId) || differentFins) && mermaid.isMermaid()) {
                     ModelAsset modelAsset = ModelAsset.getAssetMap().getAsset(mermaidTailPath);
                     if (modelAsset == null) {
                         player.sendMessage(Message.raw("Mermaids: Error: MermaidV2UIPage: " + mermaidTailPath + " Model not found"));
@@ -139,31 +211,68 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
                     player.getPageManager().setPage(ref, store, Page.None);
                 }
             } else if (data.tailModel != null) {
-                boolean closeUI = false;
+                boolean closeUI = true;
 
                 String msgMerTail = "ERROR GETTING TAIL";
                 String mermaidTailPath = mermaidSettings.getDefaultMermaidTail();
+                String mermaidTailColorPath = mermaidSettings.getDefaultTailColor();
+                MermaidColor mermaidTailColor = mermaidSettings.getCosmeticColor();
+                MermaidModel modelId = mermaidSettings.getMermaidTailId();
                 if (data.tailModel.equalsIgnoreCase("0")) {
                     msgMerTail = "Mermaid Model";
-                    mermaidTailPath = "Mermaids_Mermaid";
-                }/* else if (data.tailModel.equalsIgnoreCase("1")) {
-                    msgMerTail = "Old Mermaid Model";
-                    mermaidTailPath = "MermaidBigFinPlayer";
-                    closeUI = true;
-                }*/
+                    mermaidTailPath = MermaidModel.Mermaid.getModel();
+
+                    boolean allowedColor = false;
+                    for(MermaidColor color : MermaidModel.Mermaid.getColorList()){
+                        if(mermaidTailColor == color){
+                            allowedColor = true;
+                        }
+                    }
+                    if(!allowedColor){
+                        mermaidTailColor = MermaidModel.Mermaid.getColorList().getFirst();
+                        mermaidTailColorPath = "Mermaids_Mermaid_Orange_Texture";
+                    }
+
+                    modelId = MermaidModel.Mermaid;
+                } else if (data.tailModel.equalsIgnoreCase("1")) {
+                    msgMerTail = "Ocean Fluke Model";
+                    mermaidTailPath = MermaidModel.Ocean_Fluke.getModel();
+
+                    boolean allowedColor = false;
+                    for(MermaidColor color : MermaidModel.Ocean_Fluke.getColorList()){
+                        if(mermaidTailColor == color){
+                            allowedColor = true;
+                        }
+                    }
+                    if(!allowedColor){
+                        mermaidTailColor = MermaidModel.Ocean_Fluke.getColorList().getFirst();
+                        mermaidTailColorPath = "Mermaids_Mermaid_Orca_Texture";
+                    }
+
+                    modelId = MermaidModel.Ocean_Fluke;
+                }
 
                 Message playerMessage = Message.translation("server.customUI.mermaids.mermaidui.category.model.playerMsg.modify").param("model", msgMerTail);
                 player.sendMessage(playerMessage);
 
                 if(Mermaids.getConfig().get().ifConsoleLogs()) {
-                    String consoleMessage = Message.translation("customUI.mermaids.mermaidui.category.model.consoleMsg.modify").param("username", player.getDisplayName()).param("model", msgMerTail).getAnsiMessage();
+                    String consoleMessage = Message.translation("server.customUI.mermaids.mermaidui.category.model.consoleMsg.modify").param("username", player.getDisplayName()).param("model", msgMerTail).getAnsiMessage();
                     Mermaids.LOGGER.atInfo().log(consoleMessage);
                 }
 
                 String oldMermaidTail = mermaidSettings.getMermaidTail();
                 mermaidSettings.setMermaidTail(mermaidTailPath);
 
-                if (!oldMermaidTail.equals(mermaidTailPath) && mermaid.isMermaid()) {
+                String oldTailColorPath = mermaidSettings.getTailColor();
+                mermaidSettings.setTailColor(mermaidTailColorPath);
+
+                MermaidColor oldTailColor = mermaidSettings.getCosmeticColor();
+                mermaidSettings.setCosmeticColor(mermaidTailColor);
+
+                MermaidModel oldMermaidTailId = mermaidSettings.getMermaidTailId();
+                mermaidSettings.setMermaidTailId(modelId);
+
+                if ((!oldMermaidTail.equals(mermaidTailPath) || !oldTailColorPath.equals(mermaidTailColorPath) || oldTailColor != mermaidTailColor || oldMermaidTailId != modelId) && mermaid.isMermaid()) {
                     ModelAsset modelAsset = ModelAsset.getAssetMap().getAsset(mermaidTailPath);
                     if (modelAsset == null) {
                         player.sendMessage(Message.raw("Mermaids: Error: MermaidV2UIPage: " + mermaidTailPath + " Model not found"));
@@ -185,49 +294,87 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
                     msgTailColor = "Orange";
                     mermaidTailColorPath = "Mermaids_Mermaid_Orange_Texture";
 
-                    mermaidSettings.setCosmeticColor(MermaidCosmeticSkin.TextureColor.ORANGE);
+                    mermaidSettings.setCosmeticColor(MermaidColor.ORANGE);
                 } else if (data.tailColor.equalsIgnoreCase("1")) {
                     msgTailColor = "Pink";
                     mermaidTailColorPath = "Mermaids_Mermaid_Pink_Texture";
 
-                    mermaidSettings.setCosmeticColor(MermaidCosmeticSkin.TextureColor.PINK);
+                    mermaidSettings.setCosmeticColor(MermaidColor.PINK);
                 } else if (data.tailColor.equalsIgnoreCase("2")) {
                     msgTailColor = "Purple";
                     mermaidTailColorPath = "Mermaids_Mermaid_Purple_Texture";
 
-                    mermaidSettings.setCosmeticColor(MermaidCosmeticSkin.TextureColor.PURPLE);
+                    mermaidSettings.setCosmeticColor(MermaidColor.PURPLE);
                 } else if (data.tailColor.equalsIgnoreCase("3")) {
                     msgTailColor = "Rose";
                     mermaidTailColorPath = "Mermaids_Mermaid_Rose_Texture";
 
-                    mermaidSettings.setCosmeticColor(MermaidCosmeticSkin.TextureColor.ROSE);
+                    mermaidSettings.setCosmeticColor(MermaidColor.ROSE);
                 } else if (data.tailColor.equalsIgnoreCase("4")) {
                     msgTailColor = "Lime";
                     mermaidTailColorPath = "Mermaids_Mermaid_Lime_Texture";
 
-                    mermaidSettings.setCosmeticColor(MermaidCosmeticSkin.TextureColor.LIME);
+                    mermaidSettings.setCosmeticColor(MermaidColor.LIME);
                 } else if (data.tailColor.equalsIgnoreCase("5")) {
                     msgTailColor = "Blue";
                     mermaidTailColorPath = "Mermaids_Mermaid_Blue_Texture";
 
-                    mermaidSettings.setCosmeticColor(MermaidCosmeticSkin.TextureColor.BLUE);
+                    mermaidSettings.setCosmeticColor(MermaidColor.BLUE);
                 } else if (data.tailColor.equalsIgnoreCase("6")) {
                     msgTailColor = "Aqua";
                     mermaidTailColorPath = "Mermaids_Mermaid_Aqua_Texture";
 
-                    mermaidSettings.setCosmeticColor(MermaidCosmeticSkin.TextureColor.AQUA);
+                    mermaidSettings.setCosmeticColor(MermaidColor.AQUA);
                 } else if (data.tailColor.equalsIgnoreCase("7")) {
                     msgTailColor = "Cyan";
                     mermaidTailColorPath = "Mermaids_Mermaid_Cyan_Texture";
 
-                    mermaidSettings.setCosmeticColor(MermaidCosmeticSkin.TextureColor.CYAN);
+                    mermaidSettings.setCosmeticColor(MermaidColor.CYAN);
                 }
 
                 Message playerMessage = Message.translation("server.customUI.mermaids.mermaidui.category.color.playerMsg.modify").param("color", msgTailColor);
                 player.sendMessage(playerMessage);
 
                 if(Mermaids.getConfig().get().ifConsoleLogs()) {
-                    String consoleMessage = Message.translation("customUI.mermaids.mermaidui.category.color.consoleMsg.modify").param("username", player.getDisplayName()).param("color", msgTailColor).getAnsiMessage();
+                    String consoleMessage = Message.translation("server.customUI.mermaids.mermaidui.category.color.consoleMsg.modify").param("username", player.getDisplayName()).param("color", msgTailColor).getAnsiMessage();
+                    Mermaids.LOGGER.atInfo().log(consoleMessage);
+                }
+
+                String oldTailColor = mermaidSettings.getTailColor();
+                mermaidSettings.setTailColor(mermaidTailColorPath);
+
+                if (!oldTailColor.equals(mermaidTailColorPath) && mermaid.isMermaid()) {
+                    String activeMermaidTail = mermaidSettings.getMermaidTail();
+                    ModelAsset modelAsset = ModelAsset.getAssetMap().getAsset(activeMermaidTail);
+                    if (modelAsset == null) {
+                        player.sendMessage(Message.raw("Mermaids: Error: MermaidUIPage: " + activeMermaidTail + " Model not found"));
+                        Mermaids.LOGGER.atSevere().log(player.getDisplayName() + " had an error of getting the Mermaid Model. Error: MermaidUIPage: " + activeMermaidTail + " Model not found.");
+                    } else {
+                        ModelHelper.applySkin(Model.createUnitScaleModel(modelAsset), mermaid.getMermaidSkin().clone(), ref, mermaid, mermaidSettings);
+                    }
+                }
+
+                this.sendUpdate(commandBuilder, eventBuilder, false);
+            } else if (data.oceanFlukeColor != null) {
+                String msgTailColor = "ERROR GETTING COLOR";
+                String mermaidTailColorPath = mermaidSettings.getDefaultTailColor();
+                if (data.oceanFlukeColor.equalsIgnoreCase("0")) {
+                    msgTailColor = "Black";
+                    mermaidTailColorPath = "Mermaids_Mermaid_Orca_Texture";
+
+                    mermaidSettings.setCosmeticColor(MermaidColor.BLACK);
+                } else if (data.oceanFlukeColor.equalsIgnoreCase("1")) {
+                    msgTailColor = "Gray";
+                    mermaidTailColorPath = "Mermaids_Mermaid_Dolphin_Texture";
+
+                    mermaidSettings.setCosmeticColor(MermaidColor.GRAY);
+                }
+
+                Message playerMessage = Message.translation("server.customUI.mermaids.mermaidui.category.color.playerMsg.modify").param("color", msgTailColor);
+                player.sendMessage(playerMessage);
+
+                if(Mermaids.getConfig().get().ifConsoleLogs()) {
+                    String consoleMessage = Message.translation("server.customUI.mermaids.mermaidui.category.color.consoleMsg.modify").param("username", player.getDisplayName()).param("color", msgTailColor).getAnsiMessage();
                     Mermaids.LOGGER.atInfo().log(consoleMessage);
                 }
 
@@ -267,7 +414,7 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
                 player.sendMessage(playerMessage);
 
                 if(Mermaids.getConfig().get().ifConsoleLogs()) {
-                    String consoleMessage = Message.translation("customUI.mermaids.mermaidui.category.dorsalFin.consoleMsg.modify").param("username", player.getDisplayName()).param("fin", dorsalFinMsg).getAnsiMessage();
+                    String consoleMessage = Message.translation("server.customUI.mermaids.mermaidui.category.dorsalFin.consoleMsg.modify").param("username", player.getDisplayName()).param("fin", dorsalFinMsg).getAnsiMessage();
                     Mermaids.LOGGER.atInfo().log(consoleMessage);
                 }
 
@@ -308,7 +455,7 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
                 player.sendMessage(playerMessage);
 
                 if(Mermaids.getConfig().get().ifConsoleLogs()) {
-                    String consoleMessage = Message.translation("customUI.mermaids.mermaidui.category.pectoralFin.consoleMsg.modify").param("username", player.getDisplayName()).param("fin", pectoralFinMsg).getAnsiMessage();
+                    String consoleMessage = Message.translation("server.customUI.mermaids.mermaidui.category.pectoralFin.consoleMsg.modify").param("username", player.getDisplayName()).param("fin", pectoralFinMsg).getAnsiMessage();
                     Mermaids.LOGGER.atInfo().log(consoleMessage);
                 }
 
@@ -346,7 +493,7 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
                 player.sendMessage(playerMessage);
 
                 if(Mermaids.getConfig().get().ifConsoleLogs()) {
-                    String consoleMessage = Message.translation("customUI.mermaids.mermaidui.category.auricleFin.consoleMsg.modify").param("username", player.getDisplayName()).param("fin", auricleFinMsg).getAnsiMessage();
+                    String consoleMessage = Message.translation("server.customUI.mermaids.mermaidui.category.auricleFin.consoleMsg.modify").param("username", player.getDisplayName()).param("fin", auricleFinMsg).getAnsiMessage();
                     Mermaids.LOGGER.atInfo().log(consoleMessage);
                 }
 
@@ -372,18 +519,29 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
         }
     }
 
-    private void buildCategoryList(@Nonnull UICommandBuilder commandBuilder, @Nonnull UIEventBuilder eventBuilder) {
+    private void buildCategoryList(@Nonnull UICommandBuilder commandBuilder, @Nonnull UIEventBuilder eventBuilder, MermaidSettingsComponent mermaidSettings) {
         commandBuilder.clear("#CategoryList");
 
+        int j = 0;
         for (int i = 0; i < MermaidUIPage.Category.values().length; i++) {
             MermaidUIPage.Category category = MermaidUIPage.Category.values()[i];
-            commandBuilder.append("#CategoryList", "Pages/UIGallery/CategoryButton.ui");
-            commandBuilder.set("#CategoryList[" + i + "].TextSpans", Message.translation(category.getNameKey()));
-            if (category == this.selectedCategory) {
-                commandBuilder.set("#CategoryList[" + i + "].Style", CATEGORY_BUTTON_SELECTED_STYLE);
+
+            if(mermaidSettings.getMermaidTail().equals(MermaidModel.Mermaid.getModel()) && category == Category.OCEAN_FLUKE_COLOR){
+                j++;
+                continue;
+            }
+            if(mermaidSettings.getMermaidTail().equals(MermaidModel.Ocean_Fluke.getModel()) && category == Category.COLOR){
+                j++;
+                continue;
             }
 
-            eventBuilder.addEventBinding(CustomUIEventBindingType.Activating, "#CategoryList[" + i + "]", EventData.of("Category", category.getId()));
+            commandBuilder.append("#CategoryList", "Pages/UIGallery/CategoryButton.ui");
+            commandBuilder.set("#CategoryList[" + String.valueOf(i-j) + "].TextSpans", Message.translation(category.getNameKey()));
+            if (category == this.selectedCategory) {
+                commandBuilder.set("#CategoryList[" + String.valueOf(i-j) + "].Style", CATEGORY_BUTTON_SELECTED_STYLE);
+            }
+
+            eventBuilder.addEventBinding(CustomUIEventBindingType.Activating, "#CategoryList[" + String.valueOf(i-j) + "]", EventData.of("Category", category.getId()));
         }
     }
 
@@ -406,6 +564,11 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
             for (int i = 0; i < category.getTailSelectionCount(); i++) {
                 String selector = "#CategoryContent #TailColor" + i + " #Selector";
                 eventBuilder.addEventBinding(CustomUIEventBindingType.Activating, selector, EventData.of("TailColor", String.valueOf(i)));
+            }
+        } else if (category.id.equalsIgnoreCase("ocean_fluke_color")) {
+            for (int i = 0; i < category.getTailSelectionCount(); i++) {
+                String selector = "#CategoryContent #OceanFlukeColor" + i + " #Selector";
+                eventBuilder.addEventBinding(CustomUIEventBindingType.Activating, selector, EventData.of("OceanFlukeColor", String.valueOf(i)));
             }
         } else if (category.id.equalsIgnoreCase("dorsal_fin")) {
             for (int i = 0; i < category.getTailSelectionCount(); i++) {
@@ -430,19 +593,25 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
                 "presets",
                 "server.customUI.mermaids.mermaidui.category.presets",
                 "Pages/MermaidUI/Categories/TailPresetsContent.ui",
-                2
+                4
         ),
-        /*MODEL(
+        MODEL(
                 "model",
                 "server.customUI.mermaids.mermaidui.category.model",
                 "Pages/MermaidUI/Categories/TailModelContent.ui",
-                1
-        ),*/
+                2
+        ),
         COLOR(
                 "color",
                 "server.customUI.mermaids.mermaidui.category.color",
                 "Pages/MermaidUI/Categories/TailColorContent.ui",
                 8
+        ),
+        OCEAN_FLUKE_COLOR(
+                "ocean_fluke_color",
+                "server.customUI.mermaids.mermaidui.category.color",
+                "Pages/MermaidUI/Categories/OceanFlukeColorContent.ui",
+                2
         ),
         DORSAL_FIN(
                 "dorsal_fin",
@@ -507,6 +676,7 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
         static final String KEY_TAIL_PRESETS = "TailPresets";
         static final String KEY_TAIL_MODEL = "TailModel";
         static final String KEY_TAIL_COLOR = "TailColor";
+        static final String KEY_OCEAN_FLUKE_COLOR = "OceanFlukeColor";
         static final String KEY_DORSAL_FIN = "DorsalFin";
         static final String KEY_PECTORAL_FIN = "PectoralFin";
         static final String KEY_AURICLE_FIN = "AuricleFin";
@@ -517,6 +687,7 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
                 .addField(new KeyedCodec<>(KEY_TAIL_PRESETS, Codec.STRING), (entry, s) -> entry.tailPresets = s, entry -> entry.tailPresets)
                 .addField(new KeyedCodec<>(KEY_TAIL_MODEL, Codec.STRING), (entry, s) -> entry.tailModel = s, entry -> entry.tailModel)
                 .addField(new KeyedCodec<>(KEY_TAIL_COLOR, Codec.STRING), (entry, s) -> entry.tailColor = s, entry -> entry.tailColor)
+                .addField(new KeyedCodec<>(KEY_OCEAN_FLUKE_COLOR, Codec.STRING), (entry, s) -> entry.oceanFlukeColor = s, entry -> entry.oceanFlukeColor)
                 .addField(new KeyedCodec<>(KEY_DORSAL_FIN, Codec.STRING), (entry, s) -> entry.dorsalFin = s, entry -> entry.dorsalFin)
                 .addField(new KeyedCodec<>(KEY_PECTORAL_FIN, Codec.STRING), (entry, s) -> entry.pectoralFin = s, entry -> entry.pectoralFin)
                 .addField(new KeyedCodec<>(KEY_AURICLE_FIN, Codec.STRING), (entry, s) -> entry.auricleFin = s, entry -> entry.auricleFin)
@@ -525,6 +696,7 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
         private String tailPresets;
         private String tailModel;
         private String tailColor;
+        private String oceanFlukeColor;
         private String dorsalFin;
         private String pectoralFin;
         private String auricleFin;

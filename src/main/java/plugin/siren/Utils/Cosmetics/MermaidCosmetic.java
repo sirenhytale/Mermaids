@@ -2,6 +2,7 @@ package plugin.siren.Utils.Cosmetics;
 
 import com.hypixel.hytale.server.core.asset.type.model.config.ModelAttachment;
 import plugin.siren.Systems.MermaidSettingsComponent;
+import plugin.siren.Utils.Models.MermaidColor;
 
 public enum MermaidCosmetic {
     Long_Back_Fins(0, "Characters/SirensMermaid/Cosmetics/Mermaid/Dorsal_Fins/Mermaids_LongDorsalFins.blockymodel", "Characters/SirensMermaid/Cosmetics/Mermaid/Dorsal_Fins/LongDorsalFins/Mermaids_LongDorsalFins_Orange_Texture.png", MermaidCosmeticType.DORSAL_FIN),
@@ -48,7 +49,7 @@ public enum MermaidCosmetic {
     }
 
     public String getTexture(MermaidSettingsComponent mermaidSettings){
-        MermaidCosmeticSkin.TextureColor textureColor = mermaidSettings.getCosmeticColor();
+        MermaidColor textureColor = mermaidSettings.getCosmeticColor();
         String textureString = MermaidCosmeticSkin.getTexture(value, textureColor);
 
         return textureString;

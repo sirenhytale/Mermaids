@@ -12,6 +12,8 @@ import plugin.siren.Mermaids;
 import plugin.siren.Utils.Cosmetics.MermaidCosmetic;
 import plugin.siren.Utils.Cosmetics.MermaidCosmeticSkin;
 import plugin.siren.Utils.Cosmetics.MermaidCosmeticType;
+import plugin.siren.Utils.Models.MermaidColor;
+import plugin.siren.Utils.Models.MermaidModel;
 
 import javax.annotation.Nullable;
 
@@ -28,6 +30,10 @@ public class MermaidSettingsComponent implements Component<EntityStore> {
             .append(new KeyedCodec<String>("Mermaid-Tail-Model", Codec.STRING),
                     (merSettings, mtmStr) -> merSettings.mermaidTail = mtmStr, // Setter
                     (merSettings) -> merSettings.mermaidTail)                    // Getter
+            .add()
+            .append(new KeyedCodec<Integer>("Mermaid-Tail-Model-ID", Codec.INTEGER),
+                    (merSettings, mtmiInt) -> merSettings.modelId = mtmiInt, // Setter
+                    (merSettings) -> merSettings.modelId)                    // Getter
             .add()
             .append(new KeyedCodec<String>("Mermaid-Tail-Color", Codec.STRING),
                     (merSettings, mtcStr) -> merSettings.tailColor = mtcStr, // Setter
@@ -67,6 +73,7 @@ public class MermaidSettingsComponent implements Component<EntityStore> {
     private boolean permanentPotion;
 
     private String mermaidTail;
+    private int modelId;
     private String tailColor;
     private int cosmeticColor;
     private int dorsalFin;
@@ -77,7 +84,7 @@ public class MermaidSettingsComponent implements Component<EntityStore> {
     private boolean forceMermaidOrbisOrigin;
     private boolean forceMermaidEndlessLeveling;
 
-    private final String defaultMermaidTail = "Mermaids_Mermaid";
+    private final String defaultMermaidTail = MermaidModel.Mermaid.getModel();
     private final String defaultTailColor = "Mermaids_Mermaid_Orange_Texture";
 
     public static ComponentType<EntityStore, MermaidSettingsComponent> getComponentType(){
@@ -89,6 +96,7 @@ public class MermaidSettingsComponent implements Component<EntityStore> {
         this.permanentPotion = false;
 
         this.mermaidTail = defaultMermaidTail;
+        this.modelId = MermaidModel.Mermaid.getValue();
         this.tailColor = defaultTailColor;
         this.cosmeticColor = 0;
         this.dorsalFin = -1;
@@ -105,6 +113,7 @@ public class MermaidSettingsComponent implements Component<EntityStore> {
         this.permanentPotion = other.permanentPotion;
 
         this.mermaidTail = other.mermaidTail;
+        this.modelId = other.modelId;
         this.tailColor = other.tailColor;
         this.cosmeticColor = other.cosmeticColor;
         this.dorsalFin = other.dorsalFin;
@@ -192,11 +201,19 @@ public class MermaidSettingsComponent implements Component<EntityStore> {
         this.mermaidTail = mermaidTail;
     }
 
-    public MermaidCosmeticSkin.TextureColor getCosmeticColor(){
-        return MermaidCosmeticSkin.TextureColor.get(cosmeticColor);
+    public MermaidModel getMermaidTailId(){
+        return MermaidModel.get(modelId);
     }
 
-    public void setCosmeticColor(MermaidCosmeticSkin.TextureColor textureColor){
+    public void setMermaidTailId(MermaidModel model){
+        modelId = model.getValue();
+    }
+
+    public MermaidColor getCosmeticColor(){
+        return MermaidColor.get(cosmeticColor);
+    }
+
+    public void setCosmeticColor(MermaidColor textureColor){
         cosmeticColor = textureColor.getValue();
     }
 

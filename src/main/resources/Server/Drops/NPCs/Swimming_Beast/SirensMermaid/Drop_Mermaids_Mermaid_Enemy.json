@@ -57,6 +57,20 @@
             }
           }
         ]
+      },
+      {
+        "Type": "Choice",
+        "Weight": 10,
+        "Containers": [
+          {
+            "Type": "Single",
+            "Item": {
+              "ItemId": "Mermaids_Mermaid_Pendant",
+              "QuantityMin": 0,
+              "QuantityMax": 1
+            }
+          }
+        ]
       }
     ]
   }

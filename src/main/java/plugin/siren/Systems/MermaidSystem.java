@@ -25,6 +25,7 @@ import com.hypixel.hytale.server.core.entity.entities.player.movement.MovementMa
 import com.hypixel.hytale.server.core.entity.movement.MovementStatesComponent;
 import com.hypixel.hytale.server.core.inventory.InventoryComponent;
 import com.hypixel.hytale.server.core.inventory.ItemStack;
+import com.hypixel.hytale.server.core.inventory.container.CombinedItemContainer;
 import com.hypixel.hytale.server.core.inventory.container.ItemContainer;
 import com.hypixel.hytale.server.core.modules.entity.component.ModelComponent;
 import com.hypixel.hytale.server.core.modules.entity.component.TransformComponent;
@@ -215,6 +216,22 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                 }
             }
 
+            boolean mermaidPendant = false;
+            CombinedItemContainer inventoryCombined = InventoryComponent.getCombined(store, ref, InventoryComponent.EVERYTHING);
+            if(inventoryCombined != null) {
+                for(short i = 0; i < inventoryCombined.getCapacity(); i++){
+                    ItemContainer itemContainer = inventoryCombined.getContainerForSlot(i);
+                    for(short j = 0; j < itemContainer.getCapacity(); j++){
+                        ItemStack item = itemContainer.getItemStack(j);
+                        if(item != null){
+                            if(item.getItemId().equalsIgnoreCase("mermaids_mermaid_pendant")){
+                                mermaidPendant = true;
+                            }
+                        }
+                    }
+                }
+            }
+
             boolean transformPermission = PermissionsModule.get().hasPermission(playerRef.getUuid(), "mermaids.transform") || !Mermaids.getConfig().get().getRequireTransformationPermission();
             boolean toggleMermaid = mermaidSettings.getToggleMermaid();
             int transformationMode = Mermaids.getConfig().get().getTransformationMode();
@@ -236,7 +253,7 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
             boolean forcedMermaidWater = requireForcedMermaid && mermaidSettings.isForcedMermaid() && Mermaids.getConfig().get().ifForceMermaidOnlyInWater();
 
             //Checks to see if in water / other transformation methods
-            if (((((movementStatesTransform || h2OorRain || inFluidBlock) && (transModeZero || (permMerPotion))) || mermaidPotionEffect || (mermaidOnLand && (transModeZero || permMerPotion))) && toggleMermaid && transformPermission && (!requireForcedMermaid || forcedMermaidWater)) || forcedMermaid) {
+            if (((((movementStatesTransform || h2OorRain || inFluidBlock) && (transModeZero || permMerPotion || mermaidPendant)) || mermaidPotionEffect || (mermaidOnLand && (transModeZero || permMerPotion || mermaidPendant))) && toggleMermaid && transformPermission && (!requireForcedMermaid || forcedMermaidWater)) || forcedMermaid) {
 
                 if (!mermaid.isUnderwater()) {
                     mermaid.setUnderwater(true);

@@ -8,15 +8,15 @@ Group {
     Anchor: (Bottom: 25);
     LayoutMode: Top;
 
-    Group #TailModel0 {
+    Group #OceanFlukeColor0 {
       $SB.@SelectorBlock {
-        @Name = "Mermaid Model";
+        @Name = "Black/White Tail";
       }
     }
 
-    Group #TailModel1 {
+    Group #OceanFlukeColor1 {
       $SB.@SelectorBlock {
-        @Name = "Ocean Fluke Model";
+        @Name = "Gray Tail";
       }
     }
   }

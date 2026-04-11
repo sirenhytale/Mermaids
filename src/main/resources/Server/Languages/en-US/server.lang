@@ -134,6 +134,9 @@ items.mermaids.Mermaids_Potion_Mermaid_Transformation_Medium.desc = Transform in
 items.mermaids.Mermaids_Potion_Mermaid_Transformation_Large.name = Permanent Potion of Mermaid Transformation
 items.mermaids.Mermaids_Potion_Mermaid_Transformation_Large.desc = Permanent transform into a Mermaid when enter contact with water.
 
+items.mermaids.tool.mermaidPendant.name = Mermaid Pendant
+items.mermaids.tool.mermaidPendant.desc = Hold this pendant grants the user magical powers to transform into a Mermaid.
+
 items.mermaids.ingredient.mermaidsMermaidScale.name = Mermaid Scale
 items.mermaids.ingredient.mermaidsMermaidScale.desc = A scale that has fallen off a Mermaid.
 items.mermaids.ingredient.mermaidsMermaidTear.name = Mermaid Tear
