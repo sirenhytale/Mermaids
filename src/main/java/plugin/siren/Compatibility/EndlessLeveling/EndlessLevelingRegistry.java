@@ -95,7 +95,7 @@ public class EndlessLevelingRegistry {
         }else{
             String playersRaceId = EndlessLevelingAPI.get().getRaceId(playerRef.getUuid());
 
-            if(playersRaceId.length() >= 6){
+            if(playersRaceId.length() >= 7){
                 String raceIdSub = playersRaceId.substring(0,7);
 
                 if(raceIdSub.equalsIgnoreCase("mermaid")){

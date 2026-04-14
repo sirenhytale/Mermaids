@@ -1,6 +1,7 @@
 # === commands ===
 
 commands.mermaids.mermaid.desc = Command opens the Mermaids plugin UI.
+commands.mermaids.mermaids.desc = Mermaids command line
 commands.mermaids.admin.desc = Mermaids admin command line.
 commands.mermaids.admin.blockTransform.desc = Command toggles to allow users to transform from liquid blocks.
 commands.mermaids.admin.blockTransform.arg0.desc = Boolean to set block transformations.
@@ -76,6 +77,19 @@ commands.mermaids.admin.transformMode.playerMsg.set0 = You have modified the tra
 commands.mermaids.admin.transformMode.playerMsg.set1 = You have modified the transformation mode to 1. \nOnly when the user drinks a Mermaid Potion or has a Mermaid Pendant, will they transform into a mermaid.
 commands.mermaids.admin.transformMode.consoleMsg.set0 = {username} has modified the transformation mode to 0, allows transformation into a mermaid when entering contact with water.
 commands.mermaids.admin.transformMode.consoleMsg.set1 = {username} has modified the transformation mode to 1, only allows transformation into a mermaid when the user drinks a Mermaid Potion or has a Mermaid Pendant.
+commands.mermaids.bug.desc = Mermaids bug command line.
+commands.mermaids.bug.componentFix.desc = Command to make sure the player has all of the Mermaids mod components.
+commands.mermaids.bug.log.desc = Get an information log about the possible bug issues with the Mermaids mod.
+commands.mermaids.bug.log.msg.version = Currently running v{version} of Mermaids.
+commands.mermaids.bug.log.msg.update = Mermaids isn't up-to-date, Mermaids has released version {version}.
+commands.mermaids.bug.log.msg.mermaidComponent = Mermaid Component: {boolean}.
+commands.mermaids.bug.log.msg.mermaidSettingsComponent = Mermaid Settings Component: {boolean}.
+commands.mermaids.bug.log.msg.requireForcedMermaid = Forced Mermaid Required (Default is false): {boolean}.
+commands.mermaids.bug.report.desc = Command to report any bugs to the Mermaids dev.
+commands.mermaids.bug.report.arg0.desc = The bug report message to report.
+commands.mermaids.bug.report.msg.success = Thank you for the bug report!
+commands.mermaids.bug.report.msg.invalidArg0 = You forgot to include the message to report.
+commands.mermaids.bug.report.msg.apiError = Failed to get the webhook API Url.
 commands.mermaids.debug.desc = Mermaids debug command line.
 commands.mermaids.debug.giveMermaidRing.desc = Command gives the player the Mermaid Ring.
 commands.mermaids.debug.giveMermaidRing.playerMsg.inventoryFull = Your inventory is full, free up an empty space to receive the Mermaid Ring.

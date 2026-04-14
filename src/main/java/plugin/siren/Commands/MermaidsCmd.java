@@ -7,11 +7,12 @@ import plugin.siren.Mermaids;
 
 public class MermaidsCmd extends AbstractCommandCollection {
     public MermaidsCmd(){
-        super("mermaids","Mermaids command line");
+        super("mermaids","server.commands.mermaids.mermaids.desc");
 
         this.addAliases("mer");
 
         this.addSubCommand(new AdminCmd());
+        this.addSubCommand(new BugCmd());
         this.addSubCommand(new InfoCmd());
         this.addSubCommand(new ToggleCmd());
         this.addSubCommand(new MermaidsUICmd());
