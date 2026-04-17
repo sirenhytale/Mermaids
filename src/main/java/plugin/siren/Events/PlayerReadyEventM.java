@@ -110,7 +110,16 @@ public class PlayerReadyEventM {
                 }
             }
 
-            MermaidsUpdateChecker.sendUpdateMessage(player);
+            MermaidComponent mermaidComp = store.getComponent(ref, MermaidComponent.getComponentType());
+            if(mermaidComp == null) {
+                MermaidsUpdateChecker.sendUpdateMessage(player, MermaidsUpdateChecker.Type.PlayerReadyEvent);
+            }else{
+                if(!mermaidComp.getUpdateCheckerCheck()) {
+                    MermaidsUpdateChecker.sendUpdateMessage(player, MermaidsUpdateChecker.Type.PlayerReadyEvent);
+
+                    mermaidComp.setCheckOnUpdateChecker(true);
+                }
+            }
         });
     }
 }

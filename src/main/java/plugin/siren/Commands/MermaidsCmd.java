@@ -16,6 +16,7 @@ public class MermaidsCmd extends AbstractCommandCollection {
         this.addSubCommand(new InfoCmd());
         this.addSubCommand(new ToggleCmd());
         this.addSubCommand(new MermaidsUICmd());
+        this.addSubCommand(new AirCmd());
         this.addSubCommand(new PermPotionRemoveCmd());
 
         if(Mermaids.ifDebug()){

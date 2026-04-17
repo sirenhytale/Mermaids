@@ -239,7 +239,6 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
             boolean transModeOne = transformationMode == 1;
 
             MovementStatesComponent movementState = commandBuffer.getComponent(ref, MovementStatesComponent.getComponentType());
-
             boolean movementStatesTransform = movementState.getMovementStates().swimming || movementState.getMovementStates().swimJumping || movementState.getMovementStates().inFluid;
             boolean h2OorRain = mermaid.getH2OBlock().get() || mermaid.getRainTransform().get();
             boolean inFluidBlock = mermaid.isInFluidBlock();
@@ -252,8 +251,11 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
             boolean forcedMermaid = requireForcedMermaid && mermaidSettings.isForcedMermaid() && !Mermaids.getConfig().get().ifForceMermaidOnlyInWater();
             boolean forcedMermaidWater = requireForcedMermaid && mermaidSettings.isForcedMermaid() && Mermaids.getConfig().get().ifForceMermaidOnlyInWater();
 
+            boolean specialTrans = permMerPotion || mermaidPotionEffect || mermaidPendant;
+
             //Checks to see if in water / other transformation methods
-            if (((((movementStatesTransform || h2OorRain || inFluidBlock) && (transModeZero || permMerPotion || mermaidPendant)) || mermaidPotionEffect || (mermaidOnLand && (transModeZero || permMerPotion || mermaidPendant))) && toggleMermaid && transformPermission && (!requireForcedMermaid || forcedMermaidWater)) || forcedMermaid) {
+            if (((((movementStatesTransform || h2OorRain || inFluidBlock) && (transModeZero || permMerPotion || mermaidPendant)) || mermaidPotionEffect || (mermaidOnLand && (transModeZero || permMerPotion || mermaidPendant)))
+                    && toggleMermaid && transformPermission && (!requireForcedMermaid || forcedMermaidWater || specialTrans)) || forcedMermaid) {
 
                 if (!mermaid.isUnderwater()) {
                     mermaid.setUnderwater(true);

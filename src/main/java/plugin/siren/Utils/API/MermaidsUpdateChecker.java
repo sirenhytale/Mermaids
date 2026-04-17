@@ -57,7 +57,7 @@ public class MermaidsUpdateChecker {
     }
 
     public static void sendUpdateMessage(){
-        sendUpdateMessage(null, false);
+        sendUpdateMessage(null, false, Type.Default);
     }
 
     public static String sendUpdateMessage(Type type){
@@ -103,10 +103,14 @@ public class MermaidsUpdateChecker {
     }
 
     public static void sendUpdateMessage(Player player){
-        sendUpdateMessage(player, true);
+        sendUpdateMessage(player, true, Type.Default);
     }
 
-    public static void sendUpdateMessage(@Nullable Player player, boolean sendToPlayer){
+    public static void sendUpdateMessage(Player player, Type type){
+        sendUpdateMessage(player, true, type);
+    }
+
+    public static void sendUpdateMessage(@Nullable Player player, boolean sendToPlayer, Type type){
         List<String> recentVersions = MermaidsUpdateChecker.getVersionStrings();
 
         boolean outDated = true;
@@ -121,19 +125,24 @@ public class MermaidsUpdateChecker {
             String translationId = "server.updateChecker.mermaids.release.message";
             Message versionMessage = Message.translation(translationId).param("version", latestVersion);
 
-            Mermaids.LOGGER.atInfo().log(versionMessage.getAnsiMessage());
+            if(Type.PlayerReadyEvent.getValue() != type.getValue()) {
+                Mermaids.LOGGER.atInfo().log(versionMessage.getAnsiMessage());
+            }
 
             if(sendToPlayer && player != null) {
                 if ((player.hasPermission("*") || player.hasPermission("mermaids.admin")) && Mermaids.getConfig().get().ifNewVersion()) {
                     player.sendMessage(versionMessage.color(Color.CYAN).link("https://www.mermaids.dev/mermaids/curseforge/"));
                 }
             }
+
         }
     }
 
     public enum Type {
         StartUp(0),
-        InfoCmd(1);
+        InfoCmd(1),
+        PlayerReadyEvent(2),
+        Default(3);
 
         private final int value;
         private Type(int value){

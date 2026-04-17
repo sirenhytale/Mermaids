@@ -38,6 +38,8 @@ public class MermaidComponent implements Component<EntityStore> {
 
     List<Integer> cosmeticsToHide;
 
+    private boolean updateChecker;
+
     public static ComponentType<EntityStore, MermaidComponent> getComponentType(){
         return Mermaids.get().getMermaidComponentType();
     }
@@ -65,6 +67,8 @@ public class MermaidComponent implements Component<EntityStore> {
         this.dryingElapsedTime = 0f;
 
         this.cosmeticsToHide = new ArrayList<>();
+
+        updateChecker = false;
     }
 
     public MermaidComponent(MermaidComponent other){
@@ -262,5 +266,13 @@ public class MermaidComponent implements Component<EntityStore> {
 
     public void setCosmeticsToHide(List<Integer> hideCosmetics){
         this.cosmeticsToHide = hideCosmetics;
+    }
+
+    public boolean getUpdateCheckerCheck(){
+        return this.updateChecker;
+    }
+
+    public void setCheckOnUpdateChecker(boolean checked){
+        this.updateChecker = checked;
     }
 }
