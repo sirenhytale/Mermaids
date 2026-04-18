@@ -18,6 +18,7 @@ import plugin.siren.Compatibility.EndlessLeveling.EndlessLevelingRegistry;
 import plugin.siren.Compatibility.OrbisOrigins.OrbisOriginsRegistry;
 import plugin.siren.Compatibility.PlaceholderAPI.PlaceholderAPICompat;
 import plugin.siren.Contributions.al3x.HStats;
+import plugin.siren.Contributions.modifold.ModifoldAnalytics;
 import plugin.siren.Events.Interactions.*;
 import plugin.siren.Events.PlayerReadyEventM;
 import plugin.siren.Systems.MermaidComponent;
@@ -58,6 +59,7 @@ public class Mermaids extends JavaPlugin {
         this.endlessLevelingConfig = this.withConfig("Compatibility/EndlessLeveling", EndlessLevelingConfig.CODEC);
 
         new HStats(GithubIgnore.getHStatsModUUID(), VERSION);
+        new ModifoldAnalytics("mermaids", VERSION);
 
         orbisOriginsCompat = false;
         endlessLevelingCompat = false;

@@ -29,10 +29,7 @@
                         <configuration>
                             <target>
                                 <copy file="${project.build.directory}/${project.build.finalName}.jar"
-                                      todir="C:\Users\dipia\OneDrive\Documents\HytalePlugins\.SERVER\Server\mods"
-                                      overwrite="true"/>
-                                <copy file="${project.build.directory}/${project.build.finalName}.jar"
-                                      todir="C:\Users\dipia\AppData\Roaming\Hytale\UserData\Mods"
+                                      todir="B:\.HytaleMods\.HytaleServer\Server\mods"
                                       overwrite="true"/>
                             </target>
                         </configuration>
