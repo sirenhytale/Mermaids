@@ -14,6 +14,11 @@ package plugin.siren.Contributions.modifold;
  *
  * This mod is built using code from https://hstats.dev/.
  * Special thanks to Al3xWarrior!
+ *
+ * Author: bogdanmironov67 from modifold
+ * Date Copied: 2026/04/18
+ * Link: https://github.com/modifold-website/analytics/blob/main/src/main/java/com/modifold/ModifoldAnalytics.java
+ *
  */
 
 import com.google.gson.Gson;

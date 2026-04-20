@@ -36,6 +36,11 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
     private static final Value<String> CATEGORY_BUTTON_SELECTED_STYLE = Value.ref("Pages/UIGallery/CategoryButton.ui", "SelectedLabelStyle");
     private MermaidUIPage.Category selectedCategory = Category.PRESETS;
 
+    public MermaidUIPage(@Nonnull PlayerRef playerRef, MermaidUIPage.Category category) {
+        this(playerRef);
+        this.selectedCategory = category;
+    }
+
     public MermaidUIPage(@Nonnull PlayerRef playerRef) {
         super(playerRef, CustomPageLifetime.CanDismiss, MermaidUIPage.MermaidUIEventData.CODEC);
     }
