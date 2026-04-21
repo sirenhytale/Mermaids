@@ -5,7 +5,7 @@ import java.util.List;
 
 public enum MermaidModel  {
     Mermaid(0, "Mermaids_Mermaid", MermaidModelType.MERMAID),
-    Ocean_Fluke(1, "Mermaids_Mermaid_Ocean_Fluke", MermaidModelType.OCEAN_FLUKE);
+    Mammal(1, "Mermaids_Mermaid", MermaidModelType.MAMMAL);
 
     private final int value;
     private final String model;

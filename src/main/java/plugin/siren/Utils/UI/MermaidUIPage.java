@@ -89,12 +89,10 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
 
                 this.sendUpdate(commandBuilder, eventBuilder, false);
             }else if (data.tailPresets != null) {
-                boolean closeUI = true;
-
                 String msgMerPreset = "ERROR GETTING PRESET";
 
                 String mermaidTailPath = mermaidSettings.getDefaultMermaidTail();
-                String mermaidTailColorPath = mermaidSettings.getDefaultTailColor();
+                String mermaidTailColorPath = mermaidSettings.getTailColor();
                 MermaidColor mermaidTailColor = mermaidSettings.getCosmeticColor();
 
                 MermaidModel modelId = mermaidSettings.getMermaidTailId();
@@ -147,11 +145,11 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
                 } else if (data.tailPresets.equalsIgnoreCase("2")) {
                     msgMerPreset = "Orca";
 
-                    mermaidTailPath = MermaidModel.Ocean_Fluke.getModel();
+                    mermaidTailPath = MermaidModel.Mammal.getModel();
                     mermaidTailColor = MermaidColor.BLACK;
                     mermaidTailColorPath = "Mermaids_Mermaid_Orca_Texture";
 
-                    modelId = MermaidModel.Ocean_Fluke;
+                    modelId = MermaidModel.Mammal;
 
                     dorsalFin = MermaidCosmetic.Dorsal_Fin_Large.getValue();
                     pectoralFin = MermaidCosmetic.Flippers_Large.getValue();
@@ -159,11 +157,11 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
                 } else if (data.tailPresets.equalsIgnoreCase("3")) {
                     msgMerPreset = "Dolphin";
 
-                    mermaidTailPath = MermaidModel.Ocean_Fluke.getModel();
+                    mermaidTailPath = MermaidModel.Mammal.getModel();
                     mermaidTailColor = MermaidColor.GRAY;
                     mermaidTailColorPath = "Mermaids_Mermaid_Dolphin_Texture";
 
-                    modelId = MermaidModel.Ocean_Fluke;
+                    modelId = MermaidModel.Mammal;
 
                     dorsalFin = MermaidCosmetic.Dorsal_Fin.getValue();
                     pectoralFin = MermaidCosmetic.Flippers.getValue();
@@ -210,14 +208,11 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
                     }
                 }
 
+                MermaidUIPage merPage = new MermaidUIPage(playerRef, selectedCategory);
+                player.getPageManager().openCustomPage(ref, store, merPage);
+
                 this.sendUpdate(commandBuilder, eventBuilder, false);
-
-                if(closeUI){
-                    player.getPageManager().setPage(ref, store, Page.None);
-                }
             } else if (data.tailModel != null) {
-                boolean closeUI = true;
-
                 String msgMerTail = "ERROR GETTING TAIL";
                 String mermaidTailPath = mermaidSettings.getDefaultMermaidTail();
                 String mermaidTailColorPath = mermaidSettings.getTailColor();
@@ -241,20 +236,20 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
                     modelId = MermaidModel.Mermaid;
                 } else if (data.tailModel.equalsIgnoreCase("1")) {
                     msgMerTail = "Mammal Model";
-                    mermaidTailPath = MermaidModel.Ocean_Fluke.getModel();
+                    mermaidTailPath = MermaidModel.Mammal.getModel();
 
                     boolean allowedColor = false;
-                    for(MermaidColor color : MermaidModel.Ocean_Fluke.getColorList()){
+                    for(MermaidColor color : MermaidModel.Mammal.getColorList()){
                         if(mermaidTailColor == color){
                             allowedColor = true;
                         }
                     }
                     if(!allowedColor){
-                        mermaidTailColor = MermaidModel.Ocean_Fluke.getColorList().getFirst();
+                        mermaidTailColor = MermaidModel.Mammal.getColorList().getFirst();
                         mermaidTailColorPath = "Mermaids_Mermaid_Orca_Texture";
                     }
 
-                    modelId = MermaidModel.Ocean_Fluke;
+                    modelId = MermaidModel.Mammal;
                 }
 
                 Message playerMessage = Message.translation("server.customUI.mermaids.mermaidui.category.model.playerMsg.modify").param("model", msgMerTail);
@@ -287,11 +282,10 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
                     }
                 }
 
-                this.sendUpdate(commandBuilder, eventBuilder, false);
+                MermaidUIPage merPage = new MermaidUIPage(playerRef, selectedCategory);
+                player.getPageManager().openCustomPage(ref, store, merPage);
 
-                if(closeUI){
-                    player.getPageManager().setPage(ref, store, Page.None);
-                }
+                this.sendUpdate(commandBuilder, eventBuilder, false);
             } else if (data.tailColor != null) {
                 String msgTailColor = "ERROR GETTING COLOR";
                 String mermaidTailColorPath = mermaidSettings.getDefaultTailColor();
@@ -531,11 +525,11 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
         for (int i = 0; i < MermaidUIPage.Category.values().length; i++) {
             MermaidUIPage.Category category = MermaidUIPage.Category.values()[i];
 
-            if(mermaidSettings.getMermaidTail().equals(MermaidModel.Mermaid.getModel()) && category == Category.OCEAN_FLUKE_COLOR){
+            if(mermaidSettings.getMermaidTailId().getValue() == MermaidModel.Mermaid.getValue() && category == Category.OCEAN_FLUKE_COLOR){
                 j++;
                 continue;
             }
-            if(mermaidSettings.getMermaidTail().equals(MermaidModel.Ocean_Fluke.getModel()) && category == Category.COLOR){
+            if(mermaidSettings.getMermaidTailId().getValue() == MermaidModel.Mammal.getValue() && category == Category.COLOR){
                 j++;
                 continue;
             }

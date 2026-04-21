@@ -1,0 +1,1035 @@
+{
+  "nodes": [
+    {
+      "id": "1",
+      "name": "Origin",
+      "position": {"x": 0, "y": 0, "z": 0},
+      "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+      "shape": {
+        "type": "none",
+        "offset": {"x": 0, "y": 0, "z": 0},
+        "stretch": {"x": 1, "y": 1, "z": 1},
+        "settings": {
+          "isPiece": false
+        },
+        "textureLayout": {},
+        "unwrapMode": "custom",
+        "visible": true,
+        "doubleSided": false,
+        "shadingMode": "flat"
+      },
+      "children": [
+        {
+          "id": "2",
+          "name": "Pelvis",
+          "position": {"x": 0, "y": 51, "z": 0},
+          "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+          "shape": {
+            "type": "none",
+            "offset": {"x": 0, "y": 0, "z": 0},
+            "stretch": {"x": 1, "y": 1, "z": 1},
+            "settings": {
+              "isPiece": true
+            },
+            "textureLayout": {},
+            "unwrapMode": "custom",
+            "visible": true,
+            "doubleSided": false,
+            "shadingMode": "flat"
+          },
+          "children": [
+            {
+              "id": "3",
+              "name": "Tail-Connection",
+              "position": {"x": 0, "y": -4, "z": 0},
+              "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+              "shape": {
+                "type": "none",
+                "offset": {"x": 0, "y": 0, "z": 0},
+                "stretch": {"x": 1, "y": 1, "z": 1},
+                "settings": {
+                  "isPiece": true
+                },
+                "textureLayout": {},
+                "unwrapMode": "custom",
+                "visible": true,
+                "doubleSided": false,
+                "shadingMode": "flat"
+              },
+              "children": [
+                {
+                  "id": "4",
+                  "name": "Tail-A1",
+                  "position": {"x": 0, "y": -7, "z": 0},
+                  "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+                  "shape": {
+                    "type": "none",
+                    "offset": {"x": 0, "y": 0, "z": 0},
+                    "stretch": {"x": 1, "y": 1, "z": 1},
+                    "settings": {
+                      "isPiece": true
+                    },
+                    "textureLayout": {},
+                    "unwrapMode": "custom",
+                    "visible": true,
+                    "doubleSided": false,
+                    "shadingMode": "flat"
+                  },
+                  "children": [
+                    {
+                      "id": "5",
+                      "name": "Tail-A2",
+                      "position": {"x": 0, "y": -10, "z": 0},
+                      "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+                      "shape": {
+                        "type": "none",
+                        "offset": {"x": 0, "y": 0, "z": 0},
+                        "stretch": {"x": 1, "y": 1, "z": 1},
+                        "settings": {
+                          "isPiece": true
+                        },
+                        "textureLayout": {},
+                        "unwrapMode": "custom",
+                        "visible": true,
+                        "doubleSided": false,
+                        "shadingMode": "flat"
+                      },
+                      "children": [
+                        {
+                          "id": "6",
+                          "name": "Tail-A3",
+                          "position": {"x": 0, "y": -6, "z": 0},
+                          "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+                          "shape": {
+                            "type": "none",
+                            "offset": {"x": 0, "y": 0, "z": 0},
+                            "stretch": {"x": 1, "y": 1, "z": 1},
+                            "settings": {
+                              "isPiece": true
+                            },
+                            "textureLayout": {},
+                            "unwrapMode": "custom",
+                            "visible": true,
+                            "doubleSided": false,
+                            "shadingMode": "flat"
+                          },
+                          "children": [
+                            {
+                              "id": "7",
+                              "name": "Tail-A4",
+                              "position": {"x": 0, "y": -5, "z": 0},
+                              "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+                              "shape": {
+                                "type": "none",
+                                "offset": {"x": 0, "y": 0, "z": 0},
+                                "stretch": {"x": 1, "y": 1, "z": 1},
+                                "settings": {
+                                  "isPiece": true
+                                },
+                                "textureLayout": {},
+                                "unwrapMode": "custom",
+                                "visible": true,
+                                "doubleSided": false,
+                                "shadingMode": "flat"
+                              },
+                              "children": [
+                                {
+                                  "id": "8",
+                                  "name": "Tail-A5",
+                                  "position": {"x": 0, "y": -9, "z": 0},
+                                  "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+                                  "shape": {
+                                    "type": "none",
+                                    "offset": {"x": 0, "y": 0, "z": 0},
+                                    "stretch": {"x": 1, "y": 1, "z": 1},
+                                    "settings": {
+                                      "isPiece": true
+                                    },
+                                    "textureLayout": {},
+                                    "unwrapMode": "custom",
+                                    "visible": true,
+                                    "doubleSided": false,
+                                    "shadingMode": "flat"
+                                  },
+                                  "children": [
+                                    {
+                                      "id": "9",
+                                      "name": "Tail-A6",
+                                      "position": {"x": 0, "y": -5, "z": 0},
+                                      "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+                                      "shape": {
+                                        "type": "none",
+                                        "offset": {"x": 0, "y": 0, "z": 0},
+                                        "stretch": {"x": 1, "y": 1, "z": 1},
+                                        "settings": {
+                                          "isPiece": true
+                                        },
+                                        "textureLayout": {},
+                                        "unwrapMode": "custom",
+                                        "visible": true,
+                                        "doubleSided": false,
+                                        "shadingMode": "flat"
+                                      },
+                                      "children": [
+                                        {
+                                          "id": "10",
+                                          "name": "Tail-A7",
+                                          "position": {"x": 0, "y": -4, "z": 0},
+                                          "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+                                          "shape": {
+                                            "type": "none",
+                                            "offset": {"x": 0, "y": 0, "z": 0},
+                                            "stretch": {"x": 1, "y": 1, "z": 1},
+                                            "settings": {
+                                              "isPiece": true
+                                            },
+                                            "textureLayout": {},
+                                            "unwrapMode": "custom",
+                                            "visible": true,
+                                            "doubleSided": false,
+                                            "shadingMode": "flat"
+                                          },
+                                          "children": [
+                                            {
+                                              "id": "11",
+                                              "name": "Tail-A8",
+                                              "position": {"x": 0, "y": -4, "z": 0},
+                                              "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+                                              "shape": {
+                                                "type": "none",
+                                                "offset": {"x": 0, "y": 0, "z": 0},
+                                                "stretch": {"x": 1, "y": 1, "z": 1},
+                                                "settings": {
+                                                  "isPiece": true
+                                                },
+                                                "textureLayout": {},
+                                                "unwrapMode": "custom",
+                                                "visible": true,
+                                                "doubleSided": false,
+                                                "shadingMode": "flat"
+                                              },
+                                              "children": [
+                                                {
+                                                  "id": "12",
+                                                  "name": "Tail-A9",
+                                                  "position": {"x": 0, "y": -4, "z": 0},
+                                                  "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+                                                  "shape": {
+                                                    "type": "none",
+                                                    "offset": {"x": 0, "y": 0, "z": 0},
+                                                    "stretch": {"x": 1, "y": 1, "z": 1},
+                                                    "settings": {
+                                                      "isPiece": true
+                                                    },
+                                                    "textureLayout": {},
+                                                    "unwrapMode": "custom",
+                                                    "visible": true,
+                                                    "doubleSided": false,
+                                                    "shadingMode": "flat"
+                                                  },
+                                                  "children": [
+                                                    {
+                                                      "id": "13",
+                                                      "name": "Tail-A10",
+                                                      "position": {"x": 0, "y": -4, "z": 0},
+                                                      "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+                                                      "shape": {
+                                                        "type": "none",
+                                                        "offset": {"x": 0, "y": 0, "z": 0},
+                                                        "stretch": {"x": 1, "y": 1, "z": 1},
+                                                        "settings": {
+                                                          "isPiece": true
+                                                        },
+                                                        "textureLayout": {},
+                                                        "unwrapMode": "custom",
+                                                        "visible": true,
+                                                        "doubleSided": false,
+                                                        "shadingMode": "flat"
+                                                      },
+                                                      "children": [
+                                                        {
+                                                          "id": "14",
+                                                          "name": "Tail-A11",
+                                                          "position": {"x": 0, "y": -4, "z": 0},
+                                                          "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+                                                          "shape": {
+                                                            "type": "none",
+                                                            "offset": {"x": 0, "y": 0, "z": 0},
+                                                            "stretch": {"x": 1, "y": 1, "z": 1},
+                                                            "settings": {
+                                                              "isPiece": true
+                                                            },
+                                                            "textureLayout": {},
+                                                            "unwrapMode": "custom",
+                                                            "visible": true,
+                                                            "doubleSided": false,
+                                                            "shadingMode": "flat"
+                                                          },
+                                                          "children": [
+                                                            {
+                                                              "id": "15",
+                                                              "name": "Tail-A12",
+                                                              "position": {"x": 0, "y": -3, "z": 0},
+                                                              "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+                                                              "shape": {
+                                                                "type": "none",
+                                                                "offset": {"x": 0, "y": 0, "z": 0},
+                                                                "stretch": {"x": 1, "y": 1, "z": 1},
+                                                                "settings": {
+                                                                  "isPiece": true
+                                                                },
+                                                                "textureLayout": {},
+                                                                "unwrapMode": "custom",
+                                                                "visible": true,
+                                                                "doubleSided": false,
+                                                                "shadingMode": "flat"
+                                                              },
+                                                              "children": [
+                                                                {
+                                                                  "id": "16",
+                                                                  "name": "Dorsal-Fin-A12",
+                                                                  "position": {"x": 0, "y": 1, "z": 0},
+                                                                  "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+                                                                  "shape": {
+                                                                    "type": "box",
+                                                                    "offset": {"x": 0, "y": 4, "z": -7},
+                                                                    "stretch": {"x": 1, "y": 1, "z": 1},
+                                                                    "settings": {
+                                                                      "isPiece": false,
+                                                                      "size": {"x": 0, "y": 2, "z": 6}
+                                                                    },
+                                                                    "textureLayout": {
+                                                                      "back": {
+                                                                        "offset": {"x": 12, "y": 14},
+                                                                        "mirror": {"x": false, "y": false},
+                                                                        "angle": 0
+                                                                      },
+                                                                      "right": {
+                                                                        "offset": {"x": 15, "y": 14},
+                                                                        "mirror": {"x": true, "y": false},
+                                                                        "angle": 0
+                                                                      },
+                                                                      "front": {
+                                                                        "offset": {"x": 12, "y": 14},
+                                                                        "mirror": {"x": false, "y": false},
+                                                                        "angle": 0
+                                                                      },
+                                                                      "left": {
+                                                                        "offset": {"x": 9, "y": 14},
+                                                                        "mirror": {"x": false, "y": false},
+                                                                        "angle": 0
+                                                                      },
+                                                                      "top": {
+                                                                        "offset": {"x": 11, "y": 10},
+                                                                        "mirror": {"x": false, "y": false},
+                                                                        "angle": 0
+                                                                      },
+                                                                      "bottom": {
+                                                                        "offset": {"x": 11, "y": 10},
+                                                                        "mirror": {"x": false, "y": false},
+                                                                        "angle": 0
+                                                                      }
+                                                                    },
+                                                                    "unwrapMode": "custom",
+                                                                    "visible": true,
+                                                                    "doubleSided": false,
+                                                                    "shadingMode": "flat"
+                                                                  }
+                                                                }
+                                                              ]
+                                                            },
+                                                            {
+                                                              "id": "17",
+                                                              "name": "Dorsal-Fin-A11",
+                                                              "position": {"x": 0, "y": 0, "z": 0},
+                                                              "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+                                                              "shape": {
+                                                                "type": "box",
+                                                                "offset": {"x": 0, "y": 4.5, "z": -7.5},
+                                                                "stretch": {"x": 1, "y": 1, "z": 1},
+                                                                "settings": {
+                                                                  "isPiece": false,
+                                                                  "size": {"x": 0, "y": 3, "z": 6}
+                                                                },
+                                                                "textureLayout": {
+                                                                  "back": {
+                                                                    "offset": {"x": 12, "y": 13},
+                                                                    "mirror": {"x": false, "y": false},
+                                                                    "angle": 0
+                                                                  },
+                                                                  "right": {
+                                                                    "offset": {"x": 16, "y": 11},
+                                                                    "mirror": {"x": true, "y": false},
+                                                                    "angle": 0
+                                                                  },
+                                                                  "front": {
+                                                                    "offset": {"x": 11, "y": 11},
+                                                                    "mirror": {"x": false, "y": false},
+                                                                    "angle": 0
+                                                                  },
+                                                                  "left": {
+                                                                    "offset": {"x": 10, "y": 11},
+                                                                    "mirror": {"x": false, "y": false},
+                                                                    "angle": 0
+                                                                  },
+                                                                  "top": {
+                                                                    "offset": {"x": 11, "y": 10},
+                                                                    "mirror": {"x": false, "y": false},
+                                                                    "angle": 0
+                                                                  },
+                                                                  "bottom": {
+                                                                    "offset": {"x": 11, "y": 10},
+                                                                    "mirror": {"x": false, "y": false},
+                                                                    "angle": 0
+                                                                  }
+                                                                },
+                                                                "unwrapMode": "custom",
+                                                                "visible": true,
+                                                                "doubleSided": false,
+                                                                "shadingMode": "flat"
+                                                              }
+                                                            }
+                                                          ]
+                                                        },
+                                                        {
+                                                          "id": "18",
+                                                          "name": "Dorsal-Fin-A10",
+                                                          "position": {"x": 0, "y": 0, "z": 0},
+                                                          "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+                                                          "shape": {
+                                                            "type": "box",
+                                                            "offset": {"x": 0, "y": 4, "z": -8},
+                                                            "stretch": {"x": 1, "y": 1, "z": 1},
+                                                            "settings": {
+                                                              "isPiece": false,
+                                                              "size": {"x": 0, "y": 4, "z": 6}
+                                                            },
+                                                            "textureLayout": {
+                                                              "back": {
+                                                                "offset": {"x": 11, "y": 12},
+                                                                "mirror": {"x": false, "y": false},
+                                                                "angle": 0
+                                                              },
+                                                              "right": {
+                                                                "offset": {"x": 6, "y": 12},
+                                                                "mirror": {"x": true, "y": false},
+                                                                "angle": 0
+                                                              },
+                                                              "front": {
+                                                                "offset": {"x": 0, "y": 12},
+                                                                "mirror": {"x": false, "y": false},
+                                                                "angle": 0
+                                                              },
+                                                              "left": {
+                                                                "offset": {"x": 0, "y": 12},
+                                                                "mirror": {"x": false, "y": false},
+                                                                "angle": 0
+                                                              },
+                                                              "top": {
+                                                                "offset": {"x": 1, "y": 0},
+                                                                "mirror": {"x": false, "y": false},
+                                                                "angle": 0
+                                                              },
+                                                              "bottom": {
+                                                                "offset": {"x": 11, "y": 10},
+                                                                "mirror": {"x": false, "y": false},
+                                                                "angle": 0
+                                                              }
+                                                            },
+                                                            "unwrapMode": "custom",
+                                                            "visible": true,
+                                                            "doubleSided": false,
+                                                            "shadingMode": "flat"
+                                                          }
+                                                        }
+                                                      ]
+                                                    },
+                                                    {
+                                                      "id": "19",
+                                                      "name": "Dorsal-Fin-A9",
+                                                      "position": {"x": 0, "y": 0, "z": 0},
+                                                      "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+                                                      "shape": {
+                                                        "type": "box",
+                                                        "offset": {"x": 0, "y": 4, "z": -8.5},
+                                                        "stretch": {"x": 1, "y": 1, "z": 1},
+                                                        "settings": {
+                                                          "isPiece": false,
+                                                          "size": {"x": 0, "y": 4, "z": 6}
+                                                        },
+                                                        "textureLayout": {
+                                                          "back": {
+                                                            "offset": {"x": 1, "y": 0},
+                                                            "mirror": {"x": false, "y": false},
+                                                            "angle": 0
+                                                          },
+                                                          "right": {
+                                                            "offset": {"x": 6, "y": 0},
+                                                            "mirror": {"x": true, "y": false},
+                                                            "angle": 0
+                                                          },
+                                                          "front": {
+                                                            "offset": {"x": 1, "y": 0},
+                                                            "mirror": {"x": false, "y": false},
+                                                            "angle": 0
+                                                          },
+                                                          "left": {
+                                                            "offset": {"x": 6, "y": 0},
+                                                            "mirror": {"x": true, "y": false},
+                                                            "angle": 0
+                                                          },
+                                                          "top": {
+                                                            "offset": {"x": 1, "y": 0},
+                                                            "mirror": {"x": false, "y": false},
+                                                            "angle": 0
+                                                          },
+                                                          "bottom": {
+                                                            "offset": {"x": 1, "y": 0},
+                                                            "mirror": {"x": false, "y": false},
+                                                            "angle": 0
+                                                          }
+                                                        },
+                                                        "unwrapMode": "custom",
+                                                        "visible": true,
+                                                        "doubleSided": false,
+                                                        "shadingMode": "flat"
+                                                      }
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "id": "20",
+                                                  "name": "Dorsal-Fin-A8",
+                                                  "position": {"x": 0, "y": 0, "z": 0},
+                                                  "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+                                                  "shape": {
+                                                    "type": "box",
+                                                    "offset": {"x": 0, "y": 4, "z": -9},
+                                                    "stretch": {"x": 1, "y": 1, "z": 1},
+                                                    "settings": {
+                                                      "isPiece": false,
+                                                      "size": {"x": 0, "y": 4, "z": 6}
+                                                    },
+                                                    "textureLayout": {
+                                                      "back": {
+                                                        "offset": {"x": 1, "y": 0},
+                                                        "mirror": {"x": false, "y": false},
+                                                        "angle": 0
+                                                      },
+                                                      "right": {
+                                                        "offset": {"x": 6, "y": 0},
+                                                        "mirror": {"x": true, "y": false},
+                                                        "angle": 0
+                                                      },
+                                                      "front": {
+                                                        "offset": {"x": 1, "y": 0},
+                                                        "mirror": {"x": false, "y": false},
+                                                        "angle": 0
+                                                      },
+                                                      "left": {
+                                                        "offset": {"x": 6, "y": 0},
+                                                        "mirror": {"x": true, "y": false},
+                                                        "angle": 0
+                                                      },
+                                                      "top": {
+                                                        "offset": {"x": 1, "y": 1},
+                                                        "mirror": {"x": false, "y": false},
+                                                        "angle": 0
+                                                      },
+                                                      "bottom": {
+                                                        "offset": {"x": 1, "y": 0},
+                                                        "mirror": {"x": false, "y": false},
+                                                        "angle": 0
+                                                      }
+                                                    },
+                                                    "unwrapMode": "custom",
+                                                    "visible": true,
+                                                    "doubleSided": false,
+                                                    "shadingMode": "flat"
+                                                  }
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "id": "21",
+                                              "name": "Dorsal-Fin-A7",
+                                              "position": {"x": 0, "y": 0, "z": 0},
+                                              "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+                                              "shape": {
+                                                "type": "box",
+                                                "offset": {"x": 0, "y": 4, "z": -9.5},
+                                                "stretch": {"x": 1, "y": 1, "z": 1},
+                                                "settings": {
+                                                  "isPiece": false,
+                                                  "size": {"x": 0, "y": 4, "z": 6}
+                                                },
+                                                "textureLayout": {
+                                                  "back": {
+                                                    "offset": {"x": 1, "y": 0},
+                                                    "mirror": {"x": false, "y": false},
+                                                    "angle": 0
+                                                  },
+                                                  "right": {
+                                                    "offset": {"x": 6, "y": 0},
+                                                    "mirror": {"x": true, "y": false},
+                                                    "angle": 0
+                                                  },
+                                                  "front": {
+                                                    "offset": {"x": 1, "y": 0},
+                                                    "mirror": {"x": false, "y": false},
+                                                    "angle": 0
+                                                  },
+                                                  "left": {
+                                                    "offset": {"x": 6, "y": 0},
+                                                    "mirror": {"x": true, "y": false},
+                                                    "angle": 0
+                                                  },
+                                                  "top": {
+                                                    "offset": {"x": 1, "y": 0},
+                                                    "mirror": {"x": false, "y": false},
+                                                    "angle": 0
+                                                  },
+                                                  "bottom": {
+                                                    "offset": {"x": 1, "y": 0},
+                                                    "mirror": {"x": false, "y": false},
+                                                    "angle": 0
+                                                  }
+                                                },
+                                                "unwrapMode": "custom",
+                                                "visible": true,
+                                                "doubleSided": false,
+                                                "shadingMode": "flat"
+                                              }
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "id": "22",
+                                          "name": "Dorsal-Fin-A6",
+                                          "position": {"x": 0, "y": 0, "z": 0},
+                                          "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+                                          "shape": {
+                                            "type": "box",
+                                            "offset": {"x": 0, "y": 4, "z": -10},
+                                            "stretch": {"x": 1, "y": 1, "z": 1},
+                                            "settings": {
+                                              "isPiece": false,
+                                              "size": {"x": 0, "y": 4, "z": 6}
+                                            },
+                                            "textureLayout": {
+                                              "back": {
+                                                "offset": {"x": 1, "y": 0},
+                                                "mirror": {"x": false, "y": false},
+                                                "angle": 0
+                                              },
+                                              "right": {
+                                                "offset": {"x": 6, "y": 0},
+                                                "mirror": {"x": true, "y": false},
+                                                "angle": 0
+                                              },
+                                              "front": {
+                                                "offset": {"x": 1, "y": 0},
+                                                "mirror": {"x": false, "y": false},
+                                                "angle": 0
+                                              },
+                                              "left": {
+                                                "offset": {"x": 6, "y": 0},
+                                                "mirror": {"x": true, "y": false},
+                                                "angle": 0
+                                              },
+                                              "top": {
+                                                "offset": {"x": 1, "y": 0},
+                                                "mirror": {"x": false, "y": false},
+                                                "angle": 0
+                                              },
+                                              "bottom": {
+                                                "offset": {"x": 1, "y": 0},
+                                                "mirror": {"x": false, "y": false},
+                                                "angle": 0
+                                              }
+                                            },
+                                            "unwrapMode": "custom",
+                                            "visible": true,
+                                            "doubleSided": false,
+                                            "shadingMode": "flat"
+                                          }
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "id": "23",
+                                      "name": "Dorsal-Fin-A5",
+                                      "position": {"x": 0, "y": -1, "z": 0},
+                                      "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+                                      "shape": {
+                                        "type": "box",
+                                        "offset": {"x": 0, "y": 4.5, "z": -10.5},
+                                        "stretch": {"x": 1, "y": 1, "z": 1},
+                                        "settings": {
+                                          "isPiece": false,
+                                          "size": {"x": 0, "y": 5, "z": 6}
+                                        },
+                                        "textureLayout": {
+                                          "back": {
+                                            "offset": {"x": 1, "y": 0},
+                                            "mirror": {"x": false, "y": false},
+                                            "angle": 0
+                                          },
+                                          "right": {
+                                            "offset": {"x": 6, "y": 0},
+                                            "mirror": {"x": true, "y": false},
+                                            "angle": 0
+                                          },
+                                          "front": {
+                                            "offset": {"x": 1, "y": 0},
+                                            "mirror": {"x": false, "y": false},
+                                            "angle": 0
+                                          },
+                                          "left": {
+                                            "offset": {"x": 6, "y": 0},
+                                            "mirror": {"x": true, "y": false},
+                                            "angle": 0
+                                          },
+                                          "top": {
+                                            "offset": {"x": 1, "y": 0},
+                                            "mirror": {"x": false, "y": false},
+                                            "angle": 0
+                                          },
+                                          "bottom": {
+                                            "offset": {"x": 1, "y": 0},
+                                            "mirror": {"x": false, "y": false},
+                                            "angle": 0
+                                          }
+                                        },
+                                        "unwrapMode": "custom",
+                                        "visible": true,
+                                        "doubleSided": false,
+                                        "shadingMode": "flat"
+                                      }
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": "24",
+                                  "name": "Dorsal-Fin-A4",
+                                  "position": {"x": 0, "y": -1, "z": 0},
+                                  "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+                                  "shape": {
+                                    "type": "box",
+                                    "offset": {"x": 0, "y": 0.5, "z": -11},
+                                    "stretch": {"x": 1, "y": 1, "z": 1},
+                                    "settings": {
+                                      "isPiece": false,
+                                      "size": {"x": 0, "y": 5, "z": 6}
+                                    },
+                                    "textureLayout": {
+                                      "back": {
+                                        "offset": {"x": 1, "y": 0},
+                                        "mirror": {"x": false, "y": false},
+                                        "angle": 0
+                                      },
+                                      "right": {
+                                        "offset": {"x": 6, "y": 0},
+                                        "mirror": {"x": true, "y": false},
+                                        "angle": 0
+                                      },
+                                      "front": {
+                                        "offset": {"x": 1, "y": 0},
+                                        "mirror": {"x": false, "y": false},
+                                        "angle": 0
+                                      },
+                                      "left": {
+                                        "offset": {"x": 6, "y": 0},
+                                        "mirror": {"x": true, "y": false},
+                                        "angle": 0
+                                      },
+                                      "top": {
+                                        "offset": {"x": 1, "y": 0},
+                                        "mirror": {"x": false, "y": false},
+                                        "angle": 0
+                                      },
+                                      "bottom": {
+                                        "offset": {"x": 1, "y": 0},
+                                        "mirror": {"x": false, "y": false},
+                                        "angle": 0
+                                      }
+                                    },
+                                    "unwrapMode": "custom",
+                                    "visible": true,
+                                    "doubleSided": false,
+                                    "shadingMode": "flat"
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "id": "25",
+                              "name": "Dorsal-Fin-A3",
+                              "position": {"x": 0, "y": 0, "z": 0},
+                              "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+                              "shape": {
+                                "type": "box",
+                                "offset": {"x": 0, "y": -0.5, "z": -11.5},
+                                "stretch": {"x": 1, "y": 1, "z": 1},
+                                "settings": {
+                                  "isPiece": false,
+                                  "size": {"x": 0, "y": 5, "z": 6}
+                                },
+                                "textureLayout": {
+                                  "back": {
+                                    "offset": {"x": 1, "y": 0},
+                                    "mirror": {"x": false, "y": false},
+                                    "angle": 0
+                                  },
+                                  "right": {
+                                    "offset": {"x": 6, "y": 0},
+                                    "mirror": {"x": true, "y": false},
+                                    "angle": 0
+                                  },
+                                  "front": {
+                                    "offset": {"x": 1, "y": 0},
+                                    "mirror": {"x": false, "y": false},
+                                    "angle": 0
+                                  },
+                                  "left": {
+                                    "offset": {"x": 6, "y": 0},
+                                    "mirror": {"x": true, "y": false},
+                                    "angle": 0
+                                  },
+                                  "top": {
+                                    "offset": {"x": 1, "y": 1},
+                                    "mirror": {"x": false, "y": false},
+                                    "angle": 0
+                                  },
+                                  "bottom": {
+                                    "offset": {"x": 1, "y": 0},
+                                    "mirror": {"x": false, "y": false},
+                                    "angle": 0
+                                  }
+                                },
+                                "unwrapMode": "custom",
+                                "visible": true,
+                                "doubleSided": false,
+                                "shadingMode": "flat"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "id": "26",
+                          "name": "Dorsal-Fin-A2",
+                          "position": {"x": 0, "y": 0, "z": 0},
+                          "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+                          "shape": {
+                            "type": "box",
+                            "offset": {"x": 0, "y": -1, "z": -12},
+                            "stretch": {"x": 1, "y": 1, "z": 1},
+                            "settings": {
+                              "isPiece": false,
+                              "size": {"x": 0, "y": 6, "z": 6}
+                            },
+                            "textureLayout": {
+                              "back": {
+                                "offset": {"x": 1, "y": 0},
+                                "mirror": {"x": false, "y": false},
+                                "angle": 0
+                              },
+                              "right": {
+                                "offset": {"x": 6, "y": 0},
+                                "mirror": {"x": true, "y": false},
+                                "angle": 0
+                              },
+                              "front": {
+                                "offset": {"x": 1, "y": 0},
+                                "mirror": {"x": false, "y": false},
+                                "angle": 0
+                              },
+                              "left": {
+                                "offset": {"x": 6, "y": 0},
+                                "mirror": {"x": true, "y": false},
+                                "angle": 0
+                              },
+                              "top": {
+                                "offset": {"x": 1, "y": 0},
+                                "mirror": {"x": false, "y": false},
+                                "angle": 0
+                              },
+                              "bottom": {
+                                "offset": {"x": 1, "y": 0},
+                                "mirror": {"x": false, "y": false},
+                                "angle": 0
+                              }
+                            },
+                            "unwrapMode": "custom",
+                            "visible": true,
+                            "doubleSided": false,
+                            "shadingMode": "flat"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": "27",
+                      "name": "Dorsal-Fin-A1",
+                      "position": {"x": 0, "y": 0, "z": 0},
+                      "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+                      "shape": {
+                        "type": "box",
+                        "offset": {"x": 0, "y": -5, "z": -12.5},
+                        "stretch": {"x": 1, "y": 1, "z": 1},
+                        "settings": {
+                          "isPiece": false,
+                          "size": {"x": 0, "y": 6, "z": 6}
+                        },
+                        "textureLayout": {
+                          "back": {
+                            "offset": {"x": 1, "y": 0},
+                            "mirror": {"x": false, "y": false},
+                            "angle": 0
+                          },
+                          "right": {
+                            "offset": {"x": 6, "y": 0},
+                            "mirror": {"x": true, "y": false},
+                            "angle": 0
+                          },
+                          "front": {
+                            "offset": {"x": 1, "y": 0},
+                            "mirror": {"x": false, "y": false},
+                            "angle": 0
+                          },
+                          "left": {
+                            "offset": {"x": 6, "y": 0},
+                            "mirror": {"x": true, "y": false},
+                            "angle": 0
+                          },
+                          "top": {
+                            "offset": {"x": 1, "y": 0},
+                            "mirror": {"x": false, "y": false},
+                            "angle": 0
+                          },
+                          "bottom": {
+                            "offset": {"x": 1, "y": 0},
+                            "mirror": {"x": false, "y": false},
+                            "angle": 0
+                          }
+                        },
+                        "unwrapMode": "custom",
+                        "visible": true,
+                        "doubleSided": false,
+                        "shadingMode": "flat"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "28",
+                  "name": "Dorsal-Fin-Con",
+                  "position": {"x": 0, "y": 0, "z": 0},
+                  "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+                  "shape": {
+                    "type": "box",
+                    "offset": {"x": 0, "y": -5, "z": -13},
+                    "stretch": {"x": 1, "y": 1, "z": 1},
+                    "settings": {
+                      "isPiece": false,
+                      "size": {"x": 0, "y": 8, "z": 6}
+                    },
+                    "textureLayout": {
+                      "back": {
+                        "offset": {"x": 1, "y": 0},
+                        "mirror": {"x": false, "y": false},
+                        "angle": 0
+                      },
+                      "right": {
+                        "offset": {"x": 6, "y": 0},
+                        "mirror": {"x": true, "y": false},
+                        "angle": 0
+                      },
+                      "front": {
+                        "offset": {"x": 1, "y": 0},
+                        "mirror": {"x": false, "y": false},
+                        "angle": 0
+                      },
+                      "left": {
+                        "offset": {"x": 6, "y": 0},
+                        "mirror": {"x": true, "y": false},
+                        "angle": 0
+                      },
+                      "top": {
+                        "offset": {"x": 1, "y": 1},
+                        "mirror": {"x": false, "y": false},
+                        "angle": 0
+                      },
+                      "bottom": {
+                        "offset": {"x": 1, "y": 0},
+                        "mirror": {"x": false, "y": false},
+                        "angle": 0
+                      }
+                    },
+                    "unwrapMode": "custom",
+                    "visible": true,
+                    "doubleSided": false,
+                    "shadingMode": "flat"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "29",
+              "name": "Dorsal-Fin-Pelvis",
+              "position": {"x": 0, "y": 0, "z": -11},
+              "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+              "shape": {
+                "type": "box",
+                "offset": {"x": 0, "y": -2, "z": -3},
+                "stretch": {"x": 1, "y": 1, "z": 1},
+                "settings": {
+                  "isPiece": false,
+                  "size": {"x": 0, "y": 8, "z": 6}
+                },
+                "textureLayout": {
+                  "back": {
+                    "offset": {"x": 11, "y": 8},
+                    "mirror": {"x": false, "y": false},
+                    "angle": 0
+                  },
+                  "right": {
+                    "offset": {"x": 16, "y": 0},
+                    "mirror": {"x": true, "y": false},
+                    "angle": 0
+                  },
+                  "front": {
+                    "offset": {"x": 10, "y": 0},
+                    "mirror": {"x": false, "y": false},
+                    "angle": 0
+                  },
+                  "left": {
+                    "offset": {"x": 10, "y": 0},
+                    "mirror": {"x": false, "y": false},
+                    "angle": 0
+                  },
+                  "top": {
+                    "offset": {"x": 11, "y": 10},
+                    "mirror": {"x": false, "y": false},
+                    "angle": 0
+                  },
+                  "bottom": {
+                    "offset": {"x": 11, "y": 10},
+                    "mirror": {"x": false, "y": false},
+                    "angle": 0
+                  }
+                },
+                "unwrapMode": "custom",
+                "visible": true,
+                "doubleSided": false,
+                "shadingMode": "flat"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "format": "character",
+  "lod": "auto"
+}

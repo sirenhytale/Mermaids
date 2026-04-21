@@ -12,7 +12,6 @@ import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import com.hypixel.hytale.server.core.util.Config;
-import plugin.siren.Commands.MermaidCmd;
 import plugin.siren.Commands.MermaidsCmd;
 import plugin.siren.Compatibility.EndlessLeveling.EndlessLevelingRegistry;
 import plugin.siren.Compatibility.OrbisOrigins.OrbisOriginsRegistry;
@@ -35,8 +34,8 @@ import javax.annotation.Nonnull;
 import java.util.concurrent.TimeUnit;
 
 public class Mermaids extends JavaPlugin {
-    private static final String VERSION = "2.4.3";
-    private static final boolean DEBUG = false;
+    private static final String VERSION = "2.4.4";
+    private static final boolean DEBUG = true;
 
     private static Mermaids plugin;
     public static final HytaleLogger LOGGER = HytaleLogger.forEnclosingClass();
@@ -163,13 +162,6 @@ public class Mermaids extends JavaPlugin {
             LOGGER.atInfo().log("Registered Mermaids Command.");
         }else{
             LOGGER.atSevere().log("Failed to register Mermaids Command.");
-        }
-
-        CommandRegistration mermaidCmdRegistration = this.getCommandRegistry().registerCommand(new MermaidCmd());
-        if(mermaidCmdRegistration != null && mermaidCmdRegistration.isRegistered()) {
-            LOGGER.atInfo().log("Registered Mermaid Command.");
-        }else{
-            LOGGER.atSevere().log("Failed to register Mermaid Command.");
         }
 
         MermaidCosmeticSkin.registerCosmeticSkins();

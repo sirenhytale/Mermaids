@@ -80,7 +80,7 @@ public class ModelHelper {
         var attachments = MermaidCosmeticAttachments.addAttachment(defaultAttachments, mermaidSettings);
 
         String texturePath = model.getTexture();
-        MermaidModel modelId = mermaidSettings.getMermaidTailId();
+        /*MermaidModel modelId = mermaidSettings.getMermaidTailId();
         if(modelId == MermaidModel.Mermaid){
             MermaidColor mermaidColor = mermaidSettings.getCosmeticColor();
             for(MermaidColor color : modelId.getColorList()){
@@ -100,12 +100,12 @@ public class ModelHelper {
                     for(String texture : modelId.getTextureList()){
                         String mermaidTailColor = mermaidSettings.getTailColor();
                         if(texture.equalsIgnoreCase(mermaidTailColor)){
-                            texturePath = "Characters/SirensMermaid/MermaidOceanFlukeTextures/" + mermaidTailColor + ".png";
+                            texturePath = "Characters/SirensMermaid/MermaidMammalTextures/" + mermaidTailColor + ".png";
                         }
                     }
                 }
             }
-        }
+        }*/
 
         ColorLight modelLight = playerModel.getLight();
         if(Mermaids.getConfig().get().getMermaidLight()){

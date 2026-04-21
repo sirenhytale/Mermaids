@@ -1,7 +1,6 @@
 # === commands ===
 
-commands.mermaids.mermaid.desc = Command opens the Mermaids plugin UI.
-commands.mermaids.mermaids.desc = Mermaids command line
+commands.mermaids.desc = The Mermaids Mod UI and Command Line.
 commands.mermaids.admin.desc = Mermaids admin command line.
 commands.mermaids.admin.blockTransform.desc = Command toggles to allow users to transform from liquid blocks.
 commands.mermaids.admin.blockTransform.arg0.desc = Boolean to set block transformations.
@@ -114,6 +113,7 @@ commands.mermaids.toggle.playerMsg.enabled = You have enabled transforming into 
 commands.mermaids.toggle.playerMsg.disabled = You have disabled transforming into a mermaid for yourself.
 commands.mermaids.toggle.consoleMsg.enabled = {username} has enabled transforming into a mermaid for themselves.
 commands.mermaids.toggle.consoleMsg.disabled = {username} has disabled transforming into a mermaid for themselves.
+commands.mermaids.ui.desc = Command opens the Mermaids plugin UI.
 
 # === customui ===
 

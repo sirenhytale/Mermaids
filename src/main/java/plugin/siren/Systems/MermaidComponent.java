@@ -20,6 +20,8 @@ public class MermaidComponent implements Component<EntityStore> {
     private boolean underwater;
     private boolean dryingOff;
 
+    private boolean mermaidArmor;
+
     private AtomicBoolean h2oBlock;
     private AtomicBoolean rainTransform;
     private AtomicBoolean potionEffect;
@@ -53,6 +55,8 @@ public class MermaidComponent implements Component<EntityStore> {
         this.underwater = false;
         this.dryingOff = false;
 
+        this.mermaidArmor = false;
+
         this.h2oBlock = new AtomicBoolean(false);
         this.rainTransform = new AtomicBoolean(false);
         this.potionEffect = new AtomicBoolean(false);
@@ -75,6 +79,8 @@ public class MermaidComponent implements Component<EntityStore> {
         this.mermaid = other.mermaid;
         this.underwater = other.underwater;
         this.dryingOff = other.dryingOff;
+
+        this.mermaidArmor = other.mermaidArmor;
 
         this.h2oBlock = other.h2oBlock;
         this.rainTransform = other.rainTransform;
@@ -123,6 +129,14 @@ public class MermaidComponent implements Component<EntityStore> {
 
     public void setDrying(boolean drying){
         this.dryingOff = drying;
+    }
+
+    public boolean hasMermaidArmor(){
+        return this.mermaidArmor;
+    }
+
+    public void setMermaidArmor(boolean hasMermaidArmor){
+        this.mermaidArmor = hasMermaidArmor;
     }
 
     public AtomicBoolean getH2OBlock(){

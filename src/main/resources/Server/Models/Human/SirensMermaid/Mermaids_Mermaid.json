@@ -1,7 +1,7 @@
 {
   "Parent": "Mermaids_Mermaid_TempAnim",
-  "Model": "Characters/SirensMermaid/Mermaids_Mermaid.blockymodel",
-  "Texture": "Characters/SirensMermaid/MermaidTextures/Mermaids_Mermaid_Orange_Texture.png",
+  "Model": "Characters/SirensMermaid/Mermaids_Mermaid_Human_Body.blockymodel",
+  "Texture": "Characters/Player_Textures/Player_Greyscale.png",
   "DefaultAttachments": [],
   "AnimationSets": {
     "SwimIdle": {

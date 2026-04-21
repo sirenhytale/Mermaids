@@ -10,6 +10,42 @@ public class MermaidCosmeticSkin {
     public static void registerCosmeticSkins(){
         textureMap = new TreeMap<>();
 
+        //Mermaid_Tail
+        TreeMap<MermaidColor, String> mermaidTailMap = new TreeMap<>();
+        mermaidTailMap.put(MermaidColor.ORANGE,"Characters/SirensMermaid/MermaidTextures/Mermaids_Mermaid_Orange_Texture.png");
+        mermaidTailMap.put(MermaidColor.PINK,"Characters/SirensMermaid/MermaidTextures/Mermaids_Mermaid_Pink_Texture.png");
+        mermaidTailMap.put(MermaidColor.ROSE,"Characters/SirensMermaid/MermaidTextures/Mermaids_Mermaid_Rose_Texture.png");
+        mermaidTailMap.put(MermaidColor.PURPLE,"Characters/SirensMermaid/MermaidTextures/Mermaids_Mermaid_Purple_Texture.png");
+        mermaidTailMap.put(MermaidColor.AQUA,"Characters/SirensMermaid/MermaidTextures/Mermaids_Mermaid_Aqua_Texture.png");
+        mermaidTailMap.put(MermaidColor.LIME,"Characters/SirensMermaid/MermaidTextures/Mermaids_Mermaid_Lime_Texture.png");
+        mermaidTailMap.put(MermaidColor.BLUE,"Characters/SirensMermaid/MermaidTextures/Mermaids_Mermaid_Blue_Texture.png");
+        mermaidTailMap.put(MermaidColor.CYAN,"Characters/SirensMermaid/MermaidTextures/Mermaids_Mermaid_Cyan_Texture.png");
+        textureMap.put(MermaidCosmetic.Mermaid_Tail,mermaidTailMap);
+
+        //Mermaid_Fluke
+        TreeMap<MermaidColor, String> mermaidFlukeMap = new TreeMap<>();
+        mermaidFlukeMap.put(MermaidColor.ORANGE,"Characters/SirensMermaid/MermaidTextures/Mermaids_Mermaid_Orange_Texture.png");
+        mermaidFlukeMap.put(MermaidColor.PINK,"Characters/SirensMermaid/MermaidTextures/Mermaids_Mermaid_Pink_Texture.png");
+        mermaidFlukeMap.put(MermaidColor.ROSE,"Characters/SirensMermaid/MermaidTextures/Mermaids_Mermaid_Rose_Texture.png");
+        mermaidFlukeMap.put(MermaidColor.PURPLE,"Characters/SirensMermaid/MermaidTextures/Mermaids_Mermaid_Purple_Texture.png");
+        mermaidFlukeMap.put(MermaidColor.AQUA,"Characters/SirensMermaid/MermaidTextures/Mermaids_Mermaid_Aqua_Texture.png");
+        mermaidFlukeMap.put(MermaidColor.LIME,"Characters/SirensMermaid/MermaidTextures/Mermaids_Mermaid_Lime_Texture.png");
+        mermaidFlukeMap.put(MermaidColor.BLUE,"Characters/SirensMermaid/MermaidTextures/Mermaids_Mermaid_Blue_Texture.png");
+        mermaidFlukeMap.put(MermaidColor.CYAN,"Characters/SirensMermaid/MermaidTextures/Mermaids_Mermaid_Cyan_Texture.png");
+        textureMap.put(MermaidCosmetic.Mermaid_Fluke,mermaidFlukeMap);
+
+        //Mammal_Tail
+        TreeMap<MermaidColor, String> mammalTailMap = new TreeMap<>();
+        mammalTailMap.put(MermaidColor.BLACK,"Characters/SirensMermaid/MermaidMammalTextures/Mermaids_Mermaid_Orca_Texture.png");
+        mammalTailMap.put(MermaidColor.GRAY,"Characters/SirensMermaid/MermaidMammalTextures/Mermaids_Mermaid_Dolphin_Texture.png");
+        textureMap.put(MermaidCosmetic.Mammal_Tail,mammalTailMap);
+
+        //Mammal_Fluke
+        TreeMap<MermaidColor, String> mammalFlukeMap = new TreeMap<>();
+        mammalFlukeMap.put(MermaidColor.BLACK,"Characters/SirensMermaid/MermaidMammalTextures/Mermaids_Mermaid_Orca_Texture.png");
+        mammalFlukeMap.put(MermaidColor.GRAY,"Characters/SirensMermaid/MermaidMammalTextures/Mermaids_Mermaid_Dolphin_Texture.png");
+        textureMap.put(MermaidCosmetic.Mammal_Fluke,mammalFlukeMap);
+
         // Long_Back_Fins
         TreeMap<MermaidColor, String> longBackFinsMap = new TreeMap<>();
         longBackFinsMap.put(MermaidColor.ORANGE,"Characters/SirensMermaid/Cosmetics/Mermaid/Dorsal_Fins/LongDorsalFins/Mermaids_LongDorsalFins_Orange_Texture.png");

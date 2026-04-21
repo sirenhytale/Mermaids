@@ -1,0 +1,841 @@
+{
+  "nodes": [
+    {
+      "id": "1",
+      "name": "Origin",
+      "position": {"x": 0, "y": 0, "z": 0},
+      "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+      "shape": {
+        "type": "none",
+        "offset": {"x": 0, "y": 0, "z": 0},
+        "stretch": {"x": 1, "y": 1, "z": 1},
+        "settings": {
+          "isPiece": false
+        },
+        "textureLayout": {},
+        "unwrapMode": "custom",
+        "visible": true,
+        "doubleSided": false,
+        "shadingMode": "flat"
+      },
+      "children": [
+        {
+          "id": "2",
+          "name": "Pelvis",
+          "position": {"x": 0, "y": 51, "z": 0},
+          "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+          "shape": {
+            "type": "box",
+            "offset": {"x": 0, "y": -1, "z": -0.5},
+            "stretch": {"x": 1, "y": 1, "z": 1},
+            "settings": {
+              "isPiece": true,
+              "size": {"x": 29, "y": 10, "z": 21}
+            },
+            "textureLayout": {
+              "back": {
+                "offset": {"x": 106, "y": 117},
+                "mirror": {"x": true, "y": false},
+                "angle": 0
+              },
+              "right": {
+                "offset": {"x": 21, "y": 117},
+                "mirror": {"x": true, "y": false},
+                "angle": 0
+              },
+              "front": {
+                "offset": {"x": 52, "y": 117},
+                "mirror": {"x": true, "y": false},
+                "angle": 0
+              },
+              "left": {
+                "offset": {"x": 75, "y": 117},
+                "mirror": {"x": true, "y": false},
+                "angle": 0
+              },
+              "top": {
+                "offset": {"x": 105, "y": 98},
+                "mirror": {"x": false, "y": true},
+                "angle": 0
+              },
+              "bottom": {
+                "offset": {"x": 135, "y": 77},
+                "mirror": {"x": false, "y": false},
+                "angle": 0
+              }
+            },
+            "unwrapMode": "custom",
+            "visible": true,
+            "doubleSided": false,
+            "shadingMode": "flat"
+          },
+          "children": [
+            {
+              "id": "3",
+              "name": "Tail-Connection",
+              "position": {"x": 0, "y": -3, "z": 0.5},
+              "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+              "shape": {
+                "type": "box",
+                "offset": {"x": 0, "y": -5.5, "z": -0.5},
+                "stretch": {"x": 1, "y": 1, "z": 1},
+                "settings": {
+                  "isPiece": true,
+                  "size": {"x": 27, "y": 7, "z": 19}
+                },
+                "textureLayout": {
+                  "back": {
+                    "offset": {"x": 105, "y": 127},
+                    "mirror": {"x": true, "y": false},
+                    "angle": 0
+                  },
+                  "right": {
+                    "offset": {"x": 20, "y": 127},
+                    "mirror": {"x": true, "y": false},
+                    "angle": 0
+                  },
+                  "front": {
+                    "offset": {"x": 51, "y": 127},
+                    "mirror": {"x": true, "y": false},
+                    "angle": 0
+                  },
+                  "left": {
+                    "offset": {"x": 74, "y": 127},
+                    "mirror": {"x": true, "y": false},
+                    "angle": 0
+                  },
+                  "top": {
+                    "offset": {"x": 107, "y": 118},
+                    "mirror": {"x": false, "y": true},
+                    "angle": 0
+                  },
+                  "bottom": {
+                    "offset": {"x": 137, "y": 99},
+                    "mirror": {"x": false, "y": false},
+                    "angle": 0
+                  }
+                },
+                "unwrapMode": "custom",
+                "visible": true,
+                "doubleSided": false,
+                "shadingMode": "flat"
+              },
+              "children": [
+                {
+                  "id": "4",
+                  "name": "Tail-A1",
+                  "position": {"x": 0, "y": -1.5, "z": 0.5},
+                  "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+                  "shape": {
+                    "type": "box",
+                    "offset": {"x": 0, "y": -5, "z": -0.5},
+                    "stretch": {"x": 1, "y": 1, "z": 1},
+                    "settings": {
+                      "isPiece": false,
+                      "size": {"x": 25, "y": 6, "z": 18}
+                    },
+                    "textureLayout": {
+                      "back": {
+                        "offset": {"x": 104, "y": 134},
+                        "mirror": {"x": true, "y": false},
+                        "angle": 0
+                      },
+                      "right": {
+                        "offset": {"x": 20, "y": 134},
+                        "mirror": {"x": true, "y": false},
+                        "angle": 0
+                      },
+                      "front": {
+                        "offset": {"x": 50, "y": 134},
+                        "mirror": {"x": true, "y": false},
+                        "angle": 0
+                      },
+                      "left": {
+                        "offset": {"x": 73, "y": 134},
+                        "mirror": {"x": true, "y": false},
+                        "angle": 0
+                      },
+                      "top": {
+                        "offset": {"x": 108, "y": 137},
+                        "mirror": {"x": false, "y": true},
+                        "angle": 0
+                      },
+                      "bottom": {
+                        "offset": {"x": 138, "y": 119},
+                        "mirror": {"x": false, "y": false},
+                        "angle": 0
+                      }
+                    },
+                    "unwrapMode": "custom",
+                    "visible": true,
+                    "doubleSided": false,
+                    "shadingMode": "flat"
+                  },
+                  "children": [
+                    {
+                      "id": "5",
+                      "name": "Tail-A2",
+                      "position": {"x": 0, "y": -1, "z": 0.5},
+                      "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+                      "shape": {
+                        "type": "box",
+                        "offset": {"x": 0, "y": -5, "z": -0.5},
+                        "stretch": {"x": 1, "y": 1, "z": 1},
+                        "settings": {
+                          "isPiece": false,
+                          "size": {"x": 23, "y": 6, "z": 17}
+                        },
+                        "textureLayout": {
+                          "back": {
+                            "offset": {"x": 103, "y": 140},
+                            "mirror": {"x": true, "y": false},
+                            "angle": 0
+                          },
+                          "right": {
+                            "offset": {"x": 20, "y": 140},
+                            "mirror": {"x": true, "y": false},
+                            "angle": 0
+                          },
+                          "front": {
+                            "offset": {"x": 49, "y": 140},
+                            "mirror": {"x": true, "y": false},
+                            "angle": 0
+                          },
+                          "left": {
+                            "offset": {"x": 72, "y": 140},
+                            "mirror": {"x": true, "y": false},
+                            "angle": 0
+                          },
+                          "top": {
+                            "offset": {"x": 109, "y": 155},
+                            "mirror": {"x": false, "y": true},
+                            "angle": 0
+                          },
+                          "bottom": {
+                            "offset": {"x": 139, "y": 138},
+                            "mirror": {"x": false, "y": false},
+                            "angle": 0
+                          }
+                        },
+                        "unwrapMode": "custom",
+                        "visible": true,
+                        "doubleSided": false,
+                        "shadingMode": "flat"
+                      },
+                      "children": [
+                        {
+                          "id": "6",
+                          "name": "Tail-A3",
+                          "position": {"x": 0, "y": -1, "z": 0.5},
+                          "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+                          "shape": {
+                            "type": "box",
+                            "offset": {"x": 0, "y": -4.5, "z": -0.5},
+                            "stretch": {"x": 1, "y": 1, "z": 1},
+                            "settings": {
+                              "isPiece": false,
+                              "size": {"x": 21, "y": 5, "z": 16}
+                            },
+                            "textureLayout": {
+                              "back": {
+                                "offset": {"x": 102, "y": 146},
+                                "mirror": {"x": true, "y": false},
+                                "angle": 0
+                              },
+                              "right": {
+                                "offset": {"x": 20, "y": 146},
+                                "mirror": {"x": true, "y": false},
+                                "angle": 0
+                              },
+                              "front": {
+                                "offset": {"x": 48, "y": 146},
+                                "mirror": {"x": true, "y": false},
+                                "angle": 0
+                              },
+                              "left": {
+                                "offset": {"x": 71, "y": 146},
+                                "mirror": {"x": true, "y": false},
+                                "angle": 0
+                              },
+                              "top": {
+                                "offset": {"x": 110, "y": 172},
+                                "mirror": {"x": false, "y": true},
+                                "angle": 0
+                              },
+                              "bottom": {
+                                "offset": {"x": 140, "y": 156},
+                                "mirror": {"x": false, "y": false},
+                                "angle": 0
+                              }
+                            },
+                            "unwrapMode": "custom",
+                            "visible": true,
+                            "doubleSided": false,
+                            "shadingMode": "flat"
+                          },
+                          "children": [
+                            {
+                              "id": "7",
+                              "name": "Tail-A4",
+                              "position": {"x": 0, "y": -0.5, "z": 0.5},
+                              "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+                              "shape": {
+                                "type": "box",
+                                "offset": {"x": 0, "y": -4.5, "z": -0.5},
+                                "stretch": {"x": 1, "y": 1, "z": 1},
+                                "settings": {
+                                  "isPiece": false,
+                                  "size": {"x": 20, "y": 5, "z": 15}
+                                },
+                                "textureLayout": {
+                                  "back": {
+                                    "offset": {"x": 101, "y": 151},
+                                    "mirror": {"x": true, "y": false},
+                                    "angle": 0
+                                  },
+                                  "right": {
+                                    "offset": {"x": 20, "y": 151},
+                                    "mirror": {"x": true, "y": false},
+                                    "angle": 0
+                                  },
+                                  "front": {
+                                    "offset": {"x": 48, "y": 151},
+                                    "mirror": {"x": true, "y": false},
+                                    "angle": 0
+                                  },
+                                  "left": {
+                                    "offset": {"x": 70, "y": 151},
+                                    "mirror": {"x": true, "y": false},
+                                    "angle": 0
+                                  },
+                                  "top": {
+                                    "offset": {"x": 110, "y": 188},
+                                    "mirror": {"x": false, "y": true},
+                                    "angle": 0
+                                  },
+                                  "bottom": {
+                                    "offset": {"x": 140, "y": 173},
+                                    "mirror": {"x": false, "y": false},
+                                    "angle": 0
+                                  }
+                                },
+                                "unwrapMode": "custom",
+                                "visible": true,
+                                "doubleSided": false,
+                                "shadingMode": "flat"
+                              },
+                              "children": [
+                                {
+                                  "id": "8",
+                                  "name": "Tail-A5",
+                                  "position": {"x": 0, "y": -0.5, "z": 0.5},
+                                  "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+                                  "shape": {
+                                    "type": "box",
+                                    "offset": {"x": 0, "y": -4.5, "z": -0.5},
+                                    "stretch": {"x": 1, "y": 1, "z": 1},
+                                    "settings": {
+                                      "isPiece": false,
+                                      "size": {"x": 19, "y": 5, "z": 14}
+                                    },
+                                    "textureLayout": {
+                                      "back": {
+                                        "offset": {"x": 100, "y": 156},
+                                        "mirror": {"x": true, "y": false},
+                                        "angle": 0
+                                      },
+                                      "right": {
+                                        "offset": {"x": 20, "y": 156},
+                                        "mirror": {"x": true, "y": false},
+                                        "angle": 0
+                                      },
+                                      "front": {
+                                        "offset": {"x": 48, "y": 156},
+                                        "mirror": {"x": true, "y": false},
+                                        "angle": 0
+                                      },
+                                      "left": {
+                                        "offset": {"x": 69, "y": 156},
+                                        "mirror": {"x": true, "y": false},
+                                        "angle": 0
+                                      },
+                                      "top": {
+                                        "offset": {"x": 165, "y": 90},
+                                        "mirror": {"x": false, "y": true},
+                                        "angle": 0
+                                      },
+                                      "bottom": {
+                                        "offset": {"x": 185, "y": 76},
+                                        "mirror": {"x": false, "y": false},
+                                        "angle": 0
+                                      }
+                                    },
+                                    "unwrapMode": "custom",
+                                    "visible": true,
+                                    "doubleSided": false,
+                                    "shadingMode": "flat"
+                                  },
+                                  "children": [
+                                    {
+                                      "id": "9",
+                                      "name": "Tail-A6",
+                                      "position": {"x": 0, "y": -0.5, "z": 0.5},
+                                      "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+                                      "shape": {
+                                        "type": "box",
+                                        "offset": {"x": 0, "y": -4, "z": -0.5},
+                                        "stretch": {"x": 1, "y": 1, "z": 1},
+                                        "settings": {
+                                          "isPiece": false,
+                                          "size": {"x": 18, "y": 4, "z": 13}
+                                        },
+                                        "textureLayout": {
+                                          "back": {
+                                            "offset": {"x": 99, "y": 161},
+                                            "mirror": {"x": true, "y": false},
+                                            "angle": 0
+                                          },
+                                          "right": {
+                                            "offset": {"x": 20, "y": 161},
+                                            "mirror": {"x": true, "y": false},
+                                            "angle": 0
+                                          },
+                                          "front": {
+                                            "offset": {"x": 48, "y": 161},
+                                            "mirror": {"x": true, "y": false},
+                                            "angle": 0
+                                          },
+                                          "left": {
+                                            "offset": {"x": 68, "y": 161},
+                                            "mirror": {"x": true, "y": false},
+                                            "angle": 0
+                                          },
+                                          "top": {
+                                            "offset": {"x": 166, "y": 104},
+                                            "mirror": {"x": false, "y": true},
+                                            "angle": 0
+                                          },
+                                          "bottom": {
+                                            "offset": {"x": 185, "y": 91},
+                                            "mirror": {"x": false, "y": false},
+                                            "angle": 0
+                                          }
+                                        },
+                                        "unwrapMode": "custom",
+                                        "visible": true,
+                                        "doubleSided": false,
+                                        "shadingMode": "flat"
+                                      },
+                                      "children": [
+                                        {
+                                          "id": "10",
+                                          "name": "Tail-A7",
+                                          "position": {"x": 0, "y": 0, "z": 0.5},
+                                          "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+                                          "shape": {
+                                            "type": "box",
+                                            "offset": {"x": 0, "y": -4, "z": -0.5},
+                                            "stretch": {"x": 1, "y": 1, "z": 1},
+                                            "settings": {
+                                              "isPiece": false,
+                                              "size": {"x": 17, "y": 4, "z": 12}
+                                            },
+                                            "textureLayout": {
+                                              "back": {
+                                                "offset": {"x": 98, "y": 165},
+                                                "mirror": {"x": true, "y": false},
+                                                "angle": 0
+                                              },
+                                              "right": {
+                                                "offset": {"x": 20, "y": 165},
+                                                "mirror": {"x": true, "y": false},
+                                                "angle": 0
+                                              },
+                                              "front": {
+                                                "offset": {"x": 48, "y": 165},
+                                                "mirror": {"x": true, "y": false},
+                                                "angle": 0
+                                              },
+                                              "left": {
+                                                "offset": {"x": 67, "y": 165},
+                                                "mirror": {"x": true, "y": false},
+                                                "angle": 0
+                                              },
+                                              "top": {
+                                                "offset": {"x": 167, "y": 117},
+                                                "mirror": {"x": false, "y": true},
+                                                "angle": 0
+                                              },
+                                              "bottom": {
+                                                "offset": {"x": 185, "y": 105},
+                                                "mirror": {"x": false, "y": false},
+                                                "angle": 0
+                                              }
+                                            },
+                                            "unwrapMode": "custom",
+                                            "visible": true,
+                                            "doubleSided": false,
+                                            "shadingMode": "flat"
+                                          },
+                                          "children": [
+                                            {
+                                              "id": "11",
+                                              "name": "Tail-A8",
+                                              "position": {"x": 0, "y": 0, "z": 0.5},
+                                              "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+                                              "shape": {
+                                                "type": "box",
+                                                "offset": {"x": 0, "y": -4, "z": -0.5},
+                                                "stretch": {"x": 1, "y": 1, "z": 1},
+                                                "settings": {
+                                                  "isPiece": false,
+                                                  "size": {"x": 15, "y": 4, "z": 11}
+                                                },
+                                                "textureLayout": {
+                                                  "back": {
+                                                    "offset": {"x": 97, "y": 169},
+                                                    "mirror": {"x": true, "y": false},
+                                                    "angle": 0
+                                                  },
+                                                  "right": {
+                                                    "offset": {"x": 20, "y": 169},
+                                                    "mirror": {"x": true, "y": false},
+                                                    "angle": 0
+                                                  },
+                                                  "front": {
+                                                    "offset": {"x": 47, "y": 169},
+                                                    "mirror": {"x": true, "y": false},
+                                                    "angle": 0
+                                                  },
+                                                  "left": {
+                                                    "offset": {"x": 66, "y": 169},
+                                                    "mirror": {"x": true, "y": false},
+                                                    "angle": 0
+                                                  },
+                                                  "top": {
+                                                    "offset": {"x": 168, "y": 129},
+                                                    "mirror": {"x": false, "y": true},
+                                                    "angle": 0
+                                                  },
+                                                  "bottom": {
+                                                    "offset": {"x": 186, "y": 118},
+                                                    "mirror": {"x": false, "y": false},
+                                                    "angle": 0
+                                                  }
+                                                },
+                                                "unwrapMode": "custom",
+                                                "visible": true,
+                                                "doubleSided": false,
+                                                "shadingMode": "flat"
+                                              },
+                                              "children": [
+                                                {
+                                                  "id": "12",
+                                                  "name": "Tail-A9",
+                                                  "position": {"x": 0, "y": 0, "z": 0.5},
+                                                  "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+                                                  "shape": {
+                                                    "type": "box",
+                                                    "offset": {"x": 0, "y": -4, "z": -0.5},
+                                                    "stretch": {"x": 1, "y": 1, "z": 1},
+                                                    "settings": {
+                                                      "isPiece": false,
+                                                      "size": {"x": 14, "y": 4, "z": 10}
+                                                    },
+                                                    "textureLayout": {
+                                                      "back": {
+                                                        "offset": {"x": 96, "y": 173},
+                                                        "mirror": {"x": true, "y": false},
+                                                        "angle": 0
+                                                      },
+                                                      "right": {
+                                                        "offset": {"x": 20, "y": 173},
+                                                        "mirror": {"x": true, "y": false},
+                                                        "angle": 0
+                                                      },
+                                                      "front": {
+                                                        "offset": {"x": 47, "y": 173},
+                                                        "mirror": {"x": true, "y": false},
+                                                        "angle": 0
+                                                      },
+                                                      "left": {
+                                                        "offset": {"x": 65, "y": 173},
+                                                        "mirror": {"x": true, "y": false},
+                                                        "angle": 0
+                                                      },
+                                                      "top": {
+                                                        "offset": {"x": 169, "y": 140},
+                                                        "mirror": {"x": false, "y": true},
+                                                        "angle": 0
+                                                      },
+                                                      "bottom": {
+                                                        "offset": {"x": 186, "y": 130},
+                                                        "mirror": {"x": false, "y": false},
+                                                        "angle": 0
+                                                      }
+                                                    },
+                                                    "unwrapMode": "custom",
+                                                    "visible": true,
+                                                    "doubleSided": false,
+                                                    "shadingMode": "flat"
+                                                  },
+                                                  "children": [
+                                                    {
+                                                      "id": "13",
+                                                      "name": "Tail-A10",
+                                                      "position": {"x": 0, "y": 0, "z": 0.5},
+                                                      "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+                                                      "shape": {
+                                                        "type": "box",
+                                                        "offset": {"x": 0, "y": -4, "z": -0.5},
+                                                        "stretch": {"x": 1, "y": 1, "z": 1},
+                                                        "settings": {
+                                                          "isPiece": false,
+                                                          "size": {"x": 13, "y": 4, "z": 9}
+                                                        },
+                                                        "textureLayout": {
+                                                          "back": {
+                                                            "offset": {"x": 95, "y": 177},
+                                                            "mirror": {"x": true, "y": false},
+                                                            "angle": 0
+                                                          },
+                                                          "right": {
+                                                            "offset": {"x": 20, "y": 177},
+                                                            "mirror": {"x": true, "y": false},
+                                                            "angle": 0
+                                                          },
+                                                          "front": {
+                                                            "offset": {"x": 47, "y": 177},
+                                                            "mirror": {"x": true, "y": false},
+                                                            "angle": 0
+                                                          },
+                                                          "left": {
+                                                            "offset": {"x": 64, "y": 177},
+                                                            "mirror": {"x": true, "y": false},
+                                                            "angle": 0
+                                                          },
+                                                          "top": {
+                                                            "offset": {"x": 170, "y": 150},
+                                                            "mirror": {"x": false, "y": true},
+                                                            "angle": 0
+                                                          },
+                                                          "bottom": {
+                                                            "offset": {"x": 186, "y": 141},
+                                                            "mirror": {"x": false, "y": false},
+                                                            "angle": 0
+                                                          }
+                                                        },
+                                                        "unwrapMode": "custom",
+                                                        "visible": true,
+                                                        "doubleSided": false,
+                                                        "shadingMode": "flat"
+                                                      },
+                                                      "children": [
+                                                        {
+                                                          "id": "14",
+                                                          "name": "Tail-A11",
+                                                          "position": {"x": 0, "y": 0, "z": 0.5},
+                                                          "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+                                                          "shape": {
+                                                            "type": "box",
+                                                            "offset": {"x": 0, "y": -3.5, "z": -0.5},
+                                                            "stretch": {"x": 1, "y": 1, "z": 1},
+                                                            "settings": {
+                                                              "isPiece": false,
+                                                              "size": {"x": 12, "y": 3, "z": 8}
+                                                            },
+                                                            "textureLayout": {
+                                                              "back": {
+                                                                "offset": {"x": 94, "y": 181},
+                                                                "mirror": {"x": true, "y": false},
+                                                                "angle": 0
+                                                              },
+                                                              "right": {
+                                                                "offset": {"x": 20, "y": 181},
+                                                                "mirror": {"x": true, "y": false},
+                                                                "angle": 0
+                                                              },
+                                                              "front": {
+                                                                "offset": {"x": 47, "y": 181},
+                                                                "mirror": {"x": true, "y": false},
+                                                                "angle": 0
+                                                              },
+                                                              "left": {
+                                                                "offset": {"x": 63, "y": 181},
+                                                                "mirror": {"x": true, "y": false},
+                                                                "angle": 0
+                                                              },
+                                                              "top": {
+                                                                "offset": {"x": 171, "y": 159},
+                                                                "mirror": {"x": false, "y": true},
+                                                                "angle": 0
+                                                              },
+                                                              "bottom": {
+                                                                "offset": {"x": 186, "y": 151},
+                                                                "mirror": {"x": false, "y": false},
+                                                                "angle": 0
+                                                              }
+                                                            },
+                                                            "unwrapMode": "custom",
+                                                            "visible": true,
+                                                            "doubleSided": false,
+                                                            "shadingMode": "flat"
+                                                          },
+                                                          "children": [
+                                                            {
+                                                              "id": "15",
+                                                              "name": "Tail-A12",
+                                                              "position": {"x": 0, "y": 0.5, "z": 0.5},
+                                                              "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+                                                              "shape": {
+                                                                "type": "box",
+                                                                "offset": {"x": 0, "y": -3.5, "z": -0.5},
+                                                                "stretch": {"x": 1, "y": 1, "z": 1},
+                                                                "settings": {
+                                                                  "isPiece": false,
+                                                                  "size": {"x": 11, "y": 3, "z": 7}
+                                                                },
+                                                                "textureLayout": {
+                                                                  "back": {
+                                                                    "offset": {"x": 93, "y": 184},
+                                                                    "mirror": {"x": true, "y": false},
+                                                                    "angle": 0
+                                                                  },
+                                                                  "right": {
+                                                                    "offset": {"x": 20, "y": 184},
+                                                                    "mirror": {"x": true, "y": false},
+                                                                    "angle": 0
+                                                                  },
+                                                                  "front": {
+                                                                    "offset": {"x": 47, "y": 184},
+                                                                    "mirror": {"x": true, "y": false},
+                                                                    "angle": 0
+                                                                  },
+                                                                  "left": {
+                                                                    "offset": {"x": 62, "y": 184},
+                                                                    "mirror": {"x": true, "y": false},
+                                                                    "angle": 0
+                                                                  },
+                                                                  "top": {
+                                                                    "offset": {"x": 172, "y": 167},
+                                                                    "mirror": {"x": false, "y": true},
+                                                                    "angle": 0
+                                                                  },
+                                                                  "bottom": {
+                                                                    "offset": {"x": 186, "y": 160},
+                                                                    "mirror": {"x": false, "y": false},
+                                                                    "angle": 0
+                                                                  }
+                                                                },
+                                                                "unwrapMode": "custom",
+                                                                "visible": true,
+                                                                "doubleSided": false,
+                                                                "shadingMode": "flat"
+                                                              },
+                                                              "children": [
+                                                                {
+                                                                  "id": "16",
+                                                                  "name": "Tail-End",
+                                                                  "position": {"x": 0, "y": 0.5, "z": -0.5},
+                                                                  "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+                                                                  "shape": {
+                                                                    "type": "box",
+                                                                    "offset": {"x": 0, "y": -3.5, "z": 0.5},
+                                                                    "stretch": {"x": 1, "y": 1, "z": 1},
+                                                                    "settings": {
+                                                                      "isPiece": false,
+                                                                      "size": {"x": 10, "y": 3, "z": 6}
+                                                                    },
+                                                                    "textureLayout": {
+                                                                      "back": {
+                                                                        "offset": {"x": 92, "y": 187},
+                                                                        "mirror": {"x": true, "y": false},
+                                                                        "angle": 0
+                                                                      },
+                                                                      "right": {
+                                                                        "offset": {"x": 20, "y": 187},
+                                                                        "mirror": {"x": true, "y": false},
+                                                                        "angle": 0
+                                                                      },
+                                                                      "front": {
+                                                                        "offset": {"x": 47, "y": 187},
+                                                                        "mirror": {"x": true, "y": false},
+                                                                        "angle": 0
+                                                                      },
+                                                                      "left": {
+                                                                        "offset": {"x": 61, "y": 187},
+                                                                        "mirror": {"x": true, "y": false},
+                                                                        "angle": 0
+                                                                      },
+                                                                      "top": {
+                                                                        "offset": {"x": 173, "y": 174},
+                                                                        "mirror": {"x": false, "y": true},
+                                                                        "angle": 0
+                                                                      },
+                                                                      "bottom": {
+                                                                        "offset": {"x": 186, "y": 168},
+                                                                        "mirror": {"x": false, "y": false},
+                                                                        "angle": 0
+                                                                      }
+                                                                    },
+                                                                    "unwrapMode": "custom",
+                                                                    "visible": true,
+                                                                    "doubleSided": false,
+                                                                    "shadingMode": "flat"
+                                                                  },
+                                                                  "children": [
+                                                                    {
+                                                                      "id": "17",
+                                                                      "name": "Finn-Connection",
+                                                                      "position": {"x": 0, "y": -1.5, "z": -0.5},
+                                                                      "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+                                                                      "shape": {
+                                                                        "type": "none",
+                                                                        "offset": {"x": 0, "y": 0, "z": 0},
+                                                                        "stretch": {"x": 1, "y": 1, "z": 1},
+                                                                        "settings": {
+                                                                          "isPiece": false
+                                                                        },
+                                                                        "textureLayout": {},
+                                                                        "unwrapMode": "custom",
+                                                                        "visible": true,
+                                                                        "doubleSided": false,
+                                                                        "shadingMode": "flat"
+                                                                      }
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "format": "character",
+  "lod": "auto"
+}
