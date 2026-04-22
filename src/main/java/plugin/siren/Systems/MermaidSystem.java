@@ -334,6 +334,7 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
 
                     mermaid.setArmorElapsedTime(0f);
                     mermaid.setMermaid(true);
+                    mermaid.setMovementUpdatedWater(false);
 
                     /* Particles
                     TransformComponent transform = commandBuffer.getComponent(ref, TransformComponent.getComponentType());
@@ -353,6 +354,7 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                 mermaid.setMermaid(false);
                 mermaid.setElapsedTime(0f);
                 mermaid.setDrying(true);
+                mermaid.setMovementUpdatedWater(false);
             } else if (mermaid.isDrying()) {
                 mermaid.incrementTick();
 
@@ -389,6 +391,7 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                         if(Mermaids.getConfig().get().ifConsoleLogs()) {
                             Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " has transformed back into a Human.");
                         }
+                        mermaid.setMovementUpdatedWater(false);
                     } else {
                         player.sendMessage(Message.raw("Mermaids: Error: WaterSystem: Mermaid Component == null [water.isDrying]"));
                         Mermaids.LOGGER.atSevere().log(player.getDisplayName() + " had an error of getting the Mermaid Component. Error: WaterSystem: Mermaid Component == null [water.isDrying]");
@@ -496,12 +499,12 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
             }
 
             if ((mermaid.isMermaid() && mermaidSettings.getToggleMermaid() && transformPermission) || ((forcedMermaid || forcedMermaidWater) && mermaid.isMermaid())) {
-                if(Mermaids.getConfig().get().getItemIncreaseSwimSpeed()) {
-                    ItemSpeedType itemSpeedType = mermaid.getItemSpeedType();
-                    ArmorSpeedType armorSpeedType = mermaid.getArmorSpeedType();
+                ItemSpeedType itemSpeedType = mermaid.getItemSpeedType();
+                ArmorSpeedType armorSpeedType = mermaid.getArmorSpeedType();
 
-                    ItemSpeedType newItemSpeedType = itemSpeedType;
-                    ArmorSpeedType newArmorSpeedType = armorSpeedType;
+                ItemSpeedType newItemSpeedType = ItemSpeedType.NONE;
+                ArmorSpeedType newArmorSpeedType = ArmorSpeedType.NONE;
+                if(Mermaids.getConfig().get().getItemIncreaseSwimSpeed() && false) {
                     ItemStack itemInHand = null;
                     InventoryComponent.Hotbar hotbarComponent = commandBuffer.getComponent(ref, InventoryComponent.Hotbar.getComponentType());
                     if(hotbarComponent != null) {
@@ -556,323 +559,84 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                 if(movement != null) {
                     if (movementState.getMovementStates().swimming || movementState.getMovementStates().swimJumping || movementState.getMovementStates().inFluid ||
                             (mermaid.isInFluidBlock() && (movementState.getMovementStates().sitting || movementState.getMovementStates().sleeping))) {
-                        /*movement.getSettings().swimJumpForce += 3f;
-                        movement.getSettings().baseSpeed += 7f;
-                        movement.getSettings().forwardCrouchSpeedMultiplier += 0.4f;
-                        movement.getSettings().backwardCrouchSpeedMultiplier += 0.4f;
-                        movement.getSettings().forwardSprintSpeedMultiplier += 0.2f;
+                        if(itemSpeedType.getValue() != newItemSpeedType.getValue() || armorSpeedType.getValue() != newArmorSpeedType.getValue() || !mermaid.ifMovementUpdatedWater() || true) {
+                            MovementSettings settings = movement.getSettings();
+                            MovementSettings defaults = movement.getDefaultSettings();
 
-                        if(Mermaids.getConfig().get().getItemIncreaseSwimSpeed()) {
-                            ItemStack itemInHand = null;
-                            InventoryComponent.Hotbar hotbarComponent = commandBuffer.getComponent(ref, InventoryComponent.Hotbar.getComponentType());
-                            if(hotbarComponent != null) {
-                                itemInHand = hotbarComponent.getActiveItem();
+                            float itemBonus = 1.0f;
+                            if(itemSpeedType.getValue() == 1){ //TIER_1
+                                itemBonus = 1.25f;
+                            }else if(itemSpeedType.getValue() == 2){ //TIER_2
+                                itemBonus = 1.35f;
+                            }else if(itemSpeedType.getValue() == 3){ //TIER_3
+                                itemBonus = 1.4f;
                             }
 
-                            if (itemInHand != null && itemInHand.getItemId().equalsIgnoreCase("weapon_spear_fishbone")) {
-                                movement.getSettings().swimJumpForce += 2f;
-                                movement.getSettings().baseSpeed += 4f;
-                                movement.getSettings().forwardCrouchSpeedMultiplier += 0.1f;
-                                movement.getSettings().backwardCrouchSpeedMultiplier += 0.1f;
-                                movement.getSettings().forwardSprintSpeedMultiplier += 0.35f;
+                            float armorBonus = 1.0f;
+                            if(armorSpeedType.getValue() == 2){ //TIER_2
+                                armorBonus = 1.15f;
                             }
 
-                            // DIVING TALE
-                            if (Mermaids.getConfig().get().getDivingTaleCompat()) {
-                                if (itemInHand != null &&
-                                        (itemInHand.getItemId().equalsIgnoreCase("Harpoon_Copper") || itemInHand.getItemId().equalsIgnoreCase("Harpoon_Iron"))) {
-                                    movement.getSettings().swimJumpForce += 1.5f;
-                                    movement.getSettings().baseSpeed += 3.25f;
-                                    movement.getSettings().forwardCrouchSpeedMultiplier += 0.05f;
-                                    movement.getSettings().backwardCrouchSpeedMultiplier += 0.05f;
-                                    movement.getSettings().forwardSprintSpeedMultiplier += 0.275f;
-                                } else if (itemInHand != null &&
-                                        (itemInHand.getItemId().equalsIgnoreCase("Harpoon_Thorium") || itemInHand.getItemId().equalsIgnoreCase("Harpoon_Cobalt")
-                                                || itemInHand.getItemId().equalsIgnoreCase("Harpoon_Adamantite"))) {
-                                    movement.getSettings().swimJumpForce += 2f;
-                                    movement.getSettings().baseSpeed += 4f;
-                                    movement.getSettings().forwardCrouchSpeedMultiplier += 0.1f;
-                                    movement.getSettings().backwardCrouchSpeedMultiplier += 0.1f;
-                                    movement.getSettings().forwardSprintSpeedMultiplier += 0.35f;
-                                } else if (itemInHand != null &&
-                                        (itemInHand.getItemId().equalsIgnoreCase("Harpoon_Mithril"))) {
-                                    movement.getSettings().swimJumpForce += 3f;
-                                    movement.getSettings().baseSpeed += 5.25f;
-                                    movement.getSettings().forwardCrouchSpeedMultiplier += 0.15f;
-                                    movement.getSettings().backwardCrouchSpeedMultiplier += 0.15f;
-                                    movement.getSettings().forwardSprintSpeedMultiplier += 0.45f;
-                                }
+                            float itemSwimJumpForce = 1.0f;
+                            float itemBaseSpeed = 1.0f;
+                            float itemForwardCrouch = 1.0f;
+                            float itemBackwardCrouch = 1.0f;
+                            float itemForwardSprint = 1.0f;
+                            if(newItemSpeedType.getValue() == 1){ //TIER_1
+                                itemSwimJumpForce = 1.1f;
+                                itemBaseSpeed = 1.25f;
+                                itemForwardSprint = 1.05f;
+                            }else if(newItemSpeedType.getValue() == 2){ //TIER_2
+                                itemSwimJumpForce = 1.15f;
+                                itemBaseSpeed = 1.35f;
+                                itemBackwardCrouch = 1.05f;
+                                itemForwardSprint = 1.1f;
+                            }else if(newItemSpeedType.getValue() == 3){ //TIER_3
+                                itemSwimJumpForce = 1.2f;
+                                itemBaseSpeed = 1.4f;
+                                itemForwardCrouch = 1.05f;
+                                itemBackwardCrouch = 1.1f;
+                                itemForwardSprint = 1.15f;
                             }
 
-                            // MORENPC
-                            if(Mermaids.getConfig().get().getMoreNPCCompat()) {
-                                if (itemInHand != null &&
-                                        (itemInHand.getItemId().equalsIgnoreCase("Weapon_Trident_Icy"))) {
-                                    movement.getSettings().swimJumpForce += 3f;
-                                    movement.getSettings().baseSpeed += 5.25f;
-                                    movement.getSettings().forwardCrouchSpeedMultiplier += 0.15f;
-                                    movement.getSettings().backwardCrouchSpeedMultiplier += 0.15f;
-                                    movement.getSettings().forwardSprintSpeedMultiplier += 0.45f;
-                                }
+                            float armorSwimJumpForce = 1.0f;
+                            float armorBaseSpeed = 1.0f;
+                            if(newArmorSpeedType.getValue() == 2){ //TIER_2
+                                armorSwimJumpForce = 1.05f;
+                                armorBaseSpeed = 1.15f;
                             }
 
-                            // KEYBLADE REIMAGINED
-                            if(Mermaids.getConfig().get().getKeybladeReimagCompat()){
-                                if (itemInHand != null &&
-                                        (itemInHand.getItemId().equalsIgnoreCase("Sword_Keyblade_Crabclaw"))) {
-                                    movement.getSettings().swimJumpForce += 1.5f;
-                                    movement.getSettings().baseSpeed += 3.25f;
-                                    movement.getSettings().forwardCrouchSpeedMultiplier += 0.05f;
-                                    movement.getSettings().backwardCrouchSpeedMultiplier += 0.05f;
-                                    movement.getSettings().forwardSprintSpeedMultiplier += 0.275f;
-                                } else if (itemInHand != null &&
-                                        (itemInHand.getItemId().equalsIgnoreCase("Sword_Keyblade_Crabclaw_Epic"))) {
-                                    movement.getSettings().swimJumpForce += 2f;
-                                    movement.getSettings().baseSpeed += 4f;
-                                    movement.getSettings().forwardCrouchSpeedMultiplier += 0.1f;
-                                    movement.getSettings().backwardCrouchSpeedMultiplier += 0.1f;
-                                    movement.getSettings().forwardSprintSpeedMultiplier += 0.35f;
-                                }
-                            }
+                            float mermaidBaseSpeedBonus = defaults.baseSpeed * 2.3f * itemBonus * armorBonus;
+                            float mermaidNewBaseSpeedBonus = defaults.baseSpeed * 2.3f * itemBaseSpeed * armorBaseSpeed;
 
-                            if(mermaid.hasMermaidArmor()){
-                                movement.getSettings().swimJumpForce += 0.75f;
-                                movement.getSettings().baseSpeed += 3f;
-                            }
-                        }*/
+                            float newSwimJumpForce = defaults.swimJumpForce * 1.35f * itemSwimJumpForce * armorSwimJumpForce * 1.1f;
+                            float newBaseSpeed = defaults.baseSpeed * 2.45f * itemBaseSpeed * armorBaseSpeed * 1.1f;
+                            float newForwardCrouch = defaults.forwardCrouchSpeedMultiplier * 1.8f * itemForwardCrouch;
+                            float newBackwardCrouch = defaults.backwardCrouchSpeedMultiplier * 1.9f * itemBackwardCrouch;
+                            float newForwardSprint = defaults.forwardSprintSpeedMultiplier * 1.25f * itemForwardSprint * 1.1f;
 
-                        MovementSettings settings = movement.getSettings();
-                        MovementSettings defaults = movement.getDefaultSettings();
+                            boolean updateSpeedOne = !mermaid.ifMovementUpdatedWater();
+                            boolean updateSpeedTwo = mermaidBaseSpeedBonus > settings.baseSpeed || true;
+                            boolean updateSpeedThree = mermaidBaseSpeedBonus != mermaidNewBaseSpeedBonus && mermaidNewBaseSpeedBonus != settings.baseSpeed;
+                            if(updateSpeedOne || updateSpeedTwo || updateSpeedThree) {
+                                float swimJumpForce = Math.max(settings.swimJumpForce, newSwimJumpForce);
+                                float baseSpeed = Math.max(settings.baseSpeed, newBaseSpeed);
+                                float forwardCrouchSpeedMultiplier = Math.max(settings.forwardCrouchSpeedMultiplier, newForwardCrouch);
+                                float backwardCrouchSpeedMultiplier = Math.max(settings.backwardCrouchSpeedMultiplier, newBackwardCrouch);
+                                float forwardSprintSpeedMultiplier = Math.max(settings.forwardSprintSpeedMultiplier, newForwardSprint);
 
-                        float swimJumpForce = Math.max(settings.swimJumpForce, defaults.swimJumpForce * 1.25f);
-                        float baseSpeed = Math.max(settings.baseSpeed, defaults.baseSpeed * 2.3f);
-                        float forwardCrouchSpeedMultiplier = Math.max(settings.forwardCrouchSpeedMultiplier, defaults.forwardCrouchSpeedMultiplier * 1.8f);
-                        float backwardCrouchSpeedMultiplier = Math.max(settings.backwardCrouchSpeedMultiplier, defaults.backwardCrouchSpeedMultiplier * 1.9f);
-                        float forwardSprintSpeedMultiplier = Math.max(settings.forwardSprintSpeedMultiplier, defaults.forwardSprintSpeedMultiplier * 1.15f);
+                                //Mermaids.LOGGER.atInfo().log("SETTING - settings: " + String.valueOf(settings.baseSpeed) + "     defaults: " + String.valueOf(defaults.baseSpeed) + "      basespeed: " + String.valueOf(baseSpeed));
 
-                        Mermaids.LOGGER.atInfo().log("BEFORE - settings: " + String.valueOf(settings.baseSpeed) + "     defaults: " + String.valueOf(defaults.baseSpeed) + "      basespeed: " + String.valueOf(baseSpeed));
+                                settings.swimJumpForce = swimJumpForce;
+                                settings.baseSpeed = baseSpeed;
+                                settings.forwardCrouchSpeedMultiplier = forwardCrouchSpeedMultiplier;
+                                settings.backwardCrouchSpeedMultiplier = backwardCrouchSpeedMultiplier;
+                                settings.forwardSprintSpeedMultiplier = forwardSprintSpeedMultiplier;
 
-                        if(Mermaids.getConfig().get().getItemIncreaseSwimSpeed()) {
-                            ItemStack itemInHand = null;
-                            InventoryComponent.Hotbar hotbarComponent = commandBuffer.getComponent(ref, InventoryComponent.Hotbar.getComponentType());
-                            if(hotbarComponent != null) {
-                                itemInHand = hotbarComponent.getActiveItem();
-                            }
-
-                            if (itemInHand != null && itemInHand.getItemId().equalsIgnoreCase("weapon_spear_fishbone")) {
-                                float swimJumpForceBonus = Math.max(settings.swimJumpForce, swimJumpForce * 1.15f);
-                                float baseSpeedBonus = Math.max(settings.baseSpeed, baseSpeed * 1.35f);
-                                float backwardCrouchSpeedMultiplierBonus = Math.max(settings.backwardCrouchSpeedMultiplier, backwardCrouchSpeedMultiplier * 1.05f);
-                                float forwardSprintSpeedMultiplierBonus = Math.max(settings.forwardSprintSpeedMultiplier, forwardSprintSpeedMultiplier * 1.1f);
-
-                                swimJumpForce = swimJumpForceBonus;
-                                baseSpeed = baseSpeedBonus;
-                                backwardCrouchSpeedMultiplier = backwardCrouchSpeedMultiplierBonus;
-                                forwardSprintSpeedMultiplier = forwardSprintSpeedMultiplierBonus;
-                            }
-
-                            // DIVING TALE
-                            if (Mermaids.getConfig().get().getDivingTaleCompat()) {
-                                if (itemInHand != null &&
-                                        (itemInHand.getItemId().equalsIgnoreCase("Harpoon_Copper") || itemInHand.getItemId().equalsIgnoreCase("Harpoon_Iron"))) {
-                                    float swimJumpForceBonus = Math.max(settings.swimJumpForce, swimJumpForce * 1.f);
-                                    float baseSpeedBonus = Math.max(settings.baseSpeed, baseSpeed * 1.25f);
-                                    float forwardSprintSpeedMultiplierBonus = Math.max(settings.forwardSprintSpeedMultiplier, forwardSprintSpeedMultiplier * 1.05f);
-
-                                    swimJumpForce = swimJumpForceBonus;
-                                    baseSpeed = baseSpeedBonus;
-                                    forwardSprintSpeedMultiplier = forwardSprintSpeedMultiplierBonus;
-                                } else if (itemInHand != null &&
-                                        (itemInHand.getItemId().equalsIgnoreCase("Harpoon_Thorium") || itemInHand.getItemId().equalsIgnoreCase("Harpoon_Cobalt")
-                                                || itemInHand.getItemId().equalsIgnoreCase("Harpoon_Adamantite"))) {
-                                    float swimJumpForceBonus = Math.max(settings.swimJumpForce, swimJumpForce * 1.15f);
-                                    float baseSpeedBonus = Math.max(settings.baseSpeed, baseSpeed * 1.35f);
-                                    float backwardCrouchSpeedMultiplierBonus = Math.max(settings.backwardCrouchSpeedMultiplier, backwardCrouchSpeedMultiplier * 1.05f);
-                                    float forwardSprintSpeedMultiplierBonus = Math.max(settings.forwardSprintSpeedMultiplier, forwardSprintSpeedMultiplier * 1.1f);
-
-                                    swimJumpForce = swimJumpForceBonus;
-                                    baseSpeed = baseSpeedBonus;
-                                    backwardCrouchSpeedMultiplier = backwardCrouchSpeedMultiplierBonus;
-                                    forwardSprintSpeedMultiplier = forwardSprintSpeedMultiplierBonus;
-                                } else if (itemInHand != null &&
-                                        (itemInHand.getItemId().equalsIgnoreCase("Harpoon_Mithril"))) {
-                                    float swimJumpForceBonus = Math.max(settings.swimJumpForce, swimJumpForce * 1.2f);
-                                    float baseSpeedBonus = Math.max(settings.baseSpeed, baseSpeed * 1.4f);
-                                    float forwardCrouchSpeedMultiplierBonus = Math.max(settings.forwardCrouchSpeedMultiplier, forwardCrouchSpeedMultiplier * 1.05f);
-                                    float backwardCrouchSpeedMultiplierBonus = Math.max(settings.backwardCrouchSpeedMultiplier, backwardCrouchSpeedMultiplier * 1.1f);
-                                    float forwardSprintSpeedMultiplierBonus = Math.max(settings.forwardSprintSpeedMultiplier, forwardSprintSpeedMultiplier * 1.15f);
-
-                                    swimJumpForce = swimJumpForceBonus;
-                                    baseSpeed = baseSpeedBonus;
-                                    forwardCrouchSpeedMultiplier = forwardCrouchSpeedMultiplierBonus;
-                                    backwardCrouchSpeedMultiplier = backwardCrouchSpeedMultiplierBonus;
-                                    forwardSprintSpeedMultiplier = forwardSprintSpeedMultiplierBonus;
-                                }
-                            }
-
-                            // MORENPC
-                            if(Mermaids.getConfig().get().getMoreNPCCompat()) {
-                                if (itemInHand != null &&
-                                        (itemInHand.getItemId().equalsIgnoreCase("Weapon_Trident_Icy"))) {
-                                    float swimJumpForceBonus = Math.max(settings.swimJumpForce, swimJumpForce * 1.2f);
-                                    float baseSpeedBonus = Math.max(settings.baseSpeed, baseSpeed * 1.4f);
-                                    float forwardCrouchSpeedMultiplierBonus = Math.max(settings.forwardCrouchSpeedMultiplier, forwardCrouchSpeedMultiplier * 1.05f);
-                                    float backwardCrouchSpeedMultiplierBonus = Math.max(settings.backwardCrouchSpeedMultiplier, backwardCrouchSpeedMultiplier * 1.1f);
-                                    float forwardSprintSpeedMultiplierBonus = Math.max(settings.forwardSprintSpeedMultiplier, forwardSprintSpeedMultiplier * 1.15f);
-
-                                    swimJumpForce = swimJumpForceBonus;
-                                    baseSpeed = baseSpeedBonus;
-                                    forwardCrouchSpeedMultiplier = forwardCrouchSpeedMultiplierBonus;
-                                    backwardCrouchSpeedMultiplier = backwardCrouchSpeedMultiplierBonus;
-                                    forwardSprintSpeedMultiplier = forwardSprintSpeedMultiplierBonus;
-                                }
-                            }
-
-                            // KEYBLADE REIMAGINED
-                            if(Mermaids.getConfig().get().getKeybladeReimagCompat()){
-                                if (itemInHand != null &&
-                                        (itemInHand.getItemId().equalsIgnoreCase("Sword_Keyblade_Crabclaw"))) {
-                                    float swimJumpForceBonus = Math.max(settings.swimJumpForce, swimJumpForce * 1.f);
-                                    float baseSpeedBonus = Math.max(settings.baseSpeed, baseSpeed * 1.25f);
-                                    float forwardSprintSpeedMultiplierBonus = Math.max(settings.forwardSprintSpeedMultiplier, forwardSprintSpeedMultiplier * 1.05f);
-
-                                    swimJumpForce = swimJumpForceBonus;
-                                    baseSpeed = baseSpeedBonus;
-                                    forwardSprintSpeedMultiplier = forwardSprintSpeedMultiplierBonus;
-                                } else if (itemInHand != null &&
-                                        (itemInHand.getItemId().equalsIgnoreCase("Sword_Keyblade_Crabclaw_Epic"))) {
-                                    float swimJumpForceBonus = Math.max(settings.swimJumpForce, swimJumpForce * 1.15f);
-                                    float baseSpeedBonus = Math.max(settings.baseSpeed, baseSpeed * 1.35f);
-                                    float backwardCrouchSpeedMultiplierBonus = Math.max(settings.backwardCrouchSpeedMultiplier, backwardCrouchSpeedMultiplier * 1.05f);
-                                    float forwardSprintSpeedMultiplierBonus = Math.max(settings.forwardSprintSpeedMultiplier, forwardSprintSpeedMultiplier * 1.1f);
-
-                                    swimJumpForce = swimJumpForceBonus;
-                                    baseSpeed = baseSpeedBonus;
-                                    backwardCrouchSpeedMultiplier = backwardCrouchSpeedMultiplierBonus;
-                                    forwardSprintSpeedMultiplier = forwardSprintSpeedMultiplierBonus;
-                                }
-                            }
-
-                            if(mermaid.hasMermaidArmor()){
-                                float swimJumpForceBonus = Math.max(settings.swimJumpForce, swimJumpForce * 1.05f);
-                                float baseSpeedBonus = Math.max(settings.baseSpeed, baseSpeed * 1.15f);
-
-                                swimJumpForce = swimJumpForceBonus;
-                                baseSpeed = baseSpeedBonus;
+                                mermaid.setMovementUpdatedWater(true);
+                                mermaid.setMovementUpdatedLand(false);
                             }
                         }
-
-
-                        Mermaids.LOGGER.atInfo().log("SETTING - settings: " + String.valueOf(settings.baseSpeed) + "     defaults: " + String.valueOf(defaults.baseSpeed) + "      basespeed: " + String.valueOf(baseSpeed));
-
-                        settings.swimJumpForce = swimJumpForce;
-                        settings.baseSpeed = baseSpeed;
-                        settings.forwardCrouchSpeedMultiplier = forwardCrouchSpeedMultiplier;
-                        settings.backwardCrouchSpeedMultiplier = backwardCrouchSpeedMultiplier;
-                        settings.forwardSprintSpeedMultiplier = forwardSprintSpeedMultiplier;
-                        /*if(Mermaids.getConfig().get().getItemIncreaseSwimSpeed()) {
-                            ItemStack itemInHand = null;
-                            InventoryComponent.Hotbar hotbarComponent = commandBuffer.getComponent(ref, InventoryComponent.Hotbar.getComponentType());
-                            if(hotbarComponent != null) {
-                                itemInHand = hotbarComponent.getActiveItem();
-                            }
-
-                            boolean updateSwimSpeed = false;
-
-                            if (itemInHand != null && itemInHand.getItemId().equalsIgnoreCase("weapon_spear_fishbone")) {
-                                movement.getSettings().swimJumpForce = 16f;
-                                movement.getSettings().baseSpeed = 17f;
-                                movement.getSettings().forwardCrouchSpeedMultiplier = 1f;
-                                movement.getSettings().backwardCrouchSpeedMultiplier = 0.9f;
-                                movement.getSettings().forwardSprintSpeedMultiplier = 2.05f;
-                                updateSwimSpeed = true;
-                            }
-
-                            // DIVING TALE
-                            if (Mermaids.getConfig().get().getDivingTaleCompat()) {
-                                if (itemInHand != null &&
-                                        (itemInHand.getItemId().equalsIgnoreCase("Harpoon_Copper") || itemInHand.getItemId().equalsIgnoreCase("Harpoon_Iron"))) {
-                                    movement.getSettings().swimJumpForce = 15.25f;
-                                    movement.getSettings().baseSpeed = 15f;
-                                    movement.getSettings().forwardCrouchSpeedMultiplier = 1f;
-                                    movement.getSettings().backwardCrouchSpeedMultiplier = 0.85f;
-                                    movement.getSettings().forwardSprintSpeedMultiplier = 1.9f;
-                                    updateSwimSpeed = true;
-                                } else if (itemInHand != null &&
-                                        (itemInHand.getItemId().equalsIgnoreCase("Harpoon_Thorium") || itemInHand.getItemId().equalsIgnoreCase("Harpoon_Cobalt")
-                                                || itemInHand.getItemId().equalsIgnoreCase("Harpoon_Adamantite"))) {
-                                    movement.getSettings().swimJumpForce = 16f;
-                                    movement.getSettings().baseSpeed = 17f;
-                                    movement.getSettings().forwardCrouchSpeedMultiplier = 1f;
-                                    movement.getSettings().backwardCrouchSpeedMultiplier = 0.9f;
-                                    movement.getSettings().forwardSprintSpeedMultiplier = 2.05f;
-                                    updateSwimSpeed = true;
-                                } else if (itemInHand != null &&
-                                        (itemInHand.getItemId().equalsIgnoreCase("Harpoon_Mithril"))) {
-                                    movement.getSettings().swimJumpForce = 17f;
-                                    movement.getSettings().baseSpeed = 18.5f;
-                                    movement.getSettings().forwardCrouchSpeedMultiplier = 1f;
-                                    movement.getSettings().backwardCrouchSpeedMultiplier = 0.95f;
-                                    movement.getSettings().forwardSprintSpeedMultiplier = 2.15f;
-                                    updateSwimSpeed = true;
-                                }
-                            }
-
-                            // MORENPC
-                            if(Mermaids.getConfig().get().getMoreNPCCompat()) {
-                                if (itemInHand != null &&
-                                        (itemInHand.getItemId().equalsIgnoreCase("Weapon_Trident_Icy"))) {
-                                    movement.getSettings().swimJumpForce = 17f;
-                                    movement.getSettings().baseSpeed = 18.5f;
-                                    movement.getSettings().forwardCrouchSpeedMultiplier = 1f;
-                                    movement.getSettings().backwardCrouchSpeedMultiplier = 0.95f;
-                                    movement.getSettings().forwardSprintSpeedMultiplier = 2.15f;
-                                    updateSwimSpeed = true;
-                                }
-                            }
-
-                            // KEYBLADE REIMAGINED
-                            if(Mermaids.getConfig().get().getKeybladeReimagCompat()){
-                                if (itemInHand != null &&
-                                        (itemInHand.getItemId().equalsIgnoreCase("Sword_Keyblade_Crabclaw"))) {
-                                    movement.getSettings().swimJumpForce = 15.25f;
-                                    movement.getSettings().baseSpeed = 15f;
-                                    movement.getSettings().forwardCrouchSpeedMultiplier = 1f;
-                                    movement.getSettings().backwardCrouchSpeedMultiplier = 0.85f;
-                                    movement.getSettings().forwardSprintSpeedMultiplier = 1.9f;
-                                    updateSwimSpeed = true;
-                                } else if (itemInHand != null &&
-                                        (itemInHand.getItemId().equalsIgnoreCase("Sword_Keyblade_Crabclaw_Epic"))) {
-                                    movement.getSettings().swimJumpForce = 16f;
-                                    movement.getSettings().baseSpeed = 17f;
-                                    movement.getSettings().forwardCrouchSpeedMultiplier = 1f;
-                                    movement.getSettings().backwardCrouchSpeedMultiplier = 0.9f;
-                                    movement.getSettings().forwardSprintSpeedMultiplier = 2.05f;
-                                    updateSwimSpeed = true;
-                                }
-                            }
-
-                            if(!updateSwimSpeed){
-                                movement.getSettings().swimJumpForce = 14.5f;
-                                movement.getSettings().baseSpeed = 12.5f;
-                                movement.getSettings().forwardCrouchSpeedMultiplier = 1f;
-                                movement.getSettings().backwardCrouchSpeedMultiplier = 0.8f;
-                                movement.getSettings().forwardSprintSpeedMultiplier = 1.85f;
-                            }
-
-                            if(mermaid.hasMermaidArmor()){
-                                movement.getSettings().swimJumpForce += 0.5f;
-                                movement.getSettings().baseSpeed += 3f;
-                            }
-                        }else{
-                            movement.getSettings().swimJumpForce = 14.5f;
-                            movement.getSettings().baseSpeed = 12.5f;
-                            movement.getSettings().forwardCrouchSpeedMultiplier = 1f;
-                            movement.getSettings().backwardCrouchSpeedMultiplier = 0.8f;
-                            movement.getSettings().forwardSprintSpeedMultiplier = 1.85f;
-                        }
-
-                         */
                     } else {
                         if(Mermaids.getConfig().get().getMermaidOnLandSpeedDebuff()) {
                             movement.getSettings().jumpForce = 8f;
@@ -880,10 +644,18 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                             movement.getSettings().forwardCrouchSpeedMultiplier = 0.35f;
                             movement.getSettings().backwardCrouchSpeedMultiplier = 0.25f;
                             movement.getSettings().forwardSprintSpeedMultiplier = 1.35f;
+
+
+                            mermaid.setMovementUpdatedLand(true);
                         }
                         onLand = true;
+
+                        mermaid.setMovementUpdatedWater(false);
                     }
                     movement.update(playerRef.getPacketHandler());
+
+                    mermaid.setItemSpeedType(newItemSpeedType);
+                    mermaid.setArmorSpeedType(newArmorSpeedType);
                 }else{
                     player.sendMessage(Message.raw("Mermaids: Error: WaterSystem: Movement Component == null [transformation stats]"));
                 }

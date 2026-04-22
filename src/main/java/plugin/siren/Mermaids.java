@@ -34,8 +34,8 @@ import javax.annotation.Nonnull;
 import java.util.concurrent.TimeUnit;
 
 public class Mermaids extends JavaPlugin {
-    private static final String VERSION = "2.4.4";
-    private static final boolean DEBUG = true;
+    private static final String VERSION = "2.5.0";
+    private static final boolean DEBUG = false;
 
     private static Mermaids plugin;
     public static final HytaleLogger LOGGER = HytaleLogger.forEnclosingClass();
