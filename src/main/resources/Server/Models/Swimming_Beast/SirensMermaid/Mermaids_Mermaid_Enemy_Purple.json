@@ -6,10 +6,6 @@
       "Texture": "Characters/SirensMermaid/MermaidTextures/Mermaids_Mermaid_Purple_Texture.png"
     },
     {
-      "Model": "Characters/SirensMermaid/Mermaids_Mermaid_Fluke.blockymodel",
-      "Texture": "Characters/SirensMermaid/MermaidTextures/Mermaids_Mermaid_Purple_Texture.png"
-    },
-    {
       "Model": "Characters/Body_Attachments/Faces/Player_Face_Detached.blockymodel",
       "Texture": "Characters/Body_Attachments/Faces/Faces_Detached_Textures/MakeUp_Face11.png",
       "GradientSet": "Skin",

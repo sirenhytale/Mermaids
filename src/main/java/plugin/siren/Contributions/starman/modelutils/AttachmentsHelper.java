@@ -16,6 +16,7 @@ import plugin.siren.Utils.Cosmetics.MermaidCosmeticType;
 import javax.annotation.Nullable;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /*
@@ -26,7 +27,7 @@ import java.util.List;
  * Link: https://github.com/SyperAI/hytale-model-utils
  *
  * Modified: Siren
- * Date: 2026/03/29
+ * Date: 2026/04/21
  *
  */
 
@@ -85,8 +86,8 @@ public class AttachmentsHelper {
         }
     }
 
-    public static ModelAttachment[] parseSkin(PlayerSkin skin, @Nullable ArrayList<String> ignore, @Nullable String defaultGradientId, @Nullable MermaidComponent mermaid) {
-        ArrayList<ModelAttachment> attachments = new ArrayList<>();
+    public static ModelAttachment[] parseSkin(ModelAttachment[] baseAttachments, PlayerSkin skin, @Nullable ArrayList<String> ignore, @Nullable String defaultGradientId, @Nullable MermaidComponent mermaid) {
+        ArrayList<ModelAttachment> attachments = new ArrayList<>(Arrays.asList(baseAttachments));
 
         // We go through all the fields of the class PlayerSkin
         for (Field skinField : skin.getClass().getDeclaredFields()) {

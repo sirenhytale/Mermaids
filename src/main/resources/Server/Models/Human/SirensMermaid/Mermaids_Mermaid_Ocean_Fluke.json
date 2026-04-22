@@ -1,5 +1,3 @@
 {
-  "Parent": "Mermaids_Mermaid",
-  "Model": "Characters/SirensMermaid/Mermaids_Mermaid_Ocean_Fluke.blockymodel",
-  "Texture": "Characters/SirensMermaid/MermaidMammalTextures/Mermaids_Mermaid_Orca_Texture.png"
+  "Parent": "Mermaids_Mermaid"
 }

@@ -8,7 +8,7 @@
       "shape": {
         "type": "none",
         "offset": {"x": 0, "y": 0, "z": 0},
-        "stretch": {"x": 1, "y": 1, "z": 1},
+        "stretch": {"x": 0, "y": 0, "z": 0},
         "settings": {
           "isPiece": false
         },
@@ -27,7 +27,7 @@
           "shape": {
             "type": "none",
             "offset": {"x": 0, "y": 0, "z": 0},
-            "stretch": {"x": 1, "y": 1, "z": 1},
+            "stretch": {"x": 0, "y": 0, "z": 0},
             "settings": {
               "isPiece": true
             },
@@ -44,35 +44,68 @@
               "position": {"x": 0, "y": -4, "z": 0},
               "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
               "shape": {
-                "type": "none",
-                "offset": {"x": 0, "y": 0, "z": 0},
+                "type": "box",
+                "offset": {"x": -20, "y": -8.5, "z": 2},
                 "stretch": {"x": 1, "y": 1, "z": 1},
                 "settings": {
-                  "isPiece": true
+                  "isPiece": true,
+                  "size": {"x": 14, "y": 19, "z": 0}
                 },
-                "textureLayout": {},
+                "textureLayout": {
+                  "back": {
+                    "offset": {"x": 14, "y": 0},
+                    "mirror": {"x": true, "y": false},
+                    "angle": 0
+                  },
+                  "right": {
+                    "offset": {"x": 0, "y": 0},
+                    "mirror": {"x": false, "y": false},
+                    "angle": 0
+                  },
+                  "front": {
+                    "offset": {"x": 0, "y": 0},
+                    "mirror": {"x": false, "y": false},
+                    "angle": 0
+                  },
+                  "left": {
+                    "offset": {"x": 0, "y": 0},
+                    "mirror": {"x": false, "y": false},
+                    "angle": 0
+                  },
+                  "top": {
+                    "offset": {"x": 46, "y": 0},
+                    "mirror": {"x": true, "y": false},
+                    "angle": 0
+                  },
+                  "bottom": {
+                    "offset": {"x": 0, "y": 0},
+                    "mirror": {"x": false, "y": false},
+                    "angle": 0
+                  }
+                },
                 "unwrapMode": "custom",
                 "visible": true,
-                "doubleSided": false,
+                "doubleSided": true,
                 "shadingMode": "flat"
               },
               "children": [
                 {
                   "id": "4",
-                  "name": "Pelvic-Fins-Connection",
-                  "position": {"x": 0, "y": 6, "z": 6},
+                  "name": "Pelvic-Fin--C1",
+                  "position": {"x": 20, "y": 7.5, "z": 0},
                   "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
                   "shape": {
                     "type": "box",
-                    "offset": {"x": -20, "y": -14.5, "z": -4},
+                    "offset": {"x": 20, "y": -7.5, "z": 0},
                     "stretch": {"x": 1, "y": 1, "z": 1},
                     "settings": {
                       "isPiece": false,
-                      "size": {"x": 14, "y": 19, "z": 0}
+                      "size": {"x": 14, "y": 19, "z": 0},
+                      "isStaticBox": true
                     },
                     "textureLayout": {
                       "back": {
-                        "offset": {"x": 14, "y": 0},
+                        "offset": {"x": 29, "y": 0},
                         "mirror": {"x": true, "y": false},
                         "angle": 0
                       },
@@ -82,7 +115,7 @@
                         "angle": 0
                       },
                       "front": {
-                        "offset": {"x": 0, "y": 0},
+                        "offset": {"x": 15, "y": 0},
                         "mirror": {"x": false, "y": false},
                         "angle": 0
                       },
@@ -92,12 +125,12 @@
                         "angle": 0
                       },
                       "top": {
-                        "offset": {"x": 46, "y": 0},
+                        "offset": {"x": 11, "y": 0},
                         "mirror": {"x": true, "y": false},
                         "angle": 0
                       },
                       "bottom": {
-                        "offset": {"x": 0, "y": 0},
+                        "offset": {"x": 18, "y": 0},
                         "mirror": {"x": false, "y": false},
                         "angle": 0
                       }
@@ -106,61 +139,7 @@
                     "visible": true,
                     "doubleSided": true,
                     "shadingMode": "flat"
-                  },
-                  "children": [
-                    {
-                      "id": "5",
-                      "name": "Pelvic-Fin--C1",
-                      "position": {"x": 20, "y": 7.5, "z": 0},
-                      "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
-                      "shape": {
-                        "type": "box",
-                        "offset": {"x": 20, "y": -7.5, "z": 0},
-                        "stretch": {"x": 1, "y": 1, "z": 1},
-                        "settings": {
-                          "isPiece": false,
-                          "size": {"x": 14, "y": 19, "z": 0},
-                          "isStaticBox": true
-                        },
-                        "textureLayout": {
-                          "back": {
-                            "offset": {"x": 29, "y": 0},
-                            "mirror": {"x": true, "y": false},
-                            "angle": 0
-                          },
-                          "right": {
-                            "offset": {"x": 0, "y": 0},
-                            "mirror": {"x": false, "y": false},
-                            "angle": 0
-                          },
-                          "front": {
-                            "offset": {"x": 15, "y": 0},
-                            "mirror": {"x": false, "y": false},
-                            "angle": 0
-                          },
-                          "left": {
-                            "offset": {"x": 0, "y": 0},
-                            "mirror": {"x": false, "y": false},
-                            "angle": 0
-                          },
-                          "top": {
-                            "offset": {"x": 11, "y": 0},
-                            "mirror": {"x": true, "y": false},
-                            "angle": 0
-                          },
-                          "bottom": {
-                            "offset": {"x": 18, "y": 0},
-                            "mirror": {"x": false, "y": false},
-                            "angle": 0
-                          }
-                        },
-                        "unwrapMode": "custom",
-                        "visible": true,
-                        "doubleSided": true,
-                        "shadingMode": "flat"
-                      }
-                    }
-                  ]
+                  }
                 }
               ]
             }

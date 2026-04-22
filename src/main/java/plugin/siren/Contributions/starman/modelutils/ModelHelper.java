@@ -15,6 +15,7 @@ import plugin.siren.Utils.Cosmetics.MermaidCosmeticAttachments;
 import plugin.siren.Utils.Cosmetics.MermaidCosmeticType;
 import plugin.siren.Utils.Models.MermaidColor;
 import plugin.siren.Utils.Models.MermaidModel;
+import plugin.siren.Utils.Models.MermaidModelAttachments;
 
 import java.lang.reflect.Field;
 
@@ -26,7 +27,7 @@ import java.lang.reflect.Field;
  * Link: https://github.com/SyperAI/hytale-model-utils
  *
  * Modified: Siren
- * Date: 2026/04/10
+ * Date: 2026/04/21
  *
  */
 
@@ -75,9 +76,15 @@ public class ModelHelper {
             }
         }
 
-        var defaultAttachments = AttachmentsHelper.parseSkin(playerSkin, null, gradientId, mermaid);
+        var mermaidTailAttachments = MermaidModelAttachments.addAttachments(mermaidSettings);
 
-        var attachments = MermaidCosmeticAttachments.addAttachment(defaultAttachments, mermaidSettings);
+        var defaultAttachments = AttachmentsHelper.parseSkin(mermaidTailAttachments, playerSkin, null, gradientId, mermaid);
+
+        var attachments = MermaidCosmeticAttachments.addAttachments(defaultAttachments, mermaidSettings);
+
+        if(Mermaids.ifDebug()){
+            Mermaids.LOGGER.atInfo().log("Final model attachments:\n" + attachments.toString());
+        }
 
         String texturePath = model.getTexture();
         /*MermaidModel modelId = mermaidSettings.getMermaidTailId();

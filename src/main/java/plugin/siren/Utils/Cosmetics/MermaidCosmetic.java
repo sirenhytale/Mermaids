@@ -14,9 +14,9 @@ public enum MermaidCosmetic {
     Dorsal_Fin(6, "Characters/SirensMermaid/Cosmetics/Mermaid/Dorsal_Fins/Mermaids_Dorsal_Fin.blockymodel", "Characters/SirensMermaid/Cosmetics/Mermaid/Dorsal_Fins/DorsalFin/Mermaids_Dorsal_Fin_Orange_Texture.png", MermaidCosmeticType.DORSAL_FIN),
     Dorsal_Fin_Large(7, "Characters/SirensMermaid/Cosmetics/Mermaid/Dorsal_Fins/Mermaids_Dorsal_Fin_Large.blockymodel", "Characters/SirensMermaid/Cosmetics/Mermaid/Dorsal_Fins/DorsalFin/Mermaids_Dorsal_Fin_Orange_Texture.png", MermaidCosmeticType.DORSAL_FIN),
     Mermaid_Tail(8, "Characters/SirensMermaid/Mermaids_Mermaid_Tail.blockymodel", "Characters/SirensMermaid/MermaidTextures/Mermaids_Mermaid_Orange_Texture.png", MermaidCosmeticType.TAIL),
-    Mammal_Tail(9, "Characters/SirensMermaid/Mermaids_Mammal_Tail.blockymodel", "Characters/SirensMermaid/MermaidMammalTextures/Mermaids_Mermaid_Orca_Texture.png", MermaidCosmeticType.TAIL),
-    Mermaid_Fluke(10, "Characters/SirensMermaid/Mermaids_Mermaid_Fluke.blockymodel", "Characters/SirensMermaid/MermaidTextures/Mermaids_Mermaid_Orange_Texture.png", MermaidCosmeticType.FLUKE),
-    Mammal_Fluke(11, "Characters/SirensMermaid/Mermaids_Mammal_Fluke.blockymodel", "Characters/SirensMermaid/MermaidMammalTextures/Mermaids_Mermaid_Orca_Texture.png", MermaidCosmeticType.FLUKE);
+    Mammal_Tail(9, "Characters/SirensMermaid/Mermaids_Mammal_Tail.blockymodel", "Characters/SirensMermaid/MermaidMammalTextures/Mermaids_Mermaid_Orca_Texture.png", MermaidCosmeticType.TAIL);
+    /*Mermaid_Fluke(10, "Characters/SirensMermaid/Mermaids_Mermaid_Fluke.blockymodel", "Characters/SirensMermaid/MermaidTextures/Mermaids_Mermaid_Orange_Texture.png", MermaidCosmeticType.FLUKE),
+    Mammal_Fluke(11, "Characters/SirensMermaid/Mermaids_Mammal_Fluke.blockymodel", "Characters/SirensMermaid/MermaidMammalTextures/Mermaids_Mermaid_Orca_Texture.png", MermaidCosmeticType.FLUKE);*/
 
     private final int value;
     private final String model;
