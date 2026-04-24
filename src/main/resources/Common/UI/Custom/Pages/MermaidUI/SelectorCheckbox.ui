@@ -1,0 +1,25 @@
+$C = "../../Common.ui";
+
+@SelectorBlock = Group {
+  @Name = "";
+  @Check = true;
+  @TransKey = "";
+
+  LayoutMode: Top;
+  Anchor: (Top: 8, Bottom: 8);
+
+  Group #Selector {
+    @LabelStyle = ();
+
+    LayoutMode: Left;
+
+    $C.@CheckBox #CheckBox {
+      Value: @Check;
+    }
+
+    Label #TextLabel {
+      Text: @Name;
+      Anchor: (Right: 30, Left: 11);
+    }
+  }
+};

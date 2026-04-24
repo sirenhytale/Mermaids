@@ -71,6 +71,20 @@
             }
           }
         ]
+      },
+      {
+        "Type": "Choice",
+        "Weight": 10,
+        "Containers": [
+          {
+            "Type": "Single",
+            "Item": {
+              "ItemId": "Mermaids_Seashell_Bra",
+              "QuantityMin": 0,
+              "QuantityMax": 1
+            }
+          }
+        ]
       }
     ]
   }

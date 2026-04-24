@@ -3,21 +3,21 @@
     "Name": "server.items.mermaids.Mermaids_Weapon_Spell_Ring.name",
     "Description": "server.items.mermaids.Mermaids_Weapon_Spell_Ring.desc"
   },
-  "Icon": "Icons/ItemsGenerated/Deco_Starfish.png",
+  "Icon": "Icons/ItemsGenerated/SirensMermaid/Mermaids_Mermaid_Tear.png",
   "IconProperties": {
-    "Scale": 0.545,
-    "Translation": [
-      -7.8,
-      -7.8
-    ],
+    "Scale": 0.6,
     "Rotation": [
-      45,
-      90,
+      0,
+      0,
       0
+    ],
+    "Translation": [
+      0,
+      -13
     ]
   },
-  "Model": "Blocks/Foliage/Water/Starfish.blockymodel",
-  "Texture": "Blocks/Foliage/Water/Starfish_Texture.png",
+  "Model": "Resources/Ingredients/SirensMermaid/Mermaids_Mermaid_Tear.blockymodel",
+  "Texture": "Resources/Ingredients/SirensMermaid/Mermaids_Mermaid_Tear_Texture.png",
   "Interactions": {
     "Primary": {
       "Interactions": [

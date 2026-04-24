@@ -7,7 +7,7 @@ $C = "../../Common.ui";
   Anchor: (Top: 8, Bottom: 8);
 
   $C.@SecondaryTextButton #Selector {
-    @Anchor = (Width: 240, Height: 150, Left: 0);
+    @Anchor = (Width: 250, Height: 150, Left: 0);
     Text: @Name;
   }
 };

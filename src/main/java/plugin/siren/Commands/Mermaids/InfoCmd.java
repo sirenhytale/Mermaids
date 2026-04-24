@@ -42,7 +42,7 @@ public class InfoCmd extends AbstractPlayerCommand {
             player.sendMessage(versionMessage);
 
             if(!version.equalsIgnoreCase(latestVersion)){
-                Message updateMessage = Message.translation("server.commands.mermaids.info.playerMsg.update").param("version", version).color(Color.CYAN).link("https://www.curseforge.com/hytale/mods/mermaids");
+                Message updateMessage = Message.translation("server.commands.mermaids.info.playerMsg.update").param("version", latestVersion).color(Color.CYAN).link("https://www.curseforge.com/hytale/mods/mermaids");
                 player.sendMessage(updateMessage);
             }
         }

@@ -22,7 +22,6 @@ public class ToggleCmd extends AbstractPlayerCommand {
     public ToggleCmd() {
         super("toggle", "server.commands.mermaids.toggle.desc");
         this.requirePermission("mermaids.toggle");
-        this.setPermissionGroup(GameMode.Creative);
     }
 
     RequiredArg<Boolean> mermaidToggleArg = this.withRequiredArg("Allow Mermaid Transformations", "server.commands.mermaids.toggle.arg0.desc", ArgTypes.BOOLEAN);
@@ -37,8 +36,16 @@ public class ToggleCmd extends AbstractPlayerCommand {
         if(mermaidSettings != null) {
             mermaidSettings.setToggleMermaid(mermaidToggle);
 
-            String playerTranslationId = "server.commands.mermaids.toggle.playerMsg.removed";
-            String consoleTranslationId = "server.commands.mermaids.toggle.playerMsg.removed";
+            String playerTranslationId = "";
+            String consoleTranslationId = "";
+            if(mermaidToggle) {
+                playerTranslationId = "server.commands.mermaids.toggle.playerMsg.enabled";
+                consoleTranslationId = "server.commands.mermaids.toggle.playerMsg.enabled";
+            }else{
+                playerTranslationId = "server.commands.mermaids.toggle.playerMsg.disabled";
+                consoleTranslationId = "server.commands.mermaids.toggle.playerMsg.disabled";
+            }
+
             if(player != null) {
                 player.sendMessage(Message.translation(playerTranslationId));
 

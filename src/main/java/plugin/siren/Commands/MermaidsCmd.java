@@ -23,19 +23,19 @@ public class MermaidsCmd extends AbstractCommand {
         this.addAliases("mer");
         this.addAliases("mermaid");
 
-        this.addSubCommand(new AdminCmd());
-        this.addSubCommand(new BugCmd());
-        this.addSubCommand(new InfoCmd());
-        this.addSubCommand(new ToggleCmd());
-        this.addSubCommand(new UICmd());
-        this.addSubCommand(new AirCmd());
-        this.addSubCommand(new PermPotionRemoveCmd());
-
         if(Mermaids.ifDebug()){
             this.addSubCommand(new DebugCmd());
         }
 
-        this.setPermissionGroup(GameMode.Adventure);
+        this.addSubCommand(new AdminCmd());
+        this.addSubCommand(new BugCmd());
+        this.addSubCommand(new InfoCmd());
+        this.addSubCommand(new ToggleCmd());
+        this.addSubCommand(new GlowCmd());
+        this.addSubCommand(new AirCmd());
+        this.addSubCommand(new PermPotionRemoveCmd());
+
+        this.requirePermission("mermaids");
     }
 
     @Nonnull

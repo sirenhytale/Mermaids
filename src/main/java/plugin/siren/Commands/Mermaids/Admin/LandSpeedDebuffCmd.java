@@ -17,11 +17,11 @@ import javax.annotation.Nonnull;
 
 public class LandSpeedDebuffCmd extends AbstractPlayerCommand {
     public LandSpeedDebuffCmd() {
-        super("landspeeddebuff", "server.commands.mermaids.admin.landspeeddebuff.desc");
+        super("landdebuff", "server.commands.mermaids.admin.landspeeddebuff.desc");
 
         this.addAliases("mermaidonlandspeeddebuff");
         this.addAliases("onlandspeeddebuff");
-        this.addAliases("landdebuff");
+        this.addAliases("landspeeddebuff");
 
         this.requirePermission("mermaids.admin.mermaidonland");
     }

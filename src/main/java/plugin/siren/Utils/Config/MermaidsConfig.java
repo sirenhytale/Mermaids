@@ -56,10 +56,6 @@ public class MermaidsConfig {
                     (merConfig, rtpBool, extraInfo) -> merConfig.RequireTransPerm = rtpBool, // Setter
                     (merConfig, extraInfo) -> merConfig.RequireTransPerm)                    // Getter
             .add()
-            .append(new KeyedCodec<Boolean>("Require-Mermaids-UI-Permission", Codec.BOOLEAN),
-                    (merConfig, rmupBool, extraInfo) -> merConfig.RequireUIPerm = rmupBool, // Setter
-                    (merConfig, extraInfo) -> merConfig.RequireUIPerm)                    // Getter
-            .add()
             .append(new KeyedCodec<Boolean>("Items-Can-Increase-Swim-Speed", Codec.BOOLEAN),
                     (merConfig, icissBool, extraInfo) -> merConfig.ItemSwimSpeed = icissBool, // Setter
                     (merConfig, extraInfo) -> merConfig.ItemSwimSpeed)                    // Getter
@@ -104,6 +100,10 @@ public class MermaidsConfig {
                     (merConfig, nvmBool, extraInfo) -> merConfig.NewVersion = nvmBool, // Setter
                     (merConfig, extraInfo) -> merConfig.NewVersion)                    // Getter
             .add()
+            .append(new KeyedCodec<Boolean>("Do-Not-Change:Add-mermaids-Perm", Codec.BOOLEAN),
+                    (merConfig, ampBool, extraInfo) -> merConfig.mermaidPerm = ampBool, // Setter
+                    (merConfig, extraInfo) -> merConfig.mermaidPerm)                    // Getter
+            .add()
             .append(new KeyedCodec<Boolean>("DebugMode", Codec.BOOLEAN),
                     (merConfig, dmBool, extraInfo) -> merConfig.DebugMode = dmBool, // Setter
                     (merConfig, extraInfo) -> merConfig.DebugMode)                    // Getter
@@ -112,7 +112,7 @@ public class MermaidsConfig {
 
     private String InformationDefault = "Confused about what one of these statement do? Go to https://www.mermaids.dev/mermaids/config/ or check out the Mermaids page on the Curseforge website and scroll down to Config Extra Info.";
     private String Information = InformationDefault;
-    private final int ConfigVersionDefault = 14;
+    private final int ConfigVersionDefault = 15;
     private int ConfigVersion = ConfigVersionDefault;
     private String PluginName = "Mermaids";
     private String Version = Mermaids.getVersion();
@@ -122,11 +122,11 @@ public class MermaidsConfig {
     private String DownloadSite = DownloadSiteDefault;
     private boolean ConsoleLogs = false;
     private int TransformationMode = 0;
-    private String TransModeDesc = "TransformationMode = 0 : Transform when entering water, TransformationMode = 1 : Requires user to drink Mermaid Potion to Transform";
+    private String TransModeDescDefault = "TransformationMode = 0 : Transform when entering water, TransformationMode = 1 : Requires user to drink Mermaid Potion to Transform or have a Mermaid Pendant";
+    private String TransModeDesc = TransModeDescDefault;
     private boolean MermaidOnLand = false;
     private boolean LandSpeedDebuff = true;
     private boolean RequireTransPerm = false;
-    private boolean RequireUIPerm = false;
     private boolean ItemSwimSpeed = true;
     private boolean BlockTrans = true;
     private boolean RainTrans = false;
@@ -138,6 +138,7 @@ public class MermaidsConfig {
     private boolean MoreNPCCompat = true;
     private boolean KeybladeReimagCompat = true;
     private boolean NewVersion = true;
+    private boolean mermaidPerm = false;
     private boolean DebugMode = false;
 
     private boolean RequireForceMermaid = false;
@@ -167,6 +168,10 @@ public class MermaidsConfig {
         if(!DownloadSite.equalsIgnoreCase(DownloadSiteDefault)){
             configUpdated = true;
             DownloadSite = DownloadSiteDefault;
+        }
+        if(!TransModeDesc.equalsIgnoreCase(TransModeDescDefault)){
+            configUpdated = true;
+            TransModeDesc = TransModeDescDefault;
         }
 
         return configUpdated;
@@ -222,10 +227,6 @@ public class MermaidsConfig {
 
     public boolean getRequireTransformationPermission(){
         return RequireTransPerm;
-    }
-
-    public boolean getRequireUIPermission(){
-        return RequireUIPerm;
     }
 
     public boolean getItemIncreaseSwimSpeed(){
@@ -289,11 +290,19 @@ public class MermaidsConfig {
     }
 
     public boolean ifNewVersion(){
-        return NewVersion;
+        return this.NewVersion;
+    }
+
+    public boolean ifAddedMermaidsPerm(){
+        return this.mermaidPerm;
+    }
+
+    public void setAddedMermaidsPerm(boolean added){
+        this.mermaidPerm = added;
     }
 
     public boolean ifDebugMode(){
-        return DebugMode;
+        return this.DebugMode;
     }
 
     public boolean ifRequireForceMermaid(){

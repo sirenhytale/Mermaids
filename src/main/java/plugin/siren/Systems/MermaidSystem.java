@@ -245,7 +245,7 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
             boolean h2OorRain = mermaid.getH2OBlock().get() || mermaid.getRainTransform().get();
             boolean inFluidBlock = mermaid.isInFluidBlock();
 
-            boolean permMerPotion = (transformationMode == 0 || transformationMode == 1) && mermaidSettings.ifPermanentPotion();
+            boolean permMerPotion = (transModeZero || transModeOne) && mermaidSettings.ifPermanentPotion();
             boolean mermaidPotionEffect = mermaid.isPotionEffectTransformation();
             boolean mermaidOnLand = Mermaids.getConfig().get().getMermaidOnLand();
 
@@ -255,9 +255,11 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
 
             boolean specialTrans = permMerPotion || mermaidPotionEffect || mermaidPendant;
 
+            boolean fullToggle = toggleMermaid || specialTrans;
+
             //Checks to see if in water / other transformation methods
             if (((((movementStatesTransform || h2OorRain || inFluidBlock) && (transModeZero || permMerPotion || mermaidPendant)) || mermaidPotionEffect || (mermaidOnLand && (transModeZero || permMerPotion || mermaidPendant)))
-                    && toggleMermaid && transformPermission && (!requireForcedMermaid || forcedMermaidWater || specialTrans)) || forcedMermaid) {
+                    && fullToggle && transformPermission && (!requireForcedMermaid || forcedMermaidWater || specialTrans)) || forcedMermaid) {
 
                 if (!mermaid.isUnderwater()) {
                     mermaid.setUnderwater(true);
@@ -498,7 +500,7 @@ public class MermaidSystem extends EntityTickingSystem<EntityStore> {
                 }
             }
 
-            if ((mermaid.isMermaid() && mermaidSettings.getToggleMermaid() && transformPermission) || ((forcedMermaid || forcedMermaidWater) && mermaid.isMermaid())) {
+            if ((mermaid.isMermaid() && fullToggle && transformPermission) || ((forcedMermaid || forcedMermaidWater) && mermaid.isMermaid())) {
                 ItemSpeedType itemSpeedType = mermaid.getItemSpeedType();
                 ArmorSpeedType armorSpeedType = mermaid.getArmorSpeedType();
 

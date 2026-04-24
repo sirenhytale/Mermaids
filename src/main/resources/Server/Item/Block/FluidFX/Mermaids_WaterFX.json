@@ -13,8 +13,8 @@
   "DistortionAmplitude": 4,
   "DistortionFrequency": 5,
   "MovementSettings": {
-    "SwimUpSpeed": 6,
-    "SwimDownSpeed": -6,
+    "SwimUpSpeed": 7,
+    "SwimDownSpeed": -7,
     "HorizontalSpeedMultiplier": 0.65,
     "SinkSpeed": -0.55,
     "FieldOfViewMultiplier": 1,

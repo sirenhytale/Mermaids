@@ -71,6 +71,7 @@ public class MermaidSettingsComponent implements Component<EntityStore> {
 
     private boolean toggleMermaid;
     private boolean permanentPotion;
+    private boolean glow;
 
     private String mermaidTail;
     private int modelId;
@@ -94,6 +95,7 @@ public class MermaidSettingsComponent implements Component<EntityStore> {
     public MermaidSettingsComponent(){
         this.toggleMermaid = true;
         this.permanentPotion = false;
+        this.glow = true;
 
         this.mermaidTail = defaultMermaidTail;
         this.modelId = MermaidModel.Mermaid.getValue();
@@ -111,6 +113,7 @@ public class MermaidSettingsComponent implements Component<EntityStore> {
     public MermaidSettingsComponent(MermaidSettingsComponent other){
         this.toggleMermaid = other.toggleMermaid;
         this.permanentPotion = other.permanentPotion;
+        this.glow = other.glow;
 
         this.mermaidTail = other.mermaidTail;
         this.modelId = other.modelId;
@@ -191,6 +194,14 @@ public class MermaidSettingsComponent implements Component<EntityStore> {
 
     public void setPermanentPotion(boolean permPotion){
         this.permanentPotion = permPotion;
+    }
+
+    public boolean ifMermaidGlow(){
+        return this.glow;
+    }
+
+    public void setMermaidGlow(boolean glow){
+        this.glow = glow;
     }
 
     public String getMermaidTail(){

@@ -8,6 +8,7 @@ import com.hypixel.hytale.server.core.HytaleServer;
 import com.hypixel.hytale.server.core.command.system.CommandRegistration;
 import com.hypixel.hytale.server.core.event.events.player.PlayerReadyEvent;
 import com.hypixel.hytale.server.core.modules.interaction.interaction.config.Interaction;
+import com.hypixel.hytale.server.core.permissions.PermissionsModule;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
@@ -31,10 +32,11 @@ import plugin.siren.Utils.Cosmetics.MermaidCosmeticSkin;
 import plugin.siren.Utils.Github.GithubIgnore;
 
 import javax.annotation.Nonnull;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 public class Mermaids extends JavaPlugin {
-    private static final String VERSION = "2.5.0";
+    private static final String VERSION = "2.5.1";
     private static final boolean DEBUG = false;
 
     private static Mermaids plugin;
@@ -165,6 +167,14 @@ public class Mermaids extends JavaPlugin {
         }
 
         MermaidCosmeticSkin.registerCosmeticSkins();
+
+        if(!config.get().ifAddedMermaidsPerm()){
+            LOGGER.atInfo().log("Add mermaids permission to Adventure group.");
+            PermissionsModule.get().addGroupPermission("Adventure", Set.of("mermaids"));
+
+            config.get().setAddedMermaidsPerm(true);
+            config.save();
+        }
 
         LOGGER.atInfo().log("Version " + VERSION + " of Mermaids has successfully loaded.");
 

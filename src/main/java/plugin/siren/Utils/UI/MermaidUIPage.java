@@ -6,8 +6,8 @@ import com.hypixel.hytale.codec.builder.BuilderCodec;
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.component.Store;
 import com.hypixel.hytale.protocol.packets.interface_.CustomPageLifetime;
+import com.hypixel.hytale.protocol.packets.interface_.CustomUICommand;
 import com.hypixel.hytale.protocol.packets.interface_.CustomUIEventBindingType;
-import com.hypixel.hytale.protocol.packets.interface_.Page;
 import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.asset.type.model.config.Model;
 import com.hypixel.hytale.server.core.asset.type.model.config.ModelAsset;
@@ -24,7 +24,6 @@ import plugin.siren.Mermaids;
 import plugin.siren.Systems.MermaidComponent;
 import plugin.siren.Systems.MermaidSettingsComponent;
 import plugin.siren.Utils.Cosmetics.MermaidCosmetic;
-import plugin.siren.Utils.Cosmetics.MermaidCosmeticSkin;
 import plugin.siren.Utils.Cosmetics.MermaidCosmeticType;
 import plugin.siren.Utils.Models.MermaidColor;
 import plugin.siren.Utils.Models.MermaidModel;
@@ -54,8 +53,10 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
         commandBuilder.append("Pages/MermaidUI/MermaidUIPage.ui");
 
         if(mermaidSettings != null) {
+            Player player = store.getComponent(ref, Player.getComponentType());
+
             this.buildCategoryList(commandBuilder, eventBuilder, mermaidSettings);
-            this.displayCategory(this.selectedCategory, commandBuilder, eventBuilder);
+            this.displayCategory(this.selectedCategory, commandBuilder, eventBuilder, mermaidSettings, player);
         }else{
             Mermaids.LOGGER.atWarning().log("ERROR: MermaidUIPage build mermaidSettings is null!");
         }
@@ -84,7 +85,7 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
                     }
                     commandBuilder.set("#CategoryList[" + newIndex + "].Style", CATEGORY_BUTTON_SELECTED_STYLE);
                     this.selectedCategory = newCategory;
-                    this.displayCategory(this.selectedCategory, commandBuilder, eventBuilder);
+                    this.displayCategory(this.selectedCategory, commandBuilder, eventBuilder, mermaidSettings, player);
                 }
 
                 this.sendUpdate(commandBuilder, eventBuilder, false);
@@ -512,6 +513,64 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
                 }
 
                 this.sendUpdate(commandBuilder, eventBuilder, false);
+            } else if (data.settings != null) {
+                PlayerSettings setting = PlayerSettings.get(data.settings);
+
+                if(setting != null){
+                    String playerTranslationId = "";
+                    String consoleTranslationId = "";
+                    if(setting == PlayerSettings.TOGGLE){
+                        boolean newValue = !mermaidSettings.getToggleMermaid();
+
+                        if(newValue){
+                            playerTranslationId = "server.customUI.mermaids.mermaidui.category.settings.playerMsg.toggle.true";
+                            consoleTranslationId = "server.customUI.mermaids.mermaidui.category.settings.consoleMsg.toggle.true";
+                        }else {
+                            playerTranslationId = "server.customUI.mermaids.mermaidui.category.settings.playerMsg.toggle.false";
+                            consoleTranslationId = "server.customUI.mermaids.mermaidui.category.settings.consoleMsg.toggle.false";
+                        }
+
+                        if(player.hasPermission("mermaids.toggle")) {
+                            mermaidSettings.setToggleMermaid(newValue);
+                        }else{
+                            playerTranslationId = "server.customUI.mermaids.mermaidui.category.settings.playerMsg.toggle.missingPerms";
+                            consoleTranslationId = "server.customUI.mermaids.mermaidui.category.settings.consoleMsg.toggle.missingPerms";
+                        }
+                    }else if(setting == PlayerSettings.GLOW){
+                        boolean newValue = !mermaidSettings.ifMermaidGlow();
+
+                        if(newValue){
+                            playerTranslationId = "server.customUI.mermaids.mermaidui.category.settings.playerMsg.glow.true";
+                            consoleTranslationId = "server.customUI.mermaids.mermaidui.category.settings.consoleMsg.glow.true";
+                        }else {
+                            playerTranslationId = "server.customUI.mermaids.mermaidui.category.settings.playerMsg.glow.false";
+                            consoleTranslationId = "server.customUI.mermaids.mermaidui.category.settings.consoleMsg.glow.false";
+                        }
+
+                        if(player.hasPermission("mermaids.glow")) {
+                            mermaidSettings.setMermaidGlow(newValue);
+                        }else{
+                            playerTranslationId = "server.customUI.mermaids.mermaidui.category.settings.playerMsg.glow.missingPerms";
+                            consoleTranslationId = "server.customUI.mermaids.mermaidui.category.settings.consoleMsg.glow.missingPerms";
+                        }
+                    }else if(setting == PlayerSettings.REMOVEPOTION){
+                        mermaidSettings.setPermanentPotion(false);
+
+                        playerTranslationId = "server.customUI.mermaids.mermaidui.category.settings.playerMsg.removePotion";
+                        consoleTranslationId = "server.customUI.mermaids.mermaidui.category.settings.consoleMsg.removePotion";
+                    }
+
+                    Message playerMessage = Message.translation(playerTranslationId);
+                    player.sendMessage(playerMessage);
+
+                    String consoleMessage = Message.translation(consoleTranslationId).param("username", player.getDisplayName()).getAnsiMessage();
+                    Mermaids.LOGGER.atInfo().log(consoleMessage);
+                }else{
+                    Message playerMessage = Message.translation("server.customUI.mermaids.mermaidui.category.settings.playerMsg.error");
+                    player.sendMessage(playerMessage);
+                }
+
+                this.sendUpdate(commandBuilder, eventBuilder, false);
             }
         }else{
             Mermaids.LOGGER.atFine().log("Mermaids: Error: MermaidUIPage: Failed to load Mermaid Component and/or Mermaid Settings Component : handleDataEvent");
@@ -544,7 +603,7 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
         }
     }
 
-    private void displayCategory(@Nonnull MermaidUIPage.Category category, @Nonnull UICommandBuilder commandBuilder, @Nonnull UIEventBuilder eventBuilder) {
+    private void displayCategory(@Nonnull MermaidUIPage.Category category, @Nonnull UICommandBuilder commandBuilder, @Nonnull UIEventBuilder eventBuilder, MermaidSettingsComponent mermaidSettings, Player player) {
         commandBuilder.set("#CategoryTitle.TextSpans", Message.translation(category.getNameKey()));
         commandBuilder.clear("#CategoryContent");
         commandBuilder.append("#CategoryContent", category.getContentPath());
@@ -583,6 +642,37 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
             for (int i = 0; i < category.getTailSelectionCount(); i++) {
                 String selector = "#CategoryContent #AuricleFin" + i + " #Selector";
                 eventBuilder.addEventBinding(CustomUIEventBindingType.Activating, selector, EventData.of("AuricleFin", String.valueOf(i)));
+            }
+        } else if (category.id.equalsIgnoreCase("settings")) {
+            for (int i = 0; i < category.getTailSelectionCount(); i++) {
+                PlayerSettings setting = PlayerSettings.get(i);
+
+                if(setting.option == SettingOption.BUTTON){
+                    String selector = "#CategoryContent #Settings" + i + " #Selector";
+                    eventBuilder.addEventBinding(CustomUIEventBindingType.Activating, selector, EventData.of("Settings", String.valueOf(setting.getValue())));
+                }else if(setting.option == SettingOption.CHECKBOX){
+                    String selector = "#CategoryContent #Settings" + i + " #Selector #CheckBox";
+                    String selectorValue = "#CategoryContent #Settings" + i + " #Selector #CheckBox.Value";
+                    String selectorText = "#CategoryContent #Settings" + i + " #Selector #TextLabel.Text";
+                    boolean value = false;
+
+                    if(setting == PlayerSettings.TOGGLE){
+                        value = mermaidSettings.getToggleMermaid();
+
+                        if(!player.hasPermission("mermaids.toggle")){
+                            commandBuilder.set(selectorText, "Mermaid Transformation - Missing Perm: mermaids.toggle");
+                        }
+                    }else if(setting == PlayerSettings.GLOW){
+                        value = mermaidSettings.ifMermaidGlow();
+
+                        if(!player.hasPermission("mermaids.glow")){
+                            commandBuilder.set(selectorText, "Mermaid Glow - Missing Perm: mermaids.glow");
+                        }
+                    }
+
+                    commandBuilder.set(selectorValue, value);
+                    eventBuilder.addEventBinding(CustomUIEventBindingType.ValueChanged, selector, EventData.of("Settings", String.valueOf(setting.getValue())));
+                }
             }
         }
     }
@@ -628,6 +718,12 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
                 "auricle_fin",
                 "server.customUI.mermaids.mermaidui.category.auricleFin",
                 "Pages/MermaidUI/Categories/AuricleFinContent.ui",
+                3
+        ),
+        SETTINGS(
+                "settings",
+                "server.customUI.mermaids.mermaidui.category.settings",
+                "Pages/MermaidUI/Categories/SettingsContent.ui",
                 3
         );
 
@@ -679,6 +775,7 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
         static final String KEY_DORSAL_FIN = "DorsalFin";
         static final String KEY_PECTORAL_FIN = "PectoralFin";
         static final String KEY_AURICLE_FIN = "AuricleFin";
+        static final String KEY_SETTINGS = "Settings";
         public static final BuilderCodec<MermaidUIEventData> CODEC = BuilderCodec.builder(
                         MermaidUIPage.MermaidUIEventData.class, MermaidUIPage.MermaidUIEventData::new
                 )
@@ -690,6 +787,7 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
                 .addField(new KeyedCodec<>(KEY_DORSAL_FIN, Codec.STRING), (entry, s) -> entry.dorsalFin = s, entry -> entry.dorsalFin)
                 .addField(new KeyedCodec<>(KEY_PECTORAL_FIN, Codec.STRING), (entry, s) -> entry.pectoralFin = s, entry -> entry.pectoralFin)
                 .addField(new KeyedCodec<>(KEY_AURICLE_FIN, Codec.STRING), (entry, s) -> entry.auricleFin = s, entry -> entry.auricleFin)
+                .addField(new KeyedCodec<>(KEY_SETTINGS, Codec.STRING), (entry, s) -> entry.settings = s, entry -> entry.settings)
                 .build();
         private String category;
         private String tailPresets;
@@ -699,8 +797,59 @@ public class MermaidUIPage extends InteractiveCustomUIPage<MermaidUIPage.Mermaid
         private String dorsalFin;
         private String pectoralFin;
         private String auricleFin;
+        private String settings;
 
         public MermaidUIEventData() {
         }
+    }
+
+    private static enum PlayerSettings{
+        TOGGLE(0, SettingOption.CHECKBOX),
+        GLOW(1, SettingOption.CHECKBOX),
+        REMOVEPOTION(2, SettingOption.BUTTON);
+
+        private final int value;
+        private final String valueStr;
+        private final SettingOption option;
+        private PlayerSettings(int value, SettingOption option){
+            this.value = value;
+            this.valueStr = String.valueOf(value);
+            this.option = option;
+        }
+
+        public static PlayerSettings get(int value){
+            PlayerSettings settings = null;
+            for(PlayerSettings setting : PlayerSettings.values()){
+                if(setting.value == value){
+                    settings = setting;
+                }
+            }
+
+            return settings;
+        }
+
+        public static PlayerSettings get(String value){
+            PlayerSettings settings = null;
+            for(PlayerSettings setting : PlayerSettings.values()){
+                if(setting.valueStr.equalsIgnoreCase(value)){
+                    settings = setting;
+                }
+            }
+
+            return settings;
+        }
+
+        public int getValue(){
+            return this.value;
+        }
+
+        public SettingOption getOption(){
+            return this.option;
+        }
+    }
+
+    private static enum SettingOption{
+        CHECKBOX,
+        BUTTON;
     }
 }

@@ -1,0 +1,34 @@
+$C = "../../../Common.ui";
+$SB = "../SelectorButton.ui";
+$SC = "../SelectorCheckbox.ui";
+
+Group {
+  LayoutMode: Top;
+
+  Group {
+    Anchor: (Bottom: 25);
+    LayoutMode: Top;
+
+    Group #Settings0 {
+      $SC.@SelectorBlock {
+        @Name = "Toggle Mermaid Transformation";
+        @Check = true;
+      }
+    }
+
+    Group #Settings1 {
+      $SC.@SelectorBlock {
+        @Name = "Toggle Mermaid Glow";
+        @Check = false;
+      }
+    }
+
+    $C.@PanelSeparatorFancy {}
+
+    Group #Settings2 {
+      $SB.@SelectorBlock {
+        @Name = "Remove Mermaid Potion";
+      }
+    }
+  }
+}

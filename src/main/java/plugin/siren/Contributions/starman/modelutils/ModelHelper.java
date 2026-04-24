@@ -115,7 +115,7 @@ public class ModelHelper {
         }*/
 
         ColorLight modelLight = playerModel.getLight();
-        if(Mermaids.getConfig().get().getMermaidLight()){
+        if(Mermaids.getConfig().get().getMermaidLight() && mermaidSettings.ifMermaidGlow()){
             model.getLight().radius = (byte) Mermaids.getConfig().get().getLightRadius();
             modelLight = model.getLight();
         }
