@@ -66,6 +66,7 @@ public enum MermaidCosmetic {
     public ModelAttachment getAsModelAttachment(MermaidSettingsComponent mermaidSettings){
         String textureString = getTexture(mermaidSettings);
 
-        return new ModelAttachment(model, textureString, null, null, 1.0);
+        //return new ModelAttachment(model, textureString, null, null, 1.0);
+        return new ModelAttachment(model, textureString, "Eyes_Gradient", "Purple", 1.0);
     }
 }

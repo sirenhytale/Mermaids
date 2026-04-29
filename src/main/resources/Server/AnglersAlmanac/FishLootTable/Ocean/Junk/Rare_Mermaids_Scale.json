@@ -1,0 +1,35 @@
+{
+  "ItemId": "Mermaids_Mermaid_Scale",
+  "Category": [
+    "material",
+    "ingredient"
+  ],
+  "Name": "Mermaid Scale",
+  "Description": "A scale that has fallen off a Mermaid.",
+  "FamilyId": "Mermaids",
+  "Rarity": "Rare",
+  "IsGlobal": false,
+  "Weight": 50,
+  "Habitats": {
+    "Zones": [
+      "Ocean"
+    ],
+    "Tiers": [],
+    "Regions": [],
+    "Biomes": [
+      "Trenches",
+      "Shore",
+      "Beach"
+    ],
+    "Min_depth": 3,
+    "Height": {
+      "Min_y": 0,
+      "Max_y": -1
+    }
+  },
+  "Minigame_stats": {
+    "Difficulty": 6,
+    "Behavior": "Erratic",
+    "Stamina": 70
+  }
+}

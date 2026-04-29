@@ -1,0 +1,29 @@
+$C = "../../../../Common.ui";
+$SB = "../../SelectorButton.ui";
+
+Group {
+  LayoutMode: Top;
+
+  Group {
+    Anchor: (Bottom: 25);
+    LayoutMode: Top;
+
+    Group #ColorStyle0 {
+      $SB.@SelectorBlock {
+        @Name = "Default";
+      }
+    }
+
+    Group #ColorStyle1 {
+      $SB.@SelectorBlock {
+        @Name = "Shiny Fabric";
+      }
+    }
+
+    Group #ColorStyle2 {
+      $SB.@SelectorBlock {
+        @Name = "Fantasy Cotton";
+      }
+    }
+  }
+}

@@ -1,6 +1,7 @@
 package plugin.siren;
 
 import com.hypixel.hytale.common.plugin.PluginIdentifier;
+import com.hypixel.hytale.component.ComponentRegistryProxy;
 import com.hypixel.hytale.component.ComponentType;
 import com.hypixel.hytale.event.EventRegistration;
 import com.hypixel.hytale.logger.HytaleLogger;
@@ -19,11 +20,14 @@ import plugin.siren.Compatibility.OrbisOrigins.OrbisOriginsRegistry;
 import plugin.siren.Compatibility.PlaceholderAPI.PlaceholderAPICompat;
 import plugin.siren.Contributions.al3x.HStats;
 import plugin.siren.Contributions.modifold.ModifoldAnalytics;
+import plugin.siren.Events.EntityRegistrationSystem;
 import plugin.siren.Events.Interactions.*;
 import plugin.siren.Events.PlayerReadyEventM;
 import plugin.siren.Systems.MermaidComponent;
 import plugin.siren.Systems.MermaidSettingsComponent;
 import plugin.siren.Systems.MermaidSystem;
+import plugin.siren.Systems.NPCs.MermaidNPCComponent;
+import plugin.siren.Systems.NPCs.MermaidNPCSystem;
 import plugin.siren.Utils.API.MermaidsUpdateChecker;
 import plugin.siren.Utils.Config.EndlessLevelingConfig;
 import plugin.siren.Utils.Config.MermaidsConfig;
@@ -36,8 +40,9 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 public class Mermaids extends JavaPlugin {
-    private static final String VERSION = "2.5.1";
+    private static final String VERSION = "2.5.2";
     private static final boolean DEBUG = false;
+    private static final boolean PREMIUM = false;
 
     private static Mermaids plugin;
     public static final HytaleLogger LOGGER = HytaleLogger.forEnclosingClass();
@@ -47,6 +52,7 @@ public class Mermaids extends JavaPlugin {
 
     private ComponentType<EntityStore, MermaidComponent> mermaidComponent;
     private ComponentType<EntityStore, MermaidSettingsComponent> mermaidSettingsComponent;
+    private ComponentType<EntityStore, MermaidNPCComponent> mermaidNPCComponent;
 
     private boolean orbisOriginsCompat;
     private boolean endlessLevelingCompat;
@@ -91,6 +97,18 @@ public class Mermaids extends JavaPlugin {
         } else {
             LOGGER.atInfo().log("Failed to register Mermaid Settings Component.");
         }
+
+        /*this.mermaidNPCComponent = this.getEntityStoreRegistry().registerComponent(MermaidNPCComponent.class, MermaidNPCComponent::new);
+        if (this.mermaidNPCComponent != null) {
+            LOGGER.atInfo().log("Registered Mermaid NPC Component.");
+        } else {
+            LOGGER.atInfo().log("Failed to register Mermaid NPC Component.");
+        }
+
+        ComponentRegistryProxy<EntityStore> entities = this.getEntityStoreRegistry();
+        entities.registerSystem(new EntityRegistrationSystem());
+
+        this.getEntityStoreRegistry().registerSystem(new MermaidNPCSystem(this.mermaidNPCComponent));*/
 
         this.getEntityStoreRegistry().registerSystem(new MermaidSystem(this.mermaidComponent, this.mermaidSettingsComponent));
         LOGGER.atInfo().log("Registered Mermaid System.");
@@ -169,8 +187,9 @@ public class Mermaids extends JavaPlugin {
         MermaidCosmeticSkin.registerCosmeticSkins();
 
         if(!config.get().ifAddedMermaidsPerm()){
-            LOGGER.atInfo().log("Add mermaids permission to Adventure group.");
+            LOGGER.atInfo().log("Add mermaids permission to Adventure and default group.");
             PermissionsModule.get().addGroupPermission("Adventure", Set.of("mermaids"));
+            PermissionsModule.get().addGroupPermission("default", Set.of("mermaids"));
 
             config.get().setAddedMermaidsPerm(true);
             config.save();
@@ -205,6 +224,10 @@ public class Mermaids extends JavaPlugin {
         return mermaidSettingsComponent;
     }
 
+    public ComponentType<EntityStore, MermaidNPCComponent> getMermaidNPCComponentType(){
+        return mermaidNPCComponent;
+    }
+
     public static Mermaids get(){
         return plugin;
     }
@@ -234,6 +257,10 @@ public class Mermaids extends JavaPlugin {
     }
 
     public static boolean ifDebug(){
-        return plugin.DEBUG || plugin.config.get().ifDebugMode();
+        return DEBUG || plugin.config.get().ifDebugMode();
+    }
+
+    public static boolean ifPremium(){
+        return PREMIUM;
     }
 }

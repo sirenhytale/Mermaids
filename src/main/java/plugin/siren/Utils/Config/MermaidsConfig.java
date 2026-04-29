@@ -100,7 +100,7 @@ public class MermaidsConfig {
                     (merConfig, nvmBool, extraInfo) -> merConfig.NewVersion = nvmBool, // Setter
                     (merConfig, extraInfo) -> merConfig.NewVersion)                    // Getter
             .add()
-            .append(new KeyedCodec<Boolean>("Do-Not-Change:Add-mermaids-Perm", Codec.BOOLEAN),
+            .append(new KeyedCodec<Boolean>("Do-Not-Change:Add-mermaids-Permission", Codec.BOOLEAN),
                     (merConfig, ampBool, extraInfo) -> merConfig.mermaidPerm = ampBool, // Setter
                     (merConfig, extraInfo) -> merConfig.mermaidPerm)                    // Getter
             .add()

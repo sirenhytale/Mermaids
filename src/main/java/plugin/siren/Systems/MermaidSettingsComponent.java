@@ -81,6 +81,8 @@ public class MermaidSettingsComponent implements Component<EntityStore> {
     private int pectoralFin;
     private int auricleFin;
 
+    private String categoryString;
+
     private boolean forceMermaid;
     private boolean forceMermaidOrbisOrigin;
     private boolean forceMermaidEndlessLeveling;
@@ -105,6 +107,8 @@ public class MermaidSettingsComponent implements Component<EntityStore> {
         this.pectoralFin = -1;
         this.auricleFin = -1;
 
+        this.categoryString = "color";
+
         this.forceMermaid = false;
         this.forceMermaidOrbisOrigin = false;
         this.forceMermaidEndlessLeveling = false;
@@ -122,6 +126,8 @@ public class MermaidSettingsComponent implements Component<EntityStore> {
         this.dorsalFin = other.dorsalFin;
         this.pectoralFin = other.pectoralFin;
         this.auricleFin = other.auricleFin;
+
+        this.categoryString = other.categoryString;
 
         this.forceMermaid = other.forceMermaid;
         this.forceMermaidOrbisOrigin = other.forceMermaidOrbisOrigin;
@@ -329,5 +335,13 @@ public class MermaidSettingsComponent implements Component<EntityStore> {
         if(cosmeticType.equals(MermaidCosmeticType.AURICLE_FIN)){
             auricleFin = cosmeticValue;
         }
+    }
+
+    public String getCategory(){
+        return this.categoryString;
+    }
+
+    public void setCategory(String category){
+        this.categoryString = category;
     }
 }

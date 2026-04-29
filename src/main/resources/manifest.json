@@ -1,7 +1,7 @@
 {
   "Group": "Siren",
   "Name": "Mermaids",
-  "Version": "2.5.1",
+  "Version": "2.5.2",
   "Description": "Ever wanted to be a Mermaid? Now you can with Mermaids, this mod allows the user to transform into a Mermaid in water! Giving the user increased swim speed, water breathing, night vision, and more while swimming underwater through seas, rivers, and oceans.",
   "Authors": [
     {
@@ -23,7 +23,8 @@
     "Buuz135:BetterModlist": "*",
     "Reset:MoreNPC": "*",
     "TaHie:Keyblades Reimagined": "*",
-    "com.airijko:EndlessLeveling": "*"
+    "com.airijko:EndlessLeveling": "*",
+    "dev.rm20:AnglersAlmanac": "*"
   },
   "LoadBefore": {},
   "DisabledByDefault": false,

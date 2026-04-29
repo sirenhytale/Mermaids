@@ -11,6 +11,7 @@ import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import plugin.siren.Commands.Mermaids.*;
 import plugin.siren.Mermaids;
+import plugin.siren.Utils.UI.MermaidPremiumUIPage;
 import plugin.siren.Utils.UI.MermaidUIPage;
 
 import javax.annotation.Nonnull;
@@ -52,8 +53,13 @@ public class MermaidsCmd extends AbstractCommand {
                     Player player = store.getComponent(ref, Player.getComponentType());
                     PlayerRef playerRef = store.getComponent(ref, PlayerRef.getComponentType());
                     if (player != null && playerRef != null) {
-                        MermaidUIPage merPage = new MermaidUIPage(playerRef);
-                        player.getPageManager().openCustomPage(ref, store, merPage);
+                        if(Mermaids.ifPremium()){
+                            MermaidPremiumUIPage merPage = new MermaidPremiumUIPage(playerRef);
+                            player.getPageManager().openCustomPage(ref, store, merPage);
+                        }else {
+                            MermaidUIPage merPage = new MermaidUIPage(playerRef);
+                            player.getPageManager().openCustomPage(ref, store, merPage);
+                        }
 
                         if (Mermaids.ifDebug()) {
                             Mermaids.LOGGER.atInfo().log(player.getDisplayName() + " opened the Mermaids UI.");

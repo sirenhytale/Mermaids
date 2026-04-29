@@ -15,8 +15,8 @@
   "MovementSettings": {
     "SwimUpSpeed": 7,
     "SwimDownSpeed": -7,
-    "HorizontalSpeedMultiplier": 0.65,
-    "SinkSpeed": -0.55,
+    "HorizontalSpeedMultiplier": 0.7,
+    "SinkSpeed": -0.4,
     "FieldOfViewMultiplier": 1,
     "EntryVelocityMultiplier": 1
   },
